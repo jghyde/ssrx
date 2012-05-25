@@ -1,2 +1,16 @@
 /* This file will hold styles for the mobile version of your website (mobile first). */
 /* This also can include ANY global CSS that applies site-wide. Unless overwritten by a more specific style rule, CSS declarations in global.css will apply site-wide. */
+
+#zone-user-wrapper {
+  width: 100%;
+  height: 45px;
+  background-color: #fe9a20;
+}
+hgroup.site-name-slogan h1.site-name {
+  display: none;
+}
+#zone-menu-wrapper {
+  width: 100%;
+  height: 35px;
+  background-color: #ffd460;
+}
