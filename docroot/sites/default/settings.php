@@ -200,21 +200,7 @@
  *   );
  * @endcode
  */
-$databases = array (
-  'default' => 
-  array (
-    'default' => 
-    array (
-      'database' => 'ssrx',
-      'username' => 'root',
-      'password' => 'cool98',
-      'host' => 'localhost',
-      'port' => '',
-      'driver' => 'mysql',
-      'prefix' => '',
-    ),
-  ),
-);
+$databases = array();
 
 /**
  * Access control for update.php script.
@@ -246,7 +232,7 @@ $update_free_access = FALSE;
  *   $drupal_hash_salt = file_get_contents('/home/example/salt.txt');
  *
  */
-$drupal_hash_salt = 'IA_qK5f7QPEGYzPlsd1OrkVLs5x4MwKDnYJ7dTxhoKA';
+$drupal_hash_salt = '';
 
 /**
  * Base URL (optional).
@@ -524,3 +510,12 @@ $conf['404_fast_html'] = '<html xmlns="http://www.w3.org/1999/xhtml"><head><titl
  * Remove the leading hash signs to disable.
  */
 # $conf['allow_authorize_operations'] = FALSE;
+
+
+// On Acquia Cloud, this include file configures Drupal to use the correct
+// database in each site environment (Dev, Stage, or Prod). To use this 
+// settings.php for development on your local workstation, set $db_url
+// (Drupal 5 or 6) or $databases (Drupal 7) as described in comments above.
+if (file_exists('/var/www/site-php')) {
+  require('/var/www/site-php/tom17/tom17-settings.inc');
+}
