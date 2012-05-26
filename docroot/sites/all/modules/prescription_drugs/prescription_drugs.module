@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Prescription Drugs feature.
+ */
+
+include_once 'prescription_drugs.features.inc';
