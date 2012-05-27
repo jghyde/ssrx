@@ -519,6 +519,8 @@ $conf['404_fast_html'] = '<html xmlns="http://www.w3.org/1999/xhtml"><head><titl
 if (file_exists('/var/www/site-php')) {
   require('/var/www/site-php/tom17/tom17-settings.inc');
 }
+
 if (file_exists('ssrx.php')) {
   require_once('ssrx.php');
 }
+
