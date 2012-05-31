@@ -1,6 +1,11 @@
 /* This file will hold styles for the mobile version of your website (mobile first). */
 /* This also can include ANY global CSS that applies site-wide. Unless overwritten by a more specific style rule, CSS declarations in global.css will apply site-wide. */
 
+html {
+  min-height: 100%;
+  padding-bottom: 1px;
+}
+
 #zone-user-wrapper {
   width: 100%;
   height: 45px;
@@ -17,4 +22,75 @@ hgroup.site-name-slogan h1.site-name {
 #block-fb-connect-login-ssrx.block-fb-connect {
   width: 205px;
   float: right;
+}
+
+.zone-footer-wrapper {
+  background-image: linear-gradient(bottom, rgb(254,154,32) 10%, rgb(255,180,88) 80%);
+  background-image: -o-linear-gradient(bottom, rgb(254,154,32) 10%, rgb(255,180,88) 80%);
+  background-image: -moz-linear-gradient(bottom, rgb(254,154,32) 10%, rgb(255,180,88) 80%);
+  background-image: -webkit-linear-gradient(bottom, rgb(254,154,32) 10%, rgb(255,180,88) 80%);
+  background-image: -ms-linear-gradient(bottom, rgb(254,154,32) 10%, rgb(255,180,88) 80%);
+
+  background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.1, rgb(254,154,32)),
+	color-stop(0.8, rgb(255,180,88))
+);
+  position: relative;
+  bottom: 0px;
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+.zone-footer{
+  color: #094569;
+}
+
+.zone-footer .block-title {
+  font: 20px 'Helvetica' sans-serif bold;
+  padding: 10px 0 20px 0;
+}
+
+div#region-footer-first #block-views-recent-blog-posts-block div.view-content {
+  display: block;
+}
+
+.block-menu {
+  float: left;
+}
+
+div#region-footer-first #block-views-recent-blog-posts-block .views-row {
+  min-height: 80px;
+  padding-bottom: 10px;
+}
+
+div#region-footer-first #block-views-recent-blog-posts-block div.view-content p {
+  font-size: 14px;
+  font-family: 'Lucida Sans Unicode';
+  padding-top: 15px;
+  margin-bottom: 0px;
+}
+
+.dateposted {
+  font-size: 12px;
+  font-family: 'Lucida Sans Unicode';
+  color: #696969;
+}
+
+div#region-footer-first #block-views-recent-blog-posts-block div.view-content img {
+  border: 5px #000000 solid;
+  float: left;
+  width: 60px;
+  height: 60px;
+  margin: 0px 10px;
+  background: #FFFFFF;
+}
+
+div#region-footer-first #block-views-recent-blog-posts-block div.view-content .more-link {
+  background: transparent url('BUTTONIMAGEHERE) no-repeat;
+  color: #222222;
+  font: 12pt Helvetica bold;
+  line-height: 30px;
 }
