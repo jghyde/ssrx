@@ -14,3 +14,7 @@ hgroup.site-name-slogan h1.site-name {
   height: 35px;
   background-color: #ffd460;
 }
+#block-fb-connect-login-ssrx.block-fb-connect {
+  width: 205px;
+  float: right;
+}
