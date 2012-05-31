@@ -1,0 +1,12 @@
+name = ssrx_context
+description = All contexts for ssrx
+core = 7.x
+package = SSRX
+dependencies[] = context
+dependencies[] = ctools
+dependencies[] = fb_connect
+dependencies[] = superfish
+dependencies[] = system
+features[context][] = all
+features[ctools][] = context:context:3
+features[features_api][] = api:1
