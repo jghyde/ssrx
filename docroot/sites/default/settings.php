@@ -520,6 +520,20 @@ if (file_exists('/var/www/site-php')) {
   require('/var/www/site-php/tom17/tom17-settings.inc');
 }
 
+/**
+ * Drupal for Facebook settings.
+ */
+$conf['fb_verbose'] = TRUE; // debug output
+//$conf['fb_verbose'] = 'extreme'; // for verbosity fetishists.
+
+// More efficient connect session discovery.
+// Required if supporting one connect app and different canvas apps.
+$conf['fb_id'] = '322584547818383'; // Your connect app's ID goes here.
+
+// Enable URL rewriting (for canvas page apps).
+include "sites/all/modules/fb/fb_url_rewrite.inc";
+include "sites/all/modules/fb/fb_settings.inc";
+
 @include('local.settings.php');
 
 
