@@ -1,0 +1,17 @@
+name = ssrx_blog
+description = SSRX Blog
+core = 7.x
+package = SSRX
+dependencies[] = ctools
+dependencies[] = features
+dependencies[] = field_sql_storage
+dependencies[] = image
+dependencies[] = node
+dependencies[] = text
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:1
+features[field][] = node-blog-body
+features[field][] = node-blog-field_blog_image
+features[node][] = blog
+features[views_view][] = recent_blog_posts

@@ -50,15 +50,25 @@ hgroup.site-name-slogan h1.site-name {
 
 .zone-footer .block-title {
   font: 20px 'Helvetica' sans-serif bold;
+}
+
+#block-views-recent-blog-posts-block .block-title,
+#block-block-1 .block-title {
   padding: 10px 0 20px 0;
+}
+
+#block-block-1 .content {
+  display: none;
 }
 
 div#region-footer-first #block-views-recent-blog-posts-block div.view-content {
   display: block;
 }
 
-.block-menu {
+.block-menu,
+#block-block-2 {
   float: left;
+  min-width: 200px;
 }
 
 div#region-footer-first #block-views-recent-blog-posts-block .views-row {
@@ -68,12 +78,13 @@ div#region-footer-first #block-views-recent-blog-posts-block .views-row {
 
 div#region-footer-first #block-views-recent-blog-posts-block div.view-content p {
   font-size: 14px;
-  font-family: 'Lucida Sans Unicode';
+  font-family: 'Myriad Pro';
+  font-weight: bold;
   padding-top: 15px;
   margin-bottom: 0px;
 }
 
-.dateposted {
+.views-field-created {
   font-size: 12px;
   font-family: 'Lucida Sans Unicode';
   color: #696969;
@@ -88,9 +99,38 @@ div#region-footer-first #block-views-recent-blog-posts-block div.view-content im
   background: #FFFFFF;
 }
 
-div#region-footer-first #block-views-recent-blog-posts-block div.view-content .more-link {
-  background: transparent url('BUTTONIMAGEHERE) no-repeat;
-  color: #222222;
-  font: 12pt Helvetica bold;
+.more-link a {
+  background: transparent url('/sites/all/themes/ssrx/images/buttonbackground.png') no-repeat;
+  color: #7c7c7c;
+  font: 13px Helvetica sans-serif bold;
   line-height: 30px;
+  text-decoration: none;
+  float: left;
+  padding-left: 45px;
+  width: 169px;
+  line-height: 33px;
+  text-align: left;
+}
+
+#zone-footer .block-menu .content .menu li.leaf {
+  list-style: none;
+  text-indent: 5px;
+}
+
+#zone-footer .leaf a {
+  font-size: 14px;
+  font-weight: bold;
+  color: #094569;
+  text-decoration: none;
+  font-family: 'Helvetica Neue';
+}
+
+.socialmedia {
+  float: left;
+  padding: 10px 4px;
+  display: inline;
+}
+
+#twitter {
+  padding: 10px 0px 10px 4px;
 }
