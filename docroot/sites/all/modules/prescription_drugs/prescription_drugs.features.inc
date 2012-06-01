@@ -19,6 +19,13 @@ function prescription_drugs_ctools_plugin_api() {
 }
 
 /**
+ * Implements hook_views_api().
+ */
+function prescription_drugs_views_api() {
+  return array("version" => "3.0");
+}
+
+/**
  * Implements hook_node_info().
  */
 function prescription_drugs_node_info() {
@@ -43,14 +50,6 @@ function prescription_drugs_node_info() {
       'name' => t('Pharmacy'),
       'base' => 'node_content',
       'description' => t('A physical pharmacy location.'),
-      'has_title' => '1',
-      'title_label' => t('Name'),
-      'help' => '',
-    ),
-    'pharmacy_chain' => array(
-      'name' => t('Pharmacy Chain'),
-      'base' => 'node_content',
-      'description' => t('Pharmacy chains such as Walgreen\'s, Costco, etc.'),
       'has_title' => '1',
       'title_label' => t('Name'),
       'help' => '',
