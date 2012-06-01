@@ -21,7 +21,7 @@ function prescription_drugs_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'ant_drug_price';
-  $strongarm->value = '0';
+  $strongarm->value = '1';
   $export['ant_drug_price'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -35,14 +35,14 @@ function prescription_drugs_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'ant_pattern_drug_price';
-  $strongarm->value = '';
+  $strongarm->value = '[node:field_drug] [node:field_dosage] at [node:field_pharmacy] on [node:created:short]';
   $export['ant_pattern_drug_price'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'ant_pattern_pharmacy';
-  $strongarm->value = '[node:field_chain]';
+  $strongarm->value = '[node:field_chain] [node:field_location]';
   $export['ant_pattern_pharmacy'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -118,13 +118,6 @@ function prescription_drugs_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_anonymous_pharmacy_chain';
-  $strongarm->value = 0;
-  $export['comment_anonymous_pharmacy_chain'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'comment_default_mode_drug';
   $strongarm->value = 1;
   $export['comment_default_mode_drug'] = $strongarm;
@@ -146,13 +139,6 @@ function prescription_drugs_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_default_mode_pharmacy_chain';
-  $strongarm->value = 1;
-  $export['comment_default_mode_pharmacy_chain'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'comment_default_per_page_drug';
   $strongarm->value = '50';
   $export['comment_default_per_page_drug'] = $strongarm;
@@ -170,13 +156,6 @@ function prescription_drugs_strongarm() {
   $strongarm->name = 'comment_default_per_page_pharmacy';
   $strongarm->value = '50';
   $export['comment_default_per_page_pharmacy'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'comment_default_per_page_pharmacy_chain';
-  $strongarm->value = '50';
-  $export['comment_default_per_page_pharmacy_chain'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -216,23 +195,9 @@ function prescription_drugs_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_form_location_pharmacy_chain';
-  $strongarm->value = 1;
-  $export['comment_form_location_pharmacy_chain'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'comment_pharmacy';
   $strongarm->value = '0';
   $export['comment_pharmacy'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'comment_pharmacy_chain';
-  $strongarm->value = '0';
-  $export['comment_pharmacy_chain'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -258,13 +223,6 @@ function prescription_drugs_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_preview_pharmacy_chain';
-  $strongarm->value = '1';
-  $export['comment_preview_pharmacy_chain'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'comment_subject_field_drug';
   $strongarm->value = 1;
   $export['comment_subject_field_drug'] = $strongarm;
@@ -282,13 +240,6 @@ function prescription_drugs_strongarm() {
   $strongarm->name = 'comment_subject_field_pharmacy';
   $strongarm->value = 1;
   $export['comment_subject_field_pharmacy'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'comment_subject_field_pharmacy_chain';
-  $strongarm->value = 1;
-  $export['comment_subject_field_pharmacy_chain'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -336,7 +287,7 @@ function prescription_drugs_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'location_maxnum_pharmacy';
-  $strongarm->value = '1';
+  $strongarm->value = '0';
   $export['location_maxnum_pharmacy'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -540,8 +491,8 @@ function prescription_drugs_strongarm() {
   $strongarm->name = 'location_settings_node_pharmacy';
   $strongarm->value = array(
     'multiple' => array(
-      'min' => '1',
-      'max' => '1',
+      'min' => '0',
+      'max' => '0',
       'add' => '1',
     ),
     'form' => array(
@@ -586,7 +537,7 @@ function prescription_drugs_strongarm() {
           'weight' => '14',
         ),
         'locpick' => array(
-          'collect' => '1',
+          'collect' => '0',
           'weight' => '20',
         ),
         'phone' => array(
@@ -835,13 +786,6 @@ function prescription_drugs_strongarm() {
   $strongarm->name = 'node_preview_pharmacy';
   $strongarm->value = '1';
   $export['node_preview_pharmacy'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_preview_pharmacy_chain';
-  $strongarm->value = '1';
-  $export['node_preview_pharmacy_chain'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
