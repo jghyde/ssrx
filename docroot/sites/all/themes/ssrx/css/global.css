@@ -20,8 +20,9 @@ hgroup.site-name-slogan h1.site-name {
   background-color: #ffd460;
 }
 #block-fb-connect-login-ssrx.block-fb-connect {
-  width: 205px;
+  width: 151px;
   float: right;
+<<<<<<< HEAD
 }
 
 .zone-footer-wrapper {
@@ -133,4 +134,7 @@ div#region-footer-first #block-views-recent-blog-posts-block div.view-content im
 
 #twitter {
   padding: 10px 0px 10px 4px;
+  margin: 13px 0 13px 0;
+  height: 18px;
+  overflow: hidden;
 }

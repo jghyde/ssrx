@@ -10,6 +10,72 @@
 function prescription_drugs_field_default_fields() {
   $fields = array();
 
+  // Exported field: 'node-drug-field_brand_or_generic_'
+  $fields['node-drug-field_brand_or_generic_'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_brand_or_generic_',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => 'Generic',
+          1 => 'Brand',
+        ),
+        'allowed_values_function' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_boolean',
+    ),
+    'field_instance' => array(
+      'bundle' => 'drug',
+      'default_value' => array(
+        0 => array(
+          'value' => '1',
+        ),
+      ),
+      'deleted' => '0',
+      'description' => 'Is this a brand name or generic drug?',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => 2,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_brand_or_generic_',
+      'label' => 'Brand or Generic?',
+      'required' => 1,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_buttons',
+        'weight' => '3',
+      ),
+    ),
+  );
+
   // Exported field: 'node-drug-field_equivalent'
   $fields['node-drug-field_equivalent'] = array(
     'field_config' => array(
@@ -158,7 +224,7 @@ function prescription_drugs_field_default_fields() {
           'size' => 60,
         ),
         'type' => 'taxonomy_autocomplete',
-        'weight' => '3',
+        'weight' => '4',
       ),
     ),
   );
@@ -312,7 +378,7 @@ function prescription_drugs_field_default_fields() {
           'size' => 60,
         ),
         'type' => 'taxonomy_autocomplete',
-        'weight' => '4',
+        'weight' => '5',
       ),
     ),
   );
@@ -393,7 +459,72 @@ function prescription_drugs_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'node_reference_autocomplete',
-        'weight' => '5',
+        'weight' => '6',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-drug_price-field_price'
+  $fields['node-drug_price-field_price'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_price',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'number',
+      'settings' => array(
+        'decimal_separator' => '.',
+        'precision' => '10',
+        'scale' => '2',
+      ),
+      'translatable' => '0',
+      'type' => 'number_decimal',
+    ),
+    'field_instance' => array(
+      'bundle' => 'drug_price',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'number',
+          'settings' => array(
+            'decimal_separator' => '.',
+            'prefix_suffix' => TRUE,
+            'scale' => 2,
+            'thousand_separator' => ' ',
+          ),
+          'type' => 'number_decimal',
+          'weight' => 5,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_price',
+      'label' => 'Price',
+      'required' => 0,
+      'settings' => array(
+        'max' => '',
+        'min' => '0.01',
+        'prefix' => '',
+        'suffix' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'number',
+        'settings' => array(),
+        'type' => 'number',
+        'weight' => '2',
       ),
     ),
   );
@@ -454,7 +585,7 @@ function prescription_drugs_field_default_fields() {
         'module' => 'number',
         'settings' => array(),
         'type' => 'number',
-        'weight' => '2',
+        'weight' => '3',
       ),
     ),
   );
@@ -468,47 +599,42 @@ function prescription_drugs_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_chain',
       'foreign keys' => array(
-        'nid' => array(
+        'tid' => array(
           'columns' => array(
-            'nid' => 'nid',
+            'tid' => 'tid',
           ),
-          'table' => 'node',
+          'table' => 'taxonomy_term_data',
         ),
       ),
       'indexes' => array(
-        'nid' => array(
-          0 => 'nid',
+        'tid' => array(
+          0 => 'tid',
         ),
       ),
-      'module' => 'node_reference',
+      'module' => 'taxonomy',
       'settings' => array(
-        'referenceable_types' => array(
-          'article' => 0,
-          'page' => 0,
-          'pharmacy' => 0,
-          'pharmacy_chain' => 'pharmacy_chain',
-        ),
-        'view' => array(
-          'args' => array(),
-          'display_name' => '',
-          'view_name' => '',
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'pharmacy_chain',
+            'parent' => '0',
+          ),
         ),
       ),
       'translatable' => '0',
-      'type' => 'node_reference',
+      'type' => 'taxonomy_term_reference',
     ),
     'field_instance' => array(
       'bundle' => 'pharmacy',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => 'The chain, if any, that this pharmacy is associated with. ',
+      'description' => '',
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'node_reference',
+          'module' => 'taxonomy',
           'settings' => array(),
-          'type' => 'node_reference_default',
-          'weight' => 0,
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => 2,
         ),
         'teaser' => array(
           'label' => 'above',
@@ -526,93 +652,151 @@ function prescription_drugs_field_default_fields() {
       ),
       'widget' => array(
         'active' => 1,
-        'module' => 'node_reference',
-        'settings' => array(
-          'autocomplete_match' => 'contains',
-          'autocomplete_path' => 'node_reference/autocomplete',
-          'size' => '60',
-        ),
-        'type' => 'node_reference_autocomplete',
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
         'weight' => 0,
       ),
     ),
   );
 
-  // Exported field: 'node-pharmacy_chain-body'
-  $fields['node-pharmacy_chain-body'] = array(
+  // Exported field: 'node-pharmacy-field_location'
+  $fields['node-pharmacy-field_location'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '1',
       'deleted' => '0',
-      'entity_types' => array(
-        0 => 'node',
-      ),
-      'field_name' => 'body',
-      'foreign keys' => array(
-        'format' => array(
-          'columns' => array(
-            'format' => 'format',
-          ),
-          'table' => 'filter_format',
-        ),
-      ),
+      'entity_types' => array(),
+      'field_name' => 'field_location',
+      'foreign keys' => array(),
       'indexes' => array(
-        'format' => array(
-          0 => 'format',
+        'lid' => array(
+          0 => 'lid',
         ),
       ),
-      'module' => 'text',
-      'settings' => array(),
+      'module' => 'location_cck',
+      'settings' => array(
+        'gmap_macro' => '[gmap ]',
+        'gmap_marker' => 'drupal',
+        'location_settings' => array(
+          'display' => array(
+            'hide' => array(
+              'additional' => 0,
+              'city' => 0,
+              'coords' => 'coords',
+              'country' => 0,
+              'country_name' => 0,
+              'fax' => 0,
+              'locpick' => 'locpick',
+              'map_link' => 0,
+              'name' => 'name',
+              'phone' => 0,
+              'postal_code' => 0,
+              'province' => 0,
+              'province_name' => 'province_name',
+              'street' => 0,
+            ),
+          ),
+          'form' => array(
+            'fields' => array(
+              'additional' => array(
+                'collect' => '1',
+                'default' => '',
+                'weight' => '6',
+              ),
+              'city' => array(
+                'collect' => '2',
+                'default' => '',
+                'weight' => '8',
+              ),
+              'country' => array(
+                'collect' => '4',
+                'default' => 'us',
+                'weight' => '14',
+              ),
+              'fax' => array(
+                'collect' => '1',
+                'default' => '',
+                'weight' => '30',
+              ),
+              'locpick' => array(
+                'collect' => '0',
+                'weight' => '20',
+              ),
+              'name' => array(
+                'collect' => '0',
+                'default' => '',
+                'weight' => '2',
+              ),
+              'phone' => array(
+                'collect' => '1',
+                'default' => '',
+                'weight' => '25',
+              ),
+              'postal_code' => array(
+                'collect' => '2',
+                'default' => '',
+                'weight' => '12',
+              ),
+              'province' => array(
+                'collect' => '2',
+                'default' => '',
+                'weight' => '10',
+                'widget' => 'autocomplete',
+              ),
+              'street' => array(
+                'collect' => '2',
+                'default' => '',
+                'weight' => '4',
+              ),
+            ),
+          ),
+        ),
+      ),
       'translatable' => '0',
-      'type' => 'text_with_summary',
+      'type' => 'location',
     ),
     'field_instance' => array(
-      'bundle' => 'pharmacy_chain',
+      'bundle' => 'pharmacy',
       'default_value' => NULL,
       'deleted' => '0',
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'hidden',
-          'module' => 'text',
+          'label' => 'above',
+          'module' => 'location_cck',
           'settings' => array(),
-          'type' => 'text_default',
-          'weight' => 0,
+          'type' => 'location_default',
+          'weight' => 1,
         ),
         'teaser' => array(
-          'label' => 'hidden',
-          'module' => 'text',
-          'settings' => array(
-            'trim_length' => 600,
-          ),
-          'type' => 'text_summary_or_trimmed',
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
           'weight' => 0,
         ),
       ),
       'entity_type' => 'node',
-      'field_name' => 'body',
-      'label' => 'Body',
-      'required' => FALSE,
+      'field_name' => 'field_location',
+      'label' => 'Address',
+      'required' => 1,
       'settings' => array(
-        'display_summary' => TRUE,
-        'text_processing' => 1,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
-        'module' => 'text',
-        'settings' => array(
-          'rows' => 20,
-          'summary_rows' => 5,
-        ),
-        'type' => 'text_textarea_with_summary',
-        'weight' => 31,
+        'active' => 0,
+        'module' => 'location_cck',
+        'settings' => array(),
+        'type' => 'location',
+        'weight' => '2',
       ),
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Body');
+  t('Address');
+  t('Brand or Generic?');
   t('Chain');
   t('Dosage');
   t('Drug');
@@ -620,9 +804,10 @@ function prescription_drugs_field_default_fields() {
   t('Equivalent');
   t('Format');
   t('Generic/Name brand equivalent of this drug.');
+  t('Is this a brand name or generic drug?');
   t('Pharmacy');
+  t('Price');
   t('Quantity');
-  t('The chain, if any, that this pharmacy is associated with. ');
   t('The dosage of the drug being reported');
   t('The format of the drug being reported');
   t('The pharmacy location for this drug price report');

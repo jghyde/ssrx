@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the ssrx_settings feature.
+ */
+
+include_once 'ssrx_settings.features.inc';
