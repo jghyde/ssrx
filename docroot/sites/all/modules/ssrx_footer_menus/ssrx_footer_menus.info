@@ -1,0 +1,12 @@
+name = ssrx_footer_menus
+description = SSRX Footer Menus
+core = 7.x
+package = Features
+dependencies[] = features
+dependencies[] = menu
+features[features_api][] = api:1
+features[menu_custom][] = menu-about-simply-smarter-rx
+features[menu_custom][] = menu-find-a-doctor
+features[menu_custom][] = menu-find-pharmacies
+features[menu_custom][] = menu-find-urgent-care
+features[menu_custom][] = menu-search-for-meds
