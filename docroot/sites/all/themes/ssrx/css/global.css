@@ -6,6 +6,10 @@ html {
   padding-bottom: 1px;
 }
 
+body {
+  background-color: #f5f5f5;
+}
+
 #zone-user-wrapper {
   width: 100%;
   height: 45px;
@@ -147,4 +151,87 @@ div#region-footer-first #block-views-recent-blog-posts-block div.view-content im
 .truefooter a {
   text-decoration: none;
   color: #094569;
+}
+
+#region-content {
+  width: 960px;
+  margin: 30px;
+}
+
+.steps {
+  width: 296px;
+  float: left;
+  margin: 0px;
+}
+
+#stepone,
+#steptwo {
+  margin-right: 20px;
+}
+
+.bignumber {
+  background-color: #fe9a20;
+  -moz-border-radius: 25px;
+  -webkit-border-radius: 25px;
+  -khtml-border-radius: 25px;
+  border-radius: 25px;
+  width: 50px;
+  height: 50px;
+  color: #094569;
+  font-style: italic;
+  font-family: Arial;
+  font-size: 35px;
+  font-weight: bold;
+  line-height: 50px;
+  text-align: center;
+  margin: 10px 10px 10px 0px;
+  float: left;
+}
+
+#stepone .steptitle,
+#steptwo .steptitle {
+  font-style: italic;
+  font-family: Arial;
+  font-size: 18px;
+  font-weight: bold;
+  color: #094569;
+  padding: 15px;
+}
+
+#stepthree .steptitle {
+  font-style: italic;
+  font-family: Arial;
+  font-size: 30px;
+  line-height: 54px;
+  font-weight: bold;
+  color: #094569;
+  padding: 15px;
+}
+
+#page-title {
+  font-style: italic;
+  font-family: Arial;
+  font-size: 24px;
+  font-weight: bold;
+  color: #094569;
+}
+
+.steps img {
+  -moz-box-shadow: 3px 3px 4px #000;
+  -webkit-box-shadow: 3px 3px 4px #000;
+  box-shadow: 3px 3px 4px #000;
+}
+
+.stepcontent {
+  font-family: Arial;
+  font-size: 12px;
+}
+
+#win_image {
+  float: left;
+  }
+  
+#stepthree .stepcontent p {
+  float: right;
+  width: 180px;
 }
