@@ -244,6 +244,13 @@ function prescription_drugs_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'facetapi:block_cache:search_api@prescription_drug';
+  $strongarm->value = -1;
+  $export['facetapi:block_cache:search_api@prescription_drug'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'location_defaultnum_drug';
   $strongarm->value = '0';
   $export['location_defaultnum_drug'] = $strongarm;
@@ -814,6 +821,17 @@ function prescription_drugs_strongarm() {
   $strongarm->name = 'node_submitted_pharmacy_chain';
   $strongarm->value = 0;
   $export['node_submitted_pharmacy_chain'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'search_api_facets_search_ids';
+  $strongarm->value = array(
+    'prescription_drug' => array(
+      'search_api_views:prescriptions_search:page' => 'search_api_views:prescriptions_search:page',
+    ),
+  );
+  $export['search_api_facets_search_ids'] = $strongarm;
 
   return $export;
 }
