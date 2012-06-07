@@ -28,21 +28,21 @@ function ssrx_settings_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'acquia_spi_boot_last';
-  $strongarm->value = 1338588775;
+  $strongarm->value = 1339104589;
   $export['acquia_spi_boot_last'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'acquia_spi_cron_last';
-  $strongarm->value = 1338588775;
+  $strongarm->value = 1339097370;
   $export['acquia_spi_cron_last'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'acquia_spi_module_rebuild';
-  $strongarm->value = 1338504734;
+  $strongarm->value = 1339097370;
   $export['acquia_spi_module_rebuild'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -50,7 +50,7 @@ function ssrx_settings_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'acquia_subscription_data';
   $strongarm->value = array(
-    'timestamp' => 1338588775,
+    'timestamp' => 1339097370,
     'active' => '1',
     'href' => 'https://network.acquia.com/network/node/1895220',
     'expiration_date' => array(
@@ -133,14 +133,14 @@ function ssrx_settings_strongarm() {
     'anon_not_connected' => array(
       'title' => '',
       'body' => array(
-        'value' => '<fb:login-button size="xlarge" scope="!perms" v="2">Connect with Facebook</fb:login-button>',
+        'value' => '<fb:login-button scope="!perms" v="2">Connect</fb:login-button>',
         'format' => 'php_code',
       ),
     ),
     'user_not_connected' => array(
       'title' => '',
       'body' => array(
-        'value' => '<fb:login-button scope="!perms" v="2">Connect with Facebook</fb:login-button>',
+        'value' => '<fb:login-button scope="!perms" v="2">Connect</fb:login-button>',
         'format' => 'php_code',
       ),
     ),
@@ -951,6 +951,16 @@ function ssrx_settings_strongarm() {
     'alpha_zone_footer_css' => '',
     'alpha_zone_footer_wrapper_css' => '',
     'alpha_zone_footer_equal_height_container' => 0,
+    'alpha_region_footer_third_force' => 0,
+    'alpha_region_footer_third_zone' => 'footer',
+    'alpha_region_footer_third_prefix' => '0',
+    'alpha_region_footer_third_columns' => '12',
+    'alpha_region_footer_third_suffix' => '0',
+    'alpha_region_footer_third_weight' => '3',
+    'alpha_region_footer_third_position' => '0',
+    'alpha_region_footer_third_css' => '',
+    'alpha_region_footer_third_equal_height_element' => 0,
+    'alpha_region_footer_third_equal_height_container' => 0,
     'alpha_region_footer_first_force' => 0,
     'alpha_region_footer_first_zone' => 'footer',
     'alpha_region_footer_first_prefix' => '0',
