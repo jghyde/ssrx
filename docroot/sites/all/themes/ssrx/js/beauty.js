@@ -13,7 +13,12 @@
           $(this).removeClass('on', 1000);
         }
       );
-    }
+    }    
   };
-
+  $(document).ready(function(){ 
+    $('label').inFieldLabels({
+      fadeDuration:1000,
+      fadeOpacity: 0.1,
+    });
+  });
 })(jQuery);

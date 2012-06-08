@@ -23,3 +23,17 @@
 .orange.on {
   box-shadow: none;
 }
+
+/* for the labels inside the form text areas */
+#edit-title-wrapper {
+  position: relative;
+}
+form div.views-exposed-widget label {
+  position: absolute;
+  top: 0;
+  left: 5px;
+  font-size: 18px;
+  line-height: 38px;
+  color: #cccccc;
+  font-weight: 200!important;
+}

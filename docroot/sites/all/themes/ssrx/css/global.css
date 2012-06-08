@@ -302,9 +302,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e5e5e4', end
   padding: 0;
   margin: 0 10px 0 0;
 }
-#zone-header-wrapper label {
-  display: none;
-}
  
 #zone-header-wrapper  input#edit-distance-postal-code {
   width: 240px;
@@ -348,4 +345,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e5e5e4', end
   background: -ms-linear-gradient(top,  rgba(255,180,88,1) 49%,rgba(255,154,32,1) 99%); /* IE10+ */
   background: linear-gradient(top,  rgba(255,180,88,1) 49%,rgba(255,154,32,1) 99%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb458', endColorstr='#ff9a20',GradientType=0 ); /* IE6-8 */
+}
+div.form-item-distance-postal-code label {
+  display: none;
 }
