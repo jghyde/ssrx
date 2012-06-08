@@ -350,3 +350,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e5e5e4', end
 div#edit-distance-wrapper label {
   display: none;
 }
+div#edit-distance-wrapper div.form-item-distance-postal-code label {
+  display: inline;
+}

@@ -37,3 +37,6 @@ form div.views-exposed-widget label {
   color: #cccccc;
   font-weight: 200!important;
 }
+input:focus, input:active {
+  box-shadow: 0 0 3px #4fa0d0;
+}
