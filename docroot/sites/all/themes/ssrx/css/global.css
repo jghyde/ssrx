@@ -235,3 +235,6 @@ div#region-footer-first #block-views-recent-blog-posts-block div.view-content im
   float: right;
   width: 180px;
 }
+#block-superfish-1 h2.block-title{
+  display: none;
+}

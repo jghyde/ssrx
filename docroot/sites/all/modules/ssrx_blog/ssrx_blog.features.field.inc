@@ -143,14 +143,14 @@ function ssrx_blog_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-blog-field_blog_image'
-  $fields['node-blog-field_blog_image'] = array(
+  // Exported field: 'node-blog-field_image'
+  $fields['node-blog-field_image'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
-      'field_name' => 'field_blog_image',
+      'field_name' => 'field_image',
       'foreign keys' => array(
         'fid' => array(
           'columns' => array(
@@ -182,10 +182,10 @@ function ssrx_blog_field_default_fields() {
           'module' => 'image',
           'settings' => array(
             'image_link' => '',
-            'image_style' => '',
+            'image_style' => 'medium',
           ),
           'type' => 'image',
-          'weight' => '0',
+          'weight' => '2',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -195,18 +195,18 @@ function ssrx_blog_field_default_fields() {
         ),
       ),
       'entity_type' => 'node',
-      'field_name' => 'field_blog_image',
+      'field_name' => 'field_image',
       'label' => 'Image',
       'required' => 0,
       'settings' => array(
-        'alt_field' => 1,
+        'alt_field' => 0,
         'default_image' => 0,
-        'file_directory' => '',
+        'file_directory' => 'blog',
         'file_extensions' => 'png gif jpg jpeg',
         'max_filesize' => '',
         'max_resolution' => '',
         'min_resolution' => '',
-        'title_field' => 1,
+        'title_field' => 0,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -214,10 +214,10 @@ function ssrx_blog_field_default_fields() {
         'module' => 'image',
         'settings' => array(
           'preview_image_style' => 'thumbnail',
-          'progress_indicator' => 'throbber',
+          'progress_indicator' => 'bar',
         ),
         'type' => 'image_image',
-        'weight' => '32',
+        'weight' => '33',
       ),
     ),
   );
