@@ -346,6 +346,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e5e5e4', end
   background: linear-gradient(top,  rgba(255,180,88,1) 49%,rgba(255,154,32,1) 99%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb458', endColorstr='#ff9a20',GradientType=0 ); /* IE6-8 */
 }
-div.form-item-distance-postal-code label {
+
+div#edit-distance-wrapper label {
   display: none;
 }

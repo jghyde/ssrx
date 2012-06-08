@@ -16,7 +16,11 @@
     }    
   };
   $(document).ready(function(){ 
-    $('label').inFieldLabels({
+    $('div.form-item-distance-postal-code label').inFieldLabels({
+      fadeDuration:1000,
+      fadeOpacity: 0.1,
+    });
+    $('#edit-title-wrapper label').inFieldLabels({
       fadeDuration:1000,
       fadeOpacity: 0.1,
     });
