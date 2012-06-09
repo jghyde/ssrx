@@ -24,5 +24,6 @@
       fadeDuration:1000,
       fadeOpacity: 0.1,
     });
+    $('div.form-item.form-type-textfield.form-item-title input#edit-title').focus();
   });
 })(jQuery);
