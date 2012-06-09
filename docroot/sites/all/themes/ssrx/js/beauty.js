@@ -21,8 +21,8 @@
       fadeOpacity: 0.1,
     });
     $('#edit-title-wrapper label').inFieldLabels({
-      fadeDuration:1000,
-      fadeOpacity: 0.1,
+      fadeDuration:2000,
+      fadeOpacity: 0.4,
     });
     $('div.form-item.form-type-textfield.form-item-title input#edit-title').focus();
   });
