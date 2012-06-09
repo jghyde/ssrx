@@ -26,15 +26,15 @@ function ssrx_context_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'system-help' => array(
-          'module' => 'system',
-          'delta' => 'help',
-          'region' => 'content',
-          'weight' => '-10',
-        ),
         'system-main' => array(
           'module' => 'system',
           'delta' => 'main',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
+        'system-help' => array(
+          'module' => 'system',
+          'delta' => 'help',
           'region' => 'content',
           'weight' => '-10',
         ),
@@ -60,43 +60,49 @@ function ssrx_context_context_default_contexts() {
           'module' => 'block',
           'delta' => 1,
           'region' => 'footer_second',
-          'weight' => '-18',
+          'weight' => '-10',
         ),
         'menu-menu-search-for-meds' => array(
           'module' => 'menu',
           'delta' => 'menu-search-for-meds',
           'region' => 'footer_second',
-          'weight' => '-17',
+          'weight' => '-9',
+        ),
+        'menu-menu-report-a-price' => array(
+          'module' => 'menu',
+          'delta' => 'menu-report-a-price',
+          'region' => 'footer_second',
+          'weight' => '-8',
         ),
         'menu-menu-find-pharmacies' => array(
           'module' => 'menu',
           'delta' => 'menu-find-pharmacies',
           'region' => 'footer_second',
-          'weight' => '-16',
+          'weight' => '-7',
         ),
         'menu-menu-about-simply-smarter-rx' => array(
           'module' => 'menu',
           'delta' => 'menu-about-simply-smarter-rx',
           'region' => 'footer_second',
-          'weight' => '-15',
+          'weight' => '-6',
         ),
         'menu-menu-find-a-doctor' => array(
           'module' => 'menu',
           'delta' => 'menu-find-a-doctor',
           'region' => 'footer_second',
-          'weight' => '-14',
+          'weight' => '-5',
         ),
         'menu-menu-find-urgent-care' => array(
           'module' => 'menu',
           'delta' => 'menu-find-urgent-care',
           'region' => 'footer_second',
-          'weight' => '-13',
+          'weight' => '-4',
         ),
         'block-2' => array(
           'module' => 'block',
           'delta' => 2,
           'region' => 'footer_second',
-          'weight' => '-12',
+          'weight' => '-3',
         ),
         'block-3' => array(
           'module' => 'block',
