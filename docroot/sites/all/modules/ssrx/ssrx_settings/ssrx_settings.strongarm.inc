@@ -28,21 +28,21 @@ function ssrx_settings_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'acquia_spi_boot_last';
-  $strongarm->value = 1339104589;
+  $strongarm->value = 1339255862;
   $export['acquia_spi_boot_last'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'acquia_spi_cron_last';
-  $strongarm->value = 1339097370;
+  $strongarm->value = 1339248823;
   $export['acquia_spi_cron_last'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'acquia_spi_module_rebuild';
-  $strongarm->value = 1339097370;
+  $strongarm->value = 1339186464;
   $export['acquia_spi_module_rebuild'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -50,7 +50,7 @@ function ssrx_settings_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'acquia_subscription_data';
   $strongarm->value = array(
-    'timestamp' => 1339097370,
+    'timestamp' => 1339248823,
     'active' => '1',
     'href' => 'https://network.acquia.com/network/node/1895220',
     'expiration_date' => array(
@@ -794,7 +794,7 @@ function ssrx_settings_strongarm() {
     'alpha_region_header_first_force' => 0,
     'alpha_region_header_first_zone' => 'header',
     'alpha_region_header_first_prefix' => '0',
-    'alpha_region_header_first_columns' => '6',
+    'alpha_region_header_first_columns' => '12',
     'alpha_region_header_first_suffix' => '0',
     'alpha_region_header_first_weight' => '1',
     'alpha_region_header_first_position' => '0',
@@ -802,7 +802,7 @@ function ssrx_settings_strongarm() {
     'alpha_region_header_first_equal_height_element' => 0,
     'alpha_region_header_first_equal_height_container' => 0,
     'alpha_region_header_second_force' => 0,
-    'alpha_region_header_second_zone' => 'header',
+    'alpha_region_header_second_zone' => NULL,
     'alpha_region_header_second_prefix' => '0',
     'alpha_region_header_second_columns' => '6',
     'alpha_region_header_second_suffix' => '0',
@@ -951,16 +951,6 @@ function ssrx_settings_strongarm() {
     'alpha_zone_footer_css' => '',
     'alpha_zone_footer_wrapper_css' => '',
     'alpha_zone_footer_equal_height_container' => 0,
-    'alpha_region_footer_third_force' => 0,
-    'alpha_region_footer_third_zone' => 'footer',
-    'alpha_region_footer_third_prefix' => '0',
-    'alpha_region_footer_third_columns' => '12',
-    'alpha_region_footer_third_suffix' => '0',
-    'alpha_region_footer_third_weight' => '3',
-    'alpha_region_footer_third_position' => '0',
-    'alpha_region_footer_third_css' => '',
-    'alpha_region_footer_third_equal_height_element' => 0,
-    'alpha_region_footer_third_equal_height_container' => 0,
     'alpha_region_footer_first_force' => 0,
     'alpha_region_footer_first_zone' => 'footer',
     'alpha_region_footer_first_prefix' => '0',
@@ -981,6 +971,16 @@ function ssrx_settings_strongarm() {
     'alpha_region_footer_second_css' => '',
     'alpha_region_footer_second_equal_height_element' => 0,
     'alpha_region_footer_second_equal_height_container' => 0,
+    'alpha_region_footer_third_force' => 0,
+    'alpha_region_footer_third_zone' => 'footer',
+    'alpha_region_footer_third_prefix' => '0',
+    'alpha_region_footer_third_columns' => '12',
+    'alpha_region_footer_third_suffix' => '0',
+    'alpha_region_footer_third_weight' => '3',
+    'alpha_region_footer_third_position' => '0',
+    'alpha_region_footer_third_css' => '',
+    'alpha_region_footer_third_equal_height_element' => 0,
+    'alpha_region_footer_third_equal_height_container' => 0,
   );
   $export['theme_ssrx_settings'] = $strongarm;
 

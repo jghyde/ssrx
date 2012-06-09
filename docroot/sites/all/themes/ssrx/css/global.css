@@ -9,6 +9,17 @@ html {
 body {
   background-color: #f5f5f5;
 }
+a {
+  text-decoration: none;
+  color: #094569;
+}
+a:link, a:visited {
+  text-decoration: none;
+  color: #2e5d79;
+}
+a:hover {
+  color: #4fa0d0;
+}
 
 #zone-user-wrapper {
   width: 100%;
@@ -73,11 +84,7 @@ div#region-footer-first #block-views-recent-blog-posts-block div.view-content {
   display: block;
 }
 
-.block-menu,
-#block-block-2 {
-  float: left;
-  min-width: 200px;
-}
+
 
 div#region-footer-first #block-views-recent-blog-posts-block .views-row {
   min-height: 80px;
@@ -264,7 +271,7 @@ div#region-footer-first #block-views-recent-blog-posts-block div.view-content im
 }
 #zone-header-wrapper h2.block-title {
   font-size: 30px;
-  font-style: italic;
+  text-shadow: -1px -1px 1px #2e5d79, 1px 1px 1px #ffffff;
 }
 #zone-header-wrapper .block-inner {
   width: 865px;
@@ -352,4 +359,26 @@ div#edit-distance-wrapper label {
 }
 div#edit-distance-wrapper div.form-item-distance-postal-code label {
   display: inline;
+}
+#region-footer-second {
+  position: relative;
+}
+#region-footer-second .block {
+  width: 180px;
+  min-height: 150px;
+  float: left;
+  margin: 0 10px 20px;
+}
+#region-footer-second #block-block-1 {
+  width: 620px;
+  min-height: 0;
+}
+#region-footer-second #block-block-2 {
+  width: 360px;
+  float: right;
+  min-height: 0;
+  margin: -50px 0 0 0;
+}
+#region-footer-second #block-block-2 div.block-inner {
+  padding-left: 130px;
 }
