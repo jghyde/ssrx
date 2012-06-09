@@ -26,15 +26,15 @@ function ssrx_context_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'system-main' => array(
-          'module' => 'system',
-          'delta' => 'main',
-          'region' => 'content',
-          'weight' => '-10',
-        ),
         'system-help' => array(
           'module' => 'system',
           'delta' => 'help',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
+        'system-main' => array(
+          'module' => 'system',
+          'delta' => 'main',
           'region' => 'content',
           'weight' => '-10',
         ),
