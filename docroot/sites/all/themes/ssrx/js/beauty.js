@@ -22,7 +22,7 @@
     });
     $('#edit-title-wrapper label').inFieldLabels({
       fadeDuration:2000,
-      fadeOpacity: 0.4,
+      fadeOpacity: 0.5,
     });
     $('div.form-item.form-type-textfield.form-item-title input#edit-title').focus();
   });
