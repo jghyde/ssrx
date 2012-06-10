@@ -10,3 +10,38 @@
  * for your subtheme grows. Please read the README.txt in the /preprocess and /process subfolders
  * for more information on this topic.
  */
+function ssrx_preprocess_location(&$vars) {
+  $node = menu_get_object();
+  if (is_object($node) && $node->type == 'pharmacy') {
+    // Render the side-to-side google map for pharmacy detail pages
+    $markers = array(
+      array(
+        'options' => array(),
+        'text' => $node->title,
+        'longitude' => $vars['location']['longitude'],
+        'latitude' => $vars['location']['latitude'],
+        'markername' => 'blank',
+        'offset' => 0,
+      ),
+    );
+    $map = array(
+        'id' =>                  'pharmacy_location', // "Map ID" -- used to associate a map with other controls.
+        'width' =>               '940px', // Map width as a CSS dimension.
+        'height' =>              '300px', // Map height as a CSS dimension (usually px).
+        'latitude' =>            $vars['location']['latitude'], // Map center latitude.
+        'longitude' =>           $vars['location']['longitude'], // Map center longitude.
+        'zoom' =>                8,
+        'maxzoom' =>             4, // Maximum zoom level for autozoom.
+        'maptype' =>             'Map', // Initial baselayer type.
+        'controltype' =>         'Small', // Size of map controls.
+        'align' =>               'Center', // CSS alignment for map div.
+        'mtc' =>                 'standard', // Map type control.
+        'baselayers' =>          array("Map", "Satellite", "Hybrid", "Terrain"), // Enabled map baselayers.
+        'markers' =>             $markers, // Array of markers to place on the map.
+      );    
+    $vars['gmap'] = array( // GMap in Drupal 7 uses drupal_render().
+      '#type' => 'gmap',
+      '#gmap_settings' => $map,
+    );    
+  }
+}

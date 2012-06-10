@@ -23,6 +23,7 @@
       );
     }    
   };
+  // Place the form field labels inside the form field and fade/unfade on focus
   $(document).ready(function(){ 
     $('div.form-item-distance-postal-code label').inFieldLabels({
       fadeDuration:1000,
