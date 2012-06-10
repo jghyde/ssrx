@@ -11,6 +11,7 @@ dependencies[] = fb_connect
 dependencies[] = superfish
 dependencies[] = views
 features[context][] = all
+features[context][] = pharmacies
 features[context][] = search_page
 features[context][] = search_page_no_facets
 features[context][] = search_prescription_prices

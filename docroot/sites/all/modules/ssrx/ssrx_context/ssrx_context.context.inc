@@ -124,6 +124,40 @@ function ssrx_context_context_default_contexts() {
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'pharmacies';
+  $context->description = 'the phamacy section';
+  $context->tag = 'pharmacies';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'pharmacies' => 'pharmacies',
+        'pharmacies/*' => 'pharmacies/*',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views--exp-pharmacies-page' => array(
+          'module' => 'views',
+          'delta' => '-exp-pharmacies-page',
+          'region' => 'header_first',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('pharmacies');
+  t('the phamacy section');
+  $export['pharmacies'] = $context;
+
+  $context = new stdClass();
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'search_page';
   $context->description = 'Prescriptions Search Page';
   $context->tag = 'Prescriptions';
@@ -215,6 +249,10 @@ function ssrx_context_context_default_contexts() {
     'path' => array(
       'values' => array(
         '*' => '*',
+        '~pharmacies' => '~pharmacies',
+        '~pharmacies/*' => '~pharmacies/*',
+        '~urgent' => '~urgent',
+        '~urgent/*' => '~urgent/*',
       ),
     ),
     'views' => array(
