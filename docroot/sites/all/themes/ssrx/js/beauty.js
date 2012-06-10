@@ -13,6 +13,14 @@
           $(this).removeClass('on', 1000);
         }
       );
+      $('input#edit-submit-pharmacies', context).hover(
+        function () {
+          $(this).addClass('on', 1000);
+        },
+        function () {
+          $(this).removeClass('on', 1000);
+        }
+      );
     }    
   };
   $(document).ready(function(){ 

@@ -314,7 +314,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e5e5e4', end
   width: 240px;
   height: 40px;
 }
-#zone-header-wrapper input#edit-submit-prescription-price-search {
+#zone-header-wrapper input#edit-submit-prescription-price-search,
+#zone-header-wrapper input#edit-submit-pharmacies {
   display: block;
   width: 135px;
   height: 50px;
@@ -340,7 +341,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e5e5e4', end
 
   /*text-shadow: 1px 1px 1px #ffffff, -1px -1px 1px #000000;*/
 }
-#zone-header-wrapper input#edit-submit-prescription-price-search.on {
+#zone-header-wrapper input#edit-submit-prescription-price-search.on,
+#zone-header-wrapper input#edit-submit-pharmacies.on {
   box-shadow: none;
   background: rgb(255,180,88); /* Old browsers */
   /* IE9 SVG, needs conditional override of 'filter' to 'none' */
