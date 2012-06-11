@@ -1,7 +1,4 @@
 <div class="location vcard">
-  <div class="gmap">
-    <?php print drupal_render($gmap); ?>
-  </div>
   <div class="adr">
     <?php if (!empty($name)): ?>
       <span class="fn"><?php print $name; ?></span>
@@ -30,6 +27,10 @@
       <div class="tel">
         <abbr class="type" title="voice"><?php print t("Phone"); ?>:</abbr>
         <span class="value"><?php print $phone; ?></span>
+        <ul>
+        <li><span class="calllink"><a href="callto://+1<?php print $phone; ?>">Dial on Phone</a></span></li>
+        <li><span class="skype"><a href="skype://<?php print $phone; ?>?call">Skype</a></span></li>
+        </ul>
       </div>
     <?php endif; ?>
     <?php if (!empty($fax)): ?>
@@ -46,9 +47,12 @@
       <?php endif; ?>
     <?php endif; ?>
   </div>
+</div>
+<div class="gmap">
+  <?php print drupal_render($gmap); ?>
+</div>
   <?php if (!empty($map_link)): ?>
     <div class="map-link">
       <?php print $map_link; ?>
     </div>
   <?php endif; ?>
-</div>

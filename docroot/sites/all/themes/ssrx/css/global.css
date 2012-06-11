@@ -225,7 +225,9 @@ div#region-footer-first #block-views-recent-blog-posts-block div.view-content im
   font-weight: bold;
   color: #094569;
 }
-
+.node-type-pharmacy h1#page-title {
+  display: none;
+}
 .steps img {
   -moz-box-shadow: 3px 3px 4px #000;
   -webkit-box-shadow: 3px 3px 4px #000;

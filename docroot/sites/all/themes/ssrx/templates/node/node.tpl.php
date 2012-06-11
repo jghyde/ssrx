@@ -12,7 +12,6 @@
   <?php endif; ?>  
   
   <div<?php print $content_attributes; ?>>
-  HOWDY!!
     <?php
       // We hide the comments and links now so that we can render them later.
       hide($content['comments']);
