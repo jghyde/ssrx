@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the ssrx_drug feature.
+ */
+
+include_once 'ssrx_drug.features.inc';

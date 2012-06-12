@@ -1,6 +1,5 @@
 <article<?php print $attributes; ?>>
   <div<?php print $content_attributes; ?>>
-    <p class="location-title"><?php print drupal_get_title(); ?></p>
     <?php
       print render($content['locations']);
     ?>
