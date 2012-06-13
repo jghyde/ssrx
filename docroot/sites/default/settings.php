@@ -534,8 +534,9 @@ $conf['fb_id'] = '322584547818383'; // Your connect app's ID goes here.
 include "sites/all/modules/fb/fb_url_rewrite.inc";
 include "sites/all/modules/fb/fb_settings.inc";
 
-if (file_exists(__DIR__ . '/local.settings.php')) {
-  include_once(__DIR__ . '/local.settings.php');
+// Local settings, for local dev env.
+$dir = dirname(__FILE__);
+if (file_exists($dir .'/local.settings.php')) {
+  include_once($dir . '/local.settings.php');
 }
-
 
