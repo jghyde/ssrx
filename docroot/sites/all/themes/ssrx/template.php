@@ -42,6 +42,6 @@ function ssrx_preprocess_location(&$vars) {
     $vars['gmap'] = array( // GMap in Drupal 7 uses drupal_render().
       '#type' => 'gmap',
       '#gmap_settings' => $map,
-    );    
+    );
   }
 }
