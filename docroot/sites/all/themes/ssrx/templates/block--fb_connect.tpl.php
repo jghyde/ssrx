@@ -30,59 +30,28 @@ switch ($elements['#block']->subject) {
 	  $account = user_load($user->uid);
 
 	  // Build the user submitted
-	  if (!empty($account->picture)) {
+	  if (is_object($account->picture)) {
 	    $user_picture = $account->picture;
 			// now theme the user picture:
 			$p = array();
 			$p['path'] = $account->picture->uri;
 			$p['style_name'] = 'profile_pic';
-			$formatted_user_picture = theme('image_style', $p);
+			$user_picture = theme('image_style', $p);
 	  }
 	  else {
-	    if ($path = variable_get('user_picture_default', '')) {
-	      $vars = array();
-	      $vars['style_name'] = 'profile_pic';
-	      $vars['path'] = $path;
-	      $user_picture = '<img src="' . $path . '" height="50" width="50" title="' . $account->name . '" alt="' . $account->name . '" />' ."\n";
-				$formatted_user_picture = $user_picture;
-	    }
-	    else {
-	      $user_picture = '<img src="/' . drupal_get_path('theme', 'ssrx') . '/images/anon_icon.png" height="25" width="25" border="0" alt="' . $account->name . '" />';
-	    }
+	    $user_picture = '<img src="/' . drupal_get_path('theme', 'ssrx') . '/images/anon_icon.png" height="25" width="25" border="0" alt="' . $account->name . '" />';
 	  }
-
 	  $url = 'user/' . $account->uid . '/edit';
 
-	  if (!empty($account->field_fname['und'][0]['safe_value']) && !empty($account->field_lname['und'][0]['safe_value'])) {
-	    $name = $account->field_fname['und'][0]['safe_value'] . ' ' . $account->field_lname['und'][0]['safe_value'];
+	  if (!empty($account->field_first_name['und'][0]['safe_value']) && !empty($account->field_last_name['und'][0]['safe_value'])) {
+	    $name = $account->field_first_name['und'][0]['safe_value'] . ' ' . $account->field_last_name['und'][0]['safe_value'];
 	  }
 	  else {
-	    $name = $account->name . ' (Real Name Withheld)';
-	  }
-	  if (!empty($account->field_city['und'][0]['safe_value'])) {
-	    $location = $account->field_city['und'][0]['safe_value'];
-	  }
-	  else {
-	    $location = 'Undisclosed City';
-	  }
-
-	  if (!empty($account->field_state['und'][0]['safe_value'])) {
-	    $location .= ', ' . $account->field_state['und'][0]['safe_value'];
-	  }
-	  else {
-	    $location .= ' in an Unknown State';
-	  }
-	  if ($location == 'Undisplosed City in an Unknown State') {
-	    $location = 'Undisclosed Location';
+	    $name = $account->name;
 	  }
 	  $words = l($name, $url, array('attributes' => array('class' => array('submitted-name'))));
-	  $words .= '<div id="submitted-location">' . $location . '</div>';
 		// Figure out the profile image, if there is one
-	  $layout = '<div id="submitted"><div id="submitted-pic">' . $formatted_user_picture . '</div>';
-	  if (empty($account->picture)) {
-	      $layout .= '<div id="picture-empty" class="clearfix">' . l('', 'user/' . $account->uid . '/edit') . '</div>';
-	  }
-
+	  $layout = '<div id="submitted"><div id="submitted-pic">' . $user_picture . '</div>';
 	  $layout .= '<div id="submitted-words">' . $words;
 		$layout .= '<div class="fb-connect">' . $content . '<span class="logout">' . l('Log Out', 'user/logout') . '</span></div>';
 		$layout .= '</div></div>' . "\n";

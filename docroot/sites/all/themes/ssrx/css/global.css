@@ -471,3 +471,15 @@ a.ssrx.button {
 input#edit-submit {
   font-size: 14px;
 }
+#block-fb-connect-login-ssrx {
+  min-width: 400px;
+}
+#block-fb-connect-login-ssrx #submitted-pic {
+  width: 35px;
+}
+#block-fb-connect-login-ssrx #submitted-pic img {
+  width: 25px;
+  height: 25px;
+  margin: 10px 10px 0 0;
+  float: left;
+}
