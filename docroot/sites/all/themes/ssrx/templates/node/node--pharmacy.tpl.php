@@ -23,24 +23,22 @@
         <li><?php print l('Website', render($content['field_pharmacy_web_address'])); ?></li>
         <?php
         if ($content['field_online_pharmacy']['#items'][0]['value'] > 0) {
-          print '<li class="24hour"></li>';
+          print '<li class="online-pharmacy">Online Pharmacy</li>';
+        }
+        if ($content['field_24_hour_pharmacy']['#label_display'] > 0) {
+          print '<li class="twenty4hour-pharmacy">24-Hour Pharmacy</li>';
         }
         ?>
       </ul>
     </div>
   </div>
-  <div class="gmap">
+  <div class="gmap-wrapper">
     <?php
       print render($content['locations']);
     ?>
   </div>
   
   <div class="clearfix">
-    <?php if (!empty($content['links'])): ?>
-      <nav class="links node-links clearfix"><?php print render($content['links']); ?></nav>
-    <?php endif; ?>
-
     <?php print render($content['comments']); ?>
-    </div>
   </div>
 </article>
