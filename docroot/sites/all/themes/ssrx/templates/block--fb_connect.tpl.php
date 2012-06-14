@@ -9,14 +9,17 @@
   }
   else {
     $anonymous = 'content';
+    $fbu = fb_facebook_user();
   }
   ?>
   <div class="<?php print $anonymous; ?>">
 <?php
-if ($elements['#block']->subject == 'facebook') {
-  global $user;
+if ($elements['#block']->bid == 'fb_connect-login_ssrx') {
   if ($user->uid > 0) {
-    $elements['#block']->subject == 'facebook';
+    $elements['#block']->subject = 'registered';
+    if ($fbu > 0) {
+      $elements['#block']->subject = 'facebook';
+    }
   }
   else {
     $elements['#block']->subject == 'anonymous';
@@ -44,7 +47,7 @@ switch ($elements['#block']->subject) {
 				$formatted_user_picture = $user_picture;
 	    }
 	    else {
-	      $user_picture = 'NAH!';
+	      $user_picture = '<img src="/' . drupal_get_path('theme', 'ssrx') . '/images/anon_icon.png" height="25" width="25" border="0" alt="' . $account->name . '" />';
 	    }
 	  }
 
