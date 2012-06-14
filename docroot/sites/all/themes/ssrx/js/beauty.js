@@ -21,6 +21,14 @@
           $(this).removeClass('on', 1000);
         }
       );
+      $('input#edit-submit', context).hover(
+        function() {
+          $(this).addClass('on', 1000);
+        },
+        function () {
+          $(this).removeClass('on', 1000);
+        }
+      );
     }    
   };
   // Place the form field labels inside the form field and fade/unfade on focus
