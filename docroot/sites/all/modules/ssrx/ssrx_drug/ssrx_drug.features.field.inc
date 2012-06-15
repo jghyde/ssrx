@@ -892,6 +892,70 @@ function ssrx_drug_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-pharmacy-field_pharmacy_rating'
+  $fields['node-pharmacy-field_pharmacy_rating'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_pharmacy_rating',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'fivestar',
+      'settings' => array(
+        'axis' => 'vote',
+      ),
+      'translatable' => '0',
+      'type' => 'fivestar',
+    ),
+    'field_instance' => array(
+      'bundle' => 'pharmacy',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'fivestar',
+          'settings' => array(
+            'expose' => 1,
+            'style' => 'average',
+            'text' => 'average',
+            'widget' => array(
+              'fivestar_widget' => 'sites/all/modules/fivestar/widgets/oxygen/oxygen.css',
+            ),
+          ),
+          'type' => 'fivestar_formatter_default',
+          'weight' => '11',
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_pharmacy_rating',
+      'label' => 'Rating',
+      'required' => 0,
+      'settings' => array(
+        'allow_clear' => 0,
+        'stars' => '5',
+        'target' => 'none',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'fivestar',
+        'settings' => array(),
+        'type' => 'exposed',
+        'weight' => '6',
+      ),
+    ),
+  );
+
   // Exported field: 'node-pharmacy-field_pharmacy_web_address'
   $fields['node-pharmacy-field_pharmacy_web_address'] = array(
     'field_config' => array(
@@ -978,6 +1042,7 @@ function ssrx_drug_field_default_fields() {
   t('Pharmacy Web Address');
   t('Price');
   t('Quantity');
+  t('Rating');
   t('Strength');
   t('Trade Name');
 
