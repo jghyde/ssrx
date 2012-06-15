@@ -63,18 +63,6 @@ switch ($elements['#block']->subject) {
   case 'facebook':
 	  $account = user_load($user->uid);
 
-	  // Build the user submitted
-	  if (is_object($account->picture)) {
-	    $user_picture = $account->picture;
-			// now theme the user picture:
-			$p = array();
-			$p['path'] = $account->picture->uri;
-			$p['style_name'] = 'profile_pic';
-			$user_picture = theme('image_style', $p);
-	  }
-	  else {
-	    $user_picture = '<img src="/' . drupal_get_path('theme', 'ssrx') . '/images/anon_icon.png" height="25" width="25" border="0" alt="' . $account->name . '" />';
-	  }
 	  $url = 'user/' . $account->uid . '/edit';
 
 	  if (!empty($account->field_first_name['und'][0]['safe_value']) && !empty($account->field_last_name['und'][0]['safe_value'])) {
@@ -83,12 +71,12 @@ switch ($elements['#block']->subject) {
 	  else {
 	    $name = $account->name;
 	  }
+	  $layout = '<div class="registered fb-connect">' . $content . '</div>';
 	  $words = l($name, $url, array('attributes' => array('class' => array('submitted-name'))));
 		// Figure out the profile image, if there is one
-	  $layout = '<div class="registered" id="submitted-pic">' . $user_picture . '</div>';
 	  $layout .= '<div class="registered" id="submitted-words">' . $words . '</div>';
 	  $layout .= '<div class="registered points">' . userpoints_get_current_points($user->uid) . ' Points</div>';
-	  $layout .= '<div class="registered fb-connect">' . $content . '</div>';
+	  $layout .= '<fb:login-button autologoutlink=true></fb:login-button>';
 	  $layout .= '<div class="registered report ssrx button">' . l('Report Price', 'report', array('attributes' => array('class' => array('ssrx', 'button')))) . '</div>';
 	  $content = $layout;
 
