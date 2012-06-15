@@ -417,7 +417,8 @@ div.gmap {
   list-style: none;
   width: 100%;
 }
-ul.ssrx.button li {
+.ssrx.button li,
+div.ssrx.button {
   list-style: none;
   float: left;
   display: block;
@@ -438,7 +439,8 @@ ul.ssrx.button li {
   box-shadow: -1px -1px 2px #999999;
   border: 1px solid #cccccc;
 }
-ul.ssrx.button li:hover {
+.ssrx.button li:hover,
+div.ssrx.button:hover {
   box-shadow: none;
   background: rgb(254,254,254); /* Old browsers */
   /* IE9 SVG, needs conditional override of 'filter' to 'none' */
@@ -480,6 +482,28 @@ input#edit-submit {
 #block-fb-connect-login-ssrx #submitted-pic img {
   width: 25px;
   height: 25px;
-  margin: 10px 10px 0 0;
+  margin: 0;
   float: left;
+}
+div.registered {
+  float: left;
+  margin: 10px 20px 10px 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffffff;
+}
+div.registered a,
+div.registered.points {
+  color: #ffffff;
+}
+#block-fb-connect-login-ssrx #submitted-pic img {
+  margin: 0 0 0 0;
+}
+#submitted-pic {
+  margin: 10px 0 10px 0;
+}
+div.registered.fb-connect,
+div.registered.logout,
+div.registered.report {
+  font-weight: normal;
 }
