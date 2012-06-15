@@ -76,7 +76,7 @@ switch ($elements['#block']->subject) {
 		// Figure out the profile image, if there is one
 	  $layout .= '<div class="registered" id="submitted-words">' . $words . '</div>';
 	  $layout .= '<div class="registered points">' . userpoints_get_current_points($user->uid) . ' Points</div>';
-	  $layout .= '<fb:login-button autologoutlink=true></fb:login-button>';
+	  $layout .= '<div class="registered facebook"><fb:login-button autologoutlink="true"></fb:login-button></div>';
 	  $layout .= '<div class="registered report ssrx button">' . l('Report Price', 'report', array('attributes' => array('class' => array('ssrx', 'button')))) . '</div>';
 	  $content = $layout;
 
