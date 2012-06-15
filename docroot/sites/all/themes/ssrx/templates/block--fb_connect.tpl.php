@@ -51,19 +51,21 @@ switch ($elements['#block']->subject) {
 	  }
 	  $words = l($name, $url, array('attributes' => array('class' => array('submitted-name'))));
 		// Figure out the profile image, if there is one
-	  $layout = '<div id="submitted"><div id="submitted-pic">' . $user_picture . '</div>';
-	  $layout .= '<div id="submitted-words">' . $words;
-		$layout .= '<div class="fb-connect">' . $content . '<span class="logout">' . l('Log Out', 'user/logout') . '</span></div>';
-		$layout .= '</div></div>' . "\n";
-		$content = $layout;
+	  $layout = '<div class="registered" id="submitted-pic">' . $user_picture . '</div>';
+	  $layout .= '<div class="registered" id="submitted-words">' . $words . '</div>';
+	  $layout .= '<div class="registered points">' . userpoints_get_current_points($user->uid) . ' Points</div>';
+	  $layout .= '<div class="registered fb-connect">' . $content . '</div>';
+	  $layout .= '<div class="registered logout ssrx button">' . l('Log Out', 'user/logout', array('attributes' => array('class' => array('ssrx', 'button')))) . '</div>';
+	  $layout .= '<div class="registered report ssrx button">' . l('Report Price', 'report', array('attributes' => array('class' => array('ssrx', 'button')))) . '</div>';
+	  $content = $layout;
   break;
 
   case 'facebook':
 	  $account = user_load($user->uid);
 
 	  // Build the user submitted
-	  if (!empty($account->picture)) {
-	    $user_picture_obj = $account->picture;
+	  if (is_object($account->picture)) {
+	    $user_picture = $account->picture;
 			// now theme the user picture:
 			$p = array();
 			$p['path'] = $account->picture->uri;
@@ -71,40 +73,25 @@ switch ($elements['#block']->subject) {
 			$user_picture = theme('image_style', $p);
 	  }
 	  else {
-	    $user_picture = $content ."\n";
+	    $user_picture = '<img src="/' . drupal_get_path('theme', 'ssrx') . '/images/anon_icon.png" height="25" width="25" border="0" alt="' . $account->name . '" />';
 	  }
-
 	  $url = 'user/' . $account->uid . '/edit';
 
-	  if (!empty($account->field_fname['und'][0]['safe_value']) && !empty($account->field_lname['und'][0]['safe_value'])) {
-	    $name = $account->field_fname['und'][0]['safe_value'] . ' ' . $account->field_lname['und'][0]['safe_value'];
+	  if (!empty($account->field_first_name['und'][0]['safe_value']) && !empty($account->field_last_name['und'][0]['safe_value'])) {
+	    $name = $account->field_first_name['und'][0]['safe_value'] . ' ' . $account->field_last_name['und'][0]['safe_value'];
 	  }
 	  else {
-	    $name = $account->name . ' (Real Name Withheld)';
-	  }
-	  if (!empty($account->field_city['und'][0]['safe_value'])) {
-	    $location = $account->field_city['und'][0]['safe_value'];
-	  }
-	  else {
-	    $location = 'Undisclosed City';
-	  }
-
-	  if (!empty($account->field_state['und'][0]['safe_value'])) {
-	    $location .= ', ' . $account->field_state['und'][0]['safe_value'];
-	  }
-	  else {
-	    $location .= ' in an Unknown State';
-	  }
-	  if ($location == 'Undisclosed City in an Unknown State') {
-	    $location = 'Undisclosed Location';
+	    $name = $account->name;
 	  }
 	  $words = l($name, $url, array('attributes' => array('class' => array('submitted-name'))));
-	  $words .= '<div id="submitted-location">' . $location . '</div>';
-	  $layout = '<div id="submitted"><div id="submitted-pic">' . $user_picture . '</div>';
-	  $layout .= '<div id="submitted-words">' . $words;
-		$layout .= '<div class="fb-connect">' . '<fb:login-button autologoutlink=true></fb:login-button>' . '</div>';
-		$layout .= '</div></div>' . "\n";
-		$content = $layout;
+		// Figure out the profile image, if there is one
+	  $layout = '<div class="registered" id="submitted-pic">' . $user_picture . '</div>';
+	  $layout .= '<div class="registered" id="submitted-words">' . $words . '</div>';
+	  $layout .= '<div class="registered points">' . userpoints_get_current_points($user->uid) . ' Points</div>';
+	  $layout .= '<div class="registered fb-connect">' . $content . '</div>';
+	  $layout .= '<div class="registered report ssrx button">' . l('Report Price', 'report', array('attributes' => array('class' => array('ssrx', 'button')))) . '</div>';
+	  $content = $layout;
+
   break;
   default:
   // So, we need to rebuild 'em
