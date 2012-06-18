@@ -253,6 +253,8 @@ function ssrx_context_context_default_contexts() {
         '~pharmacies/*' => '~pharmacies/*',
         '~urgent' => '~urgent',
         '~urgent/*' => '~urgent/*',
+        '~user' => '~user',
+        '~user/*' => '~user/*',
       ),
     ),
     'views' => array(
