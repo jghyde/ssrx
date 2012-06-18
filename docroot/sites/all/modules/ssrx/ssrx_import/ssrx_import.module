@@ -10,7 +10,8 @@ function ssrx_import_menu() {
 }
 
 function ssrx_import_pharmacies() {
-  $pharmacy_count = db_query('SELECT COUNT(DISTINCT id) FROM {Pharmacies}')->fetchField();
+  // @TODO changed the pharmacy count to * because Tom S doesn't have any unique ids, and I didn't autoincrement one.
+  $pharmacy_count = db_query('SELECT COUNT(*) FROM {Pharmacies}')->fetchField();
   $batch_size = 10;
   $counter = 0;
   $operations = array();
@@ -34,7 +35,9 @@ function ssrx_import_pharmacies() {
   );
   batch_set($batch);
 
-  batch_process('node/1');
+  // @TODO What to put here?? Off top of my head? variable_get(drupal_front_page(), 'node'));
+  // maybe add drupal_set_message() and watchdog()
+  batch_process('ssrx/import/pharmacies');
 }
 
 function _ssrx_import_pharmacy($start, $size, &$context) {
@@ -86,6 +89,8 @@ function _ssrx_import_pharmacy($start, $size, &$context) {
       'country' => 'us',
       'country_name' => 'United States',
     );
+    $node->locations = array();
+    // $node->location = array();
     $node->locations[] = $node->location = $location;
     node_save($node);
 
