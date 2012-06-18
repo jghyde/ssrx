@@ -1,0 +1,4 @@
+name = ssrx_import
+description = SSRX Data Imports
+core = 7.x
+package = SSRX

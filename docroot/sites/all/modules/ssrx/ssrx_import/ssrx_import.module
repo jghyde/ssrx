@@ -1,0 +1,100 @@
+<?php
+function ssrx_import_menu() {
+  $menu['ssrx/import/pharmacies'] = array(
+    'title' => t('Import Pharmacies'),
+    'page callback' => 'ssrx_import_pharmacies',
+    'access callback' => TRUE,
+  );
+
+  return $menu;
+}
+
+function ssrx_import_pharmacies() {
+  $pharmacy_count = db_query('SELECT COUNT(DISTINCT id) FROM {Pharmacies}')->fetchField();
+  $batch_size = 10;
+  $counter = 0;
+  $operations = array();
+  while ($counter <= $pharmacy_count) {
+    $operations[] = array(
+      '_ssrx_import_pharmacy',
+      $counter,
+      $batch_size
+    );
+    $counter += $batch_size;
+    break;
+  }
+
+  $batch = array(
+    'operations' => $operations,
+    'finished' => 'batch_example_finished',
+    'title' => t('Processing Pharmacies Batch'),
+    'init_message' => t('Pharmacies Batch is starting.'),
+    'progress_message' => t('Processed @current out of @total.'),
+    'error_message' => t('Pharmacies Batch has encountered an error.'),
+  );
+  batch_set($batch);
+
+  batch_process('node/1');
+}
+
+function _ssrx_import_pharmacy($start, $size, &$context) {
+  if (!isset($context['sandbox']['progress'])) {
+    $context['sandbox']['progress'] = 0;
+    $context['sandbox']['current_node'] = 0;
+    $context['sandbox']['max'] = db_query('SELECT COUNT(DISTINCT id) FROM {Pharmacies}')->fetchField();
+  }
+  if (!isset($context['chain_tids'])) {
+    $context['chain_tids'] = array();
+  }
+  if (!isset($context['chain_vocabulary'])) {
+    $context['chain_vocabulary'] = taxonomy_vocabulary_machine_name_load('pharmacy_chain');
+  }
+
+  $result = db_query_range("SELECT * FROM {Pharmacies} WHERE id > %d ORDER BY nid ASC", $start, 0, $batch_size);
+  $current = $start;
+  foreach ($result as $line) {
+    $node = new stdClass();
+    $node->type = 'pharmacy';
+    node_object_prepare($node);
+    $node->language = LANGUAGE_NONE;
+
+    $node->title = check_plain($line->PharmacyName . '/' . $line->PharmacyAddress);
+
+    // Get the chain taxonomy term id. Create the term if it's missing.
+    if (!isset($chain_tids[$line->CHAIN])) {
+      $tid = taxonomy_get_term_by_name($line->PharmacyName, 'pharmacy_chain');
+      if (count($tid) > 0) {
+        $tid = array_shift(array_keys($tid));
+      }
+      else {
+        taxonomy_term_save((object) array(
+          'name' => $line->PharmacyName,
+          'vid' => $context['chain_vocabulary']->vid,
+        ));
+        $tid = array_shift(array_keys(taxonomy_get_term_by_name($line->PharmacyName, 'pharmacy_chain')));
+      }
+      $node->field_chain[LANGUAGE_NONE][0]['tid'] = $tid;
+    }
+
+    $location = array(
+      'street' => $line->PharmacyAddress,
+      'city' => $line->PharmacyCity,
+      'province' => $line->PharmacyState,
+      'postal_code' => $line->PharmacyZip,
+      'latitude' => $line->lat,
+      'longitude' => $line->lon,
+      'country' => 'us',
+      'country_name' => 'United States',
+    );
+    $node->locations[] = $node->location = $location;
+    node_save($node);
+
+    $context['results'][] = $node->title;
+
+    // Update our progress information.
+    $context['sandbox']['progress']++;
+    $context['sandbox']['current_node'] = $node->nid;
+    $context['message'] = t('Now processing %node', array('%node' => $node->title));
+    $current++;
+  }
+}
