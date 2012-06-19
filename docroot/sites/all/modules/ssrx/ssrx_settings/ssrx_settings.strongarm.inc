@@ -28,21 +28,21 @@ function ssrx_settings_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'acquia_spi_boot_last';
-  $strongarm->value = 1339255862;
+  $strongarm->value = 1340121564;
   $export['acquia_spi_boot_last'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'acquia_spi_cron_last';
-  $strongarm->value = 1339248823;
+  $strongarm->value = 1340115730;
   $export['acquia_spi_cron_last'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'acquia_spi_module_rebuild';
-  $strongarm->value = 1339186464;
+  $strongarm->value = 1340035301;
   $export['acquia_spi_module_rebuild'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -50,7 +50,7 @@ function ssrx_settings_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'acquia_subscription_data';
   $strongarm->value = array(
-    'timestamp' => 1339248823,
+    'timestamp' => 1340115730,
     'active' => '1',
     'href' => 'https://network.acquia.com/network/node/1895220',
     'expiration_date' => array(
@@ -134,21 +134,21 @@ function ssrx_settings_strongarm() {
       'title' => '',
       'body' => array(
         'value' => '<fb:login-button scope="!perms" v="2">Connect</fb:login-button>',
-        'format' => 'php_code',
+        'format' => 'unaltered_html',
       ),
     ),
     'user_not_connected' => array(
       'title' => '',
       'body' => array(
         'value' => '<fb:login-button scope="!perms" v="2">Connect</fb:login-button>',
-        'format' => 'php_code',
+        'format' => 'unaltered_html',
       ),
     ),
     'connected' => array(
       'title' => '',
       'body' => array(
-        'value' => '<fb:profile-pic uid=!fbu></fb:profile-pic><!--<fb:login-button autologoutlink=true></fb:login-button>-->',
-        'format' => 'php_code',
+        'value' => '<fb:profile-pic uid="!fbu" height="25" width="25"></fb:profile-pic>',
+        'format' => 'unaltered_html',
       ),
     ),
   );

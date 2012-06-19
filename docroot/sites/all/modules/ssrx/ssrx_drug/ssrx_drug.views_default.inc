@@ -35,6 +35,11 @@ function ssrx_drug_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_options']['inline'] = array(
+    'address_1' => 'address_1',
+  );
+  $handler->display->display_options['row_options']['hide_empty'] = 0;
+  $handler->display->display_options['row_options']['default_field_elements'] = 1;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -62,29 +67,30 @@ function ssrx_drug_views_default_views() {
   $handler->display->display_options['fields']['title']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['title']['link_to_node'] = 1;
   /* Field: Location: Address */
-  $handler->display->display_options['fields']['address']['id'] = 'address';
-  $handler->display->display_options['fields']['address']['table'] = 'location';
-  $handler->display->display_options['fields']['address']['field'] = 'address';
-  $handler->display->display_options['fields']['address']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['address']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['address']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['address']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['address']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['address']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['address']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['address']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['address']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['address']['alter']['more_link'] = 0;
-  $handler->display->display_options['fields']['address']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['address']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['address']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['address']['element_label_colon'] = 1;
-  $handler->display->display_options['fields']['address']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['address']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['address']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['address']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['address']['hide'] = array(
-    'name' => 'name',
+  $handler->display->display_options['fields']['address_1']['id'] = 'address_1';
+  $handler->display->display_options['fields']['address_1']['table'] = 'location';
+  $handler->display->display_options['fields']['address_1']['field'] = 'address';
+  $handler->display->display_options['fields']['address_1']['label'] = '';
+  $handler->display->display_options['fields']['address_1']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['address_1']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['address_1']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['address_1']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['address_1']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['address_1']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['address_1']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['address_1']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['address_1']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['address_1']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['address_1']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['address_1']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['address_1']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['address_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['address_1']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['address_1']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['address_1']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['address_1']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['address_1']['hide'] = array(
+    'name' => 0,
     'street' => 0,
     'additional' => 0,
     'city' => 0,
@@ -174,11 +180,20 @@ function ssrx_drug_views_default_views() {
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Global: Random */
+  $handler->display->display_options['sorts']['random']['id'] = 'random';
+  $handler->display->display_options['sorts']['random']['table'] = 'views';
+  $handler->display->display_options['sorts']['random']['field'] = 'random';
   /* Sort criterion: Content: Title */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
   $handler->display->display_options['sorts']['title']['field'] = 'title';
-  $handler->display->display_options['sorts']['title']['order'] = 'DESC';
+  /* Sort criterion: Location: Distance / Proximity */
+  $handler->display->display_options['sorts']['distance']['id'] = 'distance';
+  $handler->display->display_options['sorts']['distance']['table'] = 'location';
+  $handler->display->display_options['sorts']['distance']['field'] = 'distance';
+  $handler->display->display_options['sorts']['distance']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['distance']['origin'] = 'postal_default';
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -209,6 +224,35 @@ function ssrx_drug_views_default_views() {
   $handler->display->display_options['filters']['title']['expose']['required'] = 0;
   $handler->display->display_options['filters']['title']['expose']['multiple'] = FALSE;
   $handler->display->display_options['filters']['title']['expose']['autocomplete_filter'] = 1;
+  /* Filter criterion: Location: Distance / Proximity */
+  $handler->display->display_options['filters']['distance']['id'] = 'distance';
+  $handler->display->display_options['filters']['distance']['table'] = 'location';
+  $handler->display->display_options['filters']['distance']['field'] = 'distance';
+  $handler->display->display_options['filters']['distance']['value'] = array(
+    'latitude' => '',
+    'longitude' => '',
+    'postal_code' => '',
+    'country' => '',
+    'php_code' => '',
+    'nid_arg' => '',
+    'nid_loc_field' => 'node',
+    'uid_arg' => '',
+    'search_distance' => '25',
+    'search_units' => 'mile',
+  );
+  $handler->display->display_options['filters']['distance']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['distance']['expose']['operator_id'] = 'distance_op';
+  $handler->display->display_options['filters']['distance']['expose']['label'] = 'Distance / Proximity';
+  $handler->display->display_options['filters']['distance']['expose']['operator'] = 'distance_op';
+  $handler->display->display_options['filters']['distance']['expose']['identifier'] = 'distance';
+  $handler->display->display_options['filters']['distance']['expose']['multiple'] = FALSE;
+  $handler->display->display_options['filters']['distance']['expose']['gmap_macro'] = array(
+    'default' => '[gmap ]',
+  );
+  $handler->display->display_options['filters']['distance']['expose']['user_location_choose'] = array(
+    'default' => FALSE,
+  );
+  $handler->display->display_options['filters']['distance']['origin'] = 'postal_default';
   $handler->display->display_options['path'] = 'pharmacies';
 
   /* Display: References */
