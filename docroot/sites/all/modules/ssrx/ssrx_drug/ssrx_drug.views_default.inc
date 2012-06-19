@@ -22,7 +22,7 @@ function ssrx_drug_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Pharmacies';
+  $handler->display->display_options['title'] = 'Pharmacy Map';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -32,14 +32,33 @@ function ssrx_drug_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['autosubmit'] = 0;
   $handler->display->display_options['exposed_form']['options']['autosubmit_hide'] = 1;
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
-  $handler->display->display_options['style_plugin'] = 'default';
-  $handler->display->display_options['row_plugin'] = 'fields';
-  $handler->display->display_options['row_options']['inline'] = array(
+  $handler->display->display_options['pager']['options']['items_per_page'] = '100';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all'] = 0;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
     'address_1' => 'address_1',
   );
-  $handler->display->display_options['row_options']['hide_empty'] = 0;
-  $handler->display->display_options['row_options']['default_field_elements'] = 1;
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'address_1' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['override'] = 1;
+  $handler->display->display_options['style_options']['sticky'] = 0;
+  $handler->display->display_options['style_options']['empty_table'] = 0;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -90,33 +109,37 @@ function ssrx_drug_views_default_views() {
   $handler->display->display_options['fields']['address_1']['empty_zero'] = 0;
   $handler->display->display_options['fields']['address_1']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['address_1']['hide'] = array(
+    'country' => 'country',
+    'locpick' => 'locpick',
+    'country_name' => 'country_name',
+    'map_link' => 'map_link',
+    'coords' => 'coords',
     'name' => 0,
     'street' => 0,
     'additional' => 0,
     'city' => 0,
     'province' => 0,
     'postal_code' => 0,
-    'country' => 0,
-    'locpick' => 0,
     'fax' => 0,
     'phone' => 0,
     'province_name' => 0,
-    'country_name' => 0,
-    'map_link' => 0,
-    'coords' => 0,
   );
   /* Sort criterion: Content: Title */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
   $handler->display->display_options['sorts']['title']['field'] = 'title';
   $handler->display->display_options['sorts']['title']['order'] = 'DESC';
-  /* Sort criterion: Location: Distance / Proximity */
-  $handler->display->display_options['sorts']['distance']['id'] = 'distance';
-  $handler->display->display_options['sorts']['distance']['table'] = 'location';
-  $handler->display->display_options['sorts']['distance']['field'] = 'distance';
-  $handler->display->display_options['sorts']['distance']['order'] = 'DESC';
-  $handler->display->display_options['sorts']['distance']['origin'] = 'postal_default';
-  $handler->display->display_options['sorts']['distance']['postal_code'] = '77450';
+  /* Contextual filter: Location: Distance / Proximity */
+  $handler->display->display_options['arguments']['distance']['id'] = 'distance';
+  $handler->display->display_options['arguments']['distance']['table'] = 'location';
+  $handler->display->display_options['arguments']['distance']['field'] = 'distance';
+  $handler->display->display_options['arguments']['distance']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['distance']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['distance']['default_argument_options']['argument'] = '66101';
+  $handler->display->display_options['arguments']['distance']['default_argument_skip_url'] = 0;
+  $handler->display->display_options['arguments']['distance']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['distance']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['distance']['summary_options']['items_per_page'] = '25';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -180,20 +203,16 @@ function ssrx_drug_views_default_views() {
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Global: Random */
-  $handler->display->display_options['sorts']['random']['id'] = 'random';
-  $handler->display->display_options['sorts']['random']['table'] = 'views';
-  $handler->display->display_options['sorts']['random']['field'] = 'random';
-  /* Sort criterion: Content: Title */
-  $handler->display->display_options['sorts']['title']['id'] = 'title';
-  $handler->display->display_options['sorts']['title']['table'] = 'node';
-  $handler->display->display_options['sorts']['title']['field'] = 'title';
   /* Sort criterion: Location: Distance / Proximity */
   $handler->display->display_options['sorts']['distance']['id'] = 'distance';
   $handler->display->display_options['sorts']['distance']['table'] = 'location';
   $handler->display->display_options['sorts']['distance']['field'] = 'distance';
-  $handler->display->display_options['sorts']['distance']['order'] = 'DESC';
-  $handler->display->display_options['sorts']['distance']['origin'] = 'postal_default';
+  $handler->display->display_options['sorts']['distance']['origin'] = 'tied';
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -237,7 +256,7 @@ function ssrx_drug_views_default_views() {
     'nid_arg' => '',
     'nid_loc_field' => 'node',
     'uid_arg' => '',
-    'search_distance' => '25',
+    'search_distance' => '10',
     'search_units' => 'mile',
   );
   $handler->display->display_options['filters']['distance']['exposed'] = TRUE;
