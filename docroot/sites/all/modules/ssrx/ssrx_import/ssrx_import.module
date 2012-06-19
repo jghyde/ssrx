@@ -10,19 +10,22 @@ function ssrx_import_menu() {
 }
 
 function ssrx_import_pharmacies() {
-  // @TODO changed the pharmacy count to * because Tom S doesn't have any unique ids, and I didn't autoincrement one.
-  $pharmacy_count = db_query('SELECT COUNT(*) FROM {Pharmacies}')->fetchField();
-  $batch_size = 10;
+  $pharmacy_count = db_query('SELECT COUNT(DISTINCT id) FROM {Pharmacies}')->fetchField();
+  $batch_size = 250;
   $counter = 0;
   $operations = array();
-  while ($counter <= $pharmacy_count) {
+  while ($counter < $pharmacy_count) {
+    if ($counter >= $pharmacy_count) {
+      $batch_size = $pharmacy_count - $counter;
+    }
     $operations[] = array(
       '_ssrx_import_pharmacy',
-      $counter,
-      $batch_size
+      array(
+        $counter,
+        $batch_size,
+      ),
     );
     $counter += $batch_size;
-    break;
   }
 
   $batch = array(
@@ -35,12 +38,10 @@ function ssrx_import_pharmacies() {
   );
   batch_set($batch);
 
-  // @TODO What to put here?? Off top of my head? variable_get(drupal_front_page(), 'node'));
-  // maybe add drupal_set_message() and watchdog()
-  batch_process('ssrx/import/pharmacies');
+  batch_process('/');
 }
 
-function _ssrx_import_pharmacy($start, $size, &$context) {
+function _ssrx_import_pharmacy($start, $batch_size, &$context) {
   if (!isset($context['sandbox']['progress'])) {
     $context['sandbox']['progress'] = 0;
     $context['sandbox']['current_node'] = 0;
@@ -53,15 +54,14 @@ function _ssrx_import_pharmacy($start, $size, &$context) {
     $context['chain_vocabulary'] = taxonomy_vocabulary_machine_name_load('pharmacy_chain');
   }
 
-  $result = db_query_range("SELECT * FROM {Pharmacies} WHERE id > %d ORDER BY nid ASC", $start, 0, $batch_size);
-  $current = $start;
+  $result = db_query_range("SELECT * FROM {Pharmacies} WHERE id > :start ORDER BY id ASC", 0, $batch_size, array(':start' => $start));
   foreach ($result as $line) {
     $node = new stdClass();
     $node->type = 'pharmacy';
     node_object_prepare($node);
     $node->language = LANGUAGE_NONE;
 
-    $node->title = check_plain($line->PharmacyName . '/' . $line->PharmacyAddress);
+    $node->title = check_plain($line->PharmacyName);
 
     // Get the chain taxonomy term id. Create the term if it's missing.
     if (!isset($chain_tids[$line->CHAIN])) {
@@ -86,11 +86,12 @@ function _ssrx_import_pharmacy($start, $size, &$context) {
       'postal_code' => $line->PharmacyZip,
       'latitude' => $line->lat,
       'longitude' => $line->lon,
+      'phone' => $line->PharmacyPhone,
+      'fax' => $line->PharmacyFax,
       'country' => 'us',
       'country_name' => 'United States',
     );
     $node->locations = array();
-    // $node->location = array();
     $node->locations[] = $node->location = $location;
     node_save($node);
 
@@ -99,7 +100,6 @@ function _ssrx_import_pharmacy($start, $size, &$context) {
     // Update our progress information.
     $context['sandbox']['progress']++;
     $context['sandbox']['current_node'] = $node->nid;
-    $context['message'] = t('Now processing %node', array('%node' => $node->title));
-    $current++;
+    $context['message'] = t('Now processing :num - :num2 of :total', array(':num' => $start, ':num2' => ($start + $batch_size), ':total' => $context['sandbox']['max']));
   }
 }

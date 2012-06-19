@@ -17,146 +17,17 @@
  * Implements hook_install()
  */
 function ssrx_import_install() {
-  
+
 }
 
 /**
  * Implements hook_uninstall()
  */
 function ssrx_import_uninstall() {
-  
+
 }
 
 /**
  * Implements hook_schema()
  */
-function ssrx_import_schema() {
-  $schema['Pharmacies'] = array(
-    'description' => 'Pharmacies that will be imported from old SSRX database into Drupal',
-    'fields' => array(
-      'PharmacyId' => array(
-        'description' => 'Pharmacy Id = zip+4',
-        'type' => 'varchar',
-        'length' => '10',
-        'not null' => FALSE,
-      ),
-      'HqId' => array(
-        'description' => 'Headquarters ID = Hq zip+4',
-        'type' => 'varchar',
-        'length' => '10',
-        'not null' => FALSE,
-      ),
-      'CompanyLogoId' => array(
-        'description' => 'Company Logo Id',
-        'type' => 'varchar',
-        'length' => '10',
-        'not null' => FALSE,
-      ),
-      'CompanyLogo' => array(
-        'description' => 'Company Logo',
-        'type' => 'varchar',
-        'length' => '40',
-        'not null' => FALSE,
-      ),
-      'HqName' => array(
-        'description' => 'Headquarters Name',
-        'type' => 'varchar',
-        'length' => '40',
-        'not null' => FALSE,
-      ),
-      'PharmacyName' => array(
-        'description' => 'Pharmacy Name',
-        'type' => 'varchar',
-        'length' => '255',
-        'not null' => FALSE,
-      ),
-      'PharmacyAddress' => array(
-        'description' => 'Pharmacy Address',
-        'type' => 'varchar',
-        'length' => '255',
-        'not null' => FALSE,
-      ),
-      'PharmacyCity' => array(
-        'description' => 'Pharmacy City',
-        'type' => 'varchar',
-        'length' => '255',
-        'not null' => FALSE,
-      ),
-      'PharmacyState' => array(
-        'description' => 'Pharmacy State',
-        'type' => 'varchar',
-        'length' => '2',
-        'not null' => FALSE,
-      ),
-      'PharmacyZip' => array(
-        'description' => 'Pharmacy Zip+4',
-        'type' => 'varchar',
-        'length' => '10',
-        'not null' => FALSE,
-      ),
-      'PharmacyPhone' => array(
-        'description' => 'Pharmacy Phone',
-        'type' => 'varchar',
-        'length' => '20',
-        'not null' => FALSE,
-      ),
-      'PharmacyFax' => array(
-        'description' => 'Pharmacy Fax',
-        'type' => 'varchar',
-        'length' => '20',
-        'not null' => FALSE,
-      ),
-      'ChainOrIndependent' => array(
-        'description' => 'Chain/Independent',
-        'type' => 'varchar',
-        'length' => '11',
-        'not null' => FALSE,
-      ),
-      'HayesIdNumber' => array(
-        'description' => 'Hayes DB ID',
-        'type' => 'varchar',
-        'length' => '7',
-        'not null' => FALSE,
-      ),
-      'lat' => array(
-        'description' => 'Pharmacy Latitude',
-        'type' => 'numeric',
-        'not null' => FALSE,
-        'precision' => '13',
-        'scale' => '10',
-      ),
-      'lon' => array(
-        'description' => 'Pharmacy Longitude',
-        'type' => 'numeric',
-        'not null' => FALSE,
-        'precision' => '13',
-        'scale' => '10',
-      ),
-      'istwentyfour' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'varchar',
-        'length' => '5',
-        'not null' => TRUE,
-      ),
-      'istf' => array(
-        'description' => 'Flag for open 24 hours',
-        'type' => 'int',
-        'size' => 'tiny',
-        'not null' => TRUE,
-      ),
-      'online' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'int',
-        'size' => 'tiny',
-        'not null' => TRUE,
-      ),
-      'zip+4' => array(
-        'description' => 'TODO: please describe this field!',
-        'type' => 'int',
-        'size' => 'tiny',
-        'not null' => TRUE,
-      ),
-    ),
-  );
-  return $schema;
-}
+
