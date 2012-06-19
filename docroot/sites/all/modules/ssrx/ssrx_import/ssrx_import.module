@@ -11,14 +11,19 @@ function ssrx_import_menu() {
 
 function ssrx_import_pharmacies() {
   $pharmacy_count = db_query('SELECT COUNT(DISTINCT id) FROM {Pharmacies}')->fetchField();
-  $batch_size = 10;
+  $batch_size = 50;
   $counter = 0;
   $operations = array();
-  while ($counter <= $pharmacy_count) {
+  while ($counter < $pharmacy_count) {
+    if ($counter + $batch_size >= $pharmacy_count) {
+      $batch_size = $pharmacy_count - ($counter + $batch_size);
+    }
     $operations[] = array(
       '_ssrx_import_pharmacy',
-      $counter,
-      $batch_size
+      array(
+        $counter,
+        $batch_size,
+      ),
     );
     $counter += $batch_size;
     break;
@@ -37,7 +42,7 @@ function ssrx_import_pharmacies() {
   batch_process('/');
 }
 
-function _ssrx_import_pharmacy($start, $size, &$context) {
+function _ssrx_import_pharmacy($start, $batch_size, &$context) {
   if (!isset($context['sandbox']['progress'])) {
     $context['sandbox']['progress'] = 0;
     $context['sandbox']['current_node'] = 0;
@@ -50,15 +55,14 @@ function _ssrx_import_pharmacy($start, $size, &$context) {
     $context['chain_vocabulary'] = taxonomy_vocabulary_machine_name_load('pharmacy_chain');
   }
 
-  $result = db_query_range("SELECT * FROM {Pharmacies} WHERE id > %d ORDER BY nid ASC", $start, 0, $batch_size);
-  $current = $start;
+  $result = db_query_range("SELECT * FROM {Pharmacies} WHERE id > :batch_size ORDER BY id ASC", 0, $batch_size, array(':batch_size' => $batch_size));
   foreach ($result as $line) {
     $node = new stdClass();
     $node->type = 'pharmacy';
     node_object_prepare($node);
     $node->language = LANGUAGE_NONE;
 
-    $node->title = check_plain($line->PharmacyName . '/' . $line->PharmacyAddress);
+    $node->title = check_plain($line->PharmacyName);
 
     // Get the chain taxonomy term id. Create the term if it's missing.
     if (!isset($chain_tids[$line->CHAIN])) {
@@ -83,11 +87,12 @@ function _ssrx_import_pharmacy($start, $size, &$context) {
       'postal_code' => $line->PharmacyZip,
       'latitude' => $line->lat,
       'longitude' => $line->lon,
+      'phone' => $line->PharmacyPhone,
+      'fax' => $line->PharmacyFax,
       'country' => 'us',
       'country_name' => 'United States',
     );
     $node->locations = array();
-    // $node->location = array();
     $node->locations[] = $node->location = $location;
     node_save($node);
 
@@ -96,7 +101,6 @@ function _ssrx_import_pharmacy($start, $size, &$context) {
     // Update our progress information.
     $context['sandbox']['progress']++;
     $context['sandbox']['current_node'] = $node->nid;
-    $context['message'] = t('Now processing %node', array('%node' => $node->title));
-    $current++;
+    $context['message'] = t('Now processing :num of :total', array(':num' => $context['sandbox']['progress'], ':total' => $context['sandbox']['max']));
   }
 }
