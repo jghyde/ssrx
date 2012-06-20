@@ -3,4 +3,47 @@
  * @file
  */
 
-// Drupal needs this blank file.
+/**
+ * Implements hook_fb_user().
+ *
+ * This hook provided by fb_user.module will notify us when a new account is
+ * created or a local account is logged in via facebook.
+ *
+ * @param $op
+ *   Indicates what operation is currently being performed, or which behavior
+ *   can be customized.  There are a number of these.  In some cases,
+ *   modules/fb is informing other modules, and in other operations it is
+ *   asking for information.
+ *   - FB_USER_OP_PRE_USER - You have a chance to the name or other account
+ *     attributes, before a new user account is created.
+ *   - FB_USER_OP_POST_USER - A new user account was created for a facebook user
+ *     who authorized an app.
+ *
+ * @param $data
+ *   Associative array of information specific to this operation.
+ *   Usually, but not always, contains:
+ *   - 'fb' - The API provided by the facebook-php-sdk.
+ *   - 'fb_app' - The data about this application stored by fb_app.module.
+ *   - 'fbu' - If the current user is known, their facebook id.
+ *
+ * @param $return
+ *   An op-specific return value.  Your hook should change this reference
+ *   variable, and not return it.  Some operations return an array of data,
+ *   which may be collaboratively built by multiple implementations of this
+ *   hook.
+ *
+ */
+function ssrx_user_fb_user($op, $data, &$return) {
+  dpm($op);
+  dpm($data);
+  dpm($return);
+  $fb_app = isset($data['fb_app']) ? $data['fb_app'] : NULL;
+  $fb = isset($data['fb']) ? $data['fb'] : NULL;
+
+  if ($op == FB_USER_OP_POST_USER) {
+    // Set a global that can be checked in hook_fb, above.  Note for this to
+    // work properly, fb_example.module must be weighted heavier then
+    // fb_user.module.  (See fb_example.install).
+    $GLOBALS['fb_example_new_user'] = TRUE;
+  }
+}
