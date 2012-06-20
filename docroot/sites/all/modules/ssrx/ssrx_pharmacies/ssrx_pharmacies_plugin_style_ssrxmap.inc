@@ -163,7 +163,7 @@ class ssrx_pharmacies_plugin_style_ssrxmap extends views_plugin_style {
             'long' => '-97.611100',
           );
         }
-        elseif ($_GET['q'] == 'pharmacies' && !isset($_GET['distance']['postal_code'])) {
+        elseif (!isset($_GET['distance']['postal_code']) || $_GET['distance']['postal_code'] == '') {
           $centered = array(
             'lat' => '38.840300',
             'long' => '-97.611100',
@@ -272,7 +272,7 @@ class ssrx_pharmacies_plugin_style_ssrxmap extends views_plugin_style {
       if (!empty($markers)) { // Don't draw empty maps.
         $macro = $this->options['macro'];
         if (count($centered) > 0) {
-          if (isset($_GET['distance']['postal_code'])) {
+          if (isset($_GET['distance']['postal_code']) && $_GET['distance']['postal_code'] != '') {
             $zoom = 8;
           }
           else {
