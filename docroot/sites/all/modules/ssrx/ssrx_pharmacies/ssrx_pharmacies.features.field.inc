@@ -217,88 +217,6 @@ function ssrx_pharmacies_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-pharmacy-field_link'
-  $fields['node-pharmacy-field_link'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_link',
-      'foreign keys' => array(),
-      'indexes' => array(),
-      'module' => 'link',
-      'settings' => array(
-        'attributes' => array(
-          'class' => '',
-          'rel' => '',
-          'target' => 'default',
-        ),
-        'display' => array(
-          'url_cutoff' => 80,
-        ),
-        'enable_tokens' => 1,
-        'title' => 'optional',
-        'title_maxlength' => 128,
-        'title_value' => '',
-        'url' => 0,
-      ),
-      'translatable' => '0',
-      'type' => 'link_field',
-    ),
-    'field_instance' => array(
-      'bundle' => 'pharmacy',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'link',
-          'settings' => array(),
-          'type' => 'link_default',
-          'weight' => 12,
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 'node',
-      'field_name' => 'field_link',
-      'label' => 'Link',
-      'required' => 0,
-      'settings' => array(
-        'attributes' => array(
-          'class' => '',
-          'configurable_title' => 0,
-          'rel' => '',
-          'target' => '_blank',
-          'title' => '',
-        ),
-        'display' => array(
-          'url_cutoff' => '80',
-        ),
-        'enable_tokens' => 1,
-        'title' => 'optional',
-        'title_maxlength' => '128',
-        'title_value' => '',
-        'url' => 0,
-        'user_register_form' => FALSE,
-        'validate_url' => 1,
-      ),
-      'widget' => array(
-        'active' => 0,
-        'module' => 'link',
-        'settings' => array(),
-        'type' => 'link_field',
-        'weight' => '7',
-      ),
-    ),
-  );
-
   // Exported field: 'node-pharmacy-field_online_pharmacy'
   $fields['node-pharmacy-field_online_pharmacy'] = array(
     'field_config' => array(
@@ -507,7 +425,6 @@ function ssrx_pharmacies_field_default_fields() {
   t('Check this box if the pharmacy is an EXCLUSIVE online retailer of prescription drugs. Do not check this if the pharmacy is a physical retail location and also has an online ordering workflow. ');
   t('Comment');
   t('Enter the URL of the pharmacy\'s website, starting with "http://"');
-  t('Link');
   t('Online Pharmacy');
   t('Pharmacy Web Address');
   t('Rating');
