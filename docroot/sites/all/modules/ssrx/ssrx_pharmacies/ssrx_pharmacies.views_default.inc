@@ -191,14 +191,15 @@ function ssrx_pharmacies_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'gmap';
-  $handler->display->display_options['style_options']['macro'] = '[gmap |id=pharmacymap|center=40,-100|zoom=4|width=940px|height=400px]';
+  $handler->display->display_options['style_plugin'] = 'ssrxmap';
+  $handler->display->display_options['style_options']['macro'] = '[gmap zoom=8 |center=37.3002752813443,-82.08984375 |width=100% |height=300px |control=Small |type=Physical]';
   $handler->display->display_options['style_options']['markertype'] = 'small red';
   $handler->display->display_options['style_options']['latfield'] = 'title';
   $handler->display->display_options['style_options']['lonfield'] = 'title';
   $handler->display->display_options['style_options']['markerfield'] = 'title';
   $handler->display->display_options['style_options']['enablermt'] = 0;
   $handler->display->display_options['style_options']['rmtfield'] = 'title';
+  $handler->display->display_options['style_options']['center_on_nodearg'] = 1;
   $handler->display->display_options['style_options']['tooltipfield'] = 'title';
   $handler->display->display_options['style_options']['bubbletextenabled'] = 1;
   $handler->display->display_options['style_options']['bubbletextfield'] = 'title';
