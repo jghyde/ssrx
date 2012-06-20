@@ -234,7 +234,10 @@ class gmap_plugin_style_gmap extends views_plugin_style {
           }
           else {
             // Marker mode: popup.
-            if ($defaults['markermode'] == 1) {
+            if (!isset($defaults['markermode'])) {
+              $defaults['markermode'] = 1;
+            }
+            if ($defaults['markermode'] == 1 ) {
               $marker['text'] = $this->row_plugin->render($row);
             }
             // Marker mode: link.
