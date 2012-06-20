@@ -39,7 +39,12 @@ function ssrx_user_fb_user($op, $data, &$return) {
   dpm($return);
   $fb_app = isset($data['fb_app']) ? $data['fb_app'] : NULL;
   $fb = isset($data['fb']) ? $data['fb'] : NULL;
-
+  if ($op == FB_USER_OP_PRE_USER) {
+    $fname = $data['info']['first_name'];
+    $lname = $data['info']['last_name'];
+    $return['field_first_name'][LANGUAGE_NONE][0]['value'] = $fname;
+    $return['field_last_name'][LANGUAGE_NONE][0]['value'] = $lname;
+  }
   if ($op == FB_USER_OP_POST_USER) {
     // Set a global that can be checked in hook_fb, above.  Note for this to
     // work properly, fb_example.module must be weighted heavier then
