@@ -16,7 +16,7 @@ window.fbAsyncInit = function() {
     });
 
     // getLoginStatus is broken and may never call its callback!
-    setTimeout("FB_JS.initFinal({'session' : null})", 500);
+    setTimeout("FB_JS.initFinal({'session' : null})", 3000);
   }
   else {
     // No application.  Not safe to call FB.getLoginStatus().

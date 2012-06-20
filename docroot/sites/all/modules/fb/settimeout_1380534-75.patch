@@ -1,0 +1,13 @@
+diff --git a/docroot/sites/all/modules/fb/fb.js b/docroot/sites/all/modules/fb/fb.js
+index 9965e99..c00e132 100644
+--- a/docroot/sites/all/modules/fb/fb.js
++++ b/docroot/sites/all/modules/fb/fb.js
+@@ -16,7 +16,7 @@ window.fbAsyncInit = function() {
+     });
+ 
+     // getLoginStatus is broken and may never call its callback!
+-    setTimeout("FB_JS.initFinal({'session' : null})", 500);
++    setTimeout("FB_JS.initFinal({'session' : null})", 3000);
+   }
+   else {
+     // No application.  Not safe to call FB.getLoginStatus().
