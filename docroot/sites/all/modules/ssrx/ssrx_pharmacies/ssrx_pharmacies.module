@@ -1,0 +1,43 @@
+<?php
+/**
+ * @file
+ * Code for the ssrx_pharmacies feature.
+ */
+
+include_once 'ssrx_pharmacies.features.inc';
+
+/**
+ * Implements of hook_views_plugins().
+ */
+function ssrx_pharmacies_views_plugins() {
+  return array(
+    'module' => 'ssrx_pharmacies',
+    'style' => array(
+      'ssrxmap' => array(
+        'title' => t('SSRX Pharmacy Map'),
+        'help' => t('Displays rows of pharmacies as a map.'),
+        'handler' => 'ssrx_pharmacies_plugin_style_ssrxmap',
+        'theme' => 'ssrx_pharmacies_view_ssrxmap',
+        'uses row plugin' => TRUE,
+        'uses grouping' => TRUE,
+        'uses options' => TRUE,
+        'type' => 'normal',
+      ),
+    ),
+  );
+}
+
+/**
+ * Preprocess function for theme_gmap_view_gmap().
+ */
+function template_preprocess_ssrx_pharmacies_view_ssrxmap(&$vars) {
+  $vars['map_object'] = $vars['rows'];
+  // Rows is actually our map object.
+  unset($vars['rows']);
+  $vars['map_element'] = array(
+    '#type' => 'gmap',
+    '#gmap_settings' => $vars['map_object'],
+  );
+  // Theme the map.
+  $vars['map'] = drupal_render($vars['map_element']);
+}
