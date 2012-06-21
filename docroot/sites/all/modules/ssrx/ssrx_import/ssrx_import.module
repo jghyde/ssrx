@@ -31,7 +31,7 @@ function _ssrx_import_add_or_get_term($term, $vocabulary) {
 
 function ssrx_import_drugs() {
   $drug_count = db_query('SELECT COUNT(DISTINCT hyde_id) FROM {drugs_to_import}')->fetchField();
-  $batch_size = 2;
+  $batch_size = 200;
   $counter = 0;
   $operations = array();
   while ($counter < $drug_count) {
@@ -102,7 +102,7 @@ function _ssrx_import_drug($start, $batch_size, &$context) {
     node_object_prepare($node);
     $node->language = LANGUAGE_NONE;
 
-    $node->title = check_plain($drug->tradename);
+    $node->title = check_plain(ucwords(strtolower($drug->tradename)));
     $node->field_brand_or_generic[LANGUAGE_NONE][0]['value'] = $drug->brand_generic;
     $node->field_fda_id[LANGUAGE_NONE][0]['value'] = $drug->appl_no;
     $node->field_fda_product_id[LANGUAGE_NONE][0]['value'] = $drug->product_no;
@@ -125,17 +125,19 @@ function _ssrx_import_drug($start, $batch_size, &$context) {
     }
     $node->field_route[LANGUAGE_NONE][0]['tid'] = $context['route_tids'][$route];
 
-    $node->field_ingredients_collection = array();
-    $ingredients = explode(';', str_replace('; ', '', $drug->ingredient));
-    $strengths = explode(';', str_replace('; ', '', $drug->strength));
+    $ingredients = split(';', str_replace('; ', ';', $drug->ingredient));
+    $strengths = split(';', str_replace('; ', '', $drug->strength));
+    $ingredient_collection = array();
     for ($i = 0; $i < count($ingredients); $i++) {
+      $field_collection_item = null;
       $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_ingredients_collection'));
       $field_collection_item->setHostEntity('node', $node);
       $field_collection_item->field_ingredient[LANGUAGE_NONE][0]['value'] = $ingredients[$i];
       $field_collection_item->field_ingredient_strength[LANGUAGE_NONE][0]['value'] = $strengths[$i];
       $field_collection_item->save();
-      $node->field_ingredients_collection[LANGUAGE_NONE][]['value'] = $field_collection_item->item_id;
+      $ingredient_collection[] = array('value' => $field_collection_item->item_id);
     }
+    $node->field_ingredients_collection[LANGUAGE_NONE] = $ingredient_collection;
 
     node_save($node);
     $context['results'][] = $node->title;
