@@ -5,8 +5,145 @@ function ssrx_import_menu() {
     'page callback' => 'ssrx_import_pharmacies',
     'access callback' => TRUE,
   );
+  $menu['ssrx/import/drugs'] = array(
+    'title' => t('Import Drugs'),
+    'page callback' => 'ssrx_import_drugs',
+    'access callback' => TRUE,
+  );
 
   return $menu;
+}
+
+function _ssrx_import_add_or_get_term($term, $vocabulary) {
+  $tid = taxonomy_get_term_by_name($term, $vocabulary->title);
+  if (count($tid) > 0) {
+    $tid = array_shift(array_keys($tid));
+  }
+  else {
+    $term_object = new stdClass();
+    $term_object->name = ucwords(strtolower($term));
+    $term_object->vid = $vocabulary->vid;
+    taxonomy_term_save($term_object);
+    $tid = $term_object->tid;
+  }
+  return $tid;
+}
+
+function ssrx_import_drugs() {
+  $drug_count = db_query('SELECT COUNT(DISTINCT hyde_id) FROM {drugs_to_import}')->fetchField();
+  $batch_size = 2;
+  $counter = 0;
+  $operations = array();
+  while ($counter < $drug_count) {
+    if ($counter >= $drug_count) {
+      $batch_size = $drug_count - $counter;
+    }
+    $operations[] = array(
+      '_ssrx_import_drug',
+      array(
+        $counter,
+        $batch_size,
+      ),
+    );
+    $counter += $batch_size;
+    if (isset($_REQUEST['one_batch'])) {
+      break;
+    }
+  }
+
+  if (count($operations)) {
+    $batch = array(
+      'operations' => $operations,
+      'finished' => 'batch_example_finished',
+      'title' => t('Processing Drugs Batch'),
+      'init_message' => t('Drugs Batch is starting.'),
+      'progress_message' => t('Processed @current out of @total.'),
+      'error_message' => t('Drugs Batch has encountered an error.'),
+      'file' => drupal_get_path('module', 'ssrx_import') . '/drugs.inc',
+    );
+    batch_set($batch);
+    batch_process('/');
+  }
+  else {
+    drupal_set_message('Nothing to import');
+    drupal_goto('/');
+  }
+}
+
+function _ssrx_import_drug($start, $batch_size, &$context) {
+  if (!isset($context['sandbox']['progress'])) {
+    $context['sandbox']['progress'] = 0;
+    $context['sandbox']['current_node'] = 0;
+    $context['sandbox']['max'] = db_query('SELECT COUNT(DISTINCT hyde_id) FROM {drugs_to_import}')->fetchField();
+  }
+  if (!isset($context['format_tids'])) {
+    $context['format_tids'] = array();
+  }
+  if (!isset($context['format_vocabulary'])) {
+    $context['format_vocabulary'] = taxonomy_vocabulary_machine_name_load('drug_format');
+  }
+  if (!isset($context['route_tids'])) {
+    $context['route_tids'] = array();
+  }
+  if (!isset($context['route_vocabulary'])) {
+    $context['route_vocabulary'] = taxonomy_vocabulary_machine_name_load('drug_route');
+  }
+  if (!isset($context['type_tids'])) {
+    $context['type_tids'] = array();
+  }
+  if (!isset($context['type_vocabulary'])) {
+    $context['type_vocabulary'] = taxonomy_vocabulary_machine_name_load('drug_type');
+  }
+
+  $drugs = db_query_range("SELECT * FROM {drugs_to_import} WHERE hyde_id > :start ORDER BY hyde_id ASC", 0, $batch_size, array(':start' => $start));
+  foreach ($drugs as $drug) {
+    $node = new stdClass();
+    $node->type = 'drug';
+    node_object_prepare($node);
+    $node->language = LANGUAGE_NONE;
+
+    $node->title = check_plain($drug->tradename);
+    $node->field_brand_or_generic[LANGUAGE_NONE][0]['value'] = $drug->brand_generic;
+    $node->field_fda_id[LANGUAGE_NONE][0]['value'] = $drug->appl_no;
+    $node->field_fda_product_id[LANGUAGE_NONE][0]['value'] = $drug->product_no;
+
+    $format = ucwords(strtolower($drug->df));
+    if (!isset($context['format_tids'][$format])) {
+      $context['format_tids'][$format] = _ssrx_import_add_or_get_term($format, $context['format_vocabulary']);
+    }
+    $node->field_drug_format[LANGUAGE_NONE][0]['tid'] = $context['format_tids'][$format];
+
+    $type = ucwords(strtolower($drug->type));
+    if (!isset($context['type_tids'][$format])) {
+      $context['type_tids'][$type] = _ssrx_import_add_or_get_term($type, $context['type_vocabulary']);
+    }
+    $node->field_drug_type[LANGUAGE_NONE][0]['tid'] = $context['type_tids'][$type];
+
+    $route = ucwords(strtolower($drug->route));
+    if (!isset($context['route_tids'][$route])) {
+      $context['route_tids'][$route] = _ssrx_import_add_or_get_term($route, $context['route_vocabulary']);
+    }
+    $node->field_route[LANGUAGE_NONE][0]['tid'] = $context['route_tids'][$route];
+
+    $node->field_ingredients_collection = array();
+    $ingredients = explode(';', str_replace('; ', '', $drug->ingredient));
+    $strengths = explode(';', str_replace('; ', '', $drug->strength));
+    for ($i = 0; $i < count($ingredients); $i++) {
+      $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_ingredients_collection'));
+      $field_collection_item->setHostEntity('node', $node);
+      $field_collection_item->field_ingredient[LANGUAGE_NONE][0]['value'] = $ingredients[$i];
+      $field_collection_item->field_ingredient_strength[LANGUAGE_NONE][0]['value'] = $strengths[$i];
+      $field_collection_item->save();
+      $node->field_ingredients_collection[LANGUAGE_NONE][]['value'] = $field_collection_item->item_id;
+    }
+
+    node_save($node);
+    $context['results'][] = $node->title;
+
+    $context['sandbox']['progress']++;
+    $context['sandbox']['current_node'] = $node->nid;
+    $context['message'] = t('Now processing :num - :num2 of :total', array(':num' => $start, ':num2' => ($start + $batch_size), ':total' => $context['sandbox']['max']));
+  }
 }
 
 function ssrx_import_pharmacies() {
@@ -26,19 +163,27 @@ function ssrx_import_pharmacies() {
       ),
     );
     $counter += $batch_size;
+    if (isset($_REQUEST['one_batch'])) {
+      break;
+    }
   }
 
-  $batch = array(
-    'operations' => $operations,
-    'finished' => 'batch_example_finished',
-    'title' => t('Processing Pharmacies Batch'),
-    'init_message' => t('Pharmacies Batch is starting.'),
-    'progress_message' => t('Processed @current out of @total.'),
-    'error_message' => t('Pharmacies Batch has encountered an error.'),
-  );
-  batch_set($batch);
-
-  batch_process('/');
+  if (count($operations)) {
+    $batch = array(
+      'operations' => $operations,
+      'finished' => 'batch_example_finished',
+      'title' => t('Processing Pharmacies Batch'),
+      'init_message' => t('Pharmacies Batch is starting.'),
+      'progress_message' => t('Processed @current out of @total.'),
+      'error_message' => t('Pharmacies Batch has encountered an error.'),
+    );
+    batch_set($batch);
+    batch_process('/');
+  }
+  else {
+    drupal_set_message('Nothing to import');
+    drupal_goto('/');
+  }
 }
 
 function _ssrx_import_pharmacy($start, $batch_size, &$context) {
@@ -64,20 +209,11 @@ function _ssrx_import_pharmacy($start, $batch_size, &$context) {
     $node->title = check_plain($line->PharmacyName);
 
     // Get the chain taxonomy term id. Create the term if it's missing.
-    if (!isset($chain_tids[$line->CHAIN])) {
-      $tid = taxonomy_get_term_by_name($line->PharmacyName, 'pharmacy_chain');
-      if (count($tid) > 0) {
-        $tid = array_shift(array_keys($tid));
-      }
-      else {
-        taxonomy_term_save((object) array(
-          'name' => $line->PharmacyName,
-          'vid' => $context['chain_vocabulary']->vid,
-        ));
-        $tid = array_shift(array_keys(taxonomy_get_term_by_name($line->PharmacyName, 'pharmacy_chain')));
-      }
-      $node->field_chain[LANGUAGE_NONE][0]['tid'] = $tid;
+    $chain = ucwords(strtolower($line->CHAIN));
+    if (!isset($context['chain_tids'][$chain])) {
+      $context['chain_tids'][$chain] = _ssrx_import_add_or_get_term($chain, $context['chain_vocabulary']);
     }
+    $node->field_chain[LANGUAGE_NONE][0]['tid'] = $context['chain_tids'][$chain];
 
     $location = array(
       'street' => $line->PharmacyAddress,
