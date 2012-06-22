@@ -219,10 +219,10 @@ function ssrx_pharmacies_views_default_views() {
   $handler->display->display_options['sorts']['distance']['table'] = 'location';
   $handler->display->display_options['sorts']['distance']['field'] = 'distance';
   $handler->display->display_options['sorts']['distance']['origin'] = 'tied';
-  /* Sort criterion: Content: Title */
-  $handler->display->display_options['sorts']['title']['id'] = 'title';
-  $handler->display->display_options['sorts']['title']['table'] = 'node';
-  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  /* Sort criterion: Global: Random */
+  $handler->display->display_options['sorts']['random']['id'] = 'random';
+  $handler->display->display_options['sorts']['random']['table'] = 'views';
+  $handler->display->display_options['sorts']['random']['field'] = 'random';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */

@@ -387,7 +387,7 @@ function ssrx_user_field_default_fields() {
           'label_position' => 'above',
           'repeat_collapsed' => 0,
           'text_parts' => array(),
-          'year_range' => '-3:+3',
+          'year_range' => '1907:-18',
         ),
         'type' => 'date_select',
         'weight' => '10',
