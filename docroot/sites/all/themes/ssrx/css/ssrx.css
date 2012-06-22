@@ -14,7 +14,14 @@
   float: left;
   margin-bottom: 1em;
   padding: 0;
+  position: absolute;
+  top: -50px;
   /* margin-left: 273px; */
+}
+
+#logo {
+  height: 110px;
+  z-index: 1000;
 }
 .sf-menu.sf-style-default.sf-navbar {
   width: 100%;
