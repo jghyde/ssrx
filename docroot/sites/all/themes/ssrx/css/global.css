@@ -507,3 +507,9 @@ div.registered.logout,
 div.registered.report {
   font-weight: normal;
 }
+/* location.tpl.php */
+h3.pharmacy-title {
+  margin: 0;
+  font-family: Helvetica, Arial, Verdana, sans-serif;
+  font-size: 14px;
+}
