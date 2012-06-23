@@ -5,5 +5,7 @@
  * Implements hook_views_query_alter()
  */
 function ssrx_pharmacies_views_query_alter(&$view, &$query) {
-  return;
+  if ($view->name == 'pharmacies' && $view->current_display == 'page_1'){
+      return;
+  }
 }

@@ -177,8 +177,14 @@ class ssrx_pharmacies_plugin_style_ssrxmap extends views_plugin_style {
         }
       }
       // center the map
-      $center_lat = $centered['lat'];
-      $center_lon = $centered['long'];
+      if (isset($centered) && is_array($centered)) {
+        $center_lat = $centered['lat'];
+        $center_lon = $centered['long'];
+      }
+      else {
+        $center_lat = '38.840300';
+        $center_lon = '-97.611100';
+      }
 
       foreach ($records as $row_index => $row) {
         $this->view->row_index = $row_index;
@@ -271,14 +277,14 @@ class ssrx_pharmacies_plugin_style_ssrxmap extends views_plugin_style {
       }
       if (!empty($markers)) { // Don't draw empty maps.
         $macro = $this->options['macro'];
-        if (count($centered) > 0) {
+        if (isset($centered) && count($centered) > 0) {
           if (isset($_GET['distance']['postal_code']) && $_GET['distance']['postal_code'] != '') {
             $zoom = 8;
           }
           else {
             $zoom = 4;
           }
-          $macro = '[gmap zoom=' . $zoom . ' |center=' . $centered['lat'] . ',' . $centered['long'] . ' |width=940px |height=300px |control=Small |type=Physical]';
+          $macro = '[gmap zoom=' . $zoom . ' |center=' . $centered['lat'] . ',' . $centered['long'] . ' |width=960px |height=300px |control=Small |type=Physical]';
         }
         $map = gmap_parse_macro($macro);
         if ($this->options['enablermt']) {
