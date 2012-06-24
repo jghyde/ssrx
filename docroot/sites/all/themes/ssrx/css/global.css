@@ -573,11 +573,11 @@ tbody tr:hover {
 h4.pharmacy-title {
   font-size: 12px;
   font-weight: bold;
-  margin: 0 0 2px 0;
+  margin: 0;
   padding: 0;
   font-family: Helvetica, Arial, sans-serif;
 }
-div#gmap-auto1map-gmap0.gmap-control div div div div div div {
+div.gmap-control div div div div div div {
   border-radius: 5px;
 }
 div.gmap-popup span.views-field span.field-content {
@@ -595,4 +595,8 @@ div.istf-1 {
 }
 .views-table div.istf-1 {
   margin: 0 auto;
+}
+p.gmap-bubble-address {
+  margin: 0;
+  line-height: 1.1;
 }

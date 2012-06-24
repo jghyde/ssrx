@@ -14,10 +14,15 @@ function ssrx_preprocess_location(&$vars) {
   $node = menu_get_object();
   if (is_object($node) && $node->type == 'pharmacy') {
     // Render the side-to-side google map for pharmacy detail pages
+    $text = '<h4 class="pharmacy-title">' . $node->title . '</h4>';
+    $text .= '<p class="gmap-bubble-address">' . $vars['street'] . '</p>';
+    $text .= !empty($vars['additional']) ? '<p class="gmap-bubble-address">' . $vars['additional'] . '</p>' : '';
+    $text .= '<p class="gmap-bubble-address">' . $vars['city'] . ', ' . $vars['province'] . ' ' . $vars['postal_code'] . '</p>';
+    $text .= '<p class="gmap-bubble-address">Phone: ' . $vars['phone'] . '</p>';
     $markers = array(
       array(
         'options' => array(),
-        'text' => $node->title,
+        'text' => $text,
         'longitude' => $vars['location']['longitude'],
         'latitude' => $vars['location']['latitude'],
         'markername' => 'blank',
