@@ -221,7 +221,7 @@ function _ssrx_import_pharmacy($start, $batch_size, &$context) {
       $node->field_chain[LANGUAGE_NONE][0]['tid'] = $context['chain_tids'][$chain];
     }    
     // set the ssrx zip+4 id thingy
-    $node->field_ssrx_phamacy_id[LANGUAGE_NONE][0]['value'] = $line->PharmacyId;
+    $node->field_ssrx_pharmacy_id[LANGUAGE_NONE][0]['value'] = $line->PharmacyId;
     
     // if the pharmacy is 24 hrs, set that
     $node->field_24_hour_pharmacy[LANGUAGE_NONE][0]['value'] = $line->istf;
