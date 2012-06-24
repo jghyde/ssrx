@@ -605,3 +605,6 @@ p.gmap-bubble-address {
   margin: 0;
   line-height: 1.1;
 }
+div.comment-wrapper {
+  clear: both;
+}
