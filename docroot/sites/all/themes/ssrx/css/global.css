@@ -567,7 +567,7 @@ table {
 tr.even td , tr.odd td{
   background-color: transparent;
 }
-tr:hover {
+tbody tr:hover {
   background-color: #fede84;
 }
 h4.pharmacy-title {
