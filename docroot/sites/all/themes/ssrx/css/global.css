@@ -417,6 +417,8 @@ div.gmap {
   list-style: none;
   width: 100%;
 }
+div.ssrxbutton,
+td.ssrxbutton div,
 .ssrx.button li,
 div.ssrx.button {
   list-style: none;
@@ -439,6 +441,8 @@ div.ssrx.button {
   box-shadow: -1px -1px 2px #999999;
   border: 1px solid #cccccc;
 }
+div.ssrxbutton:hover,
+td.ssrxbutton div:hover,
 .ssrx.button li:hover,
 div.ssrx.button:hover {
   box-shadow: none;
@@ -453,6 +457,8 @@ div.ssrx.button:hover {
   background: linear-gradient(top,  rgba(254,254,254,1) 23%,rgba(237,237,237,1) 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#ededed',GradientType=0 ); /* IE6-8 */
 }
+div.ssrxbutton a,
+td.ssrxbutton a,
 a.ssrx.button {  
   background: transparent url('/sites/all/themes/ssrx/images/ssrx_button_icon.png') 5px 2px no-repeat; /* 20px x 20px */
   padding: 3px 10px 3px 30px;
@@ -518,7 +524,19 @@ h3.pharmacy-title {
 }
 
 /* all views tables */
-div.view div.view-content table.sticky-header thead tr td {
+thead th, th {
+  background: none;
+  background-color: none;
+}
+thead th, thead a, thead a:link, thead a:visited {
+  color: #ffffff;
+  text-shadow: 0px 1px 1px #094569;
+  font-weight: bold;
+
+}
+table.sticky-header,
+table.sticky-header thead,
+table.views-table thead {
   background: rgb(9,69,105); /* Old browsers */
   /* IE9 SVG, needs conditional override of 'filter' to 'none' */
   background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzA5NDU2OSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjY1JSIgc3RvcC1jb2xvcj0iIzFjNzBhMiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxYzcwYTIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
@@ -530,4 +548,42 @@ div.view div.view-content table.sticky-header thead tr td {
   background: linear-gradient(top,  rgba(9,69,105,1) 0%,rgba(28,112,162,1) 65%,rgba(28,112,162,1) 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#094569', endColorstr='#1c70a2',GradientType=0 ); /* IE6-8 */
   color: #ffffff;
+}
+table.sticky-header thead  a {
+  color: #ffffff;
+}
+td.pharmacy-title h4 {
+  font-size: 14px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+tr.even, tr.odd {
+  background: transparent;
+  background-color: transparent;
+  border-bottom: 1px solid #222222;
+}
+table {
+  border: none;
+}
+tr.even td , tr.odd td{
+  background-color: transparent;
+}
+tr:hover {
+  background-color: #fede84;
+}
+h4.pharmacy-title {
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0 0 2px 0;
+  padding: 0;
+  font-family: Helvetica, Arial, sans-serif;
+}
+div#gmap-auto1map-gmap0.gmap-control div div div div div div {
+  border-radius: 5px;
+}
+div.gmap-popup span.views-field span.field-content {
+  font-size: 10px;
+  line-height: 1;
+}
+div.gmap-popup br {
+  line-height: 80%;
 }

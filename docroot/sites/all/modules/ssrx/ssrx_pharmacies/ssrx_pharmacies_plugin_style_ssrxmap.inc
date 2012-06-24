@@ -279,7 +279,7 @@ class ssrx_pharmacies_plugin_style_ssrxmap extends views_plugin_style {
         $macro = $this->options['macro'];
         if (isset($centered) && count($centered) > 0) {
           if (isset($_GET['distance']['postal_code']) && $_GET['distance']['postal_code'] != '') {
-            $zoom = 8;
+            $zoom = 10;
           }
           else {
             $zoom = 4;
