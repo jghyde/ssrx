@@ -402,7 +402,8 @@ function ssrx_pharmacies_views_default_views() {
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['table'] = 'field_data_field_24_hour_pharmacy';
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['field'] = 'field_24_hour_pharmacy';
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['label'] = '';
-  $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['text'] = '<div class="istf-[field_24_hour_pharmacy-value]">[field_24_hour_pharmacy-value]</div>';
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['external'] = 0;
@@ -415,12 +416,13 @@ function ssrx_pharmacies_views_default_views() {
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['strip_tags'] = 0;
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_24_hour_pharmacy']['element_type'] = 'div';
+  $handler->display->display_options['fields']['field_24_hour_pharmacy']['element_class'] = 'istf';
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['element_default_classes'] = 0;
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['field_24_hour_pharmacy']['type'] = 'list_key';
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['field_api_classes'] = 0;
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
@@ -672,7 +674,8 @@ function ssrx_pharmacies_views_default_views() {
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['table'] = 'field_data_field_24_hour_pharmacy';
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['field'] = 'field_24_hour_pharmacy';
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['label'] = '24 Hour';
-  $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['text'] = '<div class="istf-[field_24_hour_pharmacy-value]">[field_24_hour_pharmacy-value]</div>';
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['external'] = 0;
@@ -925,7 +928,8 @@ function ssrx_pharmacies_views_default_views() {
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['table'] = 'field_data_field_24_hour_pharmacy';
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['field'] = 'field_24_hour_pharmacy';
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['label'] = '';
-  $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['text'] = '<div class="istf-[field_24_hour_pharmacy-value]">[field_24_hour_pharmacy-value]</div>';
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['external'] = 0;
@@ -1202,7 +1206,8 @@ function ssrx_pharmacies_views_default_views() {
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['table'] = 'field_data_field_24_hour_pharmacy';
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['field'] = 'field_24_hour_pharmacy';
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['label'] = '24 Hour';
-  $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['text'] = '<div class="istf-[field_24_hour_pharmacy-value]">[field_24_hour_pharmacy-value]</div>';
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['external'] = 0;
