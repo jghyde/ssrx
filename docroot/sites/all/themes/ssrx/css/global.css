@@ -587,3 +587,12 @@ div.gmap-popup span.views-field span.field-content {
 div.gmap-popup br {
   line-height: 80%;
 }
+div.istf-1 {
+  height: 32px;
+  width: 32px;
+  text-indent: -9999px;
+  background: transparent url(../images/istf.png) left top no-repeat;
+}
+.views-table div.istf-1 {
+  margin: 0 auto;
+}
