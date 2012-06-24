@@ -138,13 +138,19 @@ function _ssrx_import_drug($start, $batch_size, &$context) {
       $ingredient_collection[] = array('value' => $field_collection_item->item_id);
     }
     $node->field_ingredients_collection[LANGUAGE_NONE] = $ingredient_collection;
-
+    unset($field_collection_item);
+    unset($ingredient_collection);
+    unset($strengths);
+    unset($ingredients);
+    unset($route);
+    unset($type);
     node_save($node);
+    
     $context['results'][] = $node->title;
-
     $context['sandbox']['progress']++;
     $context['sandbox']['current_node'] = $node->nid;
     $context['message'] = t('Now processing :num - :num2 of :total', array(':num' => $start, ':num2' => ($start + $batch_size), ':total' => $context['sandbox']['max']));
+    unset($node);
   }
 }
 
