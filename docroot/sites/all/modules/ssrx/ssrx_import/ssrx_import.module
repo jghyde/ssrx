@@ -207,23 +207,51 @@ function _ssrx_import_pharmacy($start, $batch_size, &$context) {
     $node->type = 'pharmacy';
     node_object_prepare($node);
     $node->language = LANGUAGE_NONE;
-
-    $node->title = check_plain($line->PharmacyName);
+    
+    // @TODO no security problems with importing real characters. stubhub.com lists "Texas A&M in autosuggest as "Texas AM" and it pisses me off.
+    //$node->title = check_plain($line->PharmacyName);
+    $node->title = $line->PharmacyName;
 
     // Get the chain taxonomy term id. Create the term if it's missing.
-    $chain = ucwords(strtolower($line->CHAIN));
-    if (!isset($context['chain_tids'][$chain])) {
-      $context['chain_tids'][$chain] = _ssrx_import_add_or_get_term($chain, $context['chain_vocabulary']);
+    if (!empty($line->HqName) && $line->ChainOrIndependent == 'Chain') {
+      $chain = ucwords(strtolower($line->HqName));
+      if (!isset($context['chain_tids'][$chain])) {
+        $context['chain_tids'][$chain] = _ssrx_import_add_or_get_term($chain, $context['chain_vocabulary']);
+      }
+      $node->field_chain[LANGUAGE_NONE][0]['tid'] = $context['chain_tids'][$chain];
+    }    
+    // set the ssrx zip+4 id thingy
+    $node->field_ssrx_phamacy_id[LANGUAGE_NONE][0]['value'] = $line->PharmacyId;
+    
+    // if the pharmacy is 24 hrs, set that
+    $node->field_24_hour_pharmacy[LANGUAGE_NONE][0]['value'] = $line->istf;
+    
+    // if the pharmacy is online only, set that:
+    $node->field_online_pharmacy[LANGUAGE_NONE][0]['value'] = $line->online;
+    
+    // Set the Hays ID
+    $node->field_hays_id[LANGUAGE_NONE][0]['value'] = $line->HayesIdNumber;
+    
+    // Make sure these lats and lons have values and if they do not, set the values to '' to allow google maps api to update them.
+    $lat = '';
+    if (isset($line->lat) && !empty($line->lat) && $line->lat != 0) {
+      $lat = $line->lat;
     }
-    $node->field_chain[LANGUAGE_NONE][0]['tid'] = $context['chain_tids'][$chain];
-
+    $lon = '';
+    if (isset($line->lon) && !empty($line->lon) && $line->lon != 0) {
+      $lon = $line->lon;
+    }
+    if (empty($lat) || empty($lon)) {
+      $lon = '';
+      $lat = '';
+    }
     $location = array(
       'street' => $line->PharmacyAddress,
       'city' => $line->PharmacyCity,
       'province' => $line->PharmacyState,
       'postal_code' => $line->PharmacyZip,
-      'latitude' => $line->lat,
-      'longitude' => $line->lon,
+      'latitude' => $lat,
+      'longitude' => $lon,
       'phone' => $line->PharmacyPhone,
       'fax' => $line->PharmacyFax,
       'country' => 'us',
