@@ -529,8 +529,8 @@ function ssrx_pharmacies_views_default_views() {
     'title' => 'title',
     'address_1' => 'address_1',
     'field_pharmacy_rating' => 'field_pharmacy_rating',
-    'view_node' => 'view_node',
     'field_24_hour_pharmacy' => 'field_24_hour_pharmacy',
+    'view_node' => 'view_node',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -553,14 +553,14 @@ function ssrx_pharmacies_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'view_node' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'field_24_hour_pharmacy' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
+      'align' => 'views-align-center',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'view_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -1061,8 +1061,8 @@ function ssrx_pharmacies_views_default_views() {
     'title' => 'title',
     'address_1' => 'address_1',
     'field_pharmacy_rating' => 'field_pharmacy_rating',
-    'view_node' => 'view_node',
     'field_24_hour_pharmacy' => 'field_24_hour_pharmacy',
+    'view_node' => 'view_node',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -1085,14 +1085,14 @@ function ssrx_pharmacies_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'view_node' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
     'field_24_hour_pharmacy' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
+      'align' => 'views-align-center',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'view_node' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,

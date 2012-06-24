@@ -20,13 +20,13 @@
       <ul>
         <li><?php print render($content['field_pharmacy_rating']); ?></li>
         <li><a tel://<?php print $content['locations']['#locations'][0]['phone']; ?>"><?php print $content['locations']['#locations'][0]['phone']; ?></a></li>
-        <li><?php print l('Website', render($content['field_pharmacy_web_address'])); ?></li>
+        <?php !empty($content['field_pharmacy_web_address'][0]['#markup']) ? print '<li>' . l('Website', $content['field_pharmacy_web_address'][0]['#markup'], array('attributes' => array('title' => 'Visit the ' . drupal_get_title() . ' website.'))) . '</li>': ''; ?>
         <?php
         if ($content['field_online_pharmacy']['#items'][0]['value'] > 0) {
           print '<li class="online-pharmacy">Online Pharmacy</li>';
         }
-        if ($content['field_24_hour_pharmacy']['#label_display'] > 0) {
-          print '<li class="twenty4hour-pharmacy">24-Hour Pharmacy</li>';
+        if ((int)$content['field_24_hour_pharmacy']['#items'][0]['value'] == 1) {
+          print '<li class="istf-1">24-Hour Pharmacy</li>';
         }
         ?>
       </ul>
