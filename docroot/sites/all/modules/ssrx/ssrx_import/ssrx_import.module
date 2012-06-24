@@ -225,6 +225,7 @@ function _ssrx_import_pharmacy($start, $batch_size, &$context) {
         $context['chain_tids'][$chain] = _ssrx_import_add_or_get_term($chain, $context['chain_vocabulary']);
       }
       $node->field_chain[LANGUAGE_NONE][0]['tid'] = $context['chain_tids'][$chain];
+      unset($chain);
     }    
     // set the ssrx zip+4 id thingy
     $node->field_ssrx_pharmacy_id[LANGUAGE_NONE][0]['value'] = $line->PharmacyId;
@@ -266,12 +267,17 @@ function _ssrx_import_pharmacy($start, $batch_size, &$context) {
     $node->locations = array();
     $node->locations[] = $node->location = $location;
     node_save($node);
-
+    
+    unset($line);
+    unset($location);
+    unset($lat);
+    unset($lon);
     $context['results'][] = $node->title;
 
     // Update our progress information.
     $context['sandbox']['progress']++;
     $context['sandbox']['current_node'] = $node->nid;
     $context['message'] = t('Now processing :num - :num2 of :total', array(':num' => $start, ':num2' => ($start + $batch_size), ':total' => $context['sandbox']['max']));
+    unset($node);
   }
 }
