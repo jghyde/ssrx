@@ -372,7 +372,6 @@ function ssrx_admin_views_default_views() {
   $handler->display->display_options['filters']['field_brand_or_generic__value']['expose']['label'] = 'Brand or Generic? (field_brand_or_generic_)';
   $handler->display->display_options['filters']['field_brand_or_generic__value']['expose']['operator'] = 'field_brand_or_generic__value_op';
   $handler->display->display_options['filters']['field_brand_or_generic__value']['expose']['identifier'] = 'field_brand_or_generic__value';
-  $handler->display->display_options['filters']['field_brand_or_generic__value']['expose']['multiple'] = 1;
   $handler->display->display_options['filters']['field_brand_or_generic__value']['expose']['reduce'] = 0;
   /* Filter criterion: Content: FDA ID (field_fda_id) */
   $handler->display->display_options['filters']['field_fda_id_value']['id'] = 'field_fda_id_value';

@@ -2,6 +2,7 @@ name = ssrx_admin
 description = Administrative views for SSRX site
 core = 7.x
 package = SSRX
+php = 5.2.4
 dependencies[] = ctools
 dependencies[] = views
 features[ctools][] = views:views_default:3.0
