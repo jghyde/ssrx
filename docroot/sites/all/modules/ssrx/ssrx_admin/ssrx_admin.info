@@ -1,0 +1,9 @@
+name = ssrx_admin
+description = Administrative views for SSRX site
+core = 7.x
+package = SSRX
+dependencies[] = ctools
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:1
+features[views_view][] = 7402_drugs
