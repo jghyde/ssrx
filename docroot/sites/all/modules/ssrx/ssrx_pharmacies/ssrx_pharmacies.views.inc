@@ -5,7 +5,16 @@
  * Implements hook_views_query_alter()
  */
 function ssrx_pharmacies_views_query_alter(&$view, &$query) {
-  if ($view->name == 'pharmacies' && $view->current_display == 'page_1'){
-      return;
+  // The table views in the pharmacies views are shown as attachments
+  if ($view->name == 'pharmacies' && $view->is_attachment == TRUE){
+    $where = array();
+    $where = $query->orderby;
+    if (isset($_GET['distance'])) {
+      unset($where[1]);
+    }
+    else {
+      unset($where[0]);      
+    }
+    $query->orderby = $where;
   }
 }

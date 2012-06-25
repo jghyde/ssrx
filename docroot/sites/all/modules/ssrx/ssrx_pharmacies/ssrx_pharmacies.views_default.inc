@@ -721,6 +721,10 @@ function ssrx_pharmacies_views_default_views() {
   $handler->display->display_options['fields']['view_node']['empty_zero'] = 0;
   $handler->display->display_options['fields']['view_node']['hide_alter_empty'] = 1;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Location: Postal Code */
+  $handler->display->display_options['sorts']['postal_code']['id'] = 'postal_code';
+  $handler->display->display_options['sorts']['postal_code']['table'] = 'location';
+  $handler->display->display_options['sorts']['postal_code']['field'] = 'postal_code';
   /* Sort criterion: Global: Random */
   $handler->display->display_options['sorts']['random']['id'] = 'random';
   $handler->display->display_options['sorts']['random']['table'] = 'views';
@@ -769,7 +773,7 @@ function ssrx_pharmacies_views_default_views() {
     'nid_arg' => '',
     'nid_loc_field' => 'node',
     'uid_arg' => '',
-    'search_distance' => '25',
+    'search_distance' => '10',
     'search_units' => 'mile',
   );
   $handler->display->display_options['filters']['distance']['group'] = 1;
