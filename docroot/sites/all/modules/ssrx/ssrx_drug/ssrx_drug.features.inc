@@ -35,7 +35,7 @@ function ssrx_drug_node_info() {
       'base' => 'node_content',
       'description' => t('A prescription drug, such as Xanax, Oxycodone, etc. '),
       'has_title' => '1',
-      'title_label' => t('Name'),
+      'title_label' => t('Trade Name'),
       'help' => '',
     ),
     'drug_price' => array(
@@ -44,22 +44,6 @@ function ssrx_drug_node_info() {
       'description' => t('A specific price reported for a specific Drug Variety'),
       'has_title' => '1',
       'title_label' => t('Title'),
-      'help' => '',
-    ),
-    'drug_variety' => array(
-      'name' => t('Drug Variety'),
-      'base' => 'node_content',
-      'description' => t('A specific variety of a drug - for example 10mg Xanax Pill'),
-      'has_title' => '1',
-      'title_label' => t('Title'),
-      'help' => '',
-    ),
-    'pharmacy' => array(
-      'name' => t('Pharmacy'),
-      'base' => 'node_content',
-      'description' => t('A physical pharmacy location.'),
-      'has_title' => '1',
-      'title_label' => t('Name'),
       'help' => '',
     ),
   );

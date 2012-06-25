@@ -9,29 +9,6 @@
  */
 function ssrx_drug_taxonomy_default_vocabularies() {
   return array(
-    'drug_dosage' => array(
-      'name' => 'Drug Dosage',
-      'machine_name' => 'drug_dosage',
-      'description' => 'Prescription drug dosage, such as 500mg, 1000mg, etc',
-      'hierarchy' => '0',
-      'module' => 'taxonomy',
-      'weight' => '0',
-      'rdf_mapping' => array(
-        'rdftype' => array(
-          0 => 'skos:ConceptScheme',
-        ),
-        'name' => array(
-          'predicates' => array(
-            0 => 'dc:title',
-          ),
-        ),
-        'description' => array(
-          'predicates' => array(
-            0 => 'rdfs:comment',
-          ),
-        ),
-      ),
-    ),
     'drug_format' => array(
       'name' => 'Drug Format',
       'machine_name' => 'drug_format',
@@ -55,10 +32,10 @@ function ssrx_drug_taxonomy_default_vocabularies() {
         ),
       ),
     ),
-    'pharmacy_chain' => array(
-      'name' => 'Pharmacy Chain',
-      'machine_name' => 'pharmacy_chain',
-      'description' => 'Pharmacy Chain such as Costco, Sam\'s Club, or Walgreen\'s',
+    'drug_route' => array(
+      'name' => 'Drug Route',
+      'machine_name' => 'drug_route',
+      'description' => '',
       'hierarchy' => '0',
       'module' => 'taxonomy',
       'weight' => '0',
@@ -78,9 +55,9 @@ function ssrx_drug_taxonomy_default_vocabularies() {
         ),
       ),
     ),
-    'quantity' => array(
-      'name' => 'Quantity',
-      'machine_name' => 'quantity',
+    'drug_type' => array(
+      'name' => 'Drug Type',
+      'machine_name' => 'drug_type',
       'description' => '',
       'hierarchy' => '0',
       'module' => 'taxonomy',
