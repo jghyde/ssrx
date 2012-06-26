@@ -10,6 +10,11 @@ function ssrx_import_menu() {
     'page callback' => 'ssrx_import_drugs',
     'access callback' => TRUE,
   );
+  $menu['ssrx/import/prices'] = array(
+    'title' => t('Import Prices'),
+    'page callback' => 'ssrx_import_prices',
+    'access callback' => TRUE,
+  );
 
   return $menu;
 }
@@ -27,6 +32,101 @@ function _ssrx_import_add_or_get_term($term, $vocabulary) {
     $tid = $term_object->tid;
   }
   return $tid;
+}
+
+function ssrx_import_prices() {
+  $result = db_query("SHOW TABLES LIKE 'price_%'");
+  $tables = array();
+  $total_count = 0;
+  while ($table = $result->fetchField()) {
+    $tables[] = $table;
+    $total_count += ${'count_' . $table} = db_query('SELECT COUNT(DISTINCT id) FROM ' . $table)->fetchField();
+  }
+
+  $batch_size = 250;
+  foreach ($tables as $table) {
+    $counter = 0;
+    while ($counter <= ${'count_' . $table}) {
+      $operations[] = array(
+        '_ssrx_import_prices',
+        array(
+          $table,
+          $counter,
+          $batch_size,
+          $total_count,
+        ),
+      );
+
+      if (isset($_REQUEST['one_batch'])) {
+        break;
+      }
+      $counter += $batch_size;
+    }
+  }
+
+  if (count($operations)) {
+    $batch = array(
+      'operations' => $operations,
+      'finished' => 'batch_example_finished',
+      'title' => t('Processing Prices Batch'),
+      'init_message' => t('Now processing 0 - :num2 of :total', array(':num2' => $batch_size, ':total' => $total_count)),
+      'progress_message' => t('Processed @current out of @total.'),
+      'error_message' => t('Drugs Prices has encountered an error.'),
+    );
+
+    batch_set($batch);
+    batch_process('/');
+  }
+  else {
+    drupal_set_message('Nothing to import');
+    drupal_goto('/');
+  }
+}
+
+function _ssrx_import_prices($table, $start, $batch_size, $total, &$context) {
+  if (!isset($context['sandbox']['progress'])) {
+    $context['sandbox']['progress'] = 0;
+    $context['sandbox']['current_node'] = 0;
+    $context['sandbox']['max'] = $total;
+  }
+  $prices = db_query_range('SELECT * FROM ' . $table . ' WHERE id > :start ORDER BY id ASC', 0, $batch_size, array(':start' => $start));
+  foreach ($prices as $price) {
+    if ($price->fda_appl_id == 'fda_appl_id') {
+      continue;
+    }
+    $query = new EntityFieldQuery();
+    $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'drug')
+      ->fieldCondition('field_fda_id', 'value', $price->fda_appl_id)
+      ->fieldCondition('field_fda_product_id', 'value', $price->fda_prod_no);
+    $result = $query->execute();
+    $drug_nid = array_keys($result['node']);
+    if (count($drug_nid) == 0) {
+      watchdog('ssrx', 'Import failed for price (no match) on FDA ID :id-:pid', array(':id' => $price->fda_appl_id, ':pid' => $price->fda_prod_no));
+      continue;
+    }
+    if (count($drug_nid) > 1) {
+      watchdog('ssrx', 'Import failed for price (multiple matches) on FDA ID :id-:pid', array(':id' => $price->fda_appl_id, ':pid' => $price->fda_prod_no));
+      continue;
+    }
+    $price->drug_nid = $drug_nid[0];
+
+    $node = new stdClass();
+    $node->type = 'drug_price';
+    node_object_prepare($node);
+    $node->language = LANGUAGE_NONE;
+    $node->field_location[LANGUAGE_NONE][0]['nid'] = $price->store_nid;
+    $node->field_drug_variety[LANGUAGE_NONE][0]['nid'] = $price->drug_nid;
+    $node->field_quantity[LANGUAGE_NONE][0]['value'] = $price->pill_quantity;
+    $node->field_price[LANGUAGE_NONE][0]['value'] = $price->pill_price;
+    node_save($node);
+
+    $context['results'][] = $node->title;
+    $context['sandbox']['progress']++;
+    $context['sandbox']['current_node'] = $node->nid;
+    $context['message'] = t('Now processing :num - :num2 of :total', array(':num' => $start, ':num2' => ($start + $batch_size), ':total' => $context['sandbox']['max']));
+    $node = null;
+  }
 }
 
 function ssrx_import_drugs() {
@@ -59,7 +159,6 @@ function ssrx_import_drugs() {
       'init_message' => t('Drugs Batch is starting.'),
       'progress_message' => t('Processed @current out of @total.'),
       'error_message' => t('Drugs Batch has encountered an error.'),
-      'file' => drupal_get_path('module', 'ssrx_import') . '/drugs.inc',
     );
     batch_set($batch);
     batch_process('/');
@@ -145,7 +244,7 @@ function _ssrx_import_drug($start, $batch_size, &$context) {
     unset($route);
     unset($type);
     node_save($node);
-    
+
     $context['results'][] = $node->title;
     $context['sandbox']['progress']++;
     $context['sandbox']['current_node'] = $node->nid;
@@ -213,7 +312,7 @@ function _ssrx_import_pharmacy($start, $batch_size, &$context) {
     $node->type = 'pharmacy';
     node_object_prepare($node);
     $node->language = LANGUAGE_NONE;
-    
+
     // @TODO no security problems with importing real characters. stubhub.com lists "Texas A&M in autosuggest as "Texas AM" and it pisses me off.
     //$node->title = check_plain($line->PharmacyName);
     $node->title = $line->PharmacyName;
@@ -226,19 +325,19 @@ function _ssrx_import_pharmacy($start, $batch_size, &$context) {
       }
       $node->field_chain[LANGUAGE_NONE][0]['tid'] = $context['chain_tids'][$chain];
       unset($chain);
-    }    
+    }
     // set the ssrx zip+4 id thingy
     $node->field_ssrx_pharmacy_id[LANGUAGE_NONE][0]['value'] = $line->PharmacyId;
-    
+
     // if the pharmacy is 24 hrs, set that
     $node->field_24_hour_pharmacy[LANGUAGE_NONE][0]['value'] = $line->istf;
-    
+
     // if the pharmacy is online only, set that:
     $node->field_online_pharmacy[LANGUAGE_NONE][0]['value'] = $line->online;
-    
+
     // Set the Hays ID
     $node->field_hays_id[LANGUAGE_NONE][0]['value'] = $line->HayesIdNumber;
-    
+
     // Make sure these lats and lons have values and if they do not, set the values to '' to allow google maps api to update them.
     $lat = '';
     if (isset($line->lat) && !empty($line->lat) && $line->lat != 0) {
@@ -267,7 +366,7 @@ function _ssrx_import_pharmacy($start, $batch_size, &$context) {
     $node->locations = array();
     $node->locations[] = $node->location = $location;
     node_save($node);
-    
+
     unset($line);
     unset($location);
     unset($lat);
