@@ -37,7 +37,7 @@ function ssrx_footer_menus_menu_default_menu_custom() {
   // Exported menu: menu-report-a-price
   $menus['menu-report-a-price'] = array(
     'menu_name' => 'menu-report-a-price',
-    'title' => 'Report a Price',
+    'title' => 'How to Win',
     'description' => 'How to report a price and win',
   );
   // Exported menu: menu-search-for-meds
@@ -56,8 +56,8 @@ function ssrx_footer_menus_menu_default_menu_custom() {
   t('Find Urgent Care Footer Menu');
   t('Find a Doctor');
   t('Find a Doctor Footer Menu');
+  t('How to Win');
   t('How to report a price and win');
-  t('Report a Price');
   t('Search for Meds');
   t('Search for Meds Footer Menu');
 
