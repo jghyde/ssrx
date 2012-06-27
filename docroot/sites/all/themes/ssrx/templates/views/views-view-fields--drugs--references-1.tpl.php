@@ -22,5 +22,5 @@
  *
  * @ingroup views_templates
  */
-
-print $fields['title']->raw . ' ' . $fields['field_ingredients_collection']->content . ' ' . $fields['field_drug_format']->content;
+$i = 0;
+//print $fields['title']->raw;
