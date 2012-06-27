@@ -9,12 +9,19 @@ function ssrx_pharmacies_views_query_alter(&$view, &$query) {
   if ($view->name == 'pharmacies' && $view->is_attachment == TRUE){
     $where = array();
     $where = $query->orderby;
+    $query->orderby = array();
     if (isset($_GET['distance'])) {
-      unset($where[1]);
+      foreach ($where as $k) {
+        if ($k['field'] == 'location_distance_sort') {
+          $query->orderby[] = $k;
+        }
+      }
     }
     else {
-      unset($where[0]);      
+      $query->orderby[] = array(
+        'field' => 'rand_',
+        'direction' => 'ASC',
+      );
     }
-    $query->orderby = $where;
   }
 }

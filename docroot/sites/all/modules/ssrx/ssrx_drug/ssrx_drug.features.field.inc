@@ -845,8 +845,8 @@ function ssrx_drug_field_default_fields() {
         ),
         'view' => array(
           'args' => array(),
-          'display_name' => '',
-          'view_name' => '',
+          'display_name' => 'references_1',
+          'view_name' => 'drugs',
         ),
       ),
       'translatable' => '0',
