@@ -9,10 +9,6 @@
  */
 function ssrx_drug_ctools_plugin_api() {
   list($module, $api) = func_get_args();
-  if ($module == "corresponding_node_references" && $api == "default_corresponding_node_references_presets") {
-    return array("version" => "1");
-  }
-  list($module, $api) = func_get_args();
   if ($module == "strongarm" && $api == "strongarm") {
     return array("version" => "1");
   }
@@ -43,7 +39,7 @@ function ssrx_drug_node_info() {
       'base' => 'node_content',
       'description' => t('A specific price reported for a specific Drug Variety'),
       'has_title' => '1',
-      'title_label' => t('Title'),
+      'title_label' => t('Tradename of Drug'),
       'help' => '',
     ),
   );

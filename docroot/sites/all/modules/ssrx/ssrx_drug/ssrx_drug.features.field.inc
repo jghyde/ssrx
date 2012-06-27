@@ -10,128 +10,6 @@
 function ssrx_drug_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'comment-comment_node_drug-comment_body'
-  $fields['comment-comment_node_drug-comment_body'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(
-        0 => 'comment',
-      ),
-      'field_name' => 'comment_body',
-      'foreign keys' => array(
-        'format' => array(
-          'columns' => array(
-            'format' => 'format',
-          ),
-          'table' => 'filter_format',
-        ),
-      ),
-      'indexes' => array(
-        'format' => array(
-          0 => 'format',
-        ),
-      ),
-      'module' => 'text',
-      'settings' => array(),
-      'translatable' => '0',
-      'type' => 'text_long',
-    ),
-    'field_instance' => array(
-      'bundle' => 'comment_node_drug',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'hidden',
-          'module' => 'text',
-          'settings' => array(),
-          'type' => 'text_default',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 'comment',
-      'field_name' => 'comment_body',
-      'label' => 'Comment',
-      'required' => TRUE,
-      'settings' => array(
-        'text_processing' => 1,
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'module' => 'text',
-        'settings' => array(
-          'rows' => 5,
-        ),
-        'type' => 'text_textarea',
-        'weight' => 0,
-      ),
-    ),
-  );
-
-  // Exported field: 'comment-comment_node_drug_price-comment_body'
-  $fields['comment-comment_node_drug_price-comment_body'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(
-        0 => 'comment',
-      ),
-      'field_name' => 'comment_body',
-      'foreign keys' => array(
-        'format' => array(
-          'columns' => array(
-            'format' => 'format',
-          ),
-          'table' => 'filter_format',
-        ),
-      ),
-      'indexes' => array(
-        'format' => array(
-          0 => 'format',
-        ),
-      ),
-      'module' => 'text',
-      'settings' => array(),
-      'translatable' => '0',
-      'type' => 'text_long',
-    ),
-    'field_instance' => array(
-      'bundle' => 'comment_node_drug_price',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'hidden',
-          'module' => 'text',
-          'settings' => array(),
-          'type' => 'text_default',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 'comment',
-      'field_name' => 'comment_body',
-      'label' => 'Comment',
-      'required' => TRUE,
-      'settings' => array(
-        'text_processing' => 1,
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'module' => 'text',
-        'settings' => array(
-          'rows' => 5,
-        ),
-        'type' => 'text_textarea',
-        'weight' => 0,
-      ),
-    ),
-  );
-
   // Exported field: 'field_collection_item-field_ingredients_collection-field_ingredient'
   $fields['field_collection_item-field_ingredients_collection-field_ingredient'] = array(
     'field_config' => array(
@@ -874,7 +752,7 @@ function ssrx_drug_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_drug_variety',
-      'label' => 'Drug',
+      'label' => 'Trade Name, Ingredients, Strength and Format of Drug (Just start typing)',
       'required' => 1,
       'settings' => array(
         'user_register_form' => FALSE,
@@ -921,15 +799,14 @@ function ssrx_drug_field_default_fields() {
           'blog' => 0,
           'drug' => 0,
           'drug_price' => 0,
-          'drug_variety' => 0,
           'page' => 0,
           'pharmacy' => 'pharmacy',
           'urgent_care' => 0,
         ),
         'view' => array(
           'args' => array(),
-          'display_name' => '',
-          'view_name' => '',
+          'display_name' => 'references_1',
+          'view_name' => 'pharmacies',
         ),
       ),
       'translatable' => '0',
@@ -1112,8 +989,6 @@ function ssrx_drug_field_default_fields() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Brand or Generic?');
-  t('Comment');
-  t('Drug');
   t('Drug Autocomplete');
   t('FDA ID');
   t('FDA Product ID');
@@ -1126,6 +1001,7 @@ function ssrx_drug_field_default_fields() {
   t('Quantity');
   t('Route');
   t('Strength');
+  t('Trade Name, Ingredients, Strength and Format of Drug (Just start typing)');
   t('Type');
 
   return $fields;

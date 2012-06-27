@@ -343,6 +343,9 @@ background: rgb(229,229,228); /* Old browsers */
   width: 240px;
   height: 40px;
 }
+form.node-form input.form-text {
+  height: 40px;
+}
 #zone-header-wrapper input#edit-submit-prescription-price-search,
 #zone-header-wrapper input#edit-submit-pharmacies,
 input#edit-submit {
