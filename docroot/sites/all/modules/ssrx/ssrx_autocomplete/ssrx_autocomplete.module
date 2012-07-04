@@ -1,0 +1,49 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Demonstrates use of the Form API.
+ *
+ * For a full list of elements and attributes, see:
+ * http://api.drupal.org/api/drupal/developer--topics--forms_api_reference.html/7
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function ssrx_autocomplete_menu() {
+  $items['ssrx/location/autocomplete'] = array(
+    'page callback' => 'ssrx_autocomplete_location',
+    'access arguments' => array('view content'),
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+  );
+  return $items;
+}
+
+
+/**
+ * Custom func that returns a json string
+ * of Drug content typw fields for autocomplete
+ * field.
+ */
+function ssrx_autocomplete_location($string) {
+  $result = db_query_range('
+    SELECT zip, autocomplete FROM {autocomplete}
+    where autocomplete LIKE :ac', 0, 20, array(':ac' => $string . '%'));
+  foreach ($result as $row) {
+    $autocomplete[$row->zip] = $row->autocomplete;
+  }
+  drupal_json_output($autocomplete);
+}
+
+/**
+ * implements hook_form_alter()
+ */
+function ssrx_autocomplete_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-prescription-price-search-page') {
+    $form['distance']['postal_code']['#autocomplete_path'] = 'ssrx/location/autocomplete';
+    $form['distance']['postal_code']['#title'] = 'City, State or Zip';
+  }
+}

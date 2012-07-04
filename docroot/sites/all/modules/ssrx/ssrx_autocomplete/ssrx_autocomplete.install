@@ -1,0 +1,111 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Install, update and uninstall functions for the autocomplete module
+ *
+ * For more information on hook_update_N(), see:
+ * http://drupal.org/node/150215 and
+ * http://api.drupal.org/api/drupal/modules--system--system.api.php/function/hook_update_N/7
+ */
+
+/**
+ * Implements hook_install().
+ */
+function ssrx_autocomplete_install() {
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function ssrx_autocomplete_uninstall() {
+}
+
+
+/**
+ * Implements hook_schema
+ */
+function ssrx_autocomplete_schema() {
+    $schema['autocomplete'] = array(
+      'description' => 'autocomplete module zipcode and city, state database.',
+      'fields' => array(
+        'zip' => array(
+          'description' => 'Postal / ZIP code.',
+          'type' => 'varchar',
+          'length' => '16',
+          'not null' => TRUE,
+          'default' => '0',
+        ),
+        'city' => array(
+          'description' => 'City.',
+          'type' => 'varchar',
+          'length' => '30',
+          'not null' => TRUE,
+          'default' => '',
+        ),
+        'state' => array(
+          'description' => 'Province / State.',
+          'type' => 'varchar',
+          'length' => '30',
+          'not null' => TRUE,
+          'default' => '',
+        ),
+        'autocomplete' => array(
+          'description' => 'Auto-complete field to search upon to retrive zip or lat/long',
+          'type' => 'varchar',
+          'length' => '35',
+          'not null' => TRUE,
+        ),
+        'latitude' => array(
+          'description' => 'Location latitude (decimal degrees).',
+          'type' => 'numeric',
+          'not null' => TRUE,
+          'default' => 0,
+          'precision' => '10',
+          'scale' => '6',
+        ),
+        'longitude' => array(
+          'description' => 'Location longitude (decimal degrees).',
+          'type' => 'numeric',
+          'not null' => TRUE,
+          'default' => 0,
+          'precision' => '10',
+          'scale' => '6',
+        ),
+        'timezone' => array(
+          'description' => 'Timezone (unused).',
+          'type' => 'int',
+          'size' => 'tiny',
+          'not null' => TRUE,
+          'default' => 0,
+        ),
+        'dst' => array(
+          'description' => 'Daylight Savings Time (unused).',
+          'type' => 'int',
+          'size' => 'tiny',
+          'not null' => TRUE,
+          'default' => 0,
+        ),
+        'country' => array(
+          'description' => 'Two letter ISO country code.',
+          'type' => 'char',
+          'length' => '2',
+          'not null' => TRUE,
+          'default' => '',
+        ),
+      ),
+      'unique keys' => array(
+        'autocomplete' => array('autocomplete')
+      ),
+      'indexes' => array(
+        'country' => array('country'),
+        'latitude' => array('latitude'),
+        'longitude' => array('longitude'),
+        'pc' => array('country', 'zip'),
+        'zip' => array('zip'),
+      ),
+    );
+  return $schema;
+}
+
