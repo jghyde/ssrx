@@ -42,7 +42,7 @@ function ssrx_autocomplete_location($string) {
  * implements hook_form_alter()
  */
 function ssrx_autocomplete_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-prescription-price-search-page') {
+  if ($form_id == 'views_exposed_form' && isset($form['distance']['postal_code']['#type'])) {
     $form['distance']['postal_code']['#autocomplete_path'] = 'ssrx/location/autocomplete';
     $form['distance']['postal_code']['#title'] = 'City, State or Zip';
   }
