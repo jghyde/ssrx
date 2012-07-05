@@ -219,12 +219,12 @@ function ssrx_pricereports_views_default_views() {
     'nid_arg' => '',
     'nid_loc_field' => 'node',
     'uid_arg' => '',
-    'search_distance' => '100',
+    'search_distance' => '25',
     'search_units' => 'mile',
   );
   $handler->display->display_options['filters']['distance']['exposed'] = TRUE;
   $handler->display->display_options['filters']['distance']['expose']['operator_id'] = 'distance_op';
-  $handler->display->display_options['filters']['distance']['expose']['label'] = 'Distance / Proximity';
+  $handler->display->display_options['filters']['distance']['expose']['label'] = 'City, State or Zip';
   $handler->display->display_options['filters']['distance']['expose']['operator'] = 'distance_op';
   $handler->display->display_options['filters']['distance']['expose']['identifier'] = 'distance';
   $handler->display->display_options['filters']['distance']['expose']['multiple'] = FALSE;

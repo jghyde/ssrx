@@ -195,11 +195,12 @@ function ssrx_pharmacies_views_default_views() {
   $handler->display->display_options['fields']['view_node']['hide_empty'] = 0;
   $handler->display->display_options['fields']['view_node']['empty_zero'] = 0;
   $handler->display->display_options['fields']['view_node']['hide_alter_empty'] = 1;
-  /* Sort criterion: Content: Title */
-  $handler->display->display_options['sorts']['title']['id'] = 'title';
-  $handler->display->display_options['sorts']['title']['table'] = 'node';
-  $handler->display->display_options['sorts']['title']['field'] = 'title';
-  $handler->display->display_options['sorts']['title']['order'] = 'DESC';
+  /* Sort criterion: Location: Distance / Proximity */
+  $handler->display->display_options['sorts']['distance']['id'] = 'distance';
+  $handler->display->display_options['sorts']['distance']['table'] = 'location';
+  $handler->display->display_options['sorts']['distance']['field'] = 'distance';
+  $handler->display->display_options['sorts']['distance']['origin'] = 'postal_default';
+  $handler->display->display_options['sorts']['distance']['postal_code'] = '67401';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -1306,9 +1307,11 @@ function ssrx_pharmacies_views_default_views() {
   $handler->display->display_options['attachment_position'] = 'after';
   $handler->display->display_options['inherit_exposed_filters'] = 1;
 
-  /* Display: References */
-  $handler = $view->new_display('references', 'References', 'references_1');
+  /* Display: Pharmacy name and address JSON  */
+  $handler = $view->new_display('references', 'Pharmacy name and address JSON ', 'references_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Pharmacy Name and Location JSON';
+  $handler->display->display_options['display_description'] = 'A references view that returns the pharmacy address JSON';
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'references_style';
