@@ -1307,8 +1307,8 @@ function ssrx_pharmacies_views_default_views() {
   $handler->display->display_options['attachment_position'] = 'after';
   $handler->display->display_options['inherit_exposed_filters'] = 1;
 
-  /* Display: Pharmacy name and address JSON  */
-  $handler = $view->new_display('references', 'Pharmacy name and address JSON ', 'references_1');
+  /* Display: Reference Pharmacy name and address JSON  */
+  $handler = $view->new_display('references', 'Reference Pharmacy name and address JSON ', 'references_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Pharmacy Name and Location JSON';
   $handler->display->display_options['display_description'] = 'A references view that returns the pharmacy address JSON';
