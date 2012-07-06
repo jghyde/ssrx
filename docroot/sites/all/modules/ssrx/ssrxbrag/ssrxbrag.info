@@ -1,0 +1,5 @@
+name = SSRX Bragging Slider
+description = The home page slide that brags about the data inside the site.
+package = SSRX
+core = 7.x
+files[] = ssrxbrag.module

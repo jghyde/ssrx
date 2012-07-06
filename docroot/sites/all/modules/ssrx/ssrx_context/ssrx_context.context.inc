@@ -26,17 +26,17 @@ function ssrx_context_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'system-help' => array(
-          'module' => 'system',
-          'delta' => 'help',
-          'region' => 'content',
-          'weight' => '-10',
-        ),
         'system-main' => array(
           'module' => 'system',
           'delta' => 'main',
           'region' => 'content',
-          'weight' => '-10',
+          'weight' => '-9',
+        ),
+        'system-help' => array(
+          'module' => 'system',
+          'delta' => 'help',
+          'region' => 'content',
+          'weight' => '-8',
         ),
         'fb_connect-login_ssrx' => array(
           'module' => 'fb_connect',
@@ -124,6 +124,39 @@ function ssrx_context_context_default_contexts() {
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'homepage';
+  $context->description = 'All context for the home page only';
+  $context->tag = 'Home Page';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        '<front>' => '<front>',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'ssrxbrag-ssrx_brag' => array(
+          'module' => 'ssrxbrag',
+          'delta' => 'ssrx_brag',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('All context for the home page only');
+  t('Home Page');
+  $export['homepage'] = $context;
+
+  $context = new stdClass();
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'pharmacies';
   $context->description = 'the phamacy section';
   $context->tag = 'pharmacies';
@@ -154,6 +187,39 @@ function ssrx_context_context_default_contexts() {
   t('pharmacies');
   t('the phamacy section');
   $export['pharmacies'] = $context;
+
+  $context = new stdClass();
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'pharmacy_home';
+  $context->description = 'Add blocks to the /pharmacies home page';
+  $context->tag = 'pharmacies';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'pharmacies' => 'pharmacies',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-pharmacies-block_1' => array(
+          'module' => 'views',
+          'delta' => 'pharmacies-block_1',
+          'region' => 'preface_first',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Add blocks to the /pharmacies home page');
+  t('pharmacies');
+  $export['pharmacy_home'] = $context;
 
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
