@@ -9,9 +9,13 @@ html {
 body {
   background-color: #f5f5f5;
   font-family: Helvetica, Arial, sans-serif;
+
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: Helvetica, Arial, sans-serif;
+}
+#block-system-main {
+  font-size: 16px;
 }
 a {
   text-decoration: none;
@@ -659,5 +663,5 @@ div.comment-wrapper {
 }
 
 #zone-content-wrapper {
-  background: transparent url(../images/12x12_tratteggio.gif) left top repeat;
+  /** background: transparent url(../images/12x12_tratteggio.gif) left top repeat; */
 }
