@@ -22,8 +22,9 @@ function ssrx_export_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'export';
+  $handler->display->display_options['title'] = 'Pharmacy Export';
   $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'administer nodes';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
@@ -187,17 +188,25 @@ function ssrx_export_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['label'] = 'Pharmacy Name';
   $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['nl2br'] = 0;
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = 0;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['more_link'] = 0;
   $handler->display->display_options['fields']['title']['alter']['strip_tags'] = 0;
   $handler->display->display_options['fields']['title']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['title']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['title']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['title']['hide_empty'] = 0;
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['title']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['title']['link_to_node'] = 1;
   /* Field: Content: Chain */
   $handler->display->display_options['fields']['field_chain']['id'] = 'field_chain';
@@ -513,19 +522,53 @@ function ssrx_export_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'pharmacy' => 'pharmacy',
   );
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'contains';
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['required'] = 0;
+  $handler->display->display_options['filters']['title']['expose']['multiple'] = FALSE;
+  /* Filter criterion: Location: Postal Code */
+  $handler->display->display_options['filters']['postal_code']['id'] = 'postal_code';
+  $handler->display->display_options['filters']['postal_code']['table'] = 'location';
+  $handler->display->display_options['filters']['postal_code']['field'] = 'postal_code';
+  $handler->display->display_options['filters']['postal_code']['operator'] = 'contains';
+  $handler->display->display_options['filters']['postal_code']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['postal_code']['expose']['operator_id'] = 'postal_code_op';
+  $handler->display->display_options['filters']['postal_code']['expose']['label'] = 'Postal Code';
+  $handler->display->display_options['filters']['postal_code']['expose']['operator'] = 'postal_code_op';
+  $handler->display->display_options['filters']['postal_code']['expose']['identifier'] = 'postal_code';
+  $handler->display->display_options['filters']['postal_code']['expose']['required'] = 0;
+  $handler->display->display_options['filters']['postal_code']['expose']['multiple'] = FALSE;
 
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'admin/export';
+  /* Display: Pharmacy Exports */
+  $handler = $view->new_display('page', 'Pharmacy Exports', 'page');
+  $handler->display->display_options['display_description'] = 'The pharmacy database';
+  $handler->display->display_options['path'] = 'admin/export/pharmacies';
 
-  /* Display: Data export */
-  $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
+  /* Display: Pharmacies Data Export */
+  $handler = $view->new_display('views_data_export', 'Pharmacies Data Export', 'views_data_export_1');
+  $handler->display->display_options['display_description'] = 'CSV Export for Pharmacies';
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['style_plugin'] = 'views_data_export_xls';
-  $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['style_options']['provide_file'] = 0;
   $handler->display->display_options['style_options']['parent_sort'] = 0;
-  $handler->display->display_options['path'] = 'admin/export/xls';
+  $handler->display->display_options['style_options']['quote'] = 1;
+  $handler->display->display_options['style_options']['trim'] = 0;
+  $handler->display->display_options['style_options']['replace_newlines'] = 0;
+  $handler->display->display_options['style_options']['header'] = 1;
+  $handler->display->display_options['path'] = 'admin/export/pharmacies/csv';
+  $handler->display->display_options['displays'] = array(
+    'page' => 'page',
+    'default' => 0,
+  );
 
   /* Display: data export pills 7402 */
   $handler = $view->new_display('views_data_export', 'data export pills 7402', 'views_data_export_2');

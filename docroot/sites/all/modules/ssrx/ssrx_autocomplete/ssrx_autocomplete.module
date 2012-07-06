@@ -1,0 +1,147 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Demonstrates use of the Form API.
+ *
+ * For a full list of elements and attributes, see:
+ * http://api.drupal.org/api/drupal/developer--topics--forms_api_reference.html/7
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function ssrx_autocomplete_menu() {
+  $items['ssrx/zip/autocomplete'] = array(
+    'page callback' => 'ssrx_autocomplete_zip',
+    'access arguments' => array('view content'),
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+  );
+  /* @TODO for now use the references.module views handler 
+  $items['ssrx/location/autocomplete'] = array(
+    'page callback' => 'ssrx_autocomplete_location',
+    'access arguments' => array('view content'),
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+  );
+  */
+  return $items;
+}
+
+
+/**
+ * Custom func that returns a json string
+ * of zip code text fields in location module
+ * to make it autocomplete City State or Zip.
+ */
+function ssrx_autocomplete_zip($string = '') {
+  $result = db_query_range('
+    SELECT zip, autocomplete FROM {autocomplete}
+    where autocomplete LIKE :ac', 0, 20, array(':ac' => $string . '%'));
+  foreach ($result as $row) {
+    $autocomplete[$row->zip] = $row->autocomplete;
+  }
+  drupal_json_output($autocomplete);
+}
+
+/**
+ * custom func to return autocomplete json for
+ * location field (node_reference) on node/add/drug-price form
+ */
+function ssrx_autocomplete_location($string = '') {
+  /*
+   @TODO for now we'll use the References module views handler.
+  // Get the zip code to base the proximity search on:
+  $zip = _ssrx_autocomplete_user_zip();
+  // Using the zip code, look up the lat/lon. Use the autocomplete module zipcode table
+  // Find the proximity:
+  $latlon = ssrx_autocomplete_get_postalcode_data_us(array('postal_code' => $zip, 'country' => 'us'));
+  $result = db_query_range('SELECT node.title AS node_title, location.lid AS location_lid
+    FROM 
+    {node} node
+    LEFT JOIN {location_instance} location_instance ON node.vid = location_instance.vid
+    LEFT JOIN {location} location ON location_instance.lid = location.lid
+    WHERE (( (node.status = :status) AND (node.type IN  (:node_type)) ))
+    ORDER BY node_title DESC', 0, 20, array(':status' => 1, ':node_type' => 'pharmacy'));
+  foreach ($result as $row) {
+    $autocomplete[] = $row;
+  }
+  */
+}
+
+/**
+ * Helper func to return the zip code
+ * of the logged in user.
+ * returns the zip code of the logged in user
+ */
+function _ssrx_autocomplete_user_zip() {
+  static $zip;
+  if (empty($zip) || $zip == '') {
+    global $user;
+    $account = user_load($user->uid);
+    if (!empty($account->field_profile_address[LANGUAGE_NONE][0]['postal_code'])) {
+      $zip = $account->field_profile_address[LANGUAGE_NONE][0]['postal_code'];
+    }
+    else {
+      // If the user hasn't provided zip code information, make their default zip code Salina, KS.
+      $zip = '67401';
+      // Then, on the user's next page load, send them a message reminding them to update their user info:
+      drupal_set_message(t('Please update your member profile address informaton !here so that we can better help you find the correct pharmacies in your area.', array('!here' => l('by going to this link', 'user/' . $user->uid . '/edit'))));
+    }
+    return $zip;
+  }
+  else {
+    return $zip;
+  }
+  
+}
+/**
+ * implements hook_form_alter()
+ */
+function ssrx_autocomplete_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'views_exposed_form' && isset($form['distance']['postal_code']['#type'])) {
+    $form['distance']['postal_code']['#autocomplete_path'] = 'ssrx/zip/autocomplete';
+    $form['distance']['postal_code']['#title'] = 'City, State or Zip';
+  }
+  /* @TODO for now use the references module views handler.
+  if ($form_id == 'drug_price_node_form') {
+    $form['field_location']['und'][0]['nid']['#autocomplete_path'] = 'ssrx/location/autocomplete';
+  }
+  */
+}
+
+/**
+ * Returns a lat/lon pair of the approximate center of the given postal code in the given country
+ *
+ * @param $location
+ *   An associative array $location where only postal code and country are necessary, but can have the keys:
+ *     'street'       => the street portion of the location
+ *     'supplemental' => additional street portion of the location
+ *     'province'     => the province, state, or territory
+ *     'country'      => lower-cased two-letter ISO code (REQUIRED)
+ *     'postal_code'  => the international postal code for this location (REQUIRED)
+ *
+ * @return
+ *   An associative array where
+ *      'lat' => approximate latitude of the center of the postal code's area
+ *      'lon' => approximate longitude of the center of the postal code's area
+ *
+ */
+function ssrx_autocomplete_get_postalcode_data_us($location = array()) {
+  $dash_index = strpos($location['postal_code'], '-');
+  // First we strip slash off if we're dealing with a 9-digit US zipcode
+  if (!($dash_index === FALSE)) {
+    $location['postal_code'] = substr($location['postal_code'], 0, $dash_index);
+  }
+
+  // Now we pad the thing and query.
+  $row = db_query("SELECT * FROM {autocomplete} where country = :country AND zip = :zip", array(':country' => $location['country'], ':zip' => str_pad($location['postal_code'], 5, "0", STR_PAD_LEFT)))->fetchObject();
+  if ($row) {
+    return array('lat' => $row->latitude, 'lon' => $row->longitude, 'city' => $row->city, 'province' => $row->state, 'country' => $row->country);
+  }
+  else {
+    return NULL;
+  }
+}

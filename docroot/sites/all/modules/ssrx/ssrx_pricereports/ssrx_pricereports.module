@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the ssrx_pricereports feature.
+ */
+
+include_once 'ssrx_pricereports.features.inc';
