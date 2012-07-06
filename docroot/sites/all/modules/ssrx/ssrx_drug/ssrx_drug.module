@@ -5,3 +5,12 @@
  */
 
 include_once 'ssrx_drug.features.inc';
+/**
+ * Implements hook_node_presave()
+ */
+function ssrx_drug_node_presave($node) {
+  if ($node->type == 'drug_price') {
+    $i = 0;
+    return;
+  }
+}
