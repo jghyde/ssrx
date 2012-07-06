@@ -252,7 +252,7 @@ div.home-img {
 #win_image {
   float: left;
   }
-  
+
 #stepthree .stepcontent p {
   float: right;
   width: 180px;
@@ -278,7 +278,9 @@ div.home-img {
 }
 #zone-header-wrapper .views-exposed-widget.views-reset-button,
 #zone-header-wrapper .form-item.form-type-textfield.form-item-distance-search-distance,
-#zone-header-wrapper  .form-item.form-type-select.form-item-distance-search-units {
+#zone-header-wrapper  .form-item.form-type-select.form-item-distance-search-units,
+#zone-header-wrapper #edit-field-24-hour-pharmacy-value-wrapper,
+#zone-header-wrapper #edit-field-online-pharmacy-value-wrapper {
   display: none;
 }
 #zone-header-wrapper h2.block-title {
@@ -344,7 +346,7 @@ html.js input.form-autocomplete.throbbing {
   background-image: url(../images/ajax-loader.gif), -o-linear-gradient(top,  rgba(229,229,228,1) 0%,rgba(255,255,255,1) 100%)!important;
   background-image: url(../images/ajax-loader.gif), -ms-linear-gradient(top,  rgba(229,229,228,1) 0%,rgba(255,255,255,1) 100%)!important;
   background-image: url(../images/ajax-loader.gif), linear-gradient(top,  rgba(229,229,228,1) 0%,rgba(255,255,255,1) 100%)!important;
-  
+
   background-position: 98% 0px!important;
   background-repeat: no-repeat!important;
 }
@@ -356,7 +358,7 @@ html.js input.form-autocomplete.throbbing {
   padding: 0;
   margin: 0 10px 0 0;
 }
- 
+
 #zone-header-wrapper  input#edit-distance-postal-code {
   width: 240px;
   height: 40px;
@@ -410,7 +412,7 @@ input#edit-submit.on {
 #zone-header-wrapper input#edit-submit-prescription-price-search,
 #zone-header-wrapper input#edit-submit-pharmacies {
   width: 135px;
-  height: 50px;  
+  height: 50px;
 }
 
 div#edit-distance-wrapper label {
@@ -510,7 +512,7 @@ div.ssrx.button:hover {
 }
 div.ssrxbutton a,
 td.ssrxbutton a,
-a.ssrx.button {  
+a.ssrx.button {
   background: transparent url('/sites/all/themes/ssrx/images/ssrx_button_icon.png') 5px 2px no-repeat; /* 20px x 20px */
   padding: 3px 10px 3px 30px;
   font-size: 12px;
