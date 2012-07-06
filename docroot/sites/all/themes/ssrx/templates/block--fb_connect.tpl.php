@@ -56,7 +56,7 @@ switch ($elements['#block']->subject) {
 	  $layout .= '<div class="registered points">' . userpoints_get_current_points($user->uid) . ' Points</div>';
 	  $layout .= '<div class="registered fb-connect">' . $content . '</div>';
 	  $layout .= '<div class="registered logout ssrx button">' . l('Log Out', 'user/logout', array('attributes' => array('class' => array('ssrx', 'button')))) . '</div>';
-	  $layout .= '<div class="registered report ssrx button">' . l('Report Price', 'report', array('attributes' => array('class' => array('ssrx', 'button')))) . '</div>';
+	  $layout .= '<div class="registered report ssrx button">' . l('Report Price', 'node/add/drug-price', array('attributes' => array('class' => array('ssrx', 'button')))) . '</div>';
 	  $content = $layout;
   break;
 
@@ -77,7 +77,7 @@ switch ($elements['#block']->subject) {
 	  $layout .= '<div class="registered" id="submitted-words">' . $words . '</div>';
 	  $layout .= '<div class="registered points">' . userpoints_get_current_points($user->uid) . ' Points</div>';
 	  $layout .= '<div class="registered facebook"><fb:login-button autologoutlink="true"></fb:login-button></div>';
-	  $layout .= '<div class="registered report ssrx button">' . l('Report Price', 'report', array('attributes' => array('class' => array('ssrx', 'button')))) . '</div>';
+	  $layout .= '<div class="registered report ssrx button">' . l('Report Price', 'node/add/drug-price', array('attributes' => array('class' => array('ssrx', 'button')))) . '</div>';
 	  $content = $layout;
 
   break;
