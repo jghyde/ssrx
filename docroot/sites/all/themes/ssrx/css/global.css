@@ -178,7 +178,10 @@ div#region-footer-first #block-views-recent-blog-posts-block div.view-content im
   width: 960px;
   margin: 0 0 30px 0;
 }
-
+#block-block-4 .content {
+  font-size: 16px;
+  line-height: 1.2;
+}
 .steps {
   width: 296px;
   float: left;
