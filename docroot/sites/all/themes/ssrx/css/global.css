@@ -149,7 +149,7 @@ div#region-footer-first #block-views-recent-blog-posts-block div.view-content im
   font-size: 16px;
   color: #094569;
   text-decoration: none;
-  font-family: 'Helvetica Neue';
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 .socialmedia {
