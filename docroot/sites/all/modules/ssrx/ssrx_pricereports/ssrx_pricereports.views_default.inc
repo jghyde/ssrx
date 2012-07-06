@@ -22,7 +22,7 @@ function ssrx_pricereports_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Find the Lowest Price';
+  $handler->display->display_options['group_by'] = TRUE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -95,10 +95,17 @@ function ssrx_pricereports_views_default_views() {
   $handler->display->display_options['relationships']['field_location_nid']['field'] = 'field_location_nid';
   $handler->display->display_options['relationships']['field_location_nid']['required'] = 0;
   $handler->display->display_options['relationships']['field_location_nid']['delta'] = '-1';
+  /* Relationship: Content: Drug (field_drug_variety) */
+  $handler->display->display_options['relationships']['field_drug_variety_nid']['id'] = 'field_drug_variety_nid';
+  $handler->display->display_options['relationships']['field_drug_variety_nid']['table'] = 'field_data_field_drug_variety';
+  $handler->display->display_options['relationships']['field_drug_variety_nid']['field'] = 'field_drug_variety_nid';
+  $handler->display->display_options['relationships']['field_drug_variety_nid']['required'] = 0;
+  $handler->display->display_options['relationships']['field_drug_variety_nid']['delta'] = '-1';
   /* Field: Content: Location */
   $handler->display->display_options['fields']['field_location']['id'] = 'field_location';
   $handler->display->display_options['fields']['field_location']['table'] = 'field_data_field_location';
   $handler->display->display_options['fields']['field_location']['field'] = 'field_location';
+  $handler->display->display_options['fields']['field_location']['label'] = 'Pharmacy';
   $handler->display->display_options['fields']['field_location']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['field_location']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_location']['alter']['absolute'] = 0;
@@ -118,6 +125,30 @@ function ssrx_pricereports_views_default_views() {
   $handler->display->display_options['fields']['field_location']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_location']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['field_location']['field_api_classes'] = 0;
+  /* Field: Content: Quantity */
+  $handler->display->display_options['fields']['field_quantity']['id'] = 'field_quantity';
+  $handler->display->display_options['fields']['field_quantity']['table'] = 'field_data_field_quantity';
+  $handler->display->display_options['fields']['field_quantity']['field'] = 'field_quantity';
+  $handler->display->display_options['fields']['field_quantity']['label'] = 'Qty';
+  $handler->display->display_options['fields']['field_quantity']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_quantity']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_quantity']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_quantity']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_quantity']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_quantity']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_quantity']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_quantity']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_quantity']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_quantity']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_quantity']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_quantity']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_quantity']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_quantity']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_quantity']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_quantity']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_quantity']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_quantity']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_quantity']['field_api_classes'] = 0;
   /* Field: Content: Price */
   $handler->display->display_options['fields']['field_price']['id'] = 'field_price';
   $handler->display->display_options['fields']['field_price']['table'] = 'field_data_field_price';
@@ -147,33 +178,11 @@ function ssrx_pricereports_views_default_views() {
     'prefix_suffix' => 1,
   );
   $handler->display->display_options['fields']['field_price']['field_api_classes'] = 0;
-  /* Field: Content: Quantity */
-  $handler->display->display_options['fields']['field_quantity']['id'] = 'field_quantity';
-  $handler->display->display_options['fields']['field_quantity']['table'] = 'field_data_field_quantity';
-  $handler->display->display_options['fields']['field_quantity']['field'] = 'field_quantity';
-  $handler->display->display_options['fields']['field_quantity']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['field_quantity']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['field_quantity']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['field_quantity']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['field_quantity']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['field_quantity']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['field_quantity']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['field_quantity']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['field_quantity']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['field_quantity']['alter']['more_link'] = 0;
-  $handler->display->display_options['fields']['field_quantity']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['field_quantity']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['field_quantity']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['field_quantity']['element_label_colon'] = 1;
-  $handler->display->display_options['fields']['field_quantity']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['field_quantity']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['field_quantity']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['field_quantity']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['field_quantity']['field_api_classes'] = 0;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
@@ -193,11 +202,94 @@ function ssrx_pricereports_views_default_views() {
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
   $handler->display->display_options['fields']['title']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['title']['link_to_node'] = 0;
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Field: Content: Ingredients */
+  $handler->display->display_options['fields']['field_ingredients_collection']['id'] = 'field_ingredients_collection';
+  $handler->display->display_options['fields']['field_ingredients_collection']['table'] = 'field_data_field_ingredients_collection';
+  $handler->display->display_options['fields']['field_ingredients_collection']['field'] = 'field_ingredients_collection';
+  $handler->display->display_options['fields']['field_ingredients_collection']['relationship'] = 'field_drug_variety_nid';
+  $handler->display->display_options['fields']['field_ingredients_collection']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_ingredients_collection']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_ingredients_collection']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_ingredients_collection']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_ingredients_collection']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_ingredients_collection']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_ingredients_collection']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_ingredients_collection']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_ingredients_collection']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_ingredients_collection']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_ingredients_collection']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_ingredients_collection']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_ingredients_collection']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_ingredients_collection']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_ingredients_collection']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_ingredients_collection']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_ingredients_collection']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_ingredients_collection']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_ingredients_collection']['settings'] = array(
+    'edit' => 'Edit',
+    'delete' => 'Delete',
+    'add' => 'Add',
+    'description' => 1,
+    'view_mode' => 'full',
+  );
+  $handler->display->display_options['fields']['field_ingredients_collection']['group_rows'] = 1;
+  $handler->display->display_options['fields']['field_ingredients_collection']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_ingredients_collection']['delta_reversed'] = 0;
+  $handler->display->display_options['fields']['field_ingredients_collection']['delta_first_last'] = 0;
+  $handler->display->display_options['fields']['field_ingredients_collection']['field_api_classes'] = 0;
+  /* Field: Location: Distance / Proximity */
+  $handler->display->display_options['fields']['distance']['id'] = 'distance';
+  $handler->display->display_options['fields']['distance']['table'] = 'location';
+  $handler->display->display_options['fields']['distance']['field'] = 'distance';
+  $handler->display->display_options['fields']['distance']['relationship'] = 'field_location_nid';
+  $handler->display->display_options['fields']['distance']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['distance']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['distance']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['distance']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['distance']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['distance']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['distance']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['distance']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['distance']['origin'] = 'tied';
+  /* Field: Content: Format */
+  $handler->display->display_options['fields']['field_drug_format']['id'] = 'field_drug_format';
+  $handler->display->display_options['fields']['field_drug_format']['table'] = 'field_data_field_drug_format';
+  $handler->display->display_options['fields']['field_drug_format']['field'] = 'field_drug_format';
+  $handler->display->display_options['fields']['field_drug_format']['relationship'] = 'field_drug_variety_nid';
+  $handler->display->display_options['fields']['field_drug_format']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_drug_format']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_drug_format']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_drug_format']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_drug_format']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_drug_format']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_drug_format']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_drug_format']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_drug_format']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_drug_format']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_drug_format']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_drug_format']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_drug_format']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_drug_format']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_drug_format']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_drug_format']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_drug_format']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_drug_format']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_drug_format']['field_api_classes'] = 0;
+  /* Sort criterion: MIN(Content: Price (field_price)) */
+  $handler->display->display_options['sorts']['field_price_value']['id'] = 'field_price_value';
+  $handler->display->display_options['sorts']['field_price_value']['table'] = 'field_data_field_price';
+  $handler->display->display_options['sorts']['field_price_value']['field'] = 'field_price_value';
+  $handler->display->display_options['sorts']['field_price_value']['group_type'] = 'min';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -249,6 +341,7 @@ function ssrx_pricereports_views_default_views() {
   $handler->display->display_options['filters']['distance']['expose']['label'] = 'City, State or Zip';
   $handler->display->display_options['filters']['distance']['expose']['operator'] = 'distance_op';
   $handler->display->display_options['filters']['distance']['expose']['identifier'] = 'distance';
+  $handler->display->display_options['filters']['distance']['expose']['required'] = 1;
   $handler->display->display_options['filters']['distance']['expose']['multiple'] = FALSE;
   $handler->display->display_options['filters']['distance']['expose']['gmap_macro'] = array(
     'default' => '[gmap ]',
@@ -257,11 +350,281 @@ function ssrx_pricereports_views_default_views() {
     'default' => FALSE,
   );
   $handler->display->display_options['filters']['distance']['origin'] = 'postal_default';
+  /* Filter criterion: Content: 24 Hour Pharmacy (field_24_hour_pharmacy) */
+  $handler->display->display_options['filters']['field_24_hour_pharmacy_value']['id'] = 'field_24_hour_pharmacy_value';
+  $handler->display->display_options['filters']['field_24_hour_pharmacy_value']['table'] = 'field_data_field_24_hour_pharmacy';
+  $handler->display->display_options['filters']['field_24_hour_pharmacy_value']['field'] = 'field_24_hour_pharmacy_value';
+  $handler->display->display_options['filters']['field_24_hour_pharmacy_value']['relationship'] = 'field_location_nid';
+  $handler->display->display_options['filters']['field_24_hour_pharmacy_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_24_hour_pharmacy_value']['expose']['operator_id'] = 'field_24_hour_pharmacy_value_op';
+  $handler->display->display_options['filters']['field_24_hour_pharmacy_value']['expose']['label'] = '24 Hour Pharmacy (field_24_hour_pharmacy)';
+  $handler->display->display_options['filters']['field_24_hour_pharmacy_value']['expose']['operator'] = 'field_24_hour_pharmacy_value_op';
+  $handler->display->display_options['filters']['field_24_hour_pharmacy_value']['expose']['identifier'] = 'field_24_hour_pharmacy_value';
+  $handler->display->display_options['filters']['field_24_hour_pharmacy_value']['expose']['reduce'] = 0;
+  /* Filter criterion: Content: Online Pharmacy (field_online_pharmacy) */
+  $handler->display->display_options['filters']['field_online_pharmacy_value']['id'] = 'field_online_pharmacy_value';
+  $handler->display->display_options['filters']['field_online_pharmacy_value']['table'] = 'field_data_field_online_pharmacy';
+  $handler->display->display_options['filters']['field_online_pharmacy_value']['field'] = 'field_online_pharmacy_value';
+  $handler->display->display_options['filters']['field_online_pharmacy_value']['relationship'] = 'field_location_nid';
+  $handler->display->display_options['filters']['field_online_pharmacy_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_online_pharmacy_value']['expose']['operator_id'] = 'field_online_pharmacy_value_op';
+  $handler->display->display_options['filters']['field_online_pharmacy_value']['expose']['label'] = 'Online Pharmacy (field_online_pharmacy)';
+  $handler->display->display_options['filters']['field_online_pharmacy_value']['expose']['operator'] = 'field_online_pharmacy_value_op';
+  $handler->display->display_options['filters']['field_online_pharmacy_value']['expose']['identifier'] = 'field_online_pharmacy_value';
+  $handler->display->display_options['filters']['field_online_pharmacy_value']['expose']['reduce'] = 0;
 
   /* Display: Search Page */
   $handler = $view->new_display('page', 'Search Page', 'page');
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
   $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['path'] = 'prescriptions';
+
+  /* Display: Price Range */
+  $handler = $view->new_display('attachment', 'Price Range', 'attachment_1');
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'title',
+      'rendered' => 0,
+      'rendered_strip' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_options']['inline'] = array(
+    'title' => 'title',
+    'field_price' => 'field_price',
+    'field_price_1' => 'field_price_1',
+  );
+  $handler->display->display_options['row_options']['hide_empty'] = 0;
+  $handler->display->display_options['row_options']['default_field_elements'] = 1;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['title']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['title']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['title']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['title']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['title']['link_to_node'] = 0;
+  /* Field: MIN(Lowest Price) */
+  $handler->display->display_options['fields']['field_price']['id'] = 'field_price';
+  $handler->display->display_options['fields']['field_price']['table'] = 'field_data_field_price';
+  $handler->display->display_options['fields']['field_price']['field'] = 'field_price';
+  $handler->display->display_options['fields']['field_price']['group_type'] = 'min';
+  $handler->display->display_options['fields']['field_price']['ui_name'] = 'Lowest Price';
+  $handler->display->display_options['fields']['field_price']['label'] = 'Low';
+  $handler->display->display_options['fields']['field_price']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['field_price']['alter']['text'] = '$[field_price]';
+  $handler->display->display_options['fields']['field_price']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_price']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_price']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_price']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_price']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_price']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_price']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_price']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_price']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_price']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_price']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_price']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_price']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_price']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_price']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_price']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_price']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_price']['settings'] = array(
+    'thousand_separator' => ',',
+    'decimal_separator' => '.',
+    'scale' => '2',
+    'prefix_suffix' => 1,
+  );
+  $handler->display->display_options['fields']['field_price']['field_api_classes'] = 0;
+  /* Field: MAX(Highest price) */
+  $handler->display->display_options['fields']['field_price_1']['id'] = 'field_price_1';
+  $handler->display->display_options['fields']['field_price_1']['table'] = 'field_data_field_price';
+  $handler->display->display_options['fields']['field_price_1']['field'] = 'field_price';
+  $handler->display->display_options['fields']['field_price_1']['group_type'] = 'max';
+  $handler->display->display_options['fields']['field_price_1']['ui_name'] = 'Highest price';
+  $handler->display->display_options['fields']['field_price_1']['label'] = 'High';
+  $handler->display->display_options['fields']['field_price_1']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['field_price_1']['alter']['text'] = '$[field_price_1]';
+  $handler->display->display_options['fields']['field_price_1']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_price_1']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_price_1']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_price_1']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_price_1']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_price_1']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_price_1']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_price_1']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_price_1']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_price_1']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_price_1']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_price_1']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_price_1']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_price_1']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_price_1']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_price_1']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_price_1']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_price_1']['settings'] = array(
+    'thousand_separator' => ',',
+    'decimal_separator' => '.',
+    'scale' => '2',
+    'prefix_suffix' => 1,
+  );
+  $handler->display->display_options['fields']['field_price_1']['field_api_classes'] = 0;
+  /* Field: Content: Published */
+  $handler->display->display_options['fields']['status']['id'] = 'status';
+  $handler->display->display_options['fields']['status']['table'] = 'node';
+  $handler->display->display_options['fields']['status']['field'] = 'status';
+  $handler->display->display_options['fields']['status']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['status']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['status']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['status']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['status']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['status']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['status']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['status']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['status']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['status']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['status']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['status']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['status']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['status']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['status']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['status']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['status']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['status']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['status']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['status']['not'] = 0;
+  $handler->display->display_options['displays'] = array(
+    'page' => 'page',
+    'default' => 0,
+  );
+  $handler->display->display_options['inherit_exposed_filters'] = 1;
+
+  /* Display: Map */
+  $handler = $view->new_display('attachment', 'Map', 'attachment_2');
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'gmap';
+  $handler->display->display_options['style_options']['latfield'] = 'field_location';
+  $handler->display->display_options['style_options']['lonfield'] = 'field_location';
+  $handler->display->display_options['style_options']['markerfield'] = 'field_location';
+  $handler->display->display_options['style_options']['enablermt'] = 0;
+  $handler->display->display_options['style_options']['rmtfield'] = 'field_location';
+  $handler->display->display_options['style_options']['tooltipfield'] = 'field_location';
+  $handler->display->display_options['style_options']['bubbletextfield'] = 'field_location';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Location */
+  $handler->display->display_options['fields']['field_location']['id'] = 'field_location';
+  $handler->display->display_options['fields']['field_location']['table'] = 'field_data_field_location';
+  $handler->display->display_options['fields']['field_location']['field'] = 'field_location';
+  $handler->display->display_options['fields']['field_location']['relationship'] = 'field_location_nid';
+  $handler->display->display_options['fields']['field_location']['label'] = 'Pharmacy';
+  $handler->display->display_options['fields']['field_location']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_location']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_location']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_location']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_location']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_location']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_location']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_location']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_location']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_location']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_location']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_location']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_location']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_location']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_location']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_location']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_location']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_location']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_location']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_location']['field_api_classes'] = 0;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['title']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['title']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['title']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['title']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['title']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['title']['link_to_node'] = 0;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
+  $handler->display->display_options['fields']['title_1']['table'] = 'node';
+  $handler->display->display_options['fields']['title_1']['field'] = 'title';
+  $handler->display->display_options['fields']['title_1']['relationship'] = 'field_location_nid';
+  $handler->display->display_options['fields']['title_1']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['title_1']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['title_1']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['title_1']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['title_1']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['title_1']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['title_1']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['title_1']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['title_1']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['title_1']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['title_1']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['title_1']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['title_1']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['title_1']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['title_1']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['title_1']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['title_1']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['title_1']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['title_1']['link_to_node'] = 1;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  $handler->display->display_options['displays'] = array(
+    'page' => 'page',
+    'default' => 0,
+  );
+  $handler->display->display_options['inherit_exposed_filters'] = 1;
   $export['prescription_price_search'] = $view;
 
   return $export;
