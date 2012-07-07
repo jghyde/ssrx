@@ -670,3 +670,6 @@ div.comment-wrapper {
 #zone-content-wrapper {
   /** background: transparent url(../images/12x12_tratteggio.gif) left top repeat; */
 }
+li#menu-754-1 a {
+  text-transform: capitalize;
+}
