@@ -35,26 +35,30 @@ function ssrx_pricereports_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
-    'field_drug_autocomplete' => 'field_drug_autocomplete',
     'title_1' => 'title_1',
+    'field_ingredients_collection' => 'field_ingredients_collection',
+    'field_drug_autocomplete' => 'field_drug_autocomplete',
     'field_location' => 'field_location',
     'field_quantity' => 'field_quantity',
     'field_price' => 'field_price',
-    'title' => 'title',
-    'field_ingredients_collection' => 'field_ingredients_collection',
-    'distance' => 'distance',
-    'field_drug_format' => 'field_drug_format',
+    'nid' => 'nid',
+    'nid_1' => 'nid_1',
   );
   $handler->display->display_options['style_options']['default'] = 'field_price';
   $handler->display->display_options['style_options']['info'] = array(
-    'field_drug_autocomplete' => array(
+    'title_1' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'title_1' => array(
+    'field_ingredients_collection' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_drug_autocomplete' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -71,40 +75,28 @@ function ssrx_pricereports_views_default_views() {
     'field_quantity' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
-      'align' => '',
+      'align' => 'views-align-center',
       'separator' => '',
       'empty_column' => 0,
     ),
     'field_price' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
-      'align' => '',
+      'align' => 'views-align-right',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'title' => array(
+    'nid' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
-      'align' => '',
+      'align' => 'views-align-center',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_ingredients_collection' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'distance' => array(
+    'nid_1' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_drug_format' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
+      'align' => 'views-align-center',
       'separator' => '',
       'empty_column' => 0,
     ),
@@ -137,7 +129,7 @@ function ssrx_pricereports_views_default_views() {
   $handler->display->display_options['fields']['title_1']['table'] = 'node';
   $handler->display->display_options['fields']['title_1']['field'] = 'title';
   $handler->display->display_options['fields']['title_1']['relationship'] = 'field_drug_variety_nid';
-  $handler->display->display_options['fields']['title_1']['label'] = 'Tradename';
+  $handler->display->display_options['fields']['title_1']['label'] = 'Trade Name';
   $handler->display->display_options['fields']['title_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title_1']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['title_1']['alter']['make_link'] = 0;
@@ -152,8 +144,10 @@ function ssrx_pricereports_views_default_views() {
   $handler->display->display_options['fields']['title_1']['alter']['strip_tags'] = 0;
   $handler->display->display_options['fields']['title_1']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['title_1']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['title_1']['element_type'] = 'div';
+  $handler->display->display_options['fields']['title_1']['element_class'] = 'ingredient-reveal-click';
   $handler->display->display_options['fields']['title_1']['element_label_colon'] = 1;
-  $handler->display->display_options['fields']['title_1']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['title_1']['element_default_classes'] = 0;
   $handler->display->display_options['fields']['title_1']['hide_empty'] = 0;
   $handler->display->display_options['fields']['title_1']['empty_zero'] = 0;
   $handler->display->display_options['fields']['title_1']['hide_alter_empty'] = 1;
@@ -182,12 +176,9 @@ function ssrx_pricereports_views_default_views() {
   $handler->display->display_options['fields']['field_ingredients_collection']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_ingredients_collection']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_ingredients_collection']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_ingredients_collection']['type'] = 'field_collection_fields';
   $handler->display->display_options['fields']['field_ingredients_collection']['settings'] = array(
-    'edit' => 'Edit',
-    'delete' => 'Delete',
-    'add' => 'Add',
-    'description' => 1,
-    'view_mode' => 'full',
+    'view_mode' => 'token',
   );
   $handler->display->display_options['fields']['field_ingredients_collection']['group_rows'] = 1;
   $handler->display->display_options['fields']['field_ingredients_collection']['delta_offset'] = '0';
@@ -202,8 +193,10 @@ function ssrx_pricereports_views_default_views() {
   $handler->display->display_options['fields']['field_drug_autocomplete']['label'] = 'Drug Name';
   $handler->display->display_options['fields']['field_drug_autocomplete']['alter']['alter_text'] = 1;
   $handler->display->display_options['fields']['field_drug_autocomplete']['alter']['text'] = '<a href="" title="Narrow search to show only  [field_drug_autocomplete-value]">[field_drug_autocomplete-value]</a><br />
-Tradename: [title_1]</br />
-[field_ingredients_collection] ';
+Tradename: <span class="ingredient-reveal-click">[title_1]</span>
+<div class="ingredient-reveal">
+[field_ingredients_collection] 
+</div>';
   $handler->display->display_options['fields']['field_drug_autocomplete']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_drug_autocomplete']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_drug_autocomplete']['alter']['external'] = 0;
@@ -217,7 +210,7 @@ Tradename: [title_1]</br />
   $handler->display->display_options['fields']['field_drug_autocomplete']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['field_drug_autocomplete']['alter']['html'] = 0;
   $handler->display->display_options['fields']['field_drug_autocomplete']['element_label_colon'] = 1;
-  $handler->display->display_options['fields']['field_drug_autocomplete']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_drug_autocomplete']['element_default_classes'] = 0;
   $handler->display->display_options['fields']['field_drug_autocomplete']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_drug_autocomplete']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_drug_autocomplete']['hide_alter_empty'] = 1;
@@ -278,7 +271,8 @@ Tradename: [title_1]</br />
   $handler->display->display_options['fields']['field_price']['id'] = 'field_price';
   $handler->display->display_options['fields']['field_price']['table'] = 'field_data_field_price';
   $handler->display->display_options['fields']['field_price']['field'] = 'field_price';
-  $handler->display->display_options['fields']['field_price']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_price']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['field_price']['alter']['text'] = '$[field_price-value]';
   $handler->display->display_options['fields']['field_price']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_price']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_price']['alter']['external'] = 0;
