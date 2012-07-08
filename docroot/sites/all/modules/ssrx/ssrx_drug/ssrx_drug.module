@@ -105,7 +105,6 @@ function ssrx_drug_set_autocomplete() {
       'error_message' => t('Drug node autocomplete rebuilding process has encountered an error.'),
     );
     batch_set($batch);
-    $r = ssrx_pricereports_index_drug_autocomplete();
     batch_process('/');
   }
   else {
@@ -224,9 +223,10 @@ function _ssrx_drug_price_reset_title($start, $batch_size, &$context) {
  */
 function ssrx_drug_batch_finished($success, $results, $operations) {
   if ($success) {
+    $r = ssrx_pricereports_index_drug_autocomplete();
     // Here we could do something meaningful with the results.
     // We just display the number of nodes we processed...
-    drupal_set_message(t('@count results processed in @requests HTTP requests.', array('@count' => count($results), '@requests' => _ssrx_drug_get_http_requests())));
+    drupal_set_message(t('@count drug node autocomplete fields were processed. @requests', array('@count' => count($results), '@requests' => $r)));
     drupal_set_message(t('The final result was "%final"', array('%final' => end($results))));
   }
   else {
