@@ -76,7 +76,7 @@ function ssrx_drug_menu() {
  */
 function ssrx_drug_set_autocomplete() {
   $count = db_query('SELECT COUNT(*) FROM {node} where type = :type', array(':type' => 'drug'))->fetchField();
-  $batch_size = 250;
+  $batch_size = 50;
   $counter = 0;
   $operations = array();
   while ($counter < $count) {
