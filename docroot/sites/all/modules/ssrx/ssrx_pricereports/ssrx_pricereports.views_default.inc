@@ -34,29 +34,19 @@ function ssrx_pricereports_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['style_plugin'] = 'table';
-  $handler->display->display_options['style_options']['grouping'] = array(
-    0 => array(
-      'field' => 'field_drug',
-      'rendered' => 1,
-      'rendered_strip' => 0,
-    ),
-  );
   $handler->display->display_options['style_options']['columns'] = array(
-    'title' => 'title',
-    'field_price' => 'field_price',
+    'title_1' => 'title_1',
     'field_location' => 'field_location',
-    'field_drug' => 'field_drug',
+    'field_quantity' => 'field_quantity',
+    'field_price' => 'field_price',
+    'title' => 'title',
+    'field_ingredients_collection' => 'field_ingredients_collection',
+    'distance' => 'distance',
+    'field_drug_format' => 'field_drug_format',
   );
   $handler->display->display_options['style_options']['default'] = 'field_price';
   $handler->display->display_options['style_options']['info'] = array(
-    'title' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_price' => array(
+    'title_1' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -70,7 +60,40 @@ function ssrx_pricereports_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_drug' => array(
+    'field_quantity' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_price' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_ingredients_collection' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'distance' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_drug_format' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -101,6 +124,31 @@ function ssrx_pricereports_views_default_views() {
   $handler->display->display_options['relationships']['field_drug_variety_nid']['field'] = 'field_drug_variety_nid';
   $handler->display->display_options['relationships']['field_drug_variety_nid']['required'] = 0;
   $handler->display->display_options['relationships']['field_drug_variety_nid']['delta'] = '-1';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
+  $handler->display->display_options['fields']['title_1']['table'] = 'node';
+  $handler->display->display_options['fields']['title_1']['field'] = 'title';
+  $handler->display->display_options['fields']['title_1']['relationship'] = 'field_drug_variety_nid';
+  $handler->display->display_options['fields']['title_1']['label'] = 'Tradename';
+  $handler->display->display_options['fields']['title_1']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['title_1']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['title_1']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['title_1']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['title_1']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['title_1']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['title_1']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['title_1']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['title_1']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['title_1']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['title_1']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['title_1']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['title_1']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['title_1']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['title_1']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['title_1']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['title_1']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['title_1']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['title_1']['link_to_node'] = 1;
   /* Field: Content: Location */
   $handler->display->display_options['fields']['field_location']['id'] = 'field_location';
   $handler->display->display_options['fields']['field_location']['table'] = 'field_data_field_location';
@@ -124,6 +172,10 @@ function ssrx_pricereports_views_default_views() {
   $handler->display->display_options['fields']['field_location']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_location']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_location']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_location']['type'] = 'node_reference_node';
+  $handler->display->display_options['fields']['field_location']['settings'] = array(
+    'node_reference_view_mode' => 'teaser',
+  );
   $handler->display->display_options['fields']['field_location']['field_api_classes'] = 0;
   /* Field: Content: Quantity */
   $handler->display->display_options['fields']['field_quantity']['id'] = 'field_quantity';
@@ -261,6 +313,7 @@ function ssrx_pricereports_views_default_views() {
   $handler->display->display_options['fields']['distance']['empty_zero'] = 0;
   $handler->display->display_options['fields']['distance']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['distance']['origin'] = 'tied';
+  $handler->display->display_options['fields']['distance']['units'] = 'mi';
   /* Field: Content: Format */
   $handler->display->display_options['fields']['field_drug_format']['id'] = 'field_drug_format';
   $handler->display->display_options['fields']['field_drug_format']['table'] = 'field_data_field_drug_format';

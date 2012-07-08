@@ -28,21 +28,21 @@ function ssrx_settings_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'acquia_spi_boot_last';
-  $strongarm->value = 1340121564;
+  $strongarm->value = 1341766836;
   $export['acquia_spi_boot_last'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'acquia_spi_cron_last';
-  $strongarm->value = 1340115730;
+  $strongarm->value = 1341766836;
   $export['acquia_spi_cron_last'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'acquia_spi_module_rebuild';
-  $strongarm->value = 1340035301;
+  $strongarm->value = 1341694604;
   $export['acquia_spi_module_rebuild'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -50,7 +50,7 @@ function ssrx_settings_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'acquia_subscription_data';
   $strongarm->value = array(
-    'timestamp' => 1340115730,
+    'timestamp' => 1341766836,
     'active' => '1',
     'href' => 'https://network.acquia.com/network/node/1895220',
     'expiration_date' => array(
@@ -280,7 +280,7 @@ function ssrx_settings_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'superfish_delay_1';
-  $strongarm->value = '10000';
+  $strongarm->value = '1200';
   $export['superfish_delay_1'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -632,12 +632,17 @@ function ssrx_settings_strongarm() {
     ),
     'alpha_exclude' => array(
       'modules/comment/comment.css' => 0,
+      'sites/all/modules/date/date_api/date.css' => 0,
+      'sites/all/modules/date/date_popup/themes/datepicker.1.7.css' => 0,
+      'sites/all/modules/date/date_repeat_field/date_repeat_field.css' => 0,
       'modules/field/theme/field.css' => 0,
+      'sites/all/modules/logintoboggan/logintoboggan.css' => 0,
       'modules/node/node.css' => 0,
       'modules/search/search.css' => 0,
       'modules/user/user.css' => 0,
       'sites/all/modules/views/css/views.css' => 0,
       'sites/all/themes/ssrx/css/ssrx.css' => 0,
+      'sites/all/themes/ssrx/css/beauty.css' => 0,
       'misc/vertical-tabs.css' => 0,
       'modules/aggregator/aggregator.css' => 0,
       'modules/block/block.css' => 0,
@@ -668,9 +673,9 @@ function ssrx_settings_strongarm() {
     'alpha_debug_grid_toggle' => 1,
     'alpha_debug_grid_active' => 0,
     'alpha_debug_grid_roles' => array(
-      1 => '1',
       2 => '2',
       3 => '3',
+      1 => 0,
     ),
     'alpha_toggle_messages' => 1,
     'alpha_toggle_action_links' => 1,
@@ -721,6 +726,16 @@ function ssrx_settings_strongarm() {
     'alpha_region_user_first_css' => '',
     'alpha_region_user_first_equal_height_element' => FALSE,
     'alpha_region_user_first_equal_height_container' => 0,
+    'alpha_region_header_second_force' => 0,
+    'alpha_region_header_second_zone' => NULL,
+    'alpha_region_header_second_prefix' => '0',
+    'alpha_region_header_second_columns' => '6',
+    'alpha_region_header_second_suffix' => '0',
+    'alpha_region_header_second_weight' => '2',
+    'alpha_region_header_second_position' => '0',
+    'alpha_region_header_second_css' => '',
+    'alpha_region_header_second_equal_height_element' => FALSE,
+    'alpha_region_header_second_equal_height_container' => 0,
     'alpha_zone_user_wrapper' => 1,
     'alpha_zone_user_force' => 0,
     'alpha_zone_user_order' => 0,
@@ -801,16 +816,6 @@ function ssrx_settings_strongarm() {
     'alpha_region_header_first_css' => '',
     'alpha_region_header_first_equal_height_element' => 0,
     'alpha_region_header_first_equal_height_container' => 0,
-    'alpha_region_header_second_force' => 0,
-    'alpha_region_header_second_zone' => NULL,
-    'alpha_region_header_second_prefix' => '0',
-    'alpha_region_header_second_columns' => '6',
-    'alpha_region_header_second_suffix' => '0',
-    'alpha_region_header_second_weight' => '2',
-    'alpha_region_header_second_position' => '0',
-    'alpha_region_header_second_css' => '',
-    'alpha_region_header_second_equal_height_element' => 0,
-    'alpha_region_header_second_equal_height_container' => 0,
     'alpha_zone_preface_wrapper' => 1,
     'alpha_zone_preface_force' => 0,
     'alpha_zone_preface_order' => 0,

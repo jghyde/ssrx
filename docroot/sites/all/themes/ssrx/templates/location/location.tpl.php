@@ -32,3 +32,10 @@ if (arg(1) == 'autocomplete') {
     print $location['additional'] . ' ';
   }
 }
+else {  // default
+  print $location['street'];
+  if (!empty($location['additional'])) {
+    print $location['additional'] . ' ';
+  }
+  print $location['city'] . ', ' . $location['province'] . ' ' . $location['postal_code'];
+}
