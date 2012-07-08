@@ -41,7 +41,7 @@ function _ssrx_drug_get_autocomplete_value($node) {
   // Change the order of the autocomplete, as necessary here: 
   $autocomplete = $tradename;
   if (!empty($ingredient)) {
-    $tradename .= ' ' . $ingredient;
+    $autocomplete .= ' ' . $ingredient;
   }
   $autocomplete .= ' ' . $strength . ' ' . $format;
   return $autocomplete;
