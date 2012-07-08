@@ -192,10 +192,12 @@ function ssrx_pricereports_views_default_views() {
   $handler->display->display_options['fields']['field_drug_autocomplete']['relationship'] = 'field_drug_variety_nid';
   $handler->display->display_options['fields']['field_drug_autocomplete']['label'] = 'Drug Name';
   $handler->display->display_options['fields']['field_drug_autocomplete']['alter']['alter_text'] = 1;
-  $handler->display->display_options['fields']['field_drug_autocomplete']['alter']['text'] = '<a href="" title="Narrow search to show only  [field_drug_autocomplete-value]">[field_drug_autocomplete-value]</a><br />
-Tradename: <span class="ingredient-reveal-click">[title_1]</span>
+  $handler->display->display_options['fields']['field_drug_autocomplete']['alter']['text'] = '<a class="ingredient-title" href="" title="Narrow search to show only  [field_drug_autocomplete-value]">[field_drug_autocomplete-value]</a><br />
+<div class="ingredient-details">
+<label>Trade Name:</label> <span class="ingredient-reveal-click">[title_1]</span>
 <div class="ingredient-reveal">
 [field_ingredients_collection] 
+</div>
 </div>';
   $handler->display->display_options['fields']['field_drug_autocomplete']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_drug_autocomplete']['alter']['absolute'] = 0;
@@ -302,7 +304,7 @@ Tradename: <span class="ingredient-reveal-click">[title_1]</span>
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['relationship'] = 'field_drug_variety_nid';
-  $handler->display->display_options['fields']['nid']['label'] = 'Update this Price';
+  $handler->display->display_options['fields']['nid']['label'] = 'Update Price';
   $handler->display->display_options['fields']['nid']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['nid']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['nid']['alter']['absolute'] = 0;
@@ -326,7 +328,7 @@ Tradename: <span class="ingredient-reveal-click">[title_1]</span>
   $handler->display->display_options['fields']['nid_1']['id'] = 'nid_1';
   $handler->display->display_options['fields']['nid_1']['table'] = 'node';
   $handler->display->display_options['fields']['nid_1']['field'] = 'nid';
-  $handler->display->display_options['fields']['nid_1']['label'] = 'Confirm this Price';
+  $handler->display->display_options['fields']['nid_1']['label'] = 'Confirm Price';
   $handler->display->display_options['fields']['nid_1']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['nid_1']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['nid_1']['alter']['absolute'] = 0;
@@ -567,19 +569,25 @@ Tradename: <span class="ingredient-reveal-click">[title_1]</span>
   /* Display: Map */
   $handler = $view->new_display('attachment', 'Map', 'attachment_2');
   $handler->display->display_options['defaults']['group_by'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'gmap';
+  $handler->display->display_options['style_plugin'] = 'ssrxmap';
+  $handler->display->display_options['style_options']['datasource'] = 'fields';
+  $handler->display->display_options['style_options']['markertype'] = 'small red';
   $handler->display->display_options['style_options']['latfield'] = 'field_location';
   $handler->display->display_options['style_options']['lonfield'] = 'field_location';
   $handler->display->display_options['style_options']['markerfield'] = 'field_location';
   $handler->display->display_options['style_options']['enablermt'] = 0;
   $handler->display->display_options['style_options']['rmtfield'] = 'field_location';
+  $handler->display->display_options['style_options']['center_on_nodearg'] = 1;
   $handler->display->display_options['style_options']['tooltipfield'] = 'field_location';
   $handler->display->display_options['style_options']['bubbletextfield'] = 'field_location';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_options']['hide_empty'] = 0;
+  $handler->display->display_options['row_options']['default_field_elements'] = 1;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['empty'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
