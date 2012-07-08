@@ -65,7 +65,7 @@ function ssrx_pricereports_autocomplete($string = '') {
 }
 
 function ssrx_pricereports_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'views_exposed_form') {
+  if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-prescription-price-search-page') {
     $form['title']['#autocomplete_path'] = 'ssrx/pricereports/autocomplete';
   }
 }

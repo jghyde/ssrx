@@ -15,14 +15,18 @@ function ssrx_menus_menu_default_menu_links() {
     'menu_name' => 'main-menu',
     'link_path' => '<front>',
     'router_path' => '',
-    'link_title' => 'Home',
-    'options' => array(),
+    'link_title' => 'Find Drugs',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
     'module' => 'menu',
     'hidden' => '0',
     'external' => '1',
-    'has_children' => '0',
+    'has_children' => '1',
     'expanded' => '0',
-    'weight' => '1',
+    'weight' => '-50',
   );
   // Exported menu link: main-menu:pharmacies
   $menu_links['main-menu:pharmacies'] = array(
@@ -40,7 +44,7 @@ function ssrx_menus_menu_default_menu_links() {
     'external' => '0',
     'has_children' => '1',
     'expanded' => '0',
-    'weight' => '3',
+    'weight' => '-49',
   );
   // Exported menu link: main-menu:pharmacies/24
   $menu_links['main-menu:pharmacies/24'] = array(
@@ -58,14 +62,14 @@ function ssrx_menus_menu_default_menu_links() {
     'external' => '0',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '0',
+    'weight' => '-49',
     'parent_path' => 'pharmacies',
   );
   // Translatables
   // Included for use with string extractors like potx.
   t('Find 24-Hour Pharmacies');
+  t('Find Drugs');
   t('Find Pharmacies');
-  t('Home');
 
 
   return $menu_links;

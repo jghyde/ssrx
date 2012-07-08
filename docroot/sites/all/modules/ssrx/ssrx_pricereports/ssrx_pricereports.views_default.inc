@@ -318,7 +318,6 @@ function ssrx_pricereports_views_default_views() {
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
   $handler->display->display_options['filters']['title']['expose']['required'] = 0;
   $handler->display->display_options['filters']['title']['expose']['multiple'] = FALSE;
-  $handler->display->display_options['filters']['title']['expose']['autocomplete_filter'] = 1;
   /* Filter criterion: Location: Distance / Proximity */
   $handler->display->display_options['filters']['distance']['id'] = 'distance';
   $handler->display->display_options['filters']['distance']['table'] = 'location';
@@ -350,28 +349,6 @@ function ssrx_pricereports_views_default_views() {
     'default' => FALSE,
   );
   $handler->display->display_options['filters']['distance']['origin'] = 'postal_default';
-  /* Filter criterion: Content: 24 Hour Pharmacy (field_24_hour_pharmacy) */
-  $handler->display->display_options['filters']['field_24_hour_pharmacy_value']['id'] = 'field_24_hour_pharmacy_value';
-  $handler->display->display_options['filters']['field_24_hour_pharmacy_value']['table'] = 'field_data_field_24_hour_pharmacy';
-  $handler->display->display_options['filters']['field_24_hour_pharmacy_value']['field'] = 'field_24_hour_pharmacy_value';
-  $handler->display->display_options['filters']['field_24_hour_pharmacy_value']['relationship'] = 'field_location_nid';
-  $handler->display->display_options['filters']['field_24_hour_pharmacy_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_24_hour_pharmacy_value']['expose']['operator_id'] = 'field_24_hour_pharmacy_value_op';
-  $handler->display->display_options['filters']['field_24_hour_pharmacy_value']['expose']['label'] = '24 Hour Pharmacy (field_24_hour_pharmacy)';
-  $handler->display->display_options['filters']['field_24_hour_pharmacy_value']['expose']['operator'] = 'field_24_hour_pharmacy_value_op';
-  $handler->display->display_options['filters']['field_24_hour_pharmacy_value']['expose']['identifier'] = 'field_24_hour_pharmacy_value';
-  $handler->display->display_options['filters']['field_24_hour_pharmacy_value']['expose']['reduce'] = 0;
-  /* Filter criterion: Content: Online Pharmacy (field_online_pharmacy) */
-  $handler->display->display_options['filters']['field_online_pharmacy_value']['id'] = 'field_online_pharmacy_value';
-  $handler->display->display_options['filters']['field_online_pharmacy_value']['table'] = 'field_data_field_online_pharmacy';
-  $handler->display->display_options['filters']['field_online_pharmacy_value']['field'] = 'field_online_pharmacy_value';
-  $handler->display->display_options['filters']['field_online_pharmacy_value']['relationship'] = 'field_location_nid';
-  $handler->display->display_options['filters']['field_online_pharmacy_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_online_pharmacy_value']['expose']['operator_id'] = 'field_online_pharmacy_value_op';
-  $handler->display->display_options['filters']['field_online_pharmacy_value']['expose']['label'] = 'Online Pharmacy (field_online_pharmacy)';
-  $handler->display->display_options['filters']['field_online_pharmacy_value']['expose']['operator'] = 'field_online_pharmacy_value_op';
-  $handler->display->display_options['filters']['field_online_pharmacy_value']['expose']['identifier'] = 'field_online_pharmacy_value';
-  $handler->display->display_options['filters']['field_online_pharmacy_value']['expose']['reduce'] = 0;
 
   /* Display: Search Page */
   $handler = $view->new_display('page', 'Search Page', 'page');
@@ -625,6 +602,89 @@ function ssrx_pricereports_views_default_views() {
     'default' => 0,
   );
   $handler->display->display_options['inherit_exposed_filters'] = 1;
+
+  /* Display: jQuery Manual Filters */
+  $handler = $view->new_display('attachment', 'jQuery Manual Filters', 'attachment_3');
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['nothing']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['nothing']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['nothing']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['nothing']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['nothing']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['nothing']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['nothing']['hide_alter_empty'] = 0;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['title']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['title']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['title']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['title']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['title']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['title']['link_to_node'] = 1;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'drug_price' => 'drug_price',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  $handler->display->display_options['displays'] = array(
+    'default' => 0,
+    'page' => 0,
+  );
   $export['prescription_price_search'] = $view;
 
   return $export;
