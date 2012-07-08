@@ -124,7 +124,7 @@ function _ssrx_drug_reset_autocomplete($start, $batch_size, &$context) {
     $context['sandbox']['current_node'] = 0;
     $context['sandbox']['max'] = db_query('SELECT COUNT(*) FROM {node} where type = :type', array(':type' => 'drug'))->fetchField();
   }
-  $drug_nodes = db_query_range("SELECT nid FROM {node} WHERE type = :type ORDER BY nid ASC", 0, $batch_size, array(':type' => 'drug'));
+  $drug_nodes = db_query_range("SELECT nid FROM {node} WHERE type = :type ORDER BY nid ASC", $start, $batch_size, array(':type' => 'drug'));
   foreach ($drug_nodes as $node) {
     $v = node_load($node->nid);
     $ac = _ssrx_drug_get_autocomplete_value($v);
