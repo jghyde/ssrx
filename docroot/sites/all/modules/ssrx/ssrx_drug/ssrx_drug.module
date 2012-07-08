@@ -196,7 +196,7 @@ function _ssrx_drug_price_reset_title($start, $batch_size, &$context) {
     $context['sandbox']['current_node'] = 0;
     $context['sandbox']['max'] = db_query('SELECT COUNT(*) FROM {node} where type = :type', array(':type' => 'drug_price'))->fetchField();
   }
-  $price_nodes = db_query_range("SELECT nid FROM {node} WHERE type = :type ORDER BY nid ASC", 0, $batch_size, array(':type' => 'drug_price'));
+  $price_nodes = db_query_range("SELECT nid FROM {node} WHERE type = :type ORDER BY nid ASC", $start, $batch_size, array(':type' => 'drug_price'));
   $deleted = '';
   foreach ($price_nodes as $node) {
     $price = node_load($node->nid);
