@@ -677,3 +677,13 @@ div.comment-wrapper {
 li#menu-754-1 a {
   text-transform: capitalize;
 }
+.pager li.pager-first a, .pager li.pager-previous a, .pager li.pager-next a, .pager li.pager-last a {
+  padding: 4px 0;
+  text-align: center;
+  width: 75px;
+}
+.pager li.pager-next {
+  position: absolute;
+  right: 75px;
+  top: 0;
+}

@@ -30,3 +30,87 @@ function ssrx_pricereports_node_presave($node) {
     $node->title = $autocomplete;
   }
 }
+/**
+ * Implements hook_menu()
+ */
+function ssrx_pricereports_menu() {
+  $items = array();
+  $items['ssrx/drug-name-search-autocomplete-rebuild'] = array(
+    'title' => t('Rebuild the autocomplete table for ssrx price report searches'),
+    'page callback' => 'ssrx_pricereports_index_drug_autocomplete',
+    'access callback' => TRUE,    
+  );
+  $items['ssrx/pricereports/autocomplete'] = array(
+    'page callback' => 'ssrx_pricereports_autocomplete',
+    'access arguments' => array('view content'),
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+  );
+  return $items;
+}
+
+/**
+ * Custom func that returns a json string
+ * of drug tradenames and drug tradename-ingredient-format
+ * to make it autocomplete the drug search views filter.
+ */
+function ssrx_pricereports_autocomplete($string = '') {
+  $result = db_query_range('
+    SELECT string FROM {autocomplete_drug}
+    where string LIKE :ac', 0, 20, array(':ac' => $string . '%'));
+  foreach ($result as $row) {
+    $autocomplete[$row->string] = $row->string;
+  }
+  drupal_json_output($autocomplete);
+}
+
+function ssrx_pricereports_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'views_exposed_form') {
+    $form['title']['#autocomplete_path'] = 'ssrx/pricereports/autocomplete';
+  }
+}
+
+/**
+ * Rebuilds the autocomple_drug table for super fast
+ * autocomplete searches. Like a cache, man.
+ */
+function ssrx_pricereports_index_drug_autocomplete() {
+  // Empty the contents of database
+  $throwout = db_truncate('autocomplete_drug')->execute();
+  $out = 'autocomplete_drug was emptied.<br />';
+  $count = 0;
+  // Select all of the titles from the node type named 'drug'
+  $query = db_select('node', 'n');
+  $query->distinct();
+  $query->addField('n','title');
+  $query->condition('type', 'drug');
+  $results = $query->execute();
+  // Insert the tradenames into the autocomplete
+  foreach ($results as $str) {
+    $data = array(
+      'string' => str_replace('&#039;', '', $str->title),
+    );
+    drupal_write_record('autocomplete_drug', $data);
+    $count++;
+  }
+  // Now insert the tradename ingredient strength format into the table
+  // select all of the autocomplete fields
+  //$strings = db_query('select field_drug_autocomplete_value from {field_data_field_drug_autocomplete}');
+  /*$strings = db_select('field_data_field_drug_autocomplete', 'f');
+  $strings->distinct();
+  $strings->addField('f','field_drug_autocomplete_value');
+  $results2 = $strings->execute; */
+  $strings = db_query('select DISTINCT field_drug_autocomplete_value from {field_data_field_drug_autocomplete}');
+  $count2 = 0;
+  foreach ($strings as $string) {
+   // Insert the tradenames into the autocomplete
+    $data = array(
+      'string' => trim(str_replace('&#039;', '', $string->field_drug_autocomplete_value)),
+    );
+    drupal_write_record('autocomplete_drug', $data);
+    $count2++;
+  }
+  $out .= $count . ' autocomplete strings from drug node titles generated. <br />';
+  $out .= $count2 . ' autocomplete strings added in the ssrx format of Trade-Ingredient-Strength-Format';
+  return $out;
+}

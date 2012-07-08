@@ -1,0 +1,31 @@
+<?php
+/**
+ * Implements hook_schema()
+ */
+function ssrx_pricereports_schema() {
+  $schema['autocomplete_drug'] = array(
+    'description' => 'Autocomplete strings for drug_price searches',
+    'fields' => array(
+      'aid' => array(
+        'description' => 'Autocomplete term ID',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'string' => array(
+        'description' => 'The autocomplete string',
+        'type' => 'varchar',
+        'length' => '256',
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('aid'),
+  );
+  return $schema;  
+}
+
+/*
+ * Implements hook_update_N()
+ */
+function ssrx_pricereports_update_7000() {
+  drupal_install_schema('ssrx_pricereports');
+}
