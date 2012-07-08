@@ -39,7 +39,11 @@ function _ssrx_drug_get_autocomplete_value($node) {
   $format_name = taxonomy_term_load($node->field_drug_format[LANGUAGE_NONE][0]['tid']); 
   $format = $format_name->name;
   // Change the order of the autocomplete, as necessary here: 
-  $autocomplete = $tradename . ' ' . $ingredient . ' ' . $strength . ' ' . $format;
+  $autocomplete = $tradename;
+  if (!empty($ingredient)) {
+    $tradename .= ' ' . $ingredient;
+  }
+  $autocomplete .= ' ' . $strength . ' ' . $format;
   return $autocomplete;
 }
 
