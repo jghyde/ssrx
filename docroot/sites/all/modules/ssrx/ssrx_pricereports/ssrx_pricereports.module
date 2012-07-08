@@ -114,3 +114,10 @@ function ssrx_pricereports_index_drug_autocomplete() {
   $out .= $count2 . ' autocomplete strings added in the ssrx format of Trade-Ingredient-Strength-Format';
   return $out;
 }
+
+/**
+ * Implements hook_views_pre_render()
+ */
+function ssrx_pricereports_views_pre_render(&$view) {
+  drupal_add_css(drupal_get_path('module', 'ssrx_pricereports') . '/css/ssrx_pricereports.css');
+}

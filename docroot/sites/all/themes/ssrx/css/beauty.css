@@ -41,6 +41,6 @@ input:focus, input:active {
   box-shadow: 0 0 3px #4fa0d0;
 }
 #autocomplete ul li div {
-  padding: 4x 5px;
+  padding: 4x 5px 4px 5px;
   font-size: 16px;
 }
