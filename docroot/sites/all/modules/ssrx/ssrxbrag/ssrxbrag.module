@@ -64,13 +64,22 @@ function ssrxbrag_block_view($delta = '') {
 
   switch ($delta) {
     case 'ssrx_brag':
+      // add the css and js for the block:
+      drupal_add_js(drupal_get_path('module', 'ssrxbrag') . '/js/ssrxbrag.js');
+      drupal_add_css(drupal_get_path('module', 'ssrxbrag') . '/css/ssrxbrag.css');
       $lines = array();
       $lines = explode("\n", variable_get('ssrxbrag_block_content'));
-      $content = '<ul>';
+      $content = '<ul class="ssrxbrag">';
+      $i = 0;
       foreach ($lines as $line) {
         if (strlen($line) > 1) {
-          $content .= '<li>' . $line . '</li>';
+          $class = '';
+          if ($i == 0) {
+            $class = ' class="first"';
+          }
+          $content .= '<li' . $class . '>' . $line . '</li>';
         }
+        $i++;
       }
       $content .= '</ul>';
       $block['subject'] = '';
