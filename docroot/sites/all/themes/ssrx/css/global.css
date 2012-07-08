@@ -294,11 +294,11 @@ div.home-img {
   text-shadow: -1px -1px 1px #2e5d79, 1px 1px 1px #ffffff;
 }
 #zone-header-wrapper .block-inner {
-  width: 865px;
+  width: 940px;
   margin: 0 auto;
 }
 #zone-header-wrapper input#edit-title {
-  width: 450px;
+  width: 545px;
   height: 40px;
 }
 input.form-text,
@@ -364,7 +364,11 @@ html.js input.form-autocomplete.throbbing {
   padding: 0;
   margin: 0 10px 0 0;
 }
-
+#zone-header-wrapper .views-exposed-widget.views-submit-button,
+#zone-header-wrapper .views-exposed-form .views-exposed-widget .form-submit,
+div.views-exposed-widget.views-submit-button {
+  margin: 0;
+}
 #zone-header-wrapper  input#edit-distance-postal-code {
   width: 240px;
   height: 40px;

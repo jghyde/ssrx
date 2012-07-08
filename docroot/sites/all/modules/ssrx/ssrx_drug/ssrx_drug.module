@@ -7,10 +7,229 @@
 include_once 'ssrx_drug.features.inc';
 /**
  * Implements hook_node_presave()
+ *  This func inserts the field_autocomplete value into the
+ *  node object before the node is saved.
+ *  The autocomplete field is what the title of the
+ *  price report nodes are derived from, and what the
+ *  autocomplete is built from (the titles of the price reports).
  */
 function ssrx_drug_node_presave($node) {
-  if ($node->type == 'drug_price') {
-    $i = 0;
-    return;
+  if ($node->type == 'drug') {
+    $autocomplete = _ssrx_drug_get_autocomplete_value($node);
+    $node->field_drug_autocomplete['und'][0]['value'] = $autocomplete;
   }
+}
+
+/**
+ * Helper function that retrieves the field information
+ * from a drug node to insert into an autocomplete field.
+ *
+ * @return a string that can be inserted into a drug price node autocomplete field
+ */
+function _ssrx_drug_get_autocomplete_value($node) {
+  $tradename = $node->title;
+  $field = field_collection_item_load($node->field_ingredients_collection[LANGUAGE_NONE][0]['value'], TRUE);
+  if (strcasecmp(trim($tradename), trim($field->field_ingredient[LANGUAGE_NONE][0]['value'])) == 0) {
+    $ingredient = '';
+  }
+  else {
+    $ingredient = '('. ucwords(strtolower($field->field_ingredient[LANGUAGE_NONE][0]['value'])) . ')';
+  }
+  $strength = $field->field_ingredient_strength[LANGUAGE_NONE][0]['value'];
+  $format_name = taxonomy_term_load($node->field_drug_format[LANGUAGE_NONE][0]['tid']); 
+  $format = $format_name->name;
+  // Change the order of the autocomplete, as necessary here: 
+  $autocomplete = $tradename . ' ' . $ingredient . ' ' . $strength . ' ' . $format;
+  return $autocomplete;
+}
+
+/**
+ * Implements hook_menu()
+ */
+function ssrx_drug_menu() {
+  $items = array();
+  $items['ssrx/drug-autocomplete-rebuild'] = array(
+    'title' => t('Insert New Autocomplete Fields on 7402 Drug Types'),
+    'page callback' => 'ssrx_drug_set_autocomplete',
+    'access callback' => TRUE,    
+  );
+  $items['ssrx/drug-price-title-rebuild'] = array(
+    'title' => t('Rebuild the drug price node type titles'),
+    'page callback' => 'ssrx_drug_price_title',
+    'access callback' => TRUE,    
+  );
+  return $items;
+}
+
+/**
+ * Loads all nodes of 'drug' type
+ * and saves them, with the benefit of
+ * the presave hook above completing the field_autocomplete
+ * in the proper fomat.
+ * Use case: When Bill changes his mind on what is in the
+ * autocomplete. Simply modify the hook_presave above and
+ * run this batch update.
+ */
+function ssrx_drug_set_autocomplete() {
+  $count = db_query('SELECT COUNT(*) FROM {node} where type = :type', array(':type' => 'drug'))->fetchField();
+  $batch_size = 250;
+  $counter = 0;
+  $operations = array();
+  while ($counter < $count) {
+    if ($counter >= $count) {
+      $batch_size = $count - $counter;
+    }
+    $operations[] = array(
+      '_ssrx_drug_reset_autocomplete',
+      array(
+        $counter,
+        $batch_size,
+      ),
+    );
+    $counter += $batch_size;
+    if (isset($_REQUEST['one_batch'])) {
+      break;
+    }
+  }
+  if (count($operations)) {
+    $batch = array(
+      'operations' => $operations,
+      'finished' => 'ssrx_drug_batch_finished',
+      'title' => t('Processing Rebuilding of Autocomplete field on Drug Nodes Batch'),
+      'init_message' => t('Drug autocomplete rebuilding Batch is starting.'),
+      'progress_message' => t('Processed @current out of @total.'),
+      'error_message' => t('Drug node autocomplete rebuilding process has encountered an error.'),
+    );
+    batch_set($batch);
+    batch_process('/');
+  }
+  else {
+    drupal_set_message('Nothing to import');
+    drupal_goto('/');
+  }
+}
+
+/**
+ * A helper function that actually loads the node and
+ * resaves it, taking advantage of the hook_node_presave above
+ * that inserts a value into the autocomplete field of the drug node.
+ */
+function _ssrx_drug_reset_autocomplete($start, $batch_size, &$context) {
+  if (!isset($context['sandbox']['progress'])) {
+    $context['sandbox']['progress'] = 0;
+    $context['sandbox']['current_node'] = 0;
+    $context['sandbox']['max'] = db_query('SELECT COUNT(*) FROM {node} where type = :type', array(':type' => 'drug'))->fetchField();
+  }
+  $drug_nodes = db_query_range("SELECT nid FROM {node} WHERE type = :type ORDER BY nid ASC", 0, $batch_size, array(':type' => 'drug'));
+  foreach ($drug_nodes as $node) {
+    $v = node_load($node->nid);
+    node_save($v);
+    $context['results'][] = $v->title;
+    $context['sandbox']['progress']++;
+    $context['sandbox']['current_node'] = $v->nid;
+    $context['message'] = t('Now processing :num - :num2 of :total', array(':num' => $start, ':num2' => ($start + $batch_size), ':total' => $context['sandbox']['max']));
+  }
+}
+
+/**
+ * Loads all nodes of 'drug' type
+ * and saves them, with the benefit of
+ * the presave hook above completing the field_autocomplete
+ * in the proper fomat.
+ * Use case: When Bill changes his mind on what is in the
+ * autocomplete. Simply modify the hook_presave above and
+ * run this batch update.
+ */
+function ssrx_drug_price_title() {
+  $count = db_query('SELECT COUNT(*) FROM {node} where type = :type', array(':type' => 'drug_price'))->fetchField();
+  $batch_size = 250;
+  $counter = 0;
+  $operations = array();
+  while ($counter < $count) {
+    if ($counter >= $count) {
+      $batch_size = $count - $counter;
+    }
+    $operations[] = array(
+      '_ssrx_drug_price_reset_title',
+      array(
+        $counter,
+        $batch_size,
+      ),
+    );
+    $counter += $batch_size;
+    if (isset($_REQUEST['one_batch'])) {
+      break;
+    }
+  }
+  if (count($operations)) {
+    $batch = array(
+      'operations' => $operations,
+      'finished' => 'ssrx_drug_batch_finished',
+      'title' => t('Processing Rebuilding of title field on drug price nodes'),
+      'init_message' => t('Drug price title rebuilding Batch is starting.'),
+      'progress_message' => t('Processed @current out of @total.'),
+      'error_message' => t('Drug price title rebuilding process has encountered an error.'),
+    );
+    batch_set($batch);
+    batch_process('/');
+  }
+  else {
+    drupal_set_message('Nothing to import');
+    drupal_goto('/');
+  }
+}
+
+/**
+ * A helper function that actually loads the node and
+ * resaves it, taking advantage of the hook_node_presave above
+ * that inserts a value into the autocomplete field of the drug node.
+ */
+function _ssrx_drug_price_reset_title($start, $batch_size, &$context) {
+  if (!isset($context['sandbox']['progress'])) {
+    $context['sandbox']['progress'] = 0;
+    $context['sandbox']['current_node'] = 0;
+    $context['sandbox']['max'] = db_query('SELECT COUNT(*) FROM {node} where type = :type', array(':type' => 'drug_price'))->fetchField();
+  }
+  $price_nodes = db_query_range("SELECT nid FROM {node} WHERE type = :type ORDER BY nid ASC", 0, $batch_size, array(':type' => 'drug_price'));
+  $deleted = '';
+  foreach ($price_nodes as $node) {
+    $price = node_load($node->nid);
+    $drug = node_load($price->field_drug_variety[LANGUAGE_NONE][0]['nid']);
+    if (!is_object($drug)) {
+      node_delete($node->nid);
+      $deleted = ' deleted';
+    }
+    else {
+      $autocomplete = _ssrx_drug_get_autocomplete_value($drug);
+      $price->title = $autocomplete;
+      unset($price->auto_nodetitle_applied);
+      node_save($price);
+    }
+    $context['results'][] = $price->title . $deleted;
+    $context['sandbox']['progress']++;
+    $context['sandbox']['current_node'] = $price->nid;
+    $context['message'] = t('Now processing :num - :num2 of :total', array(':num' => $start, ':num2' => ($start + $batch_size), ':total' => $context['sandbox']['max']));
+  }
+}
+
+/**
+ * The summary of the batch success or failure
+ */
+function ssrx_drug_batch_finished($success, $results, $operations) {
+  if ($success) {
+    // Here we could do something meaningful with the results.
+    // We just display the number of nodes we processed...
+    drupal_set_message(t('@count results processed in @requests HTTP requests.', array('@count' => count($results), '@requests' => _ssrx_drug_get_http_requests())));
+    drupal_set_message(t('The final result was "%final"', array('%final' => end($results))));
+  }
+  else {
+    // An error occurred.
+    // $operations contains the operations that remained unprocessed.
+    $error_operation = reset($operations);
+    drupal_set_message(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
+  }
+}
+
+function _ssrx_drug_get_http_requests() {
+  return !empty($_SESSION['http_request_count']) ? $_SESSION['http_request_count'] : 0;
 }
