@@ -4,6 +4,36 @@
 /**
  * @file
  * Creates autocomplete functionality for many of the search textfields in ssrx site..
+ * why? when Drupal has all those neat built-in convoluted autocomplete modules?
+ * Answer: Performance and portability to Mongo DB or Memcache down the road.
+ *
+ * If you're reading this thinking I should be conducting EFQs on these, take note:
+ *
+ * Per Larry Garfield:
+    As catch notes, the Select builder adds a LOT of overhead. You should not use it
+    unless you need one of the things it offers: Dynamic query structure,
+    hook_query_alter, certain db-unportable features that don't have a simpler
+    version (random ordering, for instance), etc.
+    
+    For the run of the mill SQL query, db_query() is several times faster than
+    db_select(). If you need a limit query, db_query_range() is still there.
+    
+    You must use the query builders for non-Select queries, because those are much
+    harder to make portable due to stupidity in many older databases. (Oracle is
+    worst, but Postgres is dumb in places, too.) The actual code you'd have to write
+    for those is vastly different, so the query builders are a necessity. SELECT
+    queries are far more standardized. db_query() is still your friend in many many
+    cases.
+    
+    Really, db_select() doesn't insulate you from as many db portability issues as
+    you think. It doesn't do anything for SQL functions that differ between
+    databases, doesn't help with date handling, etc. Its primary advantage is what
+    Eaton talks about in this article: When your query structure may change
+    depending on various conditions, it's now dead-simple to do so.
+    
+    If your query will never change, don't waste the CPU cycles on it. Just write
+    proper ANSI SQL in the first place and it will be sufficiently portable.
+
  */
 
 /**
@@ -12,6 +42,12 @@
 function ssrx_autocomplete_menu() {
   $items['ssrx/zip/autocomplete'] = array(
     'page callback' => 'ssrx_autocomplete_zip',
+    'access arguments' => array('view content'),
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+  );
+  $items['ssrx/pharacies/autocomplete'] = array(
+    'page callback' => 'ssrx_autocomplete_pharmacy',
     'access arguments' => array('view content'),
     'type' => MENU_CALLBACK,
     'access callback' => TRUE,
@@ -102,6 +138,9 @@ function ssrx_autocomplete_form_alter(&$form, &$form_state, $form_id) {
     $form['distance']['postal_code']['#autocomplete_path'] = 'ssrx/zip/autocomplete';
     $form['distance']['postal_code']['#title'] = 'City, State or Zip';
   }
+  if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-prescription-price-search-page') {
+    $form['title']['#autocomplete_path'] = 'ssrx/pharacies/autocomplete';
+  }
   /* @TODO for now use the references module views handler.
   if ($form_id == 'drug_price_node_form') {
     $form['field_location']['und'][0]['nid']['#autocomplete_path'] = 'ssrx/location/autocomplete';
@@ -141,4 +180,17 @@ function ssrx_autocomplete_get_postalcode_data_us($location = array()) {
   else {
     return NULL;
   }
+}
+
+/**
+ * The autocomplete for the pharmacy title
+ * field on /pharmacies
+ */
+function ssrx_autocomplete_pharmacy($string = '') {
+  // make a fast select on the node titles:
+  $result = db_query_range('select title from {node} where type=:pharmacy and title LIKE :string', 0, 20, array(':pharmacy' => 'pharmacy', ':string' => '%' . $string . '%'));
+  foreach ($result as $row) {
+    $autocomplete[$row->title] = $row->title;
+  }
+  drupal_json_output($autocomplete);
 }
