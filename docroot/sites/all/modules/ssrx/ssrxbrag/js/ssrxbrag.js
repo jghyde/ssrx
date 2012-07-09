@@ -2,8 +2,9 @@
 (function($){
   $(document).ready(function(){
     $('ul.ssrxbrag').cycle({
-        fx:     'slideX',
-        speed:  '550',
+        fx:     'scrollLeft',
+        speed:  '1000',
+        easing: 'easeOutBounce',
     });
   });
 })(jQuery);
