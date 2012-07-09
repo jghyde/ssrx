@@ -311,12 +311,12 @@ class ssrx_pharmacies_plugin_style_ssrxmap extends views_plugin_style {
         $macro = $this->options['macro'];
         if (isset($centered) && count($centered) > 0) {
           if (isset($_GET['distance']['postal_code']) && $_GET['distance']['postal_code'] != '') {
-            $zoom = 10;
+            $zoom = 11;
           }
           else {
             $zoom = 4;
           }
-          $macro = '[gmap zoom=' . $zoom . ' |center=' . $centered['lat'] . ',' . $centered['long'] . ' |width=960px |height=300px |control=Small |type=Physical]';
+          $macro = '[gmap zoom=' . $zoom . ' |center=' . $centered['lat'] . ',' . $centered['long'] . ' |width=960px |height=300px |control=Small |type=Map]';
         }
         $map = gmap_parse_macro($macro);
         if ($this->options['enablermt']) {
