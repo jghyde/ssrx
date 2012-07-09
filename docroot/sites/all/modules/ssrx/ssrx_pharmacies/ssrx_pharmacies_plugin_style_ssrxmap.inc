@@ -187,17 +187,27 @@ class ssrx_pharmacies_plugin_style_ssrxmap extends views_plugin_style {
       }
       // center the map
       if (isset($centered) && is_array($centered)) {
-        $center_lat = $centered['lat'];
-        $center_lon = $centered['long'];
+        // Center on the search entered first, then fall back to the $centered[] discovered up there.
+        if (!empty($_GET['distance']['postal_code'])) {
+          $result = db_query_range('SELECT longitude, latitude from {autocomplete} where zip = :zip', 0, 1, array(':zip' => $_GET['distance']['postal_code']));
+          foreach ($result as $row) {
+            $centered['lat'] = $row->latitude;
+            $centered['long'] = $row->longitude;
+          }
+        }
+        else {
+          $center_lat = $centered['lat'];
+          $center_lon = $centered['long'];
+        }
       }
       else {
+        // Can't find nuthin' so center the damned map on Salina, KS
         $center_lat = '38.840300';
         $center_lon = '-97.611100';
       }
 
       foreach ($records as $row_index => $row) {
         $this->view->row_index = $row_index;
-        $frank = $row->{$lat_field};
         if (isset($row->location_lid) && isset($row->{$lat_field})) {
           // This is a view of nodes with node location arrays
           $lat = (float)$row->{$lat_field};
