@@ -22,7 +22,7 @@ function ssrx_pharmacies_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Over 60,000 Pharmacies Nationwide. Search Them Here:';
+  $handler->display->display_options['title'] = 'Find a 24 hour Pharmacy';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -782,6 +782,8 @@ function ssrx_pharmacies_views_default_views() {
 
   /* Display: 24 hr Pharmacy Search Page */
   $handler = $view->new_display('page', '24 hr Pharmacy Search Page', 'page_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Find a 24 hour Pharmacy';
   $handler->display->display_options['display_description'] = 'The page of /pharmacies/24 where people can search for 24-hour pharmacies';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
