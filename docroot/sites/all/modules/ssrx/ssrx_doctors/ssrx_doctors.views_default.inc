@@ -33,17 +33,45 @@ function ssrx_doctors_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['autosubmit_hide'] = 1;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '50';
-  $handler->display->display_options['style_plugin'] = 'ssrxmap';
-  $handler->display->display_options['style_options']['markertype'] = 'small red';
-  $handler->display->display_options['style_options']['latfield'] = 'title';
-  $handler->display->display_options['style_options']['lonfield'] = 'title';
-  $handler->display->display_options['style_options']['markerfield'] = 'title';
-  $handler->display->display_options['style_options']['enablermt'] = 0;
-  $handler->display->display_options['style_options']['rmtfield'] = 'title';
-  $handler->display->display_options['style_options']['center_on_nodearg'] = 1;
-  $handler->display->display_options['style_options']['tooltipfield'] = 'title';
-  $handler->display->display_options['style_options']['bubbletextfield'] = 'title';
-  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
+    'field_doctor_title' => 'field_doctor_title',
+    'field_doctor_specialty' => 'field_doctor_specialty',
+    'address' => 'address',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_doctor_title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_doctor_specialty' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'address' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['override'] = 1;
+  $handler->display->display_options['style_options']['sticky'] = 0;
+  $handler->display->display_options['style_options']['empty_table'] = 0;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -164,6 +192,20 @@ function ssrx_doctors_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'doctors' => 'doctors',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Doctor&#039;s Title (field_doctor_title) */
+  $handler->display->display_options['filters']['field_doctor_title_value']['id'] = 'field_doctor_title_value';
+  $handler->display->display_options['filters']['field_doctor_title_value']['table'] = 'field_data_field_doctor_title';
+  $handler->display->display_options['filters']['field_doctor_title_value']['field'] = 'field_doctor_title_value';
+  $handler->display->display_options['filters']['field_doctor_title_value']['operator'] = 'starts';
+  $handler->display->display_options['filters']['field_doctor_title_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_doctor_title_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_doctor_title_value']['expose']['operator_id'] = 'field_doctor_title_value_op';
+  $handler->display->display_options['filters']['field_doctor_title_value']['expose']['label'] = 'Doctor&#039;s Title (field_doctor_title)';
+  $handler->display->display_options['filters']['field_doctor_title_value']['expose']['operator'] = 'field_doctor_title_value_op';
+  $handler->display->display_options['filters']['field_doctor_title_value']['expose']['identifier'] = 'field_doctor_title_value';
+  $handler->display->display_options['filters']['field_doctor_title_value']['expose']['required'] = 0;
+  $handler->display->display_options['filters']['field_doctor_title_value']['expose']['multiple'] = FALSE;
   /* Filter criterion: Doctor Proximity */
   $handler->display->display_options['filters']['distance']['id'] = 'distance';
   $handler->display->display_options['filters']['distance']['table'] = 'location';
@@ -182,6 +224,7 @@ function ssrx_doctors_views_default_views() {
     'search_distance' => '25',
     'search_units' => 'mile',
   );
+  $handler->display->display_options['filters']['distance']['group'] = 1;
   $handler->display->display_options['filters']['distance']['exposed'] = TRUE;
   $handler->display->display_options['filters']['distance']['expose']['operator_id'] = 'distance_op';
   $handler->display->display_options['filters']['distance']['expose']['label'] = 'Distance / Proximity';
@@ -195,18 +238,6 @@ function ssrx_doctors_views_default_views() {
     'default' => FALSE,
   );
   $handler->display->display_options['filters']['distance']['origin'] = 'postal_default';
-  /* Filter criterion: Content: Doctor&#039;s Title (field_doctor_title) */
-  $handler->display->display_options['filters']['field_doctor_title_value']['id'] = 'field_doctor_title_value';
-  $handler->display->display_options['filters']['field_doctor_title_value']['table'] = 'field_data_field_doctor_title';
-  $handler->display->display_options['filters']['field_doctor_title_value']['field'] = 'field_doctor_title_value';
-  $handler->display->display_options['filters']['field_doctor_title_value']['operator'] = 'starts';
-  $handler->display->display_options['filters']['field_doctor_title_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_doctor_title_value']['expose']['operator_id'] = 'field_doctor_title_value_op';
-  $handler->display->display_options['filters']['field_doctor_title_value']['expose']['label'] = 'Doctor&#039;s Title (field_doctor_title)';
-  $handler->display->display_options['filters']['field_doctor_title_value']['expose']['operator'] = 'field_doctor_title_value_op';
-  $handler->display->display_options['filters']['field_doctor_title_value']['expose']['identifier'] = 'field_doctor_title_value';
-  $handler->display->display_options['filters']['field_doctor_title_value']['expose']['required'] = 0;
-  $handler->display->display_options['filters']['field_doctor_title_value']['expose']['multiple'] = FALSE;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -231,13 +262,30 @@ function ssrx_doctors_views_default_views() {
   $handler = $view->new_display('attachment', 'Attachment Map', 'attachment_1');
   $handler->display->display_options['display_description'] = 'The map displaying the doctors';
   $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '200';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '1000';
   $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'ssrxmap';
+  $handler->display->display_options['style_options']['markertype'] = 'small red';
+  $handler->display->display_options['style_options']['latfield'] = 'title';
+  $handler->display->display_options['style_options']['lonfield'] = 'title';
+  $handler->display->display_options['style_options']['markerfield'] = 'title';
+  $handler->display->display_options['style_options']['enablermt'] = 0;
+  $handler->display->display_options['style_options']['rmtfield'] = 'title';
+  $handler->display->display_options['style_options']['center_on_nodearg'] = 1;
+  $handler->display->display_options['style_options']['tooltipfield'] = 'title';
+  $handler->display->display_options['style_options']['bubbletextenabled'] = 1;
+  $handler->display->display_options['style_options']['bubbletextfield'] = 'title';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
     'default' => 0,
   );
   $handler->display->display_options['inherit_exposed_filters'] = 1;
+  $handler->display->display_options['inherit_pager'] = 0;
   $export['doctors'] = $view;
 
   return $export;
