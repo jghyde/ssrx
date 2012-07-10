@@ -15,6 +15,11 @@ function ssrx_import_menu() {
     'page callback' => 'ssrx_import_prices',
     'access callback' => TRUE,
   );
+  $menu['ssrx/import/doctors'] = array(
+    'title' => t('Import Doctors'),
+    'page callback' => 'ssrx_import_doctors',
+    'access callback' => TRUE,
+  );
 
   return $menu;
 }
@@ -385,6 +390,141 @@ function _ssrx_import_pharmacy($start, $batch_size, &$context) {
 }
 
 /**
+ * Starts the batch API process for importing
+ * doctors into the ssrx database.
+ */
+function ssrx_import_doctors() {
+  $doctor_count = db_query('SELECT COUNT(DISTINCT id) FROM {doctors}')->fetchField();
+  $batch_size = 250;
+  $counter = 0;
+  $operations = array();
+  while ($counter < $doctor_count) {
+    if ($counter >= $doctor_count) {
+      $batch_size = $doctor_count - $counter;
+    }
+    $operations[] = array(
+      '_ssrx_import_doctors',
+      array(
+        $counter,
+        $batch_size,
+      ),
+    );
+    $counter += $batch_size;
+    if (isset($_REQUEST['one_batch'])) {
+      break;
+    }
+  }
+
+  if (count($operations)) {
+    $batch = array(
+      'operations' => $operations,
+      'finished' => 'ssrx_import_batch_finished',
+      'title' => t('Processing Doctor Import Batch'),
+      'init_message' => t('Doctor Import Batch is starting.'),
+      'progress_message' => t('Processed @current out of @total.'),
+      'error_message' => t('Doctors Import Batch has encountered an error.'),
+    );
+    batch_set($batch);
+    batch_process('/');
+  }
+  else {
+    drupal_set_message('Nothing to import');
+    drupal_goto('/');
+  }
+}
+
+/**
+ * Imports doctors from a batch API call. Imports from a
+ * separate database table added to the Drupal install.
+ */
+function _ssrx_import_doctors($start, $batch_size, &$context) {
+  if (!isset($context['sandbox']['progress'])) {
+    $context['sandbox']['progress'] = 0;
+    $context['sandbox']['current_node'] = 0;
+    $context['sandbox']['max'] = db_query('SELECT COUNT(DISTINCT id) FROM {doctors}')->fetchField();
+  }
+  if (!isset($context['doctor_tids'])) {
+    $context['doctor_tids'] = array();
+  }
+  if (!isset($context['doctor_vocabulary'])) {
+    $context['doctor_vocabulary'] = taxonomy_vocabulary_machine_name_load('doctor_specialty');
+  }
+
+  $result = db_query_range("SELECT * FROM {doctors} order by id ASC", $start, $batch_size);
+  foreach ($result as $line) {
+    $node = new stdClass();
+    $node->type = 'doctors';
+    node_object_prepare($node);
+    $node->language = LANGUAGE_NONE;
+    // for debug
+     $example_node = node_load('138016');
+    
+    // Set the title
+    $node->title = $line->name;
+    
+    // Set the taxonomy term for specialty
+    if (!empty($line->specialty)) {
+      $specialty = ucwords(strtolower($line->specialty));
+      if (!isset($context['doctor_tids'][$specialty])) {
+        $context['doctor_tids'][$specialty] = _ssrx_import_add_or_get_term($specialty, $context['doctor_vocabulary']);
+      }
+      $node->field_doctor_specialty[LANGUAGE_NONE][]['tid'] = $context['doctor_tids'][$specialty];
+      unset($specialty);
+    }
+    if (!empty($line->title)) {
+      $node->field_doctor_title[LANGUAGE_NONE][]['value'] = $line->title;
+    }
+
+    // Make sure these lats and lons have values and if they do not, set the values to '' to allow google maps api to update them.
+    $lat = '';
+    if (isset($line->lat) && !empty($line->lat) && $line->lat != 0) {
+      $lat = $line->lat;
+    }
+    $lon = '';
+    if (isset($line->lon) && !empty($line->lon) && $line->lon != 0) {
+      $lon = $line->lon;
+    }
+    if (empty($lat) || empty($lon)) {
+      $lon = '';
+      $lat = '';
+    }
+    $location = array(
+      'name' => str_replace( array( '\'', '"', ',' , ';', '<', '>' ), '', $line->clinic),
+      'street' => $line->address,
+      'city' => $line->city,
+      'province' => $line->state,
+      'postal_code' => $line->zip,
+      'latitude' => $lat,
+      'longitude' => $lon,
+      'locpick' => array(
+        'user_latitude' => $lat,
+        'user_longitude' => $lon,
+      ),
+      'phone' => _ssrx_import_format_phone($line->phone),
+      'fax' => _ssrx_import_format_phone($line->fax),
+      'source' => '1',     
+      'country' => 'us',
+      'country_name' => 'United States',
+    );
+    $node->locations = array();
+    $node->locations[] = $node->location = $location;
+    node_save($node);
+
+    unset($line);
+    unset($location);
+    unset($lat);
+    unset($lon);
+    $context['results'][] = $node->title;
+
+    // Update our progress information.
+    $context['sandbox']['progress']++;
+    $context['sandbox']['current_node'] = $node->nid;
+    $context['message'] = t('Now processing :num - :num2 of :total', array(':num' => $start, ':num2' => ($start + $batch_size), ':total' => $context['sandbox']['max']));
+    unset($node);
+  }
+}
+
+/**
  * The summary of the batch success or failure
  */
 function ssrx_import_batch_finished($success, $results, $operations) {
@@ -399,6 +539,19 @@ function ssrx_import_batch_finished($success, $results, $operations) {
     // $operations contains the operations that remained unprocessed.
     $error_operation = reset($operations);
     drupal_set_message(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
+  }
+}
+
+/**
+ * Helper function that formats phone numbers
+ */
+function _ssrx_import_format_phone($number = '') {
+  if (preg_match( '/^\+\d(\d{3})(\d{3})(\d{4})$/', $string,  $matches ) ) {
+    $result = '(' . $matches[1] . ') '  . $matches[2] . '-' . $matches[3];
+    return $result;
+  }
+  else {
+    return $string;
   }
 }
 
