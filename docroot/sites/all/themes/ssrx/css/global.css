@@ -309,7 +309,7 @@ div.home-img {
 input.form-text,
 input#edit-field-drug-variety-und-0-nid,
 #zone-header-wrapper input {
-  background-image: none;
+
   font-size: 18px;
   line-height: 38px;
 }
@@ -369,7 +369,7 @@ html.js input.form-autocomplete.throbbing {
   padding: 0;
   margin: 0 10px 0 0;
 }
-edit-submit-doctors
+#edit-submit-doctors,
 #zone-header-wrapper .views-exposed-widget.views-submit-button,
 #zone-header-wrapper .views-exposed-form .views-exposed-widget .form-submit,
 div.views-exposed-widget.views-submit-button {
@@ -384,7 +384,8 @@ form.node-form input.form-text {
 }
 #zone-header-wrapper input#edit-submit-doctors,
 #zone-header-wrapper input#edit-submit-pharmacies,
-#zone-header-wrapper input#edit-submit-prescription-price-search
+#zone-header-wrapper input#edit-submit-prescription-price-search,
+#edit-submit-prescription-price-search,
 input#edit-submit {
   display: block;
   -moz-border-radius: 5px;
