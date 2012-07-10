@@ -9,9 +9,10 @@ include_once 'ssrx_pricereports.features.inc';
  * Implements hook_form_FORM_ID_alter() for the node form.
  */
 function ssrx_pricereports_form_node_form_alter(&$form, &$form_state, $form_id) {
-  // $form['title']['#value'] = 'ssrx';
-  $form['title']['#type'] = 'value';
-  $form['title']['#required'] = FALSE;
+  if ($form_id == 'drug_price_node_form') {
+    $form['title']['#type'] = 'value';
+    $form['title']['#required'] = FALSE;
+  }
 }
 
 /**

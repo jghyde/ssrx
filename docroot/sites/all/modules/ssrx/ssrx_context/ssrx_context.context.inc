@@ -297,6 +297,8 @@ function ssrx_context_context_default_contexts() {
     'path' => array(
       'values' => array(
         '*' => '*',
+        '~doctors' => '~doctors',
+        '~doctors/*' => '~doctors/*',
         '~pharmacies' => '~pharmacies',
         '~pharmacies/*' => '~pharmacies/*',
         '~urgent' => '~urgent',

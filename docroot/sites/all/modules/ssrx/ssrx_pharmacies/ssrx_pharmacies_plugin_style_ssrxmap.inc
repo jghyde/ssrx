@@ -153,6 +153,8 @@ class ssrx_pharmacies_plugin_style_ssrxmap extends views_plugin_style {
       $highlight_nid = NULL;
 
       // Determine the nid on which to center the map
+      // @TODO this has become a mumble-jumbled mess with all of the changes.
+      // Cleanup this code when you have the billable hrs (-;)
       if ($this->options['center_on_nodearg']) {
         if (empty($this->view->result[0]->gmap_lat)) {
           if (!empty($this->view->result[0]->_field_data['node_field_data_field_location_nid']['entity']->location['latitude'])) {
