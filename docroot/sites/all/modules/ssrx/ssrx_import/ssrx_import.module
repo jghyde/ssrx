@@ -15,6 +15,11 @@ function ssrx_import_menu() {
     'page callback' => 'ssrx_import_prices',
     'access callback' => TRUE,
   );
+  $menu['ssrx/import/urgent'] = array(
+    'title' => t('Import Urgent Care Facilities'),
+    'page callback' => 'ssrx_import_urgent',
+    'access callback' => TRUE,
+  );
 
   return $menu;
 }
@@ -316,8 +321,6 @@ function _ssrx_import_pharmacy($start, $batch_size, &$context) {
     node_object_prepare($node);
     $node->language = LANGUAGE_NONE;
 
-    // @TODO no security problems with importing real characters. stubhub.com lists "Texas A&M in autosuggest as "Texas AM" and it pisses me off.
-    //$node->title = check_plain($line->PharmacyName);
     $node->title = $line->PharmacyName;
 
     // Get the chain taxonomy term id. Create the term if it's missing.
@@ -341,26 +344,13 @@ function _ssrx_import_pharmacy($start, $batch_size, &$context) {
     // Set the Hays ID
     $node->field_hays_id[LANGUAGE_NONE][0]['value'] = $line->HayesIdNumber;
 
-    // Make sure these lats and lons have values and if they do not, set the values to '' to allow google maps api to update them.
-    $lat = '';
-    if (isset($line->lat) && !empty($line->lat) && $line->lat != 0) {
-      $lat = $line->lat;
-    }
-    $lon = '';
-    if (isset($line->lon) && !empty($line->lon) && $line->lon != 0) {
-      $lon = $line->lon;
-    }
-    if (empty($lat) || empty($lon)) {
-      $lon = '';
-      $lat = '';
-    }
     $location = array(
       'street' => $line->PharmacyAddress,
       'city' => $line->PharmacyCity,
       'province' => $line->PharmacyState,
       'postal_code' => $line->PharmacyZip,
-      'latitude' => $lat,
-      'longitude' => $lon,
+      'latitude' => floatval($line->lat) == 0 ? '' : $line->lat,
+      'longitude' => floatval($line->lon) == 0 ? '' : $line->lon,
       'phone' => $line->PharmacyPhone,
       'fax' => $line->PharmacyFax,
       'country' => 'us',
@@ -370,10 +360,88 @@ function _ssrx_import_pharmacy($start, $batch_size, &$context) {
     $node->locations[] = $node->location = $location;
     node_save($node);
 
-    unset($line);
-    unset($location);
-    unset($lat);
-    unset($lon);
+    $context['results'][] = $node->title;
+
+    // Update our progress information.
+    $context['sandbox']['progress']++;
+    $context['sandbox']['current_node'] = $node->nid;
+    $context['message'] = t('Now processing :num - :num2 of :total', array(':num' => $start, ':num2' => ($start + $batch_size), ':total' => $context['sandbox']['max']));
+    unset($node);
+  }
+}
+
+function ssrx_import_urgent() {
+  $urgent_count = db_query('SELECT COUNT(DISTINCT id) FROM {urgent}')->fetchField();
+  $batch_size = 250;
+  $counter = 0;
+  $operations = array();
+  while ($counter < $urgent_count) {
+    if ($counter >= $urgent_count) {
+      $batch_size = $urgent_count - $counter;
+    }
+    $operations[] = array(
+      '_ssrx_import_urgent',
+      array(
+        $counter,
+        $batch_size,
+      ),
+    );
+    $counter += $batch_size;
+    if (isset($_REQUEST['one_batch'])) {
+      break;
+    }
+  }
+
+  if (count($operations)) {
+    $batch = array(
+      'operations' => $operations,
+      'finished' => 'ssrx_import_batch_finished',
+      'title' => t('Processing Urgent Care Facilities Batch'),
+      'init_message' => t('Urgent Care Facilities Batch is starting.'),
+      'progress_message' => t('Processed @current out of @total.'),
+      'error_message' => t('Urgent Care Facilities  Batch has encountered an error.'),
+    );
+    batch_set($batch);
+    batch_process('/');
+  }
+  else {
+    drupal_set_message('Nothing to import');
+    drupal_goto('/');
+  }
+}
+
+function _ssrx_import_urgent($start, $batch_size, &$context) {
+  if (!isset($context['sandbox']['progress'])) {
+    $context['sandbox']['progress'] = 0;
+    $context['sandbox']['current_node'] = 0;
+    $context['sandbox']['max'] = db_query('SELECT COUNT(DISTINCT id) FROM {Pharmacies}')->fetchField();
+  }
+
+  $result = db_query_range("SELECT * FROM {urgent} WHERE id > :start ORDER BY id ASC", 0, $batch_size, array(':start' => $start));
+  foreach ($result as $line) {
+    $node = new stdClass();
+    $node->type = 'urgent_care';
+    node_object_prepare($node);
+    $node->language = LANGUAGE_NONE;
+
+    $node->title = $line->name;
+    $node->field_24_hour_urgent[LANGUAGE_NONE][0]['value'] = $line->is24 == '' ? 0 : 1;
+
+    $location = array(
+      'street' => $line->address1,
+      'city' => $line->city,
+      'province' => $line->state,
+      'postal_code' => $line->zip,
+      'latitude' => floatval($line->lat) == 0 ? '' : $line->lat,
+      'longitude' => floatval($line->lon) == 0 ? '' : $line->lon,
+      'phone' => $line->phone,
+      'country' => 'us',
+      'country_name' => 'United States',
+    );
+    $node->locations = array();
+    $node->locations[] = $node->location = $location;
+    node_save($node);
+
     $context['results'][] = $node->title;
 
     // Update our progress information.
@@ -401,4 +469,3 @@ function ssrx_import_batch_finished($success, $results, $operations) {
     drupal_set_message(t('An error occurred while processing @operation with arguments : @args', array('@operation' => $error_operation[0], '@args' => print_r($error_operation[0], TRUE))));
   }
 }
-
