@@ -419,7 +419,7 @@ function _ssrx_import_urgent($start, $batch_size, &$context) {
   if (!isset($context['sandbox']['progress'])) {
     $context['sandbox']['progress'] = 0;
     $context['sandbox']['current_node'] = 0;
-    $context['sandbox']['max'] = db_query('SELECT COUNT(DISTINCT id) FROM {Pharmacies}')->fetchField();
+    $context['sandbox']['max'] = db_query('SELECT COUNT(DISTINCT id) FROM {urgent}')->fetchField();
   }
 
   $result = db_query_range("SELECT * FROM {urgent} WHERE id > :start ORDER BY id ASC", 0, $batch_size, array(':start' => $start));
@@ -526,10 +526,10 @@ function _ssrx_import_doctors($start, $batch_size, &$context) {
     $node->language = LANGUAGE_NONE;
     // for debug
      $example_node = node_load('138016');
-    
+
     // Set the title
     $node->title = $line->name;
-    
+
     // Set the taxonomy term for specialty
     if (!empty($line->specialty)) {
       $specialty = ucwords(strtolower($line->specialty));
@@ -570,7 +570,7 @@ function _ssrx_import_doctors($start, $batch_size, &$context) {
       ),
       'phone' => _ssrx_import_format_phone($line->phone),
       'fax' => _ssrx_import_format_phone($line->fax),
-      'source' => '1',     
+      'source' => '1',
       'country' => 'us',
       'country_name' => 'United States',
     );
