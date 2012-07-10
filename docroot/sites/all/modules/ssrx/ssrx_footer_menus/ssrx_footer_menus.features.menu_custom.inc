@@ -13,7 +13,7 @@ function ssrx_footer_menus_menu_default_menu_custom() {
   // Exported menu: menu-about-simply-smarter-rx
   $menus['menu-about-simply-smarter-rx'] = array(
     'menu_name' => 'menu-about-simply-smarter-rx',
-    'title' => 'About Us',
+    'title' => 'About us',
     'description' => 'About Simply Smarter RX',
   );
   // Exported menu: menu-find-a-doctor
@@ -31,8 +31,8 @@ function ssrx_footer_menus_menu_default_menu_custom() {
   // Exported menu: menu-find-urgent-care
   $menus['menu-find-urgent-care'] = array(
     'menu_name' => 'menu-find-urgent-care',
-    'title' => 'Find Urgent Care',
-    'description' => 'Find Urgent Care Footer Menu',
+    'title' => 'Find Drugs',
+    'description' => 'Find Drugs Footer Menu',
   );
   // Exported menu: menu-report-a-price
   $menus['menu-report-a-price'] = array(
@@ -49,11 +49,11 @@ function ssrx_footer_menus_menu_default_menu_custom() {
   // Translatables
   // Included for use with string extractors like potx.
   t('About Simply Smarter RX');
-  t('About Us');
+  t('About us');
+  t('Find Drugs');
+  t('Find Drugs Footer Menu');
   t('Find Pharmacies');
   t('Find Pharmacies Footer Menu');
-  t('Find Urgent Care');
-  t('Find Urgent Care Footer Menu');
   t('Find a Doctor');
   t('Find a Doctor Footer Menu');
   t('How to Win');

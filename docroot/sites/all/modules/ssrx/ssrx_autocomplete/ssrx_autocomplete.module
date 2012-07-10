@@ -1,0 +1,196 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Creates autocomplete functionality for many of the search textfields in ssrx site..
+ * why? when Drupal has all those neat built-in convoluted autocomplete modules?
+ * Answer: Performance and portability to Mongo DB or Memcache down the road.
+ *
+ * If you're reading this thinking I should be conducting EFQs on these, take note:
+ *
+ * Per Larry Garfield:
+    As catch notes, the Select builder adds a LOT of overhead. You should not use it
+    unless you need one of the things it offers: Dynamic query structure,
+    hook_query_alter, certain db-unportable features that don't have a simpler
+    version (random ordering, for instance), etc.
+    
+    For the run of the mill SQL query, db_query() is several times faster than
+    db_select(). If you need a limit query, db_query_range() is still there.
+    
+    You must use the query builders for non-Select queries, because those are much
+    harder to make portable due to stupidity in many older databases. (Oracle is
+    worst, but Postgres is dumb in places, too.) The actual code you'd have to write
+    for those is vastly different, so the query builders are a necessity. SELECT
+    queries are far more standardized. db_query() is still your friend in many many
+    cases.
+    
+    Really, db_select() doesn't insulate you from as many db portability issues as
+    you think. It doesn't do anything for SQL functions that differ between
+    databases, doesn't help with date handling, etc. Its primary advantage is what
+    Eaton talks about in this article: When your query structure may change
+    depending on various conditions, it's now dead-simple to do so.
+    
+    If your query will never change, don't waste the CPU cycles on it. Just write
+    proper ANSI SQL in the first place and it will be sufficiently portable.
+
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function ssrx_autocomplete_menu() {
+  $items['ssrx/zip/autocomplete'] = array(
+    'page callback' => 'ssrx_autocomplete_zip',
+    'access arguments' => array('view content'),
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+  );
+  $items['ssrx/pharacies/autocomplete'] = array(
+    'page callback' => 'ssrx_autocomplete_pharmacy',
+    'access arguments' => array('view content'),
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+  );
+  /* @TODO for now use the references.module views handler 
+  $items['ssrx/location/autocomplete'] = array(
+    'page callback' => 'ssrx_autocomplete_location',
+    'access arguments' => array('view content'),
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+  );
+  */
+  return $items;
+}
+
+
+/**
+ * Custom func that returns a json string
+ * of zip code text fields in location module
+ * to make it autocomplete City State or Zip.
+ */
+function ssrx_autocomplete_zip($string = '') {
+  $result = db_query_range('
+    SELECT zip, autocomplete FROM {autocomplete}
+    where autocomplete LIKE :ac', 0, 20, array(':ac' => $string . '%'));
+  foreach ($result as $row) {
+    $autocomplete[$row->zip] = $row->autocomplete;
+  }
+  drupal_json_output($autocomplete);
+}
+
+/**
+ * custom func to return autocomplete json for
+ * location field (node_reference) on node/add/drug-price form
+ */
+function ssrx_autocomplete_location($string = '') {
+  /*
+   @TODO for now we'll use the References module views handler.
+  // Get the zip code to base the proximity search on:
+  $zip = _ssrx_autocomplete_user_zip();
+  // Using the zip code, look up the lat/lon. Use the autocomplete module zipcode table
+  // Find the proximity:
+  $latlon = ssrx_autocomplete_get_postalcode_data_us(array('postal_code' => $zip, 'country' => 'us'));
+  $result = db_query_range('SELECT node.title AS node_title, location.lid AS location_lid
+    FROM 
+    {node} node
+    LEFT JOIN {location_instance} location_instance ON node.vid = location_instance.vid
+    LEFT JOIN {location} location ON location_instance.lid = location.lid
+    WHERE (( (node.status = :status) AND (node.type IN  (:node_type)) ))
+    ORDER BY node_title DESC', 0, 20, array(':status' => 1, ':node_type' => 'pharmacy'));
+  foreach ($result as $row) {
+    $autocomplete[] = $row;
+  }
+  */
+}
+
+/**
+ * Helper func to return the zip code
+ * of the logged in user.
+ * returns the zip code of the logged in user
+ */
+function _ssrx_autocomplete_user_zip() {
+  static $zip;
+  if (empty($zip) || $zip == '') {
+    global $user;
+    $account = user_load($user->uid);
+    if (!empty($account->field_profile_address[LANGUAGE_NONE][0]['postal_code'])) {
+      $zip = $account->field_profile_address[LANGUAGE_NONE][0]['postal_code'];
+    }
+    else {
+      // If the user hasn't provided zip code information, make their default zip code Salina, KS.
+      $zip = '67401';
+      // Then, on the user's next page load, send them a message reminding them to update their user info:
+      drupal_set_message(t('Please update your member profile address informaton !here so that we can better help you find the correct pharmacies in your area.', array('!here' => l('by going to this link', 'user/' . $user->uid . '/edit'))));
+    }
+    return $zip;
+  }
+  else {
+    return $zip;
+  }
+  
+}
+/**
+ * implements hook_form_alter()
+ */
+function ssrx_autocomplete_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'views_exposed_form' && isset($form['distance']['postal_code']['#type'])) {
+    $form['distance']['postal_code']['#autocomplete_path'] = 'ssrx/zip/autocomplete';
+    $form['distance']['postal_code']['#title'] = 'City, State or Zip';
+  }
+  if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-prescription-price-search-page') {
+    $form['title']['#autocomplete_path'] = 'ssrx/pharacies/autocomplete';
+  }
+  /* @TODO for now use the references module views handler.
+  if ($form_id == 'drug_price_node_form') {
+    $form['field_location']['und'][0]['nid']['#autocomplete_path'] = 'ssrx/location/autocomplete';
+  }
+  */
+}
+
+/**
+ * Returns a lat/lon pair of the approximate center of the given postal code in the given country
+ *
+ * @param $location
+ *   An associative array $location where only postal code and country are necessary, but can have the keys:
+ *     'street'       => the street portion of the location
+ *     'supplemental' => additional street portion of the location
+ *     'province'     => the province, state, or territory
+ *     'country'      => lower-cased two-letter ISO code (REQUIRED)
+ *     'postal_code'  => the international postal code for this location (REQUIRED)
+ *
+ * @return
+ *   An associative array where
+ *      'lat' => approximate latitude of the center of the postal code's area
+ *      'lon' => approximate longitude of the center of the postal code's area
+ *
+ */
+function ssrx_autocomplete_get_postalcode_data_us($location = array()) {
+  $dash_index = strpos($location['postal_code'], '-');
+  // First we strip slash off if we're dealing with a 9-digit US zipcode
+  if (!($dash_index === FALSE)) {
+    $location['postal_code'] = substr($location['postal_code'], 0, $dash_index);
+  }
+
+  // Now we pad the thing and query.
+  $row = db_query("SELECT * FROM {autocomplete} where country = :country AND zip = :zip", array(':country' => $location['country'], ':zip' => str_pad($location['postal_code'], 5, "0", STR_PAD_LEFT)))->fetchObject();
+  if ($row) {
+    return array('lat' => $row->latitude, 'lon' => $row->longitude, 'city' => $row->city, 'province' => $row->state, 'country' => $row->country);
+  }
+  else {
+    return NULL;
+  }
+}
+
+/**
+ * The autocomplete for the pharmacy title
+ * field on /pharmacies
+ */
+function ssrx_autocomplete_pharmacy($string = '') {
+  // make a fast select on the node titles:
+  $result = db_query_range('select title from {node} where type=:pharmacy and title LIKE :string', 0, 20, array(':pharmacy' => 'pharmacy', ':string' => '%' . $string . '%'));
+  foreach ($result as $row) {
+    $autocomplete[$row->title] = $row->title;
+  }
+  drupal_json_output($autocomplete);
+}

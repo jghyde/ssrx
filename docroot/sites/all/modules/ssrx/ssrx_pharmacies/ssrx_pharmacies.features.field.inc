@@ -121,6 +121,13 @@ function ssrx_pharmacies_field_default_fields() {
           'type' => 'list_default',
           'weight' => '8',
         ),
+        'search_index' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => '8',
+        ),
         'teaser' => array(
           'label' => 'above',
           'settings' => array(),
@@ -193,6 +200,13 @@ function ssrx_pharmacies_field_default_fields() {
           'type' => 'taxonomy_term_reference_plain',
           'weight' => '2',
         ),
+        'search_index' => array(
+          'label' => 'hidden',
+          'module' => 'taxonomy',
+          'settings' => array(),
+          'type' => 'taxonomy_term_reference_plain',
+          'weight' => '2',
+        ),
         'teaser' => array(
           'label' => 'above',
           'settings' => array(),
@@ -256,7 +270,13 @@ function ssrx_pharmacies_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => 13,
+          'weight' => '13',
+        ),
+        'search_index' => array(
+          'label' => 'hidden',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '13',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -327,6 +347,13 @@ function ssrx_pharmacies_field_default_fields() {
           'type' => 'list_default',
           'weight' => '9',
         ),
+        'search_index' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => '9',
+        ),
         'teaser' => array(
           'label' => 'above',
           'settings' => array(),
@@ -378,6 +405,20 @@ function ssrx_pharmacies_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
+          'module' => 'fivestar',
+          'settings' => array(
+            'expose' => 1,
+            'style' => 'average',
+            'text' => 'average',
+            'widget' => array(
+              'fivestar_widget' => 'sites/all/modules/fivestar/widgets/oxygen/oxygen.css',
+            ),
+          ),
+          'type' => 'fivestar_formatter_default',
+          'weight' => '11',
+        ),
+        'search_index' => array(
+          'label' => 'inline',
           'module' => 'fivestar',
           'settings' => array(
             'expose' => 1,
@@ -458,6 +499,13 @@ function ssrx_pharmacies_field_default_fields() {
           'type' => 'text_default',
           'weight' => '10',
         ),
+        'search_index' => array(
+          'label' => 'inline',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => '10',
+        ),
         'teaser' => array(
           'label' => 'above',
           'settings' => array(),
@@ -524,7 +572,13 @@ function ssrx_pharmacies_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => 12,
+          'weight' => '12',
+        ),
+        'search_index' => array(
+          'label' => 'hidden',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '12',
         ),
         'teaser' => array(
           'label' => 'above',

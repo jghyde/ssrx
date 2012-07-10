@@ -1,0 +1,80 @@
+diff --git a/contrib/location_cck/location_cck.module b/contrib/location_cck/location_cck.module
+index ba1a592..a5bcc77 100644
+--- a/contrib/location_cck/location_cck.module
++++ b/contrib/location_cck/location_cck.module
+@@ -162,6 +162,17 @@ function location_cck_field_insert($entity_type, $entity, $field, $instance, $la
+       );
+       location_save_locations($items, $criteria);
+     }
++  }else{
++    if (!empty($items)) {
++      list($id, $vid, $bundle) = entity_extract_ids($entity_type, $entity);
++      // Store instances of locations by field name and vid.
++      $criteria = array(
++        'genid' => 'field:' . $field['field_name'] . ':' . $entity_type . ':' . $id,
++        'vid' => $vid ? $vid : $id,
++        'nid' => $id,
++      );
++      location_save_locations($items, $criteria);
++    }
+   }
+ }
+ 
+@@ -179,6 +190,17 @@ function location_cck_field_update($entity_type, $entity, $field, $instance, $la
+       );
+       location_save_locations($items, $criteria);
+     }
++  }else{
++    if (!empty($items)) {
++      list($id, $vid, $bundle) = entity_extract_ids($entity_type, $entity);
++      // Store instances of locations by field name and vid.
++      $criteria = array(
++        'genid' => 'field:' . $field['field_name'] . ':' . $entity_type . ':' . $id,
++        'vid' => $vid ? $vid : $id,
++        'nid' => $id,
++      );
++      location_save_locations($items, $criteria);
++    }
+   }
+ }
+ 
+@@ -199,6 +221,11 @@ function location_cck_field_delete($entity_type, $entity, $field, $instance, $la
+       $locs = array();
+       location_save_locations($locs, array('genid' => $genid));
+     }
++  }else {
++    list($id, $vid, $bundle) = entity_extract_ids($entity_type, $entity);
++    $genid = 'field:' . $field['field_name'] . ':' . $entity_type . ':' . $id;
++    $locs = array();
++    location_save_locations($locs, array('genid' => $genid));
+   }
+ }
+ 
+@@ -210,6 +237,11 @@ function location_cck_field_delete_revision($entity_type, $entity, $field, $inst
+     $genid = 'cck:' . $field['field_name'] . ':' . $entity->vid;
+     $locs = array();
+     location_save_locations($locs, array('genid' => $genid));
++  } else {
++    list($id, $vid, $bundle) = entity_extract_ids($entity_type, $entity);
++    $genid = 'field:' . $field['field_name'] . ':' . $entity_type . ':' . $id;
++    $locs = array();
++    location_save_locations($locs, array('genid' => $genid));
+   }
+ }
+ 
+@@ -224,7 +256,6 @@ function location_cck_field_validate($entity_type, $entity, $field, $instance, $
+  * Implement hook_field_load().
+  */
+ function location_cck_field_load($entity_type, $entities, $field, $instances, $langcode, &$items, $age) {
+-  if ($entity_type == 'node') {
+     foreach ($entities as $id => $entity) {
+       foreach ($items[$id] as $delta => $item) {
+         $location = array();
+@@ -238,7 +269,6 @@ function location_cck_field_load($entity_type, $entities, $field, $instances, $l
+         $items[$id][$delta] = array_merge($location, $item);
+       }
+     }
+-  }
+ }
+ 
+ /**

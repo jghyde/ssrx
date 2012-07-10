@@ -1,0 +1,18 @@
+#block-ssrxbrag-ssrx-brag {
+  margin-bottom: 1em;
+}
+ul.ssrxbrag {
+  width: 940px;
+}
+ul.ssrxbrag li {
+  display: none;
+  color: #FEC177;
+  text-align: center;
+  font-weight: bold;
+  font-size: 36px;
+  text-shadow: 1px 1px #ffffff, -1px -1px #EAEAEA;
+  width: 940px;
+}
+ul.ssrxbrag li.first {
+  display: block;
+}

@@ -30,13 +30,13 @@ function ssrx_context_context_default_contexts() {
           'module' => 'system',
           'delta' => 'help',
           'region' => 'content',
-          'weight' => '-10',
+          'weight' => '0',
         ),
         'system-main' => array(
           'module' => 'system',
           'delta' => 'main',
           'region' => 'content',
-          'weight' => '-10',
+          'weight' => '2',
         ),
         'fb_connect-login_ssrx' => array(
           'module' => 'fb_connect',
@@ -60,49 +60,31 @@ function ssrx_context_context_default_contexts() {
           'module' => 'block',
           'delta' => 1,
           'region' => 'footer_second',
-          'weight' => '-10',
-        ),
-        'menu-menu-search-for-meds' => array(
-          'module' => 'menu',
-          'delta' => 'menu-search-for-meds',
-          'region' => 'footer_second',
-          'weight' => '-9',
-        ),
-        'menu-menu-report-a-price' => array(
-          'module' => 'menu',
-          'delta' => 'menu-report-a-price',
-          'region' => 'footer_second',
-          'weight' => '-8',
-        ),
-        'menu-menu-find-pharmacies' => array(
-          'module' => 'menu',
-          'delta' => 'menu-find-pharmacies',
-          'region' => 'footer_second',
-          'weight' => '-7',
+          'weight' => '-25',
         ),
         'menu-menu-about-simply-smarter-rx' => array(
           'module' => 'menu',
           'delta' => 'menu-about-simply-smarter-rx',
           'region' => 'footer_second',
-          'weight' => '-6',
+          'weight' => '-24',
         ),
-        'menu-menu-find-a-doctor' => array(
+        'menu-menu-report-a-price' => array(
           'module' => 'menu',
-          'delta' => 'menu-find-a-doctor',
+          'delta' => 'menu-report-a-price',
           'region' => 'footer_second',
-          'weight' => '-5',
+          'weight' => '-23',
         ),
         'menu-menu-find-urgent-care' => array(
           'module' => 'menu',
           'delta' => 'menu-find-urgent-care',
           'region' => 'footer_second',
-          'weight' => '-4',
+          'weight' => '-22',
         ),
         'block-2' => array(
           'module' => 'block',
           'delta' => 2,
           'region' => 'footer_second',
-          'weight' => '-3',
+          'weight' => '-21',
         ),
         'block-3' => array(
           'module' => 'block',
@@ -120,6 +102,39 @@ function ssrx_context_context_default_contexts() {
   t('All Pages');
   t('All Pages Context');
   $export['all'] = $context;
+
+  $context = new stdClass();
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'homepage';
+  $context->description = 'All context for the home page only';
+  $context->tag = 'Home Page';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        '<front>' => '<front>',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'ssrxbrag-ssrx_brag' => array(
+          'module' => 'ssrxbrag',
+          'delta' => 'ssrx_brag',
+          'region' => 'content',
+          'weight' => '-26',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('All context for the home page only');
+  t('Home Page');
+  $export['homepage'] = $context;
 
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
@@ -154,6 +169,39 @@ function ssrx_context_context_default_contexts() {
   t('pharmacies');
   t('the phamacy section');
   $export['pharmacies'] = $context;
+
+  $context = new stdClass();
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'pharmacy_home';
+  $context->description = 'Add blocks to the /pharmacies home page';
+  $context->tag = 'pharmacies';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'pharmacies' => 'pharmacies',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-pharmacies-block_1' => array(
+          'module' => 'views',
+          'delta' => 'pharmacies-block_1',
+          'region' => 'preface_first',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Add blocks to the /pharmacies home page');
+  t('pharmacies');
+  $export['pharmacy_home'] = $context;
 
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
@@ -249,6 +297,8 @@ function ssrx_context_context_default_contexts() {
     'path' => array(
       'values' => array(
         '*' => '*',
+        '~doctors' => '~doctors',
+        '~doctors/*' => '~doctors/*',
         '~pharmacies' => '~pharmacies',
         '~pharmacies/*' => '~pharmacies/*',
         '~urgent' => '~urgent',

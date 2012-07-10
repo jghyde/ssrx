@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the ssrx_urgentcare feature.
+ */
+
+include_once 'ssrx_urgentcare.features.inc';

@@ -1,5 +1,5 @@
 #region-menu {
-  margin: -12px 0 0 0;
+  margin: -14px 0 0 0;
 }
 #region-menu a {
   text-decoration: none;
@@ -17,6 +17,9 @@
   position: absolute;
   top: -50px;
   /* margin-left: 273px; */
+}
+ul#superfish-1 {
+  margin: 0;
 }
 
 #logo {
@@ -55,7 +58,7 @@
 }
 .sf-menu.sf-style-default li,
 .sf-menu.sf-style-default.sf-navbar {
-  background: #ffd666;
+  background: #FD981D;
 }
 .sf-menu.sf-style-default li li {
   background: #ffd666;

@@ -153,15 +153,26 @@ class ssrx_pharmacies_plugin_style_ssrxmap extends views_plugin_style {
       $highlight_nid = NULL;
 
       // Determine the nid on which to center the map
+      // @TODO this has become a mumble-jumbled mess with all of the changes.
+      // Cleanup this code when you have the billable hrs (-;)
       if ($this->options['center_on_nodearg']) {
         if (empty($this->view->result[0]->gmap_lat)) {
-          drupal_set_message(t('The first row of the SSRX Pharmacies module views style handler did not contain a gmap_lat. Make sure the @view has a filter that requires the location field to be populated (i.e. not empty) before displaying that row. For now, this mapping app is centering the map upon Salina, KS.', array('@view' => $this->view->name)));
-          // center the map on Kansas
-          // Salina, KS 38.8403¡ N, 97.6111¡ W
-          $centered = array(
-            'lat' => '38.840300',
-            'long' => '-97.611100',
-          );
+          if (!empty($this->view->result[0]->_field_data['node_field_data_field_location_nid']['entity']->location['latitude'])) {
+            // nodereference source of lat/lons
+            $centered = array(
+             'lat' => $this->view->result[0]->_field_data['node_field_data_field_location_nid']['entity']->location['latitude'],
+             'long' => $this->view->result[0]->_field_data['node_field_data_field_location_nid']['entity']->location['longitude'],
+            );           
+          }
+          else {
+            drupal_set_message(t('The first row of the SSRX Pharmacies module views style handler did not contain a gmap_lat. Make sure the @view has a filter that requires the location field to be populated (i.e. not empty) before displaying that row. For now, this mapping app is centering the map upon Salina, KS.', array('@view' => $this->view->name)));
+            // center the map on Kansas
+            // Salina, KS 38.8403¡ N, 97.6111¡ W
+            $centered = array(
+              'lat' => '38.840300',
+              'long' => '-97.611100',
+            );
+          }
         }
         elseif (!isset($_GET['distance']['postal_code']) || $_GET['distance']['postal_code'] == '') {
           $centered = array(
@@ -178,18 +189,41 @@ class ssrx_pharmacies_plugin_style_ssrxmap extends views_plugin_style {
       }
       // center the map
       if (isset($centered) && is_array($centered)) {
-        $center_lat = $centered['lat'];
-        $center_lon = $centered['long'];
+        // Center on the search entered first, then fall back to the $centered[] discovered up there.
+        if (!empty($_GET['distance']['postal_code'])) {
+          $result = db_query_range('SELECT longitude, latitude from {autocomplete} where zip = :zip', 0, 1, array(':zip' => $_GET['distance']['postal_code']));
+          foreach ($result as $row) {
+            $centered['lat'] = $row->latitude;
+            $centered['long'] = $row->longitude;
+          }
+        }
+        else {
+          $center_lat = $centered['lat'];
+          $center_lon = $centered['long'];
+        }
       }
       else {
+        // Can't find nuthin' so center the damned map on Salina, KS
         $center_lat = '38.840300';
         $center_lon = '-97.611100';
       }
 
       foreach ($records as $row_index => $row) {
         $this->view->row_index = $row_index;
-        $lat = (float)$row->{$lat_field};
-        $lon = (float)$row->{$lon_field};
+        if (isset($row->location_lid) && isset($row->{$lat_field})) {
+          // This is a view of nodes with node location arrays
+          $lat = (float)$row->{$lat_field};
+        }
+        else {
+          // This is a view with node references, so the lat/long is nested
+          $lat = (float)$row->_field_data['node_field_data_field_location_nid']['entity']->location['latitude'];
+        }
+        if (isset($row->location_lid) && isset($row->{$lon_field})) {
+          $lon = (float)$row->{$lon_field};
+        }
+        else {
+          $lon = $row->_field_data['node_field_data_field_location_nid']['entity']->locations[0]['longitude'];
+        }
 
         // $row->nid is present in node views, views without node as the base table must include the nid field,
         // which will be in $row->node_nid if present.
@@ -279,12 +313,12 @@ class ssrx_pharmacies_plugin_style_ssrxmap extends views_plugin_style {
         $macro = $this->options['macro'];
         if (isset($centered) && count($centered) > 0) {
           if (isset($_GET['distance']['postal_code']) && $_GET['distance']['postal_code'] != '') {
-            $zoom = 10;
+            $zoom = 11;
           }
           else {
             $zoom = 4;
           }
-          $macro = '[gmap zoom=' . $zoom . ' |center=' . $centered['lat'] . ',' . $centered['long'] . ' |width=960px |height=300px |control=Small |type=Physical]';
+          $macro = '[gmap zoom=' . $zoom . ' |center=' . $centered['lat'] . ',' . $centered['long'] . ' |width=960px |height=300px |control=Small |type=Map]';
         }
         $map = gmap_parse_macro($macro);
         if ($this->options['enablermt']) {

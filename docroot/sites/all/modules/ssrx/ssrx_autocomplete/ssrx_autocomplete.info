@@ -1,0 +1,6 @@
+; $Id$
+name = SSRX Autocomplete
+description = Adds performance-based autocomplete features to selected fields.
+package = SSRX
+core = 7.x
+files[] = ssrx_autocomplete.module

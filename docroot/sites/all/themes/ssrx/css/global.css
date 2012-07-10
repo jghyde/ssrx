@@ -9,9 +9,13 @@ html {
 body {
   background-color: #f5f5f5;
   font-family: Helvetica, Arial, sans-serif;
+
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: Helvetica, Arial, sans-serif;
+}
+#block-system-main {
+  font-size: 16px;
 }
 a {
   text-decoration: none;
@@ -24,7 +28,9 @@ a:link, a:visited {
 a:hover {
   color: #4fa0d0;
 }
-
+#breadcrumb {
+	display: none;
+}
 #zone-user-wrapper {
   width: 100%;
   height: 45px;
@@ -41,25 +47,29 @@ h2.block-title {
 #zone-menu-wrapper {
   width: 100%;
   height: 35px;
-  background-color: #ffd460;
+  background-color: #FD981D;
 }
 #block-fb-connect-login-ssrx.block-fb-connect {
   float: right;
 }
+#stepone div.home-img {
+  margin-top: 20px;
+  height: 348px;
+}
 
 .zone-footer-wrapper {
-  background-image: linear-gradient(bottom, rgb(254,154,32) 10%, rgb(255,180,88) 80%);
-  background-image: -o-linear-gradient(bottom, rgb(254,154,32) 10%, rgb(255,180,88) 80%);
-  background-image: -moz-linear-gradient(bottom, rgb(254,154,32) 10%, rgb(255,180,88) 80%);
-  background-image: -webkit-linear-gradient(bottom, rgb(254,154,32) 10%, rgb(255,180,88) 80%);
-  background-image: -ms-linear-gradient(bottom, rgb(254,154,32) 10%, rgb(255,180,88) 80%);
+  background-image: linear-gradient(bottom, rgb(255,245,232) 10%, rgb(254,193,119) 80%);
+  background-image: -o-linear-gradient(bottom, rgb(255,245,232) 10%, rgb(254,193,119) 80%);
+  background-image: -moz-linear-gradient(bottom, rgb(255,245,232) 10%, rgb(254,193,119) 80%);
+  background-image: -webkit-linear-gradient(bottom, rgb(255,245,232) 10%, rgb(254,193,119) 80%);
+  background-image: -ms-linear-gradient(bottom, rgb(255,245,232) 10%, rgb(254,193,119) 80%);
 
   background-image: -webkit-gradient(
 	linear,
 	left bottom,
 	left top,
-	color-stop(0.1, rgb(254,154,32)),
-	color-stop(0.8, rgb(255,180,88))
+	color-stop(0.1, rgb(255,245,232)),
+	color-stop(0.8, rgb(254,193,119))
 );
   position: relative;
   bottom: 0px;
@@ -74,10 +84,10 @@ h2.block-title {
 .zone-footer .block-title {
   font: 20px 'Helvetica' sans-serif bold;
 }
-
+div#zone-footer.zone div#region-footer-first.grid-4 div.region-inner section#block-block-4.block div.block-inner h2.block-title,
 #block-views-recent-blog-posts-block .block-title,
 #block-block-1 .block-title {
-  padding: 10px 0 20px 0;
+  padding: 10px 0 0 0;
 }
 
 #block-block-1 .content {
@@ -138,11 +148,10 @@ div#region-footer-first #block-views-recent-blog-posts-block div.view-content im
 }
 
 #zone-footer .leaf a {
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 16px;
   color: #094569;
   text-decoration: none;
-  font-family: 'Helvetica Neue';
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 .socialmedia {
@@ -169,8 +178,12 @@ div#region-footer-first #block-views-recent-blog-posts-block div.view-content im
 
 #region-content {
   width: 960px;
+  margin: 0 0 30px 0;
 }
-
+#block-block-4 .content {
+  font-size: 16px;
+  line-height: 22px;
+}
 .steps {
   width: 296px;
   float: left;
@@ -205,17 +218,16 @@ div#region-footer-first #block-views-recent-blog-posts-block div.view-content im
 #steptwo .steptitle {
   font-style: italic;
   font-family: Arial;
-  font-size: 18px;
+  font-size: 30px;
   font-weight: bold;
   color: #094569;
-  padding: 15px;
+  padding: 15px 0;
 }
 
 #stepthree .steptitle {
   font-style: italic;
   font-family: Arial;
   font-size: 30px;
-  line-height: 54px;
   font-weight: bold;
   color: #094569;
   padding: 15px;
@@ -228,24 +240,29 @@ div#region-footer-first #block-views-recent-blog-posts-block div.view-content im
   font-weight: bold;
   color: #094569;
 }
+.front h1#page-title {
+  display: none;
+}
 .node-type-pharmacy h1#page-title {
   display: none;
 }
-.steps img {
-  -moz-box-shadow: 3px 3px 4px #000;
-  -webkit-box-shadow: 3px 3px 4px #000;
-  box-shadow: 3px 3px 4px #000;
+h1#page-title {
+	margin-top:  1em;
 }
-
 .stepcontent {
   font-family: Arial;
-  font-size: 12px;
+  font-size: 16px;
+  color: #555555;
+  padding: 0 10px;
+}
+div.home-img {
+  height: 368px;
 }
 
 #win_image {
   float: left;
   }
-  
+
 #stepthree .stepcontent p {
   float: right;
   width: 180px;
@@ -271,7 +288,9 @@ div#region-footer-first #block-views-recent-blog-posts-block div.view-content im
 }
 #zone-header-wrapper .views-exposed-widget.views-reset-button,
 #zone-header-wrapper .form-item.form-type-textfield.form-item-distance-search-distance,
-#zone-header-wrapper  .form-item.form-type-select.form-item-distance-search-units {
+#zone-header-wrapper  .form-item.form-type-select.form-item-distance-search-units,
+#zone-header-wrapper #edit-field-24-hour-pharmacy-value-wrapper,
+#zone-header-wrapper #edit-field-online-pharmacy-value-wrapper {
   display: none;
 }
 #zone-header-wrapper h2.block-title {
@@ -279,17 +298,18 @@ div#region-footer-first #block-views-recent-blog-posts-block div.view-content im
   text-shadow: -1px -1px 1px #2e5d79, 1px 1px 1px #ffffff;
 }
 #zone-header-wrapper .block-inner {
-  width: 865px;
+  width: 940px;
   margin: 0 auto;
 }
-#zone-header-wrapper input#edit-title {
-  width: 450px;
+#zone-header-wrapper input#edit-title,
+#zone-header-wrapper input#edit-field-doctor-title-value {
+  width: 545px;
   height: 40px;
 }
 input.form-text,
 input#edit-field-drug-variety-und-0-nid,
 #zone-header-wrapper input {
-  background-image: none;
+
   font-size: 18px;
   line-height: 38px;
 }
@@ -318,7 +338,7 @@ input#edit-field-drug-variety-und-0-nid,
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-background: rgb(229,229,228); /* Old browsers */
+  background: rgb(229,229,228); /* Old browsers */
 /* IE9 SVG, needs conditional override of 'filter' to 'none' */
   background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2U1ZTVlNCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
   background: -moz-linear-gradient(top,  rgba(229,229,228,1) 0%, rgba(255,255,255,1) 100%); /* FF3.6+ */
@@ -329,7 +349,18 @@ background: rgb(229,229,228); /* Old browsers */
   background: linear-gradient(top,  rgba(229,229,228,1) 0%,rgba(255,255,255,1) 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e5e5e4', endColorstr='#ffffff',GradientType=0 ); /* IE6-8 */
 }
+html.js input.form-autocomplete.throbbing {
+  background: #FDFDFD!important;
+  background-image: url(../images/ajax-loader.gif), -moz-linear-gradient(top,  rgba(229,229,228,1) 0%, rgba(255,255,255,1) 100%)!important;
+  background-image: url(../images/ajax-loader.gif), -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(229,229,228,1)), color-stop(100%,rgba(255,255,255,1)))!important;
+  background-image: url(../images/ajax-loader.gif), -webkit-linear-gradient(top,  rgba(229,229,228,1) 0%,rgba(255,255,255,1) 100%)!important;
+  background-image: url(../images/ajax-loader.gif), -o-linear-gradient(top,  rgba(229,229,228,1) 0%,rgba(255,255,255,1) 100%)!important;
+  background-image: url(../images/ajax-loader.gif), -ms-linear-gradient(top,  rgba(229,229,228,1) 0%,rgba(255,255,255,1) 100%)!important;
+  background-image: url(../images/ajax-loader.gif), linear-gradient(top,  rgba(229,229,228,1) 0%,rgba(255,255,255,1) 100%)!important;
 
+  background-position: 98% 0px!important;
+  background-repeat: no-repeat!important;
+}
 #zone-header-wrapper div#edit-title-wrapper,
 #zone-header-wrapper div#edit-distance-wrapper,
 #zone-header-wrapper .views-exposed-widget.views-submit-button,
@@ -338,7 +369,12 @@ background: rgb(229,229,228); /* Old browsers */
   padding: 0;
   margin: 0 10px 0 0;
 }
- 
+#edit-submit-doctors,
+#zone-header-wrapper .views-exposed-widget.views-submit-button,
+#zone-header-wrapper .views-exposed-form .views-exposed-widget .form-submit,
+div.views-exposed-widget.views-submit-button {
+  margin: 0;
+}
 #zone-header-wrapper  input#edit-distance-postal-code {
   width: 240px;
   height: 40px;
@@ -346,8 +382,10 @@ background: rgb(229,229,228); /* Old browsers */
 form.node-form input.form-text {
   height: 40px;
 }
-#zone-header-wrapper input#edit-submit-prescription-price-search,
+#zone-header-wrapper input#edit-submit-doctors,
 #zone-header-wrapper input#edit-submit-pharmacies,
+#zone-header-wrapper input#edit-submit-prescription-price-search,
+#edit-submit-prescription-price-search,
 input#edit-submit {
   display: block;
   -moz-border-radius: 5px;
@@ -356,45 +394,54 @@ input#edit-submit {
   -moz-box-shadow: 0 0 5px #888;
   -webkit-box-shadow: 0 0 5px#888;
   box-shadow: 0 0 5px #888;
-  background: rgb(254,154,32); /* Old browsers */
+  background: rgb(253,152,29); /* Old browsers */
   /* IE9 SVG, needs conditional override of 'filter' to 'none' */
-  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZlOWEyMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjYzJSIgc3RvcC1jb2xvcj0iI2ZmYjQ1OCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmI0NTgiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-  background: -moz-linear-gradient(top,  rgba(254,154,32,1) 0%, rgba(255,180,88,1) 63%, rgba(255,180,88,1) 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(254,154,32,1)), color-stop(63%,rgba(255,180,88,1)), color-stop(100%,rgba(255,180,88,1))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top,  rgba(254,154,32,1) 0%,rgba(255,180,88,1) 63%,rgba(255,180,88,1) 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top,  rgba(254,154,32,1) 0%,rgba(255,180,88,1) 63%,rgba(255,180,88,1) 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top,  rgba(254,154,32,1) 0%,rgba(255,180,88,1) 63%,rgba(255,180,88,1) 100%); /* IE10+ */
-  background: linear-gradient(top,  rgba(254,154,32,1) 0%,rgba(255,180,88,1) 63%,rgba(255,180,88,1) 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fe9a20', endColorstr='#ffb458',GradientType=0 ); /* IE6-8 */
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZkOTgxZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmM4ODQiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background: -moz-linear-gradient(top,  rgba(253,152,29,1) 0%, rgba(255,200,132,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(253,152,29,1)), color-stop(100%,rgba(255,200,132,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba(253,152,29,1) 0%,rgba(255,200,132,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba(253,152,29,1) 0%,rgba(255,200,132,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba(253,152,29,1) 0%,rgba(255,200,132,1) 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  rgba(253,152,29,1) 0%,rgba(255,200,132,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fd981d', endColorstr='#ffc884',GradientType=0 ); /* IE6-8 */
+
   margin-top: -7px;
   color: #ffffff;
   text-shadow: 0px -1px 0px #668337;
 
   /*text-shadow: 1px 1px 1px #ffffff, -1px -1px 1px #000000;*/
 }
+#zone-header-wrapper input#edit-submit-doctors.on,
 #zone-header-wrapper input#edit-submit-prescription-price-search.on,
 #zone-header-wrapper input#edit-submit-pharmacies.on,
 input#edit-submit.on {
   box-shadow: none;
-  background: rgb(255,180,88); /* Old browsers */
+  background: rgb(255,245,232); /* Old browsers */
+  background: rgb(255,200,132); /* Old browsers */
   /* IE9 SVG, needs conditional override of 'filter' to 'none' */
-  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSI0OSUiIHN0b3AtY29sb3I9IiNmZmI0NTgiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI5OSUiIHN0b3AtY29sb3I9IiNmZjlhMjAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-  background: -moz-linear-gradient(top,  rgba(255,180,88,1) 49%, rgba(255,154,32,1) 99%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(49%,rgba(255,180,88,1)), color-stop(99%,rgba(255,154,32,1))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top,  rgba(255,180,88,1) 49%,rgba(255,154,32,1) 99%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top,  rgba(255,180,88,1) 49%,rgba(255,154,32,1) 99%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top,  rgba(255,180,88,1) 49%,rgba(255,154,32,1) 99%); /* IE10+ */
-  background: linear-gradient(top,  rgba(255,180,88,1) 49%,rgba(255,154,32,1) 99%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb458', endColorstr='#ff9a20',GradientType=0 ); /* IE6-8 */
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmYzg4NCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZTlhMjAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background: -moz-linear-gradient(top,  rgba(255,200,132,1) 0%, rgba(254,154,32,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,200,132,1)), color-stop(100%,rgba(254,154,32,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba(255,200,132,1) 0%,rgba(254,154,32,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba(255,200,132,1) 0%,rgba(254,154,32,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba(255,200,132,1) 0%,rgba(254,154,32,1) 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  rgba(255,200,132,1) 0%,rgba(254,154,32,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffc884', endColorstr='#fe9a20',GradientType=0 ); /* IE6-8 */
 }
+#zone-header-wrapper input#edit-submit-doctors,
 #zone-header-wrapper input#edit-submit-prescription-price-search,
 #zone-header-wrapper input#edit-submit-pharmacies {
   width: 135px;
-  height: 50px;  
+  height: 50px;
 }
-
+div#zone-header-wrapper div#views-exposed-form-doctors-page div.views-exposed-widget.views-submit-button {
+  margin: 0;
+}
 div#edit-distance-wrapper label {
   display: none;
+}
+div#block-views-exp-doctors-page {
+  width: 940px;
 }
 div#edit-distance-wrapper div.form-item-distance-postal-code label {
   display: inline;
@@ -406,7 +453,7 @@ div#edit-distance-wrapper div.form-item-distance-postal-code label {
   width: 180px;
   min-height: 150px;
   float: left;
-  margin: 0 10px 20px;
+  margin: 0 10px 10px 0;
 }
 #region-footer-second #block-block-1 {
   width: 620px;
@@ -417,6 +464,9 @@ div#edit-distance-wrapper div.form-item-distance-postal-code label {
   float: right;
   min-height: 0;
   margin: -50px 0 0 0;
+}
+#region-footer-second  section#block-menu-menu-about-simply-smarter-rx {
+  width: 230px;
 }
 #region-footer-second #block-block-2 div.block-inner {
   padding-left: 130px;
@@ -490,7 +540,7 @@ div.ssrx.button:hover {
 }
 div.ssrxbutton a,
 td.ssrxbutton a,
-a.ssrx.button {  
+a.ssrx.button {
   background: transparent url('/sites/all/themes/ssrx/images/ssrx_button_icon.png') 5px 2px no-repeat; /* 20px x 20px */
   padding: 3px 10px 3px 30px;
   font-size: 12px;
@@ -634,4 +684,21 @@ p.gmap-bubble-address {
 }
 div.comment-wrapper {
   clear: both;
+}
+
+#zone-content-wrapper {
+  /** background: transparent url(../images/12x12_tratteggio.gif) left top repeat; */
+}
+li#menu-754-1 a {
+  text-transform: capitalize;
+}
+.pager li.pager-first a, .pager li.pager-previous a, .pager li.pager-next a, .pager li.pager-last a {
+  padding: 4px 0;
+  text-align: center;
+  width: 75px;
+}
+.pager li.pager-next {
+  position: absolute;
+  right: 75px;
+  top: 0;
 }

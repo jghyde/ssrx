@@ -1,0 +1,23 @@
+th.views-field.views-field-field-location {
+  width: 200px;
+}
+th.views-field.views-field-field-quantity {
+  width: 50px;
+}
+th.views-field.views-field-field-price {
+  width: 55px;
+}
+th a img {
+  margin: 0;
+}
+a.ingredient-title {
+  font-weight: bold;
+}
+div.ingredient-details {
+  width: 100%;
+  margin-left: 1em;
+  font-size: 9px;
+}
+table.views-table h3.page-title {
+  margin: 0;
+}

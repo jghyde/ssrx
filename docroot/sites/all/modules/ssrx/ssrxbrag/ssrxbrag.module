@@ -1,0 +1,119 @@
+<?php
+/**
+ * @file
+ * TODO: Enter file description here.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function ssrxbrag_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#ssrxbrag':
+      return t("The scrolling display on the home page scrolls each line, one at a time. Change the line words on the block configure section admin/structure/block.");
+    // OPTIONAL: Add additional cases for other paths that should display help text.
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function ssrxbrag_menu() { 
+  // This is the minimum information you can provide for a menu item.
+  $items['ssrxbrag'] = array(
+    'title' => 'TODO: Enter menu item title',
+    'page callback' => 'TODO: Enter callback function',
+    'access arguments' => array('TODO: Enter user permissions'),
+  );
+  // more complex menu item
+  $items['ssrxbrag/foo'] = array(
+    'title' => 'TODO: Enter menu item title',
+    'description' => 'TODO: Enter description',
+    'page callback' => 'TODO: Enter callback function',
+    'page arguments' => '', // An array of arguments to pass to the page callback function. Integer values pass the corresponding URL component.
+    'access callback' => '', // defaults to user_access()
+    'access arguments' => array('TODO: Enter user permissions'),
+    'weight' => 0,
+    'type' => MENU_NORMAL_ITEM, // One of MENU_NORMAL_ITEM / MENU_CALLBACK / MENU_SUGGESTED_ITEM / MENU_LOCAL_TASK / MENU_DEFAULT_LOCAL_TASK
+    'menu_name' => '', // Menu to place this item in.
+    'title callback' => '', // Function to generate the title, defaults to t(). 
+    'title arguments' => '', // Arguments to send to t() or your custom callback. 
+  );
+  // OPTIONAL: Fill in additional static menu items
+
+  return $items;
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function ssrxbrag_block_info() {
+  $blocks['ssrx_brag'] = array(
+    'info' => t('SSRX Brag Block'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function ssrxbrag_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'ssrx_brag':
+      // add the css and js for the block:
+      drupal_add_js(drupal_get_path('module', 'ssrxbrag') . '/js/ssrxbrag.js');
+      drupal_add_js(libraries_get_path('jquery.cycle') . '/jquery.cycle.all.js');
+      drupal_add_js(libraries_get_path('jquery.easing' . '/jquery.easing.1.3.js'));
+      drupal_add_css(drupal_get_path('module', 'ssrxbrag') . '/css/ssrxbrag.css');
+      $lines = array();
+      $lines = explode("\n", variable_get('ssrxbrag_block_content'));
+      $content = '<ul class="ssrxbrag">';
+      $i = 0;
+      foreach ($lines as $line) {
+        if (strlen($line) > 1) {
+          $class = '';
+          if ($i == 0) {
+            $class = ' class="first"';
+          }
+          $content .= '<li' . $class . '>' . $line . '</li>';
+        }
+        $i++;
+      }
+      $content .= '</ul>';
+      $block['subject'] = '';
+      $block['content'] = $content;
+      break;
+  }
+  return $block;
+}
+
+/**
+ * Implements hook_block_configure().
+ */
+function ssrxbrag_block_configure($delta = '') {
+  $default_text = 'Over 1,004,024 Doctors.' . "\n";
+  $default_text .= 'Over 7,211 Drugs.' . "\n";
+  $default_text .= 'Over 58,000 Pharmacies.' . "\n";
+  $default_text .= 'Over 17,250,389 Prices.' . "\n";
+  $default_text .= 'Over 2,178 24 HR Pharmacies.' . "\n";
+  $default_text .= 'Over 4,385 Urgent Cares' . "\n";
+  $default_text = variable_get('ssrxbrag_block_content', $default_text);
+  $form = array();
+  $form['ssrxbrag_block_content'] = array(
+    '#type' => 'textarea',
+    '#title' => 'Place brag quote, one per line.',
+    '#default_value' => $default_text,
+  );
+  return $form;
+}
+
+/**
+ * Implements hook_block_save().
+ */
+function ssrxbrag_block_save($delta = '', $edit = array()) {
+  variable_set('ssrxbrag_block_content', $edit['ssrxbrag_block_content']);
+}

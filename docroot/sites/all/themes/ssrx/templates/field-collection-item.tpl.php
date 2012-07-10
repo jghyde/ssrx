@@ -33,6 +33,10 @@ if (arg(0) == 'node_reference') {
   $collect =  '(' . $content['field_ingredient']['#items'][0]['value'] . ') ' . $content['field_ingredient_strength']['#items'][0]['value'];
   print $collect;
 }
+elseif (arg(0) == 'prescriptions') {
+  $str =  ucfirst(strtolower($content['field_ingredient'][0]['#markup'])) . ' ' .  $content['field_ingredient_strength']['#items'][0]['safe_value'];
+  print '<div class="prescription-ingredients">' . $str . '</div>';
+}
 else {
 ?>
 <div class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
