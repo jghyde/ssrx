@@ -40,7 +40,7 @@ function ssrx_doctors_views_default_views() {
     'field_doctor_specialty' => 'field_doctor_specialty',
     'address' => 'address',
   );
-  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['default'] = 'title';
   $handler->display->display_options['style_options']['info'] = array(
     'title' => array(
       'sortable' => 1,
@@ -176,6 +176,7 @@ function ssrx_doctors_views_default_views() {
   $handler->display->display_options['sorts']['distance']['id'] = 'distance';
   $handler->display->display_options['sorts']['distance']['table'] = 'location';
   $handler->display->display_options['sorts']['distance']['field'] = 'distance';
+  $handler->display->display_options['sorts']['distance']['expose']['label'] = 'Distance / Proximity';
   $handler->display->display_options['sorts']['distance']['origin'] = 'postal_default';
   $handler->display->display_options['sorts']['distance']['postal_code'] = '76904';
   /* Filter criterion: Content: Published */
@@ -193,19 +194,19 @@ function ssrx_doctors_views_default_views() {
     'doctors' => 'doctors',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
-  /* Filter criterion: Content: Doctor&#039;s Title (field_doctor_title) */
-  $handler->display->display_options['filters']['field_doctor_title_value']['id'] = 'field_doctor_title_value';
-  $handler->display->display_options['filters']['field_doctor_title_value']['table'] = 'field_data_field_doctor_title';
-  $handler->display->display_options['filters']['field_doctor_title_value']['field'] = 'field_doctor_title_value';
-  $handler->display->display_options['filters']['field_doctor_title_value']['operator'] = 'word';
-  $handler->display->display_options['filters']['field_doctor_title_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_doctor_title_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_doctor_title_value']['expose']['operator_id'] = 'field_doctor_title_value_op';
-  $handler->display->display_options['filters']['field_doctor_title_value']['expose']['label'] = 'Doctor\'s Name Contains';
-  $handler->display->display_options['filters']['field_doctor_title_value']['expose']['operator'] = 'field_doctor_title_value_op';
-  $handler->display->display_options['filters']['field_doctor_title_value']['expose']['identifier'] = 'field_doctor_title_value';
-  $handler->display->display_options['filters']['field_doctor_title_value']['expose']['required'] = 0;
-  $handler->display->display_options['filters']['field_doctor_title_value']['expose']['multiple'] = FALSE;
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'contains';
+  $handler->display->display_options['filters']['title']['group'] = 1;
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Doctor\'s Name Contains';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['required'] = 0;
+  $handler->display->display_options['filters']['title']['expose']['multiple'] = FALSE;
   /* Filter criterion: Doctor Proximity */
   $handler->display->display_options['filters']['distance']['id'] = 'distance';
   $handler->display->display_options['filters']['distance']['table'] = 'location';

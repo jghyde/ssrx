@@ -22,7 +22,7 @@ function ssrx_pharmacies_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Find a 24 hour Pharmacy';
+  $handler->display->display_options['title'] = 'Find a Pharmacy';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -780,8 +780,8 @@ function ssrx_pharmacies_views_default_views() {
   $handler->display->display_options['attachment_position'] = 'after';
   $handler->display->display_options['inherit_exposed_filters'] = 1;
 
-  /* Display: 24 hr Pharmacy Search Page */
-  $handler = $view->new_display('page', '24 hr Pharmacy Search Page', 'page_1');
+  /* Display: Find a 24-Hour Pharmacy */
+  $handler = $view->new_display('page', 'Find a 24-Hour Pharmacy', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Find a 24 hour Pharmacy';
   $handler->display->display_options['display_description'] = 'The page of /pharmacies/24 where people can search for 24-hour pharmacies';

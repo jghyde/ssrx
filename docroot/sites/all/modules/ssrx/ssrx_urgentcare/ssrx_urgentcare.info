@@ -1,6 +1,7 @@
 name = ssrx_urgentcare
 core = 7.x
 package = SSRX
+php = 5.2.4
 dependencies[] = ctools
 dependencies[] = features
 dependencies[] = field_sql_storage
