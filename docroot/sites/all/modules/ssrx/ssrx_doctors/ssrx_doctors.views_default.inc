@@ -197,11 +197,11 @@ function ssrx_doctors_views_default_views() {
   $handler->display->display_options['filters']['field_doctor_title_value']['id'] = 'field_doctor_title_value';
   $handler->display->display_options['filters']['field_doctor_title_value']['table'] = 'field_data_field_doctor_title';
   $handler->display->display_options['filters']['field_doctor_title_value']['field'] = 'field_doctor_title_value';
-  $handler->display->display_options['filters']['field_doctor_title_value']['operator'] = 'starts';
+  $handler->display->display_options['filters']['field_doctor_title_value']['operator'] = 'word';
   $handler->display->display_options['filters']['field_doctor_title_value']['group'] = 1;
   $handler->display->display_options['filters']['field_doctor_title_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_doctor_title_value']['expose']['operator_id'] = 'field_doctor_title_value_op';
-  $handler->display->display_options['filters']['field_doctor_title_value']['expose']['label'] = 'Doctor&#039;s Title (field_doctor_title)';
+  $handler->display->display_options['filters']['field_doctor_title_value']['expose']['label'] = 'Doctor\'s Name Contains';
   $handler->display->display_options['filters']['field_doctor_title_value']['expose']['operator'] = 'field_doctor_title_value_op';
   $handler->display->display_options['filters']['field_doctor_title_value']['expose']['identifier'] = 'field_doctor_title_value';
   $handler->display->display_options['filters']['field_doctor_title_value']['expose']['required'] = 0;
