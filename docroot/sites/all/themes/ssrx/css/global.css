@@ -28,7 +28,9 @@ a:link, a:visited {
 a:hover {
   color: #4fa0d0;
 }
-
+#breadcrumb {
+	display: none;
+}
 #zone-user-wrapper {
   width: 100%;
   height: 45px;
@@ -244,7 +246,9 @@ div#region-footer-first #block-views-recent-blog-posts-block div.view-content im
 .node-type-pharmacy h1#page-title {
   display: none;
 }
-
+h1#page-title {
+	margin-top:  1em;
+}
 .stepcontent {
   font-family: Arial;
   font-size: 16px;
