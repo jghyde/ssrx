@@ -234,7 +234,6 @@ function ssrx_ads_views_default_views() {
   $handler->display->display_options['fields']['commerce_node_checkout_node']['hide_empty'] = 0;
   $handler->display->display_options['fields']['commerce_node_checkout_node']['empty_zero'] = 0;
   $handler->display->display_options['fields']['commerce_node_checkout_node']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['commerce_node_checkout_node']['field_api_classes'] = 0;
   /* Field: Commerce Line item: Unpublish on */
   $handler->display->display_options['fields']['commerce_node_checkout_expires']['id'] = 'commerce_node_checkout_expires';
   $handler->display->display_options['fields']['commerce_node_checkout_expires']['table'] = 'field_data_commerce_node_checkout_expires';
@@ -307,6 +306,129 @@ function ssrx_ads_views_default_views() {
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['context'] = 0;
   $export['ads'] = $view;
+
+  $view = new view;
+  $view->name = 'ads_create_an_ad';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'commerce_product';
+  $view->human_name = 'Ads: create an ad';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Create an Ad';
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
+  $handler->display->display_options['query']['options']['query_comment'] = FALSE;
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'table';
+  /* Field: Commerce Product: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'commerce_product';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Ad Type';
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['title']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['title']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['title']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['title']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['title']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['title']['link_to_product'] = 0;
+  /* Field: Commerce Product: Price */
+  $handler->display->display_options['fields']['commerce_price']['id'] = 'commerce_price';
+  $handler->display->display_options['fields']['commerce_price']['table'] = 'field_data_commerce_price';
+  $handler->display->display_options['fields']['commerce_price']['field'] = 'commerce_price';
+  $handler->display->display_options['fields']['commerce_price']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['commerce_price']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['commerce_price']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['commerce_price']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['commerce_price']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['commerce_price']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['commerce_price']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['commerce_price']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['commerce_price']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['commerce_price']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['commerce_price']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['commerce_price']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['commerce_price']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['commerce_price']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['commerce_price']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['commerce_price']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['commerce_price']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['commerce_price']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['commerce_price']['click_sort_column'] = 'amount';
+  $handler->display->display_options['fields']['commerce_price']['type'] = 'commerce_price_formatted_amount';
+  $handler->display->display_options['fields']['commerce_price']['settings'] = array(
+    'calculation' => '0',
+  );
+  $handler->display->display_options['fields']['commerce_price']['field_api_classes'] = 0;
+  /* Field: Commerce Product: Add to Cart form */
+  $handler->display->display_options['fields']['add_to_cart_form']['id'] = 'add_to_cart_form';
+  $handler->display->display_options['fields']['add_to_cart_form']['table'] = 'commerce_product';
+  $handler->display->display_options['fields']['add_to_cart_form']['field'] = 'add_to_cart_form';
+  $handler->display->display_options['fields']['add_to_cart_form']['label'] = 'Purchase';
+  $handler->display->display_options['fields']['add_to_cart_form']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['add_to_cart_form']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['add_to_cart_form']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['add_to_cart_form']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['add_to_cart_form']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['add_to_cart_form']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['add_to_cart_form']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['add_to_cart_form']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['add_to_cart_form']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['add_to_cart_form']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['add_to_cart_form']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['add_to_cart_form']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['add_to_cart_form']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['add_to_cart_form']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['add_to_cart_form']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['add_to_cart_form']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['add_to_cart_form']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['add_to_cart_form']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['add_to_cart_form']['show_quantity'] = 0;
+  $handler->display->display_options['fields']['add_to_cart_form']['default_quantity'] = '1';
+  $handler->display->display_options['fields']['add_to_cart_form']['combine'] = 0;
+  $handler->display->display_options['fields']['add_to_cart_form']['display_path'] = 0;
+  $handler->display->display_options['fields']['add_to_cart_form']['line_item_type'] = 'commerce_node_checkout';
+  /* Sort criterion: Commerce Product: Title */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'commerce_product';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  /* Filter criterion: Commerce Product: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'commerce_product';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'commerce_node_checkout' => 'commerce_node_checkout',
+  );
+  /* Filter criterion: Commerce Product: Status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'commerce_product';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+
+  /* Display: Block */
+  $handler = $view->new_display('block', 'Block', 'block');
+  $export['ads_create_an_ad'] = $view;
 
   $view = new view;
   $view->name = 'ads_display_block';

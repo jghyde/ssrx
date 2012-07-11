@@ -10,6 +10,79 @@
 function ssrx_ads_field_default_fields() {
   $fields = array();
 
+  // Exported field: 'commerce_product-commerce_node_checkout-commerce_node_checkout_expire'
+  $fields['commerce_product-commerce_node_checkout-commerce_node_checkout_expire'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'commerce_node_checkout_expire',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'interval' => array(
+          0 => 'interval',
+        ),
+        'period' => array(
+          0 => 'period',
+        ),
+      ),
+      'module' => 'interval',
+      'settings' => array(
+        'allowed_periods' => array(
+          'day' => 'day',
+          'month' => 'month',
+          'week' => 'week',
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'interval',
+    ),
+    'field_instance' => array(
+      'bundle' => 'commerce_node_checkout',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'hidden',
+          'module' => 'interval',
+          'settings' => array(),
+          'type' => 'interval_default',
+          'weight' => 1,
+        ),
+        'line_item' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'commerce_product',
+      'field_name' => 'commerce_node_checkout_expire',
+      'label' => 'Unpublish after',
+      'required' => 0,
+      'settings' => array(
+        'allowed_periods' => array(
+          'day' => 'day',
+          'fortnight' => 0,
+          'month' => 'month',
+          'quarter' => 0,
+          'week' => 'week',
+          'year' => 'year',
+        ),
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'interval',
+        'settings' => array(),
+        'type' => 'interval_default',
+        'weight' => 36,
+      ),
+    ),
+  );
+
   // Exported field: 'node-ad-body'
   $fields['node-ad-body'] = array(
     'field_config' => array(
@@ -86,6 +159,7 @@ function ssrx_ads_field_default_fields() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Text of the ad');
+  t('Unpublish after');
 
   return $fields;
 }
