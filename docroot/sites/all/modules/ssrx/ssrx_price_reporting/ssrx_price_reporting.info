@@ -1,0 +1,5 @@
+; $Id$
+name = SSRX Price Reporting
+description = Adds the ability to report, vet, and update prices
+package = SSRX
+core = 7.x
