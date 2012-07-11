@@ -47,6 +47,7 @@
   <?php if ($attachment_before): ?>
     <div class="attachment attachment-before">
       <?php print $attachment_before; ?>
+      <?php if ($rows) : ?>
       <div id="price-search-facets">
         <script type="text/javascript">
         (function($) {
@@ -108,6 +109,7 @@
         </ul>
       </div>
     </div>
+    <?php endif; ?>
   <?php endif; ?>
 
   <?php if ($rows): ?>
