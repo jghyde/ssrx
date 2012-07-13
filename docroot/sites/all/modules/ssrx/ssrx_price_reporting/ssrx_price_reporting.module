@@ -1,0 +1,18 @@
+<?php
+/**
+ * Implements hook_menu()
+ */
+function ssrx_price_reporting_menu() {
+  $menu['report-price/%/%'] = array(
+    'title' => t('Report a Prescription Price'),
+    'page callback' => 'ssrx_price_reporting_report',
+    'page arguments' => array(1, 2),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  return $menu;
+}
+
+function ssrx_price_reporting_report($pharmacy_nid, $drug_name) {
+  return 'foobar';
+}

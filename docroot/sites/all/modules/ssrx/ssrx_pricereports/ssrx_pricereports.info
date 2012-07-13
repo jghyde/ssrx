@@ -11,6 +11,7 @@ dependencies[] = node_reference
 dependencies[] = number
 dependencies[] = options
 dependencies[] = ssrx_drug
+dependencies[] = ssrx_price_reporting
 dependencies[] = strongarm
 dependencies[] = taxonomy
 dependencies[] = views
