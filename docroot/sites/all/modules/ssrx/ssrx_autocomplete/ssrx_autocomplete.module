@@ -210,7 +210,7 @@ function ssrx_autocomplete_pharmacy($string = '') {
  */
 function ssrx_autocomplete_urgent($string = '') {
   // make a fast select on the node titles:
-  $result = db_query_range('select title from {node} where type=:urgent and title LIKE :string', 0, 20, array(':urgent' => 'urgent', ':string' => '%' . $string . '%'));
+  $result = db_query_range('select title from {node} where type=:urgent and title LIKE :string', 0, 20, array(':urgent' => 'urgent_care', ':string' => '%' . $string . '%'));
   foreach ($result as $row) {
     $autocomplete[$row->title] = $row->title;
   }
