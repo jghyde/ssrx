@@ -22,7 +22,6 @@ function ssrx_urgentcare_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Find Urgent Care Facilities';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -216,6 +215,7 @@ function ssrx_urgentcare_views_default_views() {
 
   /* Display: Urgent Care Search Page */
   $handler = $view->new_display('page', 'Urgent Care Search Page', 'page');
+  $handler->display->display_options['display_description'] = 'Urgent Care Search Page';
   $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['path'] = 'urgent/search';
   $handler->display->display_options['menu']['type'] = 'normal';
