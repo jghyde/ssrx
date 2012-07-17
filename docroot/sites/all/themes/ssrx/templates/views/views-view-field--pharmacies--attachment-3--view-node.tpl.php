@@ -21,6 +21,8 @@
 ?>
 <?php
 //@TODO I know i know, this should be in real code. Move it yourself!
-$drug = $_REQUEST['title'] == '' ? '' : urlencode(check_plain($_REQUEST['title']));
-print str_replace('[drug]', $drug, $output);
+if (isset($_REQUEST['title']) && arg(0) != 'pharmacies') {
+  $drug = $_REQUEST['title'] == '' ? '' : urlencode(check_plain($_REQUEST['title']));
+  print str_replace('[drug]', $drug, $output);
+}
 ?>

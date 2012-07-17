@@ -614,11 +614,11 @@ function ssrx_import_batch_finished($success, $results, $operations) {
  * Helper function that formats phone numbers
  */
 function _ssrx_import_format_phone($number = '') {
-  if (preg_match( '/^\+\d(\d{3})(\d{3})(\d{4})$/', $string,  $matches ) ) {
+  if (preg_match( '/^\+\d(\d{3})(\d{3})(\d{4})$/', $number,  $matches ) ) {
     $result = '(' . $matches[1] . ') '  . $matches[2] . '-' . $matches[3];
     return $result;
   }
   else {
-    return $string;
+    return $number;
   }
 }

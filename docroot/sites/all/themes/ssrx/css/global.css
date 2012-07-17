@@ -370,6 +370,7 @@ html.js input.form-autocomplete.throbbing {
   margin: 0 10px 0 0;
 }
 #edit-submit-doctors,
+#edit-submit-urgent-care,
 #zone-header-wrapper .views-exposed-widget.views-submit-button,
 #zone-header-wrapper .views-exposed-form .views-exposed-widget .form-submit,
 div.views-exposed-widget.views-submit-button {
@@ -382,6 +383,7 @@ div.views-exposed-widget.views-submit-button {
 form.node-form input.form-text {
   height: 40px;
 }
+#zone-header-wrapper input#edit-submit-urgent-care,
 #zone-header-wrapper input#edit-submit-doctors,
 #zone-header-wrapper input#edit-submit-pharmacies,
 #zone-header-wrapper input#edit-submit-prescription-price-search,
@@ -411,6 +413,7 @@ input#edit-submit {
 
   /*text-shadow: 1px 1px 1px #ffffff, -1px -1px 1px #000000;*/
 }
+#zone-header-wrapper input#edit-submit-urgent-care.on,
 #zone-header-wrapper input#edit-submit-doctors.on,
 #zone-header-wrapper input#edit-submit-prescription-price-search.on,
 #zone-header-wrapper input#edit-submit-pharmacies.on,
@@ -428,6 +431,7 @@ input#edit-submit.on {
   background: linear-gradient(to bottom,  rgba(255,200,132,1) 0%,rgba(254,154,32,1) 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffc884', endColorstr='#fe9a20',GradientType=0 ); /* IE6-8 */
 }
+#zone-header-wrapper input#edit-submit-urgent-care,
 #zone-header-wrapper input#edit-submit-doctors,
 #zone-header-wrapper input#edit-submit-prescription-price-search,
 #zone-header-wrapper input#edit-submit-pharmacies {

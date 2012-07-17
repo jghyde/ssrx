@@ -106,6 +106,40 @@ function ssrx_context_context_default_contexts() {
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'doctors';
+  $context->description = 'The doctors section';
+  $context->tag = 'Doctors';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'doctors' => 'doctors',
+        'doctors/*' => 'doctors/*',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views--exp-doctors-page' => array(
+          'module' => 'views',
+          'delta' => '-exp-doctors-page',
+          'region' => 'header_first',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Doctors');
+  t('The doctors section');
+  $export['doctors'] = $context;
+
+  $context = new stdClass();
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'homepage';
   $context->description = 'All context for the home page only';
   $context->tag = 'Home Page';
@@ -332,6 +366,40 @@ function ssrx_context_context_default_contexts() {
   t('Prescriptions');
   t('Search page, auto suggest and location filters only');
   $export['search_prescription_prices'] = $context;
+
+  $context = new stdClass();
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'urgent';
+  $context->description = 'Urgent care context';
+  $context->tag = 'urgent';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'urgent' => 'urgent',
+        'urgent/*' => 'urgent/*',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views--exp-urgent_care-page' => array(
+          'module' => 'views',
+          'delta' => '-exp-urgent_care-page',
+          'region' => 'header_first',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Urgent care context');
+  t('urgent');
+  $export['urgent'] = $context;
 
   return $export;
 }
