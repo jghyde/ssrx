@@ -1,7 +1,6 @@
 <?php
 if (arg(0) != 'node' && arg(1) != 'autocomplete') {
   $i = 0;
-  // dpm(get_defined_vars());
   // print out the street address:
   print $location['street'] . '<br />';
   if (!empty($location['additional'])) {
@@ -24,18 +23,3 @@ if (!empty($gmap)): ?>
   <?php print $map_link; ?>
 </div>
 <?php endif; ?>
-<?php
-if (arg(1) == 'autocomplete') {
-  print $location['city'] . ', ' . $location['province'] . ' ' . $location['postal_code'];
-  print $location['street'] . ' ';
-  if (!empty($location['additional'])) {
-    print $location['additional'] . ' ';
-  }
-}
-else {  // default
-  print $location['street'];
-  if (!empty($location['additional'])) {
-    print $location['additional'] . ' ';
-  }
-  print $location['city'] . ', ' . $location['province'] . ' ' . $location['postal_code'];
-}
