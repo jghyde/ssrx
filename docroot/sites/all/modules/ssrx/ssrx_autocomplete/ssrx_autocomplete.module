@@ -64,6 +64,7 @@ function ssrx_autocomplete_menu() {
     'type' => MENU_CALLBACK,
     'access callback' => TRUE,
   );
+
   /* @TODO for now use the references.module views handler 
   $items['ssrx/location/autocomplete'] = array(
     'page callback' => 'ssrx_autocomplete_location',
@@ -159,6 +160,9 @@ function ssrx_autocomplete_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-doctors-page') {
     $form['title']['#autocomplete_path'] = 'ssrx/doctors/autocomplete';
   }
+  if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-pharmacies-page') {
+    $form['title']['#autocomplete_path'] = 'ssrx/pharmacies/autocomplete';
+  }
   /* @TODO for now use the references module views handler.
   if ($form_id == 'drug_price_node_form') {
     $form['field_location']['und'][0]['nid']['#autocomplete_path'] = 'ssrx/location/autocomplete';
@@ -225,6 +229,7 @@ function ssrx_autocomplete_urgent($string = '') {
   }
   drupal_json_output($autocomplete);
 }
+
 /**
  * The autocomplete for the doctor node type title
  * field on /doctors
