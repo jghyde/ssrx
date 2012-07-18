@@ -58,6 +58,12 @@ function ssrx_autocomplete_menu() {
     'type' => MENU_CALLBACK,
     'access callback' => TRUE,
   );
+  $items['ssrx/doctors/autocomplete'] = array(
+    'page callback' => 'ssrx_autocomplete_doctors',
+    'access arguments' => array('view content'),
+    'type' => MENU_CALLBACK,
+    'access callback' => TRUE,
+  );
   /* @TODO for now use the references.module views handler 
   $items['ssrx/location/autocomplete'] = array(
     'page callback' => 'ssrx_autocomplete_location',
@@ -149,7 +155,10 @@ function ssrx_autocomplete_form_alter(&$form, &$form_state, $form_id) {
   }
   if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-urgent-care-page') {
     $form['title']['#autocomplete_path'] = 'ssrx/urgent/autocomplete';
-  }  
+  }
+  if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-doctors-page') {
+    $form['title']['#autocomplete_path'] = 'ssrx/doctors/autocomplete';
+  }
   /* @TODO for now use the references module views handler.
   if ($form_id == 'drug_price_node_form') {
     $form['field_location']['und'][0]['nid']['#autocomplete_path'] = 'ssrx/location/autocomplete';
@@ -211,6 +220,18 @@ function ssrx_autocomplete_pharmacy($string = '') {
 function ssrx_autocomplete_urgent($string = '') {
   // make a fast select on the node titles:
   $result = db_query_range('select title from {node} where type=:urgent and title LIKE :string', 0, 20, array(':urgent' => 'urgent_care', ':string' => '%' . $string . '%'));
+  foreach ($result as $row) {
+    $autocomplete[$row->title] = $row->title;
+  }
+  drupal_json_output($autocomplete);
+}
+/**
+ * The autocomplete for the doctor node type title
+ * field on /doctors
+ */
+function ssrx_autocomplete_doctors($string = '') {
+  // make a fast select on the node titles:
+  $result = db_query_range('select title from {node} where type=:doctor and title LIKE :string', 0, 20, array(':doctor' => 'doctors', ':string' => '%' . $string . '%'));
   foreach ($result as $row) {
     $autocomplete[$row->title] = $row->title;
   }
