@@ -14,7 +14,7 @@ function ssrx_ads_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_ad';
-  $strongarm->value = '0';
+  $strongarm->value = '1';
   $export['comment_ad'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -71,10 +71,7 @@ function ssrx_ads_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'commerce_node_checkout_products_ad';
   $strongarm->value = array(
-    0 => 4,
-    1 => 1,
-    2 => 3,
-    3 => 2,
+    0 => 1,
   );
   $export['commerce_node_checkout_products_ad'] = $strongarm;
 
@@ -82,7 +79,9 @@ function ssrx_ads_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'menu_options_ad';
-  $strongarm->value = array();
+  $strongarm->value = array(
+    0 => 'main-menu',
+  );
   $export['menu_options_ad'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -97,7 +96,7 @@ function ssrx_ads_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_ad';
   $strongarm->value = array(
-    0 => 'revision',
+    0 => 'status',
   );
   $export['node_options_ad'] = $strongarm;
 
@@ -105,7 +104,7 @@ function ssrx_ads_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_preview_ad';
-  $strongarm->value = '1';
+  $strongarm->value = '2';
   $export['node_preview_ad'] = $strongarm;
 
   $strongarm = new stdClass();

@@ -710,3 +710,41 @@ th.active {
   border: 1px solid #094569;
   background: -moz-linear-gradient(center top , #1C70A2 0%, #094569 65%, #1C70A2 100%) repeat scroll 0 0 transparent;
 }
+
+/* ads theming : Ads Display */
+.view-ads-display-block {
+  width: 940px;
+}
+.view-ads-display-block a {
+  color: #0645AD;
+}
+.view-ads-display-block .views-row {
+  width: 278px;
+  height: 133px;
+  overflow: hidden;
+  margin: 0 20px 0 0;
+  border: 1px solid #222222;
+  background: #ffffff;
+  padding: 5px 10px;
+  float: left;
+}
+.view-ads-display-block h3 {
+  font-size: 14px;
+  margin: 0;
+}
+.view-ads-display-block .views-row ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.view-ads-display-block .views-row ul li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.view-ads-display-block .views-row-last {
+  margin: 0;
+}
+.block-ads-display-block-block {
+  margin: 0 0 20px;
+}

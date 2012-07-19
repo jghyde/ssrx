@@ -163,6 +163,12 @@ function ssrx_autocomplete_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-pharmacies-page') {
     $form['title']['#autocomplete_path'] = 'ssrx/pharmacies/autocomplete';
   }
+  if ($form_id == 'ad_node_form') {
+    //$form['field_location_target_for_ad']['#autocomplete_path'] = 'ssrx/zip/autocomplete';
+    //$form['field_location_target_for_ad'][LANGUAGE_NONE][0]['#autocomplete_path'] = 'ssrx/zip/autocomplete';
+    //$form['field_location_target_for_ad']['und'][0]['#autocomplete_path'] = 'ssrx/zip/autocomplete';
+    $form['field_location_target_for_ad'][LANGUAGE_NONE][0]['value']['#autocomplete_path'] = 'ssrx/zip/autocomplete';
+  }
   /* @TODO for now use the references module views handler.
   if ($form_id == 'drug_price_node_form') {
     $form['field_location']['und'][0]['nid']['#autocomplete_path'] = 'ssrx/location/autocomplete';

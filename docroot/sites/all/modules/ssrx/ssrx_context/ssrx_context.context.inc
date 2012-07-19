@@ -30,13 +30,13 @@ function ssrx_context_context_default_contexts() {
           'module' => 'system',
           'delta' => 'help',
           'region' => 'content',
-          'weight' => '0',
+          'weight' => '-10',
         ),
         'system-main' => array(
           'module' => 'system',
           'delta' => 'main',
           'region' => 'content',
-          'weight' => '2',
+          'weight' => '-8',
         ),
         'fb_connect-login_ssrx' => array(
           'module' => 'fb_connect',
@@ -85,6 +85,12 @@ function ssrx_context_context_default_contexts() {
           'delta' => 2,
           'region' => 'footer_second',
           'weight' => '-21',
+        ),
+        'views-ads_create_an_ad-block' => array(
+          'module' => 'views',
+          'delta' => 'ads_create_an_ad-block',
+          'region' => 'footer_second',
+          'weight' => '-10',
         ),
         'block-3' => array(
           'module' => 'block',

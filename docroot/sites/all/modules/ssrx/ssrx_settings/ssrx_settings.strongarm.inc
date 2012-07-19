@@ -28,21 +28,21 @@ function ssrx_settings_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'acquia_spi_boot_last';
-  $strongarm->value = 1342553653;
+  $strongarm->value = 1342673198;
   $export['acquia_spi_boot_last'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'acquia_spi_cron_last';
-  $strongarm->value = 1342549988;
+  $strongarm->value = 1342665902;
   $export['acquia_spi_cron_last'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'acquia_spi_module_rebuild';
-  $strongarm->value = 1342549988;
+  $strongarm->value = 1342665902;
   $export['acquia_spi_module_rebuild'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -50,7 +50,7 @@ function ssrx_settings_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'acquia_subscription_data';
   $strongarm->value = array(
-    'timestamp' => 1342549988,
+    'timestamp' => 1342665920,
     'active' => '1',
     'href' => 'https://network.acquia.com/network/node/1895220',
     'expiration_date' => array(
