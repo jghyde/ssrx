@@ -11,6 +11,17 @@ body {
   font-family: Helvetica, Arial, sans-serif;
 
 }
+#zone-user {
+  position: relative;
+}
+.logo-img a {
+  display: block;
+  height: 110px;
+  width: 340px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 h1, h2, h3, h4, h5, h6 {
   font-family: Helvetica, Arial, sans-serif;
 }
