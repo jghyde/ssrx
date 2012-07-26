@@ -222,8 +222,7 @@ div#region-footer-first #block-views-recent-blog-posts-block div.view-content im
   float: left;
 }
 
-#stepone .steptitle,
-#steptwo .steptitle {
+.steptitle {
   font-style: italic;
   font-family: Arial;
   font-size: 30px;
