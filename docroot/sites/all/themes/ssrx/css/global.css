@@ -243,7 +243,8 @@ div#region-footer-first #block-views-recent-blog-posts-block div.view-content im
 #page-title {
   color: #FD9F2D;
   font-size: 34px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif
+  font-weight: 500;
 
 }
 .front h1#page-title {
