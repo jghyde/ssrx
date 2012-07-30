@@ -921,3 +921,26 @@ th.active {
   left: 35px;
   color: #FD9F2D;
 }
+
+
+.page-node-226691 .line{
+	position: absolute;
+	left:11px; 
+	top:275px;
+}
+.page-node-226691 .graphic{
+  position: absolute;
+  left: 554px;
+  bottom: -10px;
+}
+.page-node-226691 .copy{
+  position: relative;
+  left:40px;
+  color:#033f65;
+}
+.page-node-226691 .copy-header{
+  font-size: 34px;
+  position: relative;
+  left: 35px;
+  color: #FD9F2D;
+}
