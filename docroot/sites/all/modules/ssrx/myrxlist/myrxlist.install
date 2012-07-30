@@ -1,0 +1,67 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Install, update and uninstall functions for the myrxlist module
+ *
+ * For more information on hook_update_N(), see:
+ * http://drupal.org/node/150215 and
+ * http://api.drupal.org/api/drupal/modules--system--system.api.php/function/hook_update_N/7
+ */
+
+/**
+ * Implements hook_install().
+ */
+function myrxlist_install() {
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function myrxlist_uninstall() {
+}
+
+function myrxlist_schema() {
+  $schema['myrxlist'] = array(
+    'description' => 'List of recent searchs by users for myRxList',
+    'fields' => array(
+      'rxid' => array(
+        'description' => 'Unique id for each search string',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'The uid of the user conducting the search',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'string' => array(
+        'description' => 'The string of the pill search',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+      ),
+      'location' => array(
+        'description' => 'The zip code of the location (if any)',
+        'type' => 'varchar',
+        'length' => '5',
+        'not null' => TRUE,
+      ),
+      'time' => array(
+        'description' => 'The time the search was conducted or updated',
+        'type' => 'timestamp',
+        'not null' => TRUE,
+        'default' => 'CURRENT_TIMESTAMP',
+      ),
+      'active' => array(
+        'description' => 'Does user have this active or inactive?',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('rxid'),
+  );
+  return $schema;
+}

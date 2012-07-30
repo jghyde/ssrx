@@ -1,0 +1,316 @@
+<?php
+/**
+ * @file
+ * TODO: Enter file description here.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function myrxlist_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#myrxlist':
+      return t("TODO: Create admin help text.");
+    // OPTIONAL: Add additional cases for other paths that should display help text.
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function myrxlist_menu() { 
+  // This is the minimum information you can provide for a menu item.
+  $items['myrxlist'] = array(
+    'title' => 'MyRxList',
+    'page callback' => 'myrxlist_page',
+    'access arguments' => array('Access Content'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['myrxlist/save/%'] = array(
+    'title' => t('Save a Prescription Search'),
+    'page callback' => 'myrxlist_save',
+    'page arguments' => array(2),
+    'access arguments' => array('Access Content'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['myrxlist/delete/%'] = array(
+    'title' => t('Delete a Prescription Search'),
+    'page callback' => 'myrxlist_delete',
+    'page arguments' => array(2),
+    'access arguments' => array('Access Content'),
+    'type' => MENU_CALLBACK,
+  );
+  /*
+  // more complex menu item
+  $items['myrxlist/foo'] = array(
+    'title' => 'TODO: Enter menu item title',
+    'description' => 'TODO: Enter description',
+    'page callback' => 'TODO: Enter callback function',
+    'page arguments' => '', // An array of arguments to pass to the page callback function. Integer values pass the corresponding URL component.
+    'access callback' => '', // defaults to user_access()
+    'access arguments' => array('TODO: Enter user permissions'),
+    'weight' => 0,
+    'type' => MENU_NORMAL_ITEM, // One of MENU_NORMAL_ITEM / MENU_CALLBACK / MENU_SUGGESTED_ITEM / MENU_LOCAL_TASK / MENU_DEFAULT_LOCAL_TASK
+    'menu_name' => '', // Menu to place this item in.
+    'title callback' => '', // Function to generate the title, defaults to t(). 
+    'title arguments' => '', // Arguments to send to t() or your custom callback. 
+  );
+  // OPTIONAL: Fill in additional static menu items
+  */
+  return $items;
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function myrxlist_block_info() {
+  $blocks['my_block'] = array(
+    'info' => t('Block title'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function myrxlist_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'my_block':
+      $block['subject'] = t('Block title');
+      $block['content'] = array(
+      );
+      break;
+  }
+  return $block;
+}
+
+/**
+ * Implements hook_block_configure().
+ */
+function myrxlist_block_configure($delta = '') {
+  // This example comes from node.module.
+  $form = array();
+  if ($delta == 'recent') {
+    $form['node_recent_block_count'] = array(
+      '#type' => 'select',
+      '#title' => t('Number of recent content items to display'),
+      '#default_value' => variable_get('node_recent_block_count', 10),
+      '#options' => drupal_map_assoc(array(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 25, 30)),
+    );
+  }
+  return $form;
+}
+
+/**
+ * Implements hook_block_save().
+ */
+function myrxlist_block_save($delta = '', $edit = array()) {
+  // This example comes from node.module.
+  if ($delta == 'recent') {
+    variable_set('node_recent_block_count', $edit['node_recent_block_count']);
+  }
+}
+
+/**
+ * Page callback to save a prescription search
+ */
+function myrxlist_save($sid) {
+  if (!$sid) {
+    return FALSE;
+  }
+  global $user;
+  if ($count = db_query('select string from {myrxlist} where uid=:uid and rxid=:rxid', array(':uid' => $user->uid, ':rxid' => $sid))->fetchField()) {
+    //If the count exists, then let's set it to save.
+    $num_updated = db_update('myrxlist')
+      ->fields(
+        array(
+          'active' => 1,
+        )
+      )
+      ->condition('rxid', $sid, '=')
+      ->condition('uid', $user->uid, '=')
+      ->execute();
+    if ($num_updated > 0) {
+      drupal_set_message(t('We just added search!name to your saved searches on MyRxList', array('!name' => '"' . $count . '"')));
+      drupal_goto('myrxlist');
+    }
+  }
+}
+
+/*
+ * Page callback to delete saved searches
+ */
+function myrxlist_delete($sid) {
+  if (!$sid) {
+    return FALSE;
+  }
+  global $user;
+  if ($count = db_query('select string from {myrxlist} where uid=:uid and rxid=:rxid', array(':uid' => $user->uid, ':rxid' => $sid))->fetchField()) {
+    //If the count exists, then let's delete.
+    $d = db_delete('myrxlist')
+      ->condition('uid', $user->uid)
+      ->condition('rxid', $sid)
+      ->execute();
+    if ($d > 0) {
+      drupal_set_message(t('We just deleted the search !name from your saved searches on MyRxList', array('!name' => '"' . $count . '"')));
+      drupal_goto('myrxlist');
+    }
+  }  
+}
+
+/**
+ * Page callback for /myrxlist
+ */
+function myrxlist_page() {
+  global $user;
+  if ($user->uid == 0) {
+    return t('Please register and log in to use this feature. !here', array('!here' => l('You can start here.', 'user/register')));
+  }
+  // Build the table for saved searches:
+  $header[] = array(
+    'data' => t('Saved Drug Search'),
+    'field' => 'string',
+  );
+  $header[] = array(
+    'data' => t('Location'),
+    'field' => 'location',
+  );
+  $header[] = array(
+    'data' => t('Remove'),
+    'field' => 'active',
+    'sort' => FALSE,
+  );
+
+  $r = db_query_range('select * from {myrxlist} where uid=:uid and active=:active order by time', 0, 25, array(':uid' => $user->uid, ':active' => 1));
+  foreach ($r as $row) {
+    $rows[] = array(
+      //prescriptions?title=Advil+Allergy+Sinus&distance[postal_code]=76901&distance[search_distance]=25&distance[search_units]=mile
+      'string' => l($row->string, 'prescriptions',
+                    array(
+                          'query' => array(
+                                           'distance[search_distance]' => 25,
+                                           'distance[search_units]' => 'mile',
+                                           'distance[postal_code]' => urlencode($row->location),
+                                           'title' => urlencode($row->string),
+                                           )
+                          )
+                   ),
+      'location' => $row->location,
+      'active' => l('Remove This Search', 'myrxlist/delete/' . $row->rxid),
+    );
+  }
+  $table_element1 = array(
+    '#theme' => 'table',
+    '#header' => $header,
+    '#rows' => $rows,
+    '#empty' =>t('You have not performed any searches for prescription drugs.'),
+  );
+  
+
+  
+  // Build the table header
+  $header2[] = array(
+    'data' => t('Drug Search'),
+    'field' => 'string',
+  );
+  $header2[] = array(
+    'data' => t('Location'),
+    'field' => 'location',
+  );
+  $header2[] = array(
+    'data' => t('Save'),
+    'field' => 'active',
+    'sort' => FALSE,
+  );
+
+  $r = db_query_range('select * from {myrxlist} where uid=:uid and active=:active order by time', 0, 25, array(':uid' => $user->uid, ':active' => 0));
+  foreach ($r as $row) {
+    $rows2[] = array(
+      //prescriptions?title=Advil+Allergy+Sinus&distance[postal_code]=76901&distance[search_distance]=25&distance[search_units]=mile
+      'string' => l($row->string, 'prescriptions',
+                    array(
+                          'query' => array(
+                                           'distance[search_distance]' => 25,
+                                           'distance[search_units]' => 'mile',
+                                           'distance[postal_code]' => urlencode($row->location),
+                                           'title' => urlencode($row->string),
+                                           )
+                          )
+                   ),
+      'location' => $row->location,
+      'active' => l('Save to List', 'myrxlist/save/' . $row->rxid),
+    );
+  }
+  $table_element2 = array(
+    '#theme' => 'table',
+    '#header' => $header2,
+    '#rows' => $rows2,
+    '#empty' =>t('You have not performed any searches for prescription drugs.'),
+  );
+  $out = '<h2>Saved Searches</h2>';
+  $out .= drupal_render($table_element1);
+  $out .= '<hr>';
+  $out .= '<h2>Recent Searches to Save</h2>';
+  $out .= '<p>' . t('We save your last 10 searches conducted on this site as candidates for your personal saved searches on MyRxList. If you want to save them for eternity so that you can maintain easy access to it, please click on "Save This Search" to move it to the MyRxList of Saved Searches.') . '</p>';
+  $out .= drupal_render($table_element2);
+  return $out;
+}
+
+/*
+ * Implements hook_form_alter()
+ */
+function myrxlist_form_alter(&$form, &$form_state, $form_id) {
+  if ($form['#id'] == 'views-exposed-form-prescription-price-search-page') {
+    $form['#submit'][] = 'myrxlist_search_form_submit';
+  }
+}
+
+/**
+ * Submit handler for views_exposed_forms
+ * that have the search functionaltity
+ */
+function myrxlist_search_form_submit($form, &$form_state) {
+  if (empty($form_state['values']['title'])) {
+    return;
+  }
+  /* Get the search values:
+  $string = $form_state['values']['title'];
+  $location = $form_state['values']['distance']['postal_code'];
+  $distance = $form_state['values']['distance']['search_distance'];
+  $units = $form_state['values']['distance']['search_units'];
+  */
+  // User
+  global $user;
+  
+  // Build query
+  $data = array(
+    'string' => $form_state['values']['title'],
+    'location' => $form_state['values']['distance']['postal_code'],
+    'uid' => $user->uid,
+  );
+  // Check for duplicates:
+  if (!$count = db_query('select count(*) from {myrxlist} where uid=:uid and string=:string', array(':uid' => $data['uid'], ':string' => $data['string']))->fetchField()) {
+    $r = drupal_write_record('myrxlist', $data);
+    if ($r == FALSE) {
+      watchdog('myrxlist', t('MyRxList Search failed to insert for %user', array('%user' => $user->name)), 'warning');
+    }
+  }
+}
+/**
+ * Implements hook_theme()
+ *
+function myrxlist_theme($existing, $type, $theme, $path) {
+  return;
+}
+*/
+/*
+ * Implements hook_cron()
+ */
+function myrxlist_cron() {
+  // @TODO need to expire old saved searches
+  return;
+}

@@ -1,0 +1,5 @@
+name = MyRxList
+description = Provides lists of recent pill searches for registered users
+package = SSRX
+core = 7.x
+files[] = myrxlist.module
