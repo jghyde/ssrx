@@ -848,3 +848,53 @@ th.active {
   position: relative;
   width: 607px;
 }
+
+.context-pharmacies  .list-header {
+  position:absolute;
+  left: 660px;
+  bottom: 498px;
+  z-index: 1;
+  color:white;
+  text-shadow: 1px 1px 1px black;
+  font-size:25px;
+  font-weight: 500;
+  text-decoration:underline;
+  
+  
+}
+.context-pharmacies .list-items{
+  position:absolute;
+  left: 683px;
+  bottom: 210px;
+  z-index: 2;
+  color:white;
+  text-shadow: 1px 1px 1px black;
+  font-size:18px;
+  font-weight: 200;	
+
+}
+
+.context-pharmacies .box {
+  position: absolute;
+  left:644px;
+  bottom:181px;
+  z-index: -1;
+}
+.context-pharmacies .doctors {
+  position: absolute;
+  left: 20px;
+  top: 40px;
+}
+.context-pharmacies .quote{
+  margin-bottom: 10px;
+  position: relative;
+  left:100px;
+}
+.context-pharmacies .quote-words{
+  position: absolute;
+  text-align: right;
+  left: 115px;
+  font-size: 24px;
+  color: #FE8117;
+  bottom: -1px;
+}
