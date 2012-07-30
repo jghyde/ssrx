@@ -755,3 +755,25 @@ th.active {
 .block-ads-display-block-block {
   margin: 0 0 20px;
 }
+
+/* spacial page styling */
+
+.context-doctors .doctors {
+  position: absolute;
+  left: 20px;
+  top: 40px;
+}
+.context-doctors .quote{
+  position: absolute;
+  bottom: 236px;
+  right: 143px;
+  padding-bottom: 20px;
+}
+.context-doctors .quote-words{
+  position: absolute;
+  text-align: right;
+  font-size: 16px;
+  color: #FE8117;
+  bottom: 262px;
+  right: 165px;
+}
