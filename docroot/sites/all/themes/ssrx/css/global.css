@@ -833,11 +833,12 @@ th.active {
   position: absolute;
  
 }
-.context-drugs margin-bottom: 10px;
+.context-drugs {
+  margin-bottom: 10px;
   position: relative;
   left:100px;
 }
-.context-drugs .quote-words{
+.context-drugs .quote-words {
   position: absolute;
   text-align: right;
   font-size: 27px;
