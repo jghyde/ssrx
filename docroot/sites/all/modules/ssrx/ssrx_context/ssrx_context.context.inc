@@ -86,12 +86,6 @@ function ssrx_context_context_default_contexts() {
           'region' => 'footer_second',
           'weight' => '-21',
         ),
-        'views-ads_create_an_ad-block' => array(
-          'module' => 'views',
-          'delta' => 'ads_create_an_ad-block',
-          'region' => 'footer_second',
-          'weight' => '-10',
-        ),
         'block-3' => array(
           'module' => 'block',
           'delta' => 3,

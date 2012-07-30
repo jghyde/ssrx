@@ -39,19 +39,25 @@ function ssrx_urgentcare_views_default_views() {
   $handler->display->display_options['style_options']['columns'] = array(
     'title' => 'title',
     'distance' => 'distance',
+    'address' => 'address',
   );
-  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['default'] = 'distance';
   $handler->display->display_options['style_options']['info'] = array(
     'title' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'distance' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'address' => array(
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -64,7 +70,7 @@ function ssrx_urgentcare_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['label'] = 'Facility Name';
   $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
@@ -78,7 +84,7 @@ function ssrx_urgentcare_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['strip_tags'] = 0;
   $handler->display->display_options['fields']['title']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['title']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = 0;
   $handler->display->display_options['fields']['title']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['title']['empty'] = 'no results';
   $handler->display->display_options['fields']['title']['hide_empty'] = 0;
@@ -113,7 +119,6 @@ function ssrx_urgentcare_views_default_views() {
   $handler->display->display_options['fields']['address']['id'] = 'address';
   $handler->display->display_options['fields']['address']['table'] = 'location';
   $handler->display->display_options['fields']['address']['field'] = 'address';
-  $handler->display->display_options['fields']['address']['label'] = '';
   $handler->display->display_options['fields']['address']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['address']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['address']['alter']['absolute'] = 0;
@@ -127,7 +132,7 @@ function ssrx_urgentcare_views_default_views() {
   $handler->display->display_options['fields']['address']['alter']['strip_tags'] = 0;
   $handler->display->display_options['fields']['address']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['address']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['address']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['address']['element_label_colon'] = 0;
   $handler->display->display_options['fields']['address']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['address']['hide_empty'] = 0;
   $handler->display->display_options['fields']['address']['empty_zero'] = 0;

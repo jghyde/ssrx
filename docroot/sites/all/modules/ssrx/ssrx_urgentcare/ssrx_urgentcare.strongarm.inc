@@ -125,7 +125,7 @@ function ssrx_urgentcare_strongarm() {
           'weight' => '14',
         ),
         'locpick' => array(
-          'collect' => '0',
+          'collect' => '1',
           'weight' => '20',
         ),
         'phone' => array(
@@ -147,6 +147,8 @@ function ssrx_urgentcare_strongarm() {
         'country' => 'country',
         'locpick' => 'locpick',
         'country_name' => 'country_name',
+        'map_link' => 'map_link',
+        'coords' => 'coords',
         'street' => 0,
         'additional' => 0,
         'city' => 0,
@@ -155,8 +157,6 @@ function ssrx_urgentcare_strongarm() {
         'fax' => 0,
         'phone' => 0,
         'province_name' => 0,
-        'map_link' => 0,
-        'coords' => 0,
       ),
       'teaser' => 1,
       'full' => 1,
@@ -180,7 +180,7 @@ function ssrx_urgentcare_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'menu_parent_urgent_care';
-  $strongarm->value = 'main-menu:503';
+  $strongarm->value = 'main-menu:0';
   $export['menu_parent_urgent_care'] = $strongarm;
 
   $strongarm = new stdClass();
