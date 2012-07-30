@@ -898,3 +898,26 @@ th.active {
   color: #FE8117;
   bottom: -1px;
 }
+
+
+.page-node-226690 .line{
+	position: absolute;
+	left:11px; 
+	top:275px;
+}
+.page-node-226690 .graphic{
+  position: absolute;
+  left: 526px;
+  bottom: 46px;
+}
+.page-node-226690 .copy{
+  position: relative;
+  left:40px;
+  color:#033f65;
+}
+.page-node-226690 .copy-header{
+  font-size: 34px;
+  position: relative;
+  left: 35px;
+  color: #FD9F2D;
+}
