@@ -846,9 +846,9 @@ th.active {
   left: 175px;
   padding-top: 40px;
 }
-.context-drugs .quote{
-  position: absolute;
-  bottom: 0;
-  right: 32px;
+.context-drugs .quote {
+  margin: 0 90px;
   padding-bottom: 20px;
+  position: relative;
+  width: 607px;
 }
