@@ -241,11 +241,10 @@ div#region-footer-first #block-views-recent-blog-posts-block div.view-content im
 }
 
 #page-title {
-  font-style: italic;
-  font-family: Arial;
-  font-size: 24px;
-  font-weight: bold;
-  color: #094569;
+  color: #FD9F2D;
+  font-size: 34px;
+  font-family: Arial, Helvetica, sans-serif;
+
 }
 .front h1#page-title {
   display: none;
