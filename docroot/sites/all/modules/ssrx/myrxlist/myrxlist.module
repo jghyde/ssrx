@@ -265,6 +265,15 @@ function myrxlist_page() {
  */
 function myrxlist_form_alter(&$form, &$form_state, $form_id) {
   if ($form['#id'] == 'views-exposed-form-prescription-price-search-page') {
+    if (!empty($form_state['input']['title']) && isset($_GET['title'])) {
+      
+      // I don't want to decode the value if it's not already urlencoded. Seems that the
+      // best approach is to see if there are not any spaces in the $form_state['input']['title'] var
+      // because urlencode will replace spaces with '+'
+      if (!strpos($form_state['input']['title'], ' ')) {
+        $form_state['input']['title'] = urldecode($form_state['input']['title']);
+      }
+    }
     $form['#submit'][] = 'myrxlist_search_form_submit';
   }
 }
@@ -293,7 +302,7 @@ function myrxlist_search_form_submit($form, &$form_state) {
     'uid' => $user->uid,
   );
   // Check for duplicates:
-  if (!$count = db_query('select count(*) from {myrxlist} where uid=:uid and string=:string', array(':uid' => $data['uid'], ':string' => $data['string']))->fetchField()) {
+  if (!$count = db_query('select count(*) from {myrxlist} where uid=:uid and string=:string and location=:location', array(':uid' => $data['uid'], ':string' => $data['string'], ':location' => $data['location']))->fetchField()) {
     $r = drupal_write_record('myrxlist', $data);
     if ($r == FALSE) {
       watchdog('myrxlist', t('MyRxList Search failed to insert for %user', array('%user' => $user->name)), 'warning');
