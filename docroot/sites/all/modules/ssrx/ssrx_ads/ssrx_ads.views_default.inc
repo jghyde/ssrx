@@ -633,6 +633,31 @@ function ssrx_ads_views_default_views() {
   $handler->display->display_options['fields']['field_location_target_for_ad']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['field_location_target_for_ad']['type'] = 'text_plain';
   $handler->display->display_options['fields']['field_location_target_for_ad']['field_api_classes'] = 0;
+  /* Field: Location: Distance / Proximity */
+  $handler->display->display_options['fields']['distance']['id'] = 'distance';
+  $handler->display->display_options['fields']['distance']['table'] = 'location';
+  $handler->display->display_options['fields']['distance']['field'] = 'distance';
+  $handler->display->display_options['fields']['distance']['label'] = 'Distance';
+  $handler->display->display_options['fields']['distance']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['distance']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['distance']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['distance']['element_label_colon'] = 0;
+  $handler->display->display_options['fields']['distance']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['distance']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['distance']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['distance']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['distance']['origin'] = 'tied';
+  $handler->display->display_options['fields']['distance']['units'] = 'mi';
   /* Sort criterion: Global: Random */
   $handler->display->display_options['sorts']['random']['id'] = 'random';
   $handler->display->display_options['sorts']['random']['table'] = 'views';

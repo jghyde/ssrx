@@ -69,7 +69,7 @@ function ssrx_user_field_default_fields() {
       'entity_type' => 'user',
       'field_name' => 'field_first_name',
       'label' => 'First Name',
-      'required' => 1,
+      'required' => 0,
       'settings' => array(
         'text_processing' => '0',
         'user_register_form' => 1,
@@ -78,10 +78,12 @@ function ssrx_user_field_default_fields() {
         'active' => 1,
         'module' => 'text',
         'settings' => array(
+          'maxlength_js' => 0,
+          'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '7',
+        'weight' => '3',
       ),
     ),
   );
@@ -145,7 +147,7 @@ function ssrx_user_field_default_fields() {
       'entity_type' => 'user',
       'field_name' => 'field_last_name',
       'label' => 'Last Name',
-      'required' => 1,
+      'required' => 0,
       'settings' => array(
         'text_processing' => '0',
         'user_register_form' => 1,
@@ -154,6 +156,84 @@ function ssrx_user_field_default_fields() {
         'active' => 1,
         'module' => 'text',
         'settings' => array(
+          'maxlength_js' => 0,
+          'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+          'size' => '60',
+        ),
+        'type' => 'text_textfield',
+        'weight' => '4',
+      ),
+    ),
+  );
+
+  // Exported field: 'user-user-field_mobile_phone_number'
+  $fields['user-user-field_mobile_phone_number'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_mobile_phone_number',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'translatable' => '0',
+      'type' => 'text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 5,
+        ),
+        'full' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'token' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_mobile_phone_number',
+      'label' => 'Mobile Phone Number',
+      'required' => 0,
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => 1,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'maxlength_js' => 0,
+          'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
           'size' => '60',
         ),
         'type' => 'text_textfield',
@@ -296,9 +376,11 @@ function ssrx_user_field_default_fields() {
       'widget' => array(
         'active' => 0,
         'module' => 'location_cck',
-        'settings' => array(),
+        'settings' => array(
+          'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        ),
         'type' => 'location',
-        'weight' => '9',
+        'weight' => '5',
       ),
     ),
   );
@@ -374,7 +456,7 @@ function ssrx_user_field_default_fields() {
         'default_value2' => 'same',
         'default_value_code' => '',
         'default_value_code2' => '',
-        'user_register_form' => 0,
+        'user_register_form' => 1,
       ),
       'widget' => array(
         'active' => 1,
@@ -385,12 +467,13 @@ function ssrx_user_field_default_fields() {
           'input_format' => 'm/d/Y - H:i:s',
           'input_format_custom' => '',
           'label_position' => 'above',
+          'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
           'repeat_collapsed' => 0,
           'text_parts' => array(),
           'year_range' => '1907:-18',
         ),
         'type' => 'date_select',
-        'weight' => '10',
+        'weight' => '6',
       ),
     ),
   );
@@ -419,11 +502,12 @@ function ssrx_user_field_default_fields() {
       'module' => 'node_reference',
       'settings' => array(
         'referenceable_types' => array(
+          'ad' => 0,
           'article' => 0,
           'blog' => 0,
+          'doctors' => 0,
           'drug' => 0,
           'drug_price' => 0,
-          'drug_variety' => 0,
           'page' => 0,
           'pharmacy' => 'pharmacy',
           'urgent_care' => 0,
@@ -465,10 +549,10 @@ function ssrx_user_field_default_fields() {
       ),
       'entity_type' => 'user',
       'field_name' => 'field_profile_pharmacy',
-      'label' => 'Preferrerrd Pharmacy',
+      'label' => 'Preferred Pharmacy',
       'required' => 0,
       'settings' => array(
-        'user_register_form' => 0,
+        'user_register_form' => 1,
       ),
       'widget' => array(
         'active' => 1,
@@ -476,10 +560,11 @@ function ssrx_user_field_default_fields() {
         'settings' => array(
           'autocomplete_match' => 'contains',
           'autocomplete_path' => 'node_reference/autocomplete',
+          'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
           'size' => '60',
         ),
         'type' => 'node_reference_autocomplete',
-        'weight' => '11',
+        'weight' => '7',
       ),
     ),
   );
@@ -490,7 +575,8 @@ function ssrx_user_field_default_fields() {
   t('First Name');
   t('In order to customize searches for you, please provide your primary location.');
   t('Last Name');
-  t('Preferrerrd Pharmacy');
+  t('Mobile Phone Number');
+  t('Preferred Pharmacy');
   t('Your Address');
   t('Your first Name');
   t('Your last name');

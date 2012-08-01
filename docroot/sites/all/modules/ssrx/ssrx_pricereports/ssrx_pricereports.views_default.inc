@@ -39,6 +39,7 @@ function ssrx_pricereports_views_default_views() {
     'field_ingredients_collection' => 'field_ingredients_collection',
     'field_drug_autocomplete' => 'field_drug_autocomplete',
     'field_location' => 'field_location',
+    'distance' => 'distance',
     'field_quantity' => 'field_quantity',
     'field_price' => 'field_price',
     'nid' => 'nid',
@@ -66,6 +67,13 @@ function ssrx_pricereports_views_default_views() {
       'empty_column' => 0,
     ),
     'field_location' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'distance' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -250,6 +258,32 @@ function ssrx_pricereports_views_default_views() {
     'node_reference_view_mode' => 'teaser',
   );
   $handler->display->display_options['fields']['field_location']['field_api_classes'] = 0;
+  /* Field: Location: Distance / Proximity */
+  $handler->display->display_options['fields']['distance']['id'] = 'distance';
+  $handler->display->display_options['fields']['distance']['table'] = 'location';
+  $handler->display->display_options['fields']['distance']['field'] = 'distance';
+  $handler->display->display_options['fields']['distance']['relationship'] = 'field_location_nid';
+  $handler->display->display_options['fields']['distance']['label'] = 'Distance';
+  $handler->display->display_options['fields']['distance']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['distance']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['distance']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['distance']['element_label_colon'] = 0;
+  $handler->display->display_options['fields']['distance']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['distance']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['distance']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['distance']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['distance']['origin'] = 'tied';
+  $handler->display->display_options['fields']['distance']['units'] = 'mi';
   /* Field: Content: Quantity */
   $handler->display->display_options['fields']['field_quantity']['id'] = 'field_quantity';
   $handler->display->display_options['fields']['field_quantity']['table'] = 'field_data_field_quantity';

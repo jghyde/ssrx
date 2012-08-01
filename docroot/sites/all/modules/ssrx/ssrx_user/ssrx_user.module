@@ -33,6 +33,8 @@
  *   hook.
  *
  */
+include_once('ssrx_user.features.inc');
+
 function ssrx_user_fb_user($op, $data, &$return) {
   // dpm($op);
   // dpm($data);
@@ -42,5 +44,14 @@ function ssrx_user_fb_user($op, $data, &$return) {
     $lname = $data['info']['last_name'];
     $return['field_first_name'][LANGUAGE_NONE][0]['value'] = $fname;
     $return['field_last_name'][LANGUAGE_NONE][0]['value'] = $lname;
+  }
+}
+
+/**
+ * Implements hook_form_alter()
+ */
+function ssrx_user_form_alter(&$form, &$form_state, $form_id) {
+  if ($form['#form_id'] == 'user_register_form') {
+    $form['fb_user']['#weight'] = -100;
   }
 }

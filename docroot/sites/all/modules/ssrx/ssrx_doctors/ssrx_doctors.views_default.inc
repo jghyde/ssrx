@@ -37,6 +37,7 @@ function ssrx_doctors_views_default_views() {
     'title' => 'title',
     'field_doctor_title' => 'field_doctor_title',
     'field_doctor_specialty' => 'field_doctor_specialty',
+    'distance' => 'distance',
     'address' => 'address',
   );
   $handler->display->display_options['style_options']['default'] = 'title';
@@ -59,6 +60,13 @@ function ssrx_doctors_views_default_views() {
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => 'views-align-center',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'distance' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
@@ -99,6 +107,7 @@ function ssrx_doctors_views_default_views() {
   $handler->display->display_options['fields']['field_doctor_title']['id'] = 'field_doctor_title';
   $handler->display->display_options['fields']['field_doctor_title']['table'] = 'field_data_field_doctor_title';
   $handler->display->display_options['fields']['field_doctor_title']['field'] = 'field_doctor_title';
+  $handler->display->display_options['fields']['field_doctor_title']['label'] = 'Title';
   $handler->display->display_options['fields']['field_doctor_title']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['field_doctor_title']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_doctor_title']['alter']['absolute'] = 0;
@@ -141,6 +150,31 @@ function ssrx_doctors_views_default_views() {
   $handler->display->display_options['fields']['field_doctor_specialty']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_doctor_specialty']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['field_doctor_specialty']['field_api_classes'] = 0;
+  /* Field: Location: Distance / Proximity */
+  $handler->display->display_options['fields']['distance']['id'] = 'distance';
+  $handler->display->display_options['fields']['distance']['table'] = 'location';
+  $handler->display->display_options['fields']['distance']['field'] = 'distance';
+  $handler->display->display_options['fields']['distance']['label'] = 'Distance';
+  $handler->display->display_options['fields']['distance']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['distance']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['distance']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['distance']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['distance']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['distance']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['distance']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['distance']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['distance']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['distance']['origin'] = 'tied';
+  $handler->display->display_options['fields']['distance']['units'] = 'mi';
   /* Field: Location: Address */
   $handler->display->display_options['fields']['address']['id'] = 'address';
   $handler->display->display_options['fields']['address']['table'] = 'location';

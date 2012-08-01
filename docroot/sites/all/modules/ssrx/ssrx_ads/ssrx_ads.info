@@ -33,6 +33,7 @@ features[ctools][] = strongarm:strongarm:1
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:1
 features[field][] = commerce_product-commerce_node_checkout-commerce_node_checkout_expire
+features[field][] = node-ad-body
 features[field][] = node-ad-field_ad_line_1
 features[field][] = node-ad-field_ad_line_2
 features[field][] = node-ad-field_ad_line_3

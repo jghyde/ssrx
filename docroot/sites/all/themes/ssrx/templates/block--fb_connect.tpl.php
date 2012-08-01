@@ -91,7 +91,7 @@ switch ($elements['#block']->subject) {
 			'type' => 'ul',
 			'items' => array(
         l('Join Us', 'user/register', array('attributes' => array('id' => 'register', 'class' => array('ssrx', 'button')))),
-        l('Log In', 'user/login', array('attributes' => array('id' => 'login', 'class' => array('ssrx', 'button')))),
+        l('Sign In', 'user/login', array('attributes' => array('id' => 'login', 'class' => array('ssrx', 'button')))),
         $fblogin,
 			),
 			'attributes' => array('class' => array('ssrx', 'button')),
