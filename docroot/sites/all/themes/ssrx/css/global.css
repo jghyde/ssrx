@@ -66,19 +66,17 @@ h2.block-title {
 }
 
 .zone-footer-wrapper {
-  background-image: linear-gradient(bottom, rgb(255,245,232) 10%, rgb(254,193,119) 80%);
-  background-image: -o-linear-gradient(bottom, rgb(255,245,232) 10%, rgb(254,193,119) 80%);
-  background-image: -moz-linear-gradient(bottom, rgb(255,245,232) 10%, rgb(254,193,119) 80%);
-  background-image: -webkit-linear-gradient(bottom, rgb(255,245,232) 10%, rgb(254,193,119) 80%);
-  background-image: -ms-linear-gradient(bottom, rgb(255,245,232) 10%, rgb(254,193,119) 80%);
+  background: rgb(254,193,119); /* Old browsers */
+  /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSI2MCUiIHN0b3AtY29sb3I9IiNmZWMxNzciIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmVmNWU4IiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+  background: -moz-linear-gradient(top,  rgba(254,193,119,1) 60%, rgba(254,245,232,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(60%,rgba(254,193,119,1)), color-stop(100%,rgba(254,245,232,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba(254,193,119,1) 60%,rgba(254,245,232,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba(254,193,119,1) 60%,rgba(254,245,232,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba(254,193,119,1) 60%,rgba(254,245,232,1) 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  rgba(254,193,119,1) 60%,rgba(254,245,232,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fec177', endColorstr='#fef5e8',GradientType=0 ); /* IE6-8 */
 
-  background-image: -webkit-gradient(
-	linear,
-	left bottom,
-	left top,
-	color-stop(0.1, rgb(255,245,232)),
-	color-stop(0.8, rgb(254,193,119))
-);
   position: relative;
   bottom: 0px;
   width: 100%;

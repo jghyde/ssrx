@@ -31,7 +31,8 @@ table.views-table h3.page-title {
   margin: 0 0 0 10px;
   line-height: 55px;
 }
-#price-search-facets {
+#price-search-facets,
+div.view.view-prescription-price-search.view-id-prescription_price_search.view-display-id-attachment_1 {
   height: 52px;
   background: rgb(254,128,88); /* Old browsers */
   /* IE9 SVG, needs conditional override of 'filter' to 'none' */
@@ -86,4 +87,39 @@ background: rgb(254,162,132); /* Old browsers */
   background: -ms-linear-gradient(top,  rgba(254,162,132,1) 0%,rgba(254,85,32,1) 64%); /* IE10+ */
   background: linear-gradient(to bottom,  rgba(254,162,132,1) 0%,rgba(254,85,32,1) 64%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fea284', endColorstr='#fe5520',GradientType=0 ); /* IE6-8 */
+}
+div.view.view-prescription-price-search.view-id-prescription_price_search.view-display-id-attachment_1{
+  line-height: 60px;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 0 0 0 20px;
+  height: 60px;
+}
+div.view div.attachment div.view div.view-content h3 {
+  display: none;
+}
+.view.view-prescription-price-search.view-id-prescription_price_search.view-display-id-attachment_1 .views-field.views-field-field-price,
+.view.view-prescription-price-search.view-id-prescription_price_search.view-display-id-attachment_1  .views-field.views-field-field-price-1 {
+  padding: 3px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  padding-left: 40px;
+  color: #39b54a;
+  margin: -5px 10px 0;
+  background-color: #ffffff;
+  float: right;
+  box-shadow: 1px 1px 3px #cccccc;
+  border: 3px solid #fe5520;
+}
+.view.view-prescription-price-search.view-id-prescription_price_search.view-display-id-attachment_1  .views-field.views-field-field-price {
+  background: #ffffff url('green_down.png') 5px 10px no-repeat;
+}
+.view.view-prescription-price-search.view-id-prescription_price_search.view-display-id-attachment_1  .views-field.views-field-field-price-1 {
+  background: #ffffff url('red_up.png') 5px 10px no-repeat;
+  color: #d1181b;
+}
+.view.view-prescription-price-search.view-id-prescription_price_search.view-display-id-attachment_1 {
+  margin: 0 0 -35px 0;
 }
