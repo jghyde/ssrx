@@ -48,7 +48,7 @@
     <div class="attachment attachment-before">
       <?php print $attachment_before; ?>
       <?php if ($rows) : ?>
-      <div id="price-search-facets">
+      <div id="price-search-facets" class="clearfix">
         <script type="text/javascript">
         (function($) {
           $(function() {
@@ -93,7 +93,7 @@
           });
         })(jQuery);
         </script>
-        Show Pharmacies within:<br />
+        <div id="dashboard-title">Show Pharmacies within:</div>
         <?php $i = 1;
         // title=Metformin+Hydrochloride&distance[postal_code]=94301&distance[search_distance]=25&distance[search_units]=mile  
         $base = 'prescriptions'; // @TODO Change this if you cange the path of the view.
@@ -107,12 +107,6 @@
           <li><a class="search-link proximity" placeholder-data="25" href="/<?php print $base; ?>?title=<?php print $title; ?>&distance[postal_code]=<?php print $postal_code; ?>&distance[search_distance]=25&distance[search_units]=<?php print $search_units; ?>">25 miles</a></li>
           <li><a class="search-link proximity" placeholder-data="50" href="/<?php print $base; ?>?title=<?php print $title; ?>&distance[postal_code]=<?php print $postal_code; ?>&distance[search_distance]=50&distance[search_units]=<?php print $search_units; ?>">50 miles</a></li>
           <li><a class="search-link proximity" placeholder-data="100" href="/<?php print $base; ?>?title=<?php print $title; ?>&distance[postal_code]=<?php print $postal_code; ?>&distance[search_distance]=100&distance[search_units]=<?php print $search_units; ?>">100 miles</a></li>
-        </ul>
-
-        <ul>
-          <li><a class="search-link type" placeholder-data="24hr" href="/">Show only 24 hour Pharmacies</a></li>
-          <li><a class="search-link type" placeholder-data="online" href="/">Show only online Pharmacies</a></li>
-          <li><a class="search-link type" placeholder-data="all" href="/">Show all Pharmacies</a></li>
         </ul>
       </div>
     </div>

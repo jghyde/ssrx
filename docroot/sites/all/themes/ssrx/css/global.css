@@ -944,3 +944,6 @@ th.active {
   left: 35px;
   color: #FD9F2D;
 }
+.view-content {
+  clear: both;
+}
