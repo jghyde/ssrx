@@ -282,7 +282,6 @@ function ssrx_pricereports_views_default_views() {
   $handler->display->display_options['fields']['distance']['hide_empty'] = 0;
   $handler->display->display_options['fields']['distance']['empty_zero'] = 0;
   $handler->display->display_options['fields']['distance']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['distance']['origin'] = 'tied';
   $handler->display->display_options['fields']['distance']['units'] = 'mi';
   /* Field: Content: Quantity */
   $handler->display->display_options['fields']['field_quantity']['id'] = 'field_quantity';
