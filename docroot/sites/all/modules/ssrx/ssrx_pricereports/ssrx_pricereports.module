@@ -122,3 +122,10 @@ function ssrx_pricereports_index_drug_autocomplete() {
 function ssrx_pricereports_views_pre_render(&$view) {
   drupal_add_css(drupal_get_path('module', 'ssrx_pricereports') . '/css/ssrx_pricereports.css');
 }
+
+/**
+ * Implements hook_views_query_alter()
+ */
+function ssrx_pricereports_views_query_alter(&$view, &$query) {
+  return;
+}

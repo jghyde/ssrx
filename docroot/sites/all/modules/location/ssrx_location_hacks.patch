@@ -1,0 +1,125 @@
+diff --git a/contrib/location_cck/location_cck.module b/contrib/location_cck/location_cck.module
+index ba1a592..a5bcc77 100644
+--- a/contrib/location_cck/location_cck.module
++++ b/contrib/location_cck/location_cck.module
+@@ -162,6 +162,17 @@ function location_cck_field_insert($entity_type, $entity, $field, $instance, $la
+       );
+       location_save_locations($items, $criteria);
+     }
++  }else{
++    if (!empty($items)) {
++      list($id, $vid, $bundle) = entity_extract_ids($entity_type, $entity);
++      // Store instances of locations by field name and vid.
++      $criteria = array(
++        'genid' => 'field:' . $field['field_name'] . ':' . $entity_type . ':' . $id,
++        'vid' => $vid ? $vid : $id,
++        'nid' => $id,
++      );
++      location_save_locations($items, $criteria);
++    }
+   }
+ }
+ 
+@@ -179,6 +190,17 @@ function location_cck_field_update($entity_type, $entity, $field, $instance, $la
+       );
+       location_save_locations($items, $criteria);
+     }
++  }else{
++    if (!empty($items)) {
++      list($id, $vid, $bundle) = entity_extract_ids($entity_type, $entity);
++      // Store instances of locations by field name and vid.
++      $criteria = array(
++        'genid' => 'field:' . $field['field_name'] . ':' . $entity_type . ':' . $id,
++        'vid' => $vid ? $vid : $id,
++        'nid' => $id,
++      );
++      location_save_locations($items, $criteria);
++    }
+   }
+ }
+ 
+@@ -199,6 +221,11 @@ function location_cck_field_delete($entity_type, $entity, $field, $instance, $la
+       $locs = array();
+       location_save_locations($locs, array('genid' => $genid));
+     }
++  }else {
++    list($id, $vid, $bundle) = entity_extract_ids($entity_type, $entity);
++    $genid = 'field:' . $field['field_name'] . ':' . $entity_type . ':' . $id;
++    $locs = array();
++    location_save_locations($locs, array('genid' => $genid));
+   }
+ }
+ 
+@@ -210,6 +237,11 @@ function location_cck_field_delete_revision($entity_type, $entity, $field, $inst
+     $genid = 'cck:' . $field['field_name'] . ':' . $entity->vid;
+     $locs = array();
+     location_save_locations($locs, array('genid' => $genid));
++  } else {
++    list($id, $vid, $bundle) = entity_extract_ids($entity_type, $entity);
++    $genid = 'field:' . $field['field_name'] . ':' . $entity_type . ':' . $id;
++    $locs = array();
++    location_save_locations($locs, array('genid' => $genid));
+   }
+ }
+ 
+@@ -224,7 +256,6 @@ function location_cck_field_validate($entity_type, $entity, $field, $instance, $
+  * Implement hook_field_load().
+  */
+ function location_cck_field_load($entity_type, $entities, $field, $instances, $langcode, &$items, $age) {
+-  if ($entity_type == 'node') {
+     foreach ($entities as $id => $entity) {
+       foreach ($items[$id] as $delta => $item) {
+         $location = array();
+@@ -238,7 +269,6 @@ function location_cck_field_load($entity_type, $entities, $field, $instances, $l
+         $items[$id][$delta] = array_merge($location, $item);
+       }
+     }
+-  }
+ }
+ 
+ /**
+diff --git a/location.info b/location.info
+index a978854..fd4daa2 100644
+--- a/location.info
++++ b/location.info
+@@ -3,6 +3,7 @@ package = Location
+ description = The location module allows you to associate a geographic location with content and users. Users can do proximity searches by postal code.  This is useful for organizing communities that have a geographic presence.
+ core = 7.x
+ configure = admin/config/content/location
++dependencies[] = ssrx_autocomplete
+ files[] = location.module
+ files[] = location.install
+ files[] = location.admin.inc
+diff --git a/location.views.inc b/location.views.inc
+index 58c5ff7..45a8cf5 100644
+--- a/location.views.inc
++++ b/location.views.inc
+@@ -459,7 +459,11 @@ function location_views_proximity_get_reference_location($view, $options) {
+     case 'user':
+     case 'hybrid':
+       global $user;
++      // @HACK The location module does not know how to figure out if a location CCK is a location field.
++      $user = user_load($user->uid);
++      $user->locations = isset($user->field_profile_address['und']) ? $user->field_profile_address['und'] : NULL;
+       $user_locations = isset($user->locations) ? $user->locations : location_load_locations($user->uid, 'uid');
++      // end @HACK
+       // This user_location_delta will only possibly be set if we are dealing with the filter.
+       $i = (isset($options['user_location_delta']) && !empty($options['user_location_delta'])) ? $options['user_location_delta'] : 0;
+       if (isset($user_locations[$i]['latitude']) || !empty($user_locations[$i]['latitude'])) {
+@@ -470,6 +474,16 @@ function location_views_proximity_get_reference_location($view, $options) {
+         $coordinates['latitude'] = (float) $options['latitude'];
+         $coordinates['longitude'] = (float) $options['longitude'];
+       }
++      // @HACK give the coordinates of the center of the zip code from where the search began:
++      elseif (isset($_GET['distance']['postal_code'])) {
++        $location = array(
++          'postal_code' => $_GET['distance']['postal_code'],
++          'country' => 'us',
++        );
++        $coords = ssrx_autocomplete_get_postalcode_data_us($location);
++        $coordinates['latitude'] = (float)$coord['lat'];
++        $coordinates['longitude'] = (float)$coord['lon'];
++      }
+       break;
+     case 'static':
+     case 'latlon_gmap':

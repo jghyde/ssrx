@@ -53,5 +53,7 @@ function ssrx_user_fb_user($op, $data, &$return) {
 function ssrx_user_form_alter(&$form, &$form_state, $form_id) {
   if ($form['#form_id'] == 'user_register_form') {
     $form['fb_user']['#weight'] = -100;
+    // Get rid of na option:
+    unset($form['field_gender'][LANGUAGE_NONE]['#options']['_none']);
   }
 }

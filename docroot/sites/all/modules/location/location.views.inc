@@ -459,7 +459,11 @@ function location_views_proximity_get_reference_location($view, $options) {
     case 'user':
     case 'hybrid':
       global $user;
+      // @HACK The location module does not know how to figure out if a location CCK is a location field.
+      $user = user_load($user->uid);
+      $user->locations = isset($user->field_profile_address['und']) ? $user->field_profile_address['und'] : NULL;
       $user_locations = isset($user->locations) ? $user->locations : location_load_locations($user->uid, 'uid');
+      // end @HACK
       // This user_location_delta will only possibly be set if we are dealing with the filter.
       $i = (isset($options['user_location_delta']) && !empty($options['user_location_delta'])) ? $options['user_location_delta'] : 0;
       if (isset($user_locations[$i]['latitude']) || !empty($user_locations[$i]['latitude'])) {
@@ -469,6 +473,16 @@ function location_views_proximity_get_reference_location($view, $options) {
       else if ($options['origin'] == 'hybrid') {
         $coordinates['latitude'] = (float) $options['latitude'];
         $coordinates['longitude'] = (float) $options['longitude'];
+      }
+      // @HACK give the coordinates of the center of the zip code from where the search began:
+      elseif (isset($_GET['distance']['postal_code'])) {
+        $location = array(
+          'postal_code' => $_GET['distance']['postal_code'],
+          'country' => 'us',
+        );
+        $coords = ssrx_autocomplete_get_postalcode_data_us($location);
+        $coordinates['latitude'] = (float)$coord['lat'];
+        $coordinates['longitude'] = (float)$coord['lon'];
       }
       break;
     case 'static':
