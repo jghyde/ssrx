@@ -953,3 +953,6 @@ p.quote-words.underlay {
   background: transparent url(../images/smlpage.png) top left no-repeat;
   overflow: hidden;
 }
+th.views-field-distance {
+  width: 90px;
+}
