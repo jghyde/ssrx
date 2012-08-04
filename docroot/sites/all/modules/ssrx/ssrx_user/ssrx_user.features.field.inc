@@ -237,7 +237,7 @@ function ssrx_user_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '8',
+        'weight' => '5',
       ),
     ),
   );
@@ -380,7 +380,7 @@ function ssrx_user_field_default_fields() {
           'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
         ),
         'type' => 'location',
-        'weight' => '5',
+        'weight' => '6',
       ),
     ),
   );
@@ -473,7 +473,7 @@ function ssrx_user_field_default_fields() {
           'year_range' => '1907:-18',
         ),
         'type' => 'date_select',
-        'weight' => '6',
+        'weight' => '7',
       ),
     ),
   );
@@ -564,7 +564,7 @@ function ssrx_user_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'node_reference_autocomplete',
-        'weight' => '7',
+        'weight' => '9',
       ),
     ),
   );

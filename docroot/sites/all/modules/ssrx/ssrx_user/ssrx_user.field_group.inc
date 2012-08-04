@@ -29,6 +29,8 @@ function ssrx_user_field_group_info() {
       3 => 'field_profile_birthday',
       4 => 'field_profile_pharmacy',
       5 => 'field_mobile_phone_number',
+      6 => 'field_insurance_company',
+      7 => 'field_gender',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
