@@ -22,7 +22,7 @@
 <?php
 if ($_REQUEST['title']):
   ?>
-  Results for <?php echo $_REQUEST['title']; ?>
+  <?php echo $_REQUEST['title']; ?>
   <?php
 else:
   ?>

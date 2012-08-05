@@ -956,3 +956,6 @@ p.quote-words.underlay {
 th.views-field-distance {
   width: 90px;
 }
+#autocomplete ul li {
+  padding: 0 0 0 5px;
+}
