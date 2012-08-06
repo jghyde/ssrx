@@ -461,9 +461,11 @@ function location_views_proximity_get_reference_location($view, $options) {
       global $user;
       // @HACK The location module does not know how to figure out if a location CCK is a location field.
       $user = user_load($user->uid);
-      $user->locations = isset($user->field_profile_address['und']) ? $user->field_profile_address['und'] : NULL;
-      $user_locations = isset($user->locations) ? $user->locations : location_load_locations($user->uid, 'uid');
+      if ($user->uid > 0) {
+        $user->locations = isset($user->field_profile_address['und']) ? $user->field_profile_address['und'] : NULL;
+        $user_locations = isset($user->locations) ? $user->locations : location_load_locations($user->uid, 'uid');
       // end @HACK
+      }
       // This user_location_delta will only possibly be set if we are dealing with the filter.
       $i = (isset($options['user_location_delta']) && !empty($options['user_location_delta'])) ? $options['user_location_delta'] : 0;
       if (isset($user_locations[$i]['latitude']) || !empty($user_locations[$i]['latitude'])) {
@@ -481,8 +483,8 @@ function location_views_proximity_get_reference_location($view, $options) {
           'country' => 'us',
         );
         $coords = ssrx_autocomplete_get_postalcode_data_us($location);
-        $coordinates['latitude'] = (float)$coord['lat'];
-        $coordinates['longitude'] = (float)$coord['lon'];
+        $coordinates['latitude'] = (float)$coords['lat'];
+        $coordinates['longitude'] = (float)$coords['lon'];
       }
       break;
     case 'static':
@@ -499,6 +501,20 @@ function location_views_proximity_get_reference_location($view, $options) {
               $coordinates['latitude'] = (float) $coords['latitude'];
               $coordinates['longitude'] = (float) $coords['longitude'];
             }
+          }
+        }
+      }
+      if (!count($coordinates)) {
+        // Force default for country.
+        if ($options['origin'] == 'postal_default') {
+          $options['country'] = variable_get('location_default_country', 'us');
+        }
+        // Zip code lookup.
+        if (!empty($options['postal_code']) && !empty($options['country'])) {
+          $coords = location_latlon_rough($options);
+          if ($coords) {
+            $coordinates['latitude'] = (float) $coords['lat'];
+            $coordinates['longitude'] = (float) $coords['lon'];
           }
         }
       }
