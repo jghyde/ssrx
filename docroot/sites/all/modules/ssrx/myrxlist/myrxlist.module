@@ -23,21 +23,24 @@ function myrxlist_menu() {
   $items['myrxlist'] = array(
     'title' => 'MyRxList',
     'page callback' => 'myrxlist_page',
-    'access arguments' => array('Access Content'),
+    'access callback' => 'user_access',
+    'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
   $items['myrxlist/save/%'] = array(
     'title' => t('Save a Prescription Search'),
     'page callback' => 'myrxlist_save',
     'page arguments' => array(2),
-    'access arguments' => array('Access Content'),
+    'access callback' => 'user_access',
+    'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
   $items['myrxlist/delete/%'] = array(
     'title' => t('Delete a Prescription Search'),
     'page callback' => 'myrxlist_delete',
     'page arguments' => array(2),
-    'access arguments' => array('Access Content'),
+    'access callback' => 'user_access',
+    'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
   /*
@@ -119,6 +122,10 @@ function myrxlist_block_save($delta = '', $edit = array()) {
  * Page callback to save a prescription search
  */
 function myrxlist_save($sid) {
+  global $user;
+  if ($user->uid == 0) {
+    return t('Please register and log in to use this feature. !here', array('!here' => l('You can start here.', 'user/register')));
+  }
   if (!$sid) {
     return FALSE;
   }
@@ -145,6 +152,10 @@ function myrxlist_save($sid) {
  * Page callback to delete saved searches
  */
 function myrxlist_delete($sid) {
+  global $user;
+  if ($user->uid == 0) {
+    return t('Please register and log in to use this feature. !here', array('!here' => l('You can start here.', 'user/register')));
+  }
   if (!$sid) {
     return FALSE;
   }
