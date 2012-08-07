@@ -959,3 +959,6 @@ th.views-field-distance {
 #autocomplete ul li {
   padding: 0 0 0 5px;
 }
+.page-user-register ul.tabs.primary {
+  display: none;
+}
