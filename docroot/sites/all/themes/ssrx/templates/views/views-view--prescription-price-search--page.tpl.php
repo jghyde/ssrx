@@ -97,8 +97,14 @@
         <?php $i = 1;
         // title=Metformin+Hydrochloride&distance[postal_code]=94301&distance[search_distance]=25&distance[search_units]=mile  
         $base = 'prescriptions'; // @TODO Change this if you cange the path of the view.
-        $title = urlencode($_GET['title']);
-        $postal_code = $_GET['distance']['postal_code'];
+        if (isset($_GET['title'])) {
+          $title = urlencode($_GET['title']);
+          $postal_code = $_GET['distance']['postal_code'];
+        }
+        else {
+          $title = 'All Prescription Drugs';
+          $postal_code = '';
+        }
         $search_units = 'mile';
         ?>
         <ul>

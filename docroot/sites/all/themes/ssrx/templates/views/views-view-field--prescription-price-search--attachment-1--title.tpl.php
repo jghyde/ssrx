@@ -20,7 +20,7 @@
   */
 ?>
 <?php
-if ($_REQUEST['title']):
+if (isset($_REQUEST['title'])):
   ?>
   <?php echo $_REQUEST['title']; ?>
   <?php
