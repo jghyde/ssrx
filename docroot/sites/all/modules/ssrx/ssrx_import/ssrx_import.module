@@ -8,7 +8,8 @@ function ssrx_import_menu() {
   $menu['ssrx/import/drugs'] = array(
     'title' => t('Import Drugs'),
     'page callback' => 'ssrx_import_drugs',
-    'access callback' => TRUE,
+    'access callback' => 'user_access',
+    'access arguments' => 'administer content',
   );
   $menu['ssrx/import/prices'] = array(
     'title' => t('Import Prices'),
@@ -348,14 +349,28 @@ function _ssrx_import_pharmacy($start, $batch_size, &$context) {
 
     // Set the Hays ID
     $node->field_hays_id[LANGUAGE_NONE][0]['value'] = $line->HayesIdNumber;
-
+    $lat = 0;
+    $lon = 0;
+    if (!empty($line->lat)) {
+      $lat = $line->lat;
+    }
+    if (!empty($line->lon)) {
+      $lon = $line->lon;
+    }
     $location = array(
       'street' => $line->PharmacyAddress,
       'city' => $line->PharmacyCity,
       'province' => $line->PharmacyState,
       'postal_code' => $line->PharmacyZip,
-      'latitude' => floatval($line->lat) == 0 ? '' : $line->lat,
-      'longitude' => floatval($line->lon) == 0 ? '' : $line->lon,
+      //'latitude' => floatval($line->lat) == 0 ? '' : $line->lat,
+      //'longitude' => floatval($line->lon) == 0 ? '' : $line->lon,
+      'latitude' => $lat,
+      'longitude' => $lon,
+      'source' => 1,
+      'locpick' => array(
+        'user_latitude' => $lat,
+        'user_longitude' => $lon,
+      ),
       'phone' => $line->PharmacyPhone,
       'fax' => $line->PharmacyFax,
       'country' => 'us',
