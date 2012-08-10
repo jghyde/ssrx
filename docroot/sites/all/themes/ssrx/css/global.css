@@ -755,90 +755,32 @@ th.active {
 }
 
 /* spacial page styling */
-
-.context-doctors .doctors {
-  position: absolute;
-  left: 20px;
-  top: 40px;
+.context-drugs tr:hover td, 
+.context-drugs tr.even:hover td.active, 
+.context-drugs tr.odd:hover td.active,
+.context-urgent tr:hover td, 
+.context-urgent tr.even:hover td.active, 
+.context-urgent tr.odd:hover td.active,
+.context-pharmacies tr:hover td, 
+.context-pharmacies tr.even:hover td.active, 
+.context-pharmacies tr.odd:hover td.active,
+.context-doctors tr:hover td, 
+.context-doctors tr.even:hover td.active, 
+.context-doctors tr.odd:hover td.active {
+  background-color: #F5F5F5;
+  background: #F5F5F5;
 }
-.context-doctors .quote{
-  position: absolute;
-  bottom: 236px;
-  right: 143px;
-  padding-bottom: 20px;
-}
-.context-doctors .quote-words{
-  position: absolute;
-  text-align: right;
-  font-size: 16px;
-  color: #FE8117;
-  bottom: 262px;
-  right: 165px;
-}
-
-
 .context-urgent .doctors {
   position: absolute;
   left: 20px;
   top: 40px;
 }
-.context-urgent .quote{
-  position: absolute;
-  bottom: 196px;
-  right: 32px;
-  padding-bottom: 20px;
-}
-.context-urgent .quote-words{
-  position: absolute;
-  text-align: right;
-  font-size: 16px;
-  color: #FE8117;
-  bottom: 224px;
-  right: 50px;
-}
-
-.context-drugs .list-header {
-  position:absolute;
-  z-index: 1;
-  color:white;
-  text-shadow: 1px 1px 1px black;
-  font-size:25px;
-  font-weight: 500;
-  text-decoration:underline;
-  line-height: 1em;
-  left:594px;
-  bottom:513px;
-}
 .context-drugs .list-items{
-  position:absolute;
   z-index: 2;
   color:white;
   text-shadow: 1px 1px 1px black;
   font-size:18px;
   font-weight: 200;	
-  left:615px;
-  bottom:218px;
-
-}
-
-.context-drugs .box {
-  position: absolute;
-  z-index: -1;
-  left:571px;
-  bottom:200px;
-}
-.context-drugs .pill {
-  position: absolute;
- 
-}
-
-.context-drugs .quote-words {
-  position: absolute;
-  text-align: right;
-  font-size: 27px;
-  color: #FE8117;
-  left: 175px;
-  padding-top: 40px;
 }
 .context-drugs .quote {
   margin: 0 90px;
@@ -847,57 +789,38 @@ th.active {
   width: 607px;
 }
 
-.context-pharmacies  .list-header {
-  position:absolute;
-  left: 660px;
-  bottom: 498px;
+.list-header {
   z-index: 1;
   color:white;
   text-shadow: 1px 1px 1px black;
   font-size:25px;
   font-weight: 500;
-  text-decoration:underline;
-  
-  
+  text-decoration:underline; 
+}
+div.dark-blue-box {
+  padding: 20px;
+  background-color: #094569;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
 }
 .context-pharmacies .list-items{
-  position:absolute;
-  left: 683px;
-  bottom: 210px;
   z-index: 2;
   color:white;
   text-shadow: 1px 1px 1px black;
   font-size:18px;
   font-weight: 200;	
-
 }
 
-.context-pharmacies .box {
-  position: absolute;
-  left:644px;
-  bottom:181px;
-  z-index: -1;
+.context-pharmacies .quote-words,
+.context-drugs .quote-words {
+  margin: 10px auto;
 }
-.context-pharmacies .doctors {
-  position: absolute;
-  left: 20px;
-  top: 40px;
+.context-drugs tbody tr:hover,
+.context-drugs tbody td:hover {
+  background: none;
+  background-color: none;
 }
-.context-pharmacies .quote{
-  margin-bottom: 10px;
-  position: relative;
-  left:100px;
-}
-.context-pharmacies .quote-words{
-  position: absolute;
-  text-align: right;
-  left: 115px;
-  font-size: 24px;
-  color: #FE8117;
-  bottom: -1px;
-}
-
-
 .page-node-226690 .line{
 	position: absolute;
 	left:11px; 
