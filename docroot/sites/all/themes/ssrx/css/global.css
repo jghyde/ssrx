@@ -960,5 +960,5 @@ th.views-field-distance {
   padding: 0 0 0 5px;
 }
 .page-user-register ul.tabs.primary {
-  display: none;
+  /* display: none; */
 }
