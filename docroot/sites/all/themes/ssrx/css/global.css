@@ -770,6 +770,14 @@ th.active {
   background-color: #F5F5F5;
   background: #F5F5F5;
 }
+.page-node-226689 h1#page-title,
+.page-node-222297 h1#page-title,
+.page-node-222300 h1#page-title,
+.page-node-222296 h1#page-title {
+  visibility: hidden;
+  margin: 0;
+  
+}
 .context-urgent .doctors {
   position: absolute;
   left: 20px;
