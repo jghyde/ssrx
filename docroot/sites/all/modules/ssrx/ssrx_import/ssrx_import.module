@@ -371,8 +371,8 @@ function _ssrx_import_pharmacy($start, $batch_size, &$context) {
         'user_latitude' => $lat,
         'user_longitude' => $lon,
       ),
-      'phone' => $line->PharmacyPhone,
-      'fax' => $line->PharmacyFax,
+      'phone' => _ssrx_import_format_phone($line->PharmacyPhone),
+      'fax' => _ssrx_import_format_phone($line->PharmacyFax),
       'country' => 'us',
       'country_name' => 'United States',
     );
