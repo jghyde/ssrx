@@ -12,7 +12,7 @@
  */
 function ssrx_preprocess_location(&$vars) {
   $node = menu_get_object();
-  if (is_object($node) && $node->type == 'pharmacy') {
+  if (is_object($node) && $node->type == 'pharmacy' || $node->type =='urget_care') {
     // Render the side-to-side google map for pharmacy detail pages
     $text = '<h4 class="pharmacy-title">' . $node->title . '</h4>';
     $text .= '<p class="gmap-bubble-address">' . $vars['street'] . '</p>';

@@ -559,6 +559,7 @@ function _ssrx_import_doctors($start, $batch_size, &$context) {
     }
 
     // Make sure these lats and lons have values and if they do not, set the values to '' to allow google maps api to update them.
+    $source = LOCATION_LATLON_UNDEFINED;
     $lat = '';
     if (isset($line->lat) && !empty($line->lat) && $line->lat != 0) {
       $lat = $line->lat;
@@ -567,10 +568,10 @@ function _ssrx_import_doctors($start, $batch_size, &$context) {
     if (isset($line->lon) && !empty($line->lon) && $line->lon != 0) {
       $lon = $line->lon;
     }
-    if (empty($lat) || empty($lon)) {
-      $lon = '';
-      $lat = '';
+    if (!empty($lon) && !empty($lat)) {
+      $source = LOCATION_LATLON_USER_SUBMITTED;
     }
+
     $location = array(
       'name' => str_replace( array( '\'', '"', ',' , ';', '<', '>' ), '', $line->clinic),
       'street' => $line->address,
@@ -585,7 +586,7 @@ function _ssrx_import_doctors($start, $batch_size, &$context) {
       ),
       'phone' => _ssrx_import_format_phone($line->phone),
       'fax' => _ssrx_import_format_phone($line->fax),
-      'source' => '1',
+      'source' => $source,
       'country' => 'us',
       'country_name' => 'United States',
     );
