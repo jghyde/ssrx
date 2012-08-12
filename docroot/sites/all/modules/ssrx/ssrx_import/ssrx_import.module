@@ -535,76 +535,85 @@ function _ssrx_import_doctors($start, $batch_size, &$context) {
 
   $result = db_query_range("SELECT * FROM {doctors} order by id ASC", $start, $batch_size);
   foreach ($result as $line) {
-    $node = new stdClass();
-    $node->type = 'doctors';
-    node_object_prepare($node);
-    $node->language = LANGUAGE_NONE;
-    // for debug
-     $example_node = node_load('138016');
-
-    // Set the title
-    $node->title = $line->name;
-
-    // Set the taxonomy term for specialty
-    if (!empty($line->specialty)) {
-      $specialty = ucwords(strtolower($line->specialty));
-      if (!isset($context['doctor_tids'][$specialty])) {
-        $context['doctor_tids'][$specialty] = _ssrx_import_add_or_get_term($specialty, $context['doctor_vocabulary']);
+    $dup_check = db_query('select title from {node} where title=:title', array(':title' => $line->name))->fetchfield;
+    if (!$dup_check) {
+    
+      $node = new stdClass();
+      $node->type = 'doctors';
+      node_object_prepare($node);
+      $node->language = LANGUAGE_NONE;
+      // for debug
+      $example_node = node_load('138016');
+ 
+      // Set the title
+      $node->title = $line->name;
+ 
+      // Set the taxonomy term for specialty
+      if (!empty($line->specialty)) {
+        $specialty = ucwords(strtolower($line->specialty));
+        if (!isset($context['doctor_tids'][$specialty])) {
+          $context['doctor_tids'][$specialty] = _ssrx_import_add_or_get_term($specialty, $context['doctor_vocabulary']);
+        }
+        $node->field_doctor_specialty[LANGUAGE_NONE][]['tid'] = $context['doctor_tids'][$specialty];
+        unset($specialty);
       }
-      $node->field_doctor_specialty[LANGUAGE_NONE][]['tid'] = $context['doctor_tids'][$specialty];
-      unset($specialty);
+      if (!empty($line->title)) {
+        $node->field_doctor_title[LANGUAGE_NONE][]['value'] = $line->title;
+      }
+ 
+      // Make sure these lats and lons have values and if they do not, set the values to '' to allow google maps api to update them.
+      $source = LOCATION_LATLON_UNDEFINED;
+      $lat = '';
+      if (isset($line->lat) && !empty($line->lat) && $line->lat != 0) {
+        $lat = $line->lat;
+      }
+      $lon = '';
+      if (isset($line->lon) && !empty($line->lon) && $line->lon != 0) {
+        $lon = $line->lon;
+      }
+      if (!empty($lon) && !empty($lat)) {
+        $source = LOCATION_LATLON_USER_SUBMITTED;
+      }
+ 
+      $location = array(
+        'name' => str_replace( array( '\'', '"', ',' , ';', '<', '>' ), '', $line->clinic),
+        'street' => $line->address,
+        'city' => $line->city,
+        'province' => $line->state,
+        'postal_code' => $line->zip,
+        'latitude' => $lat,
+        'longitude' => $lon,
+        'locpick' => array(
+          'user_latitude' => $lat,
+          'user_longitude' => $lon,
+        ),
+        'phone' => _ssrx_import_format_phone($line->phone),
+        'fax' => _ssrx_import_format_phone($line->fax),
+        'source' => $source,
+        'country' => 'us',
+        'country_name' => 'United States',
+      );
+      $node->locations = array();
+      $node->locations[] = $node->location = $location;
+      node_save($node);
+      unset($location);
+      unset($lat);
+      unset($lon);
     }
-    if (!empty($line->title)) {
-      $node->field_doctor_title[LANGUAGE_NONE][]['value'] = $line->title;
+    else {
+      $dup = $line->name . ' was a dup';
     }
-
-    // Make sure these lats and lons have values and if they do not, set the values to '' to allow google maps api to update them.
-    $source = LOCATION_LATLON_UNDEFINED;
-    $lat = '';
-    if (isset($line->lat) && !empty($line->lat) && $line->lat != 0) {
-      $lat = $line->lat;
-    }
-    $lon = '';
-    if (isset($line->lon) && !empty($line->lon) && $line->lon != 0) {
-      $lon = $line->lon;
-    }
-    if (!empty($lon) && !empty($lat)) {
-      $source = LOCATION_LATLON_USER_SUBMITTED;
-    }
-
-    $location = array(
-      'name' => str_replace( array( '\'', '"', ',' , ';', '<', '>' ), '', $line->clinic),
-      'street' => $line->address,
-      'city' => $line->city,
-      'province' => $line->state,
-      'postal_code' => $line->zip,
-      'latitude' => $lat,
-      'longitude' => $lon,
-      'locpick' => array(
-        'user_latitude' => $lat,
-        'user_longitude' => $lon,
-      ),
-      'phone' => _ssrx_import_format_phone($line->phone),
-      'fax' => _ssrx_import_format_phone($line->fax),
-      'source' => $source,
-      'country' => 'us',
-      'country_name' => 'United States',
-    );
-    $node->locations = array();
-    $node->locations[] = $node->location = $location;
-    node_save($node);
-
     unset($line);
-    unset($location);
-    unset($lat);
-    unset($lon);
-    $context['results'][] = $node->title;
+
+    $context['results'][] = $node->title . $dup;
 
     // Update our progress information.
     $context['sandbox']['progress']++;
     $context['sandbox']['current_node'] = $node->nid;
     $context['message'] = t('Now processing :num - :num2 of :total', array(':num' => $start, ':num2' => ($start + $batch_size), ':total' => $context['sandbox']['max']));
-    unset($node);
+    if (is_object($node)) {
+      unset($node);
+    }
   }
 }
 
