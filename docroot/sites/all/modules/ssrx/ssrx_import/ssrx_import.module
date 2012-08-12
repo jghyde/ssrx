@@ -539,7 +539,9 @@ function _ssrx_import_doctors($start, $batch_size, &$context) {
 
   $result = db_query_range("SELECT * FROM {doctors} order by id ASC", $start, $batch_size);
   foreach ($result as $line) {
-    $dup_check = db_query('select title from {node} where title=:title', array(':title' => $line->name))->fetchfield;
+    $doctor_name = str_replace( array( '\'', '"', ',' , ';', '<', '>' ), '', $line->name);
+    $dup_check = db_query('select title from {node} where title=:title', array(':title' => $doctor_name))->fetchfield;
+    
     if (!$dup_check) {
     
       $node = new stdClass();
@@ -550,7 +552,7 @@ function _ssrx_import_doctors($start, $batch_size, &$context) {
       $example_node = node_load('138016');
  
       // Set the title
-      $node->title = $line->name;
+      $node->title = $doctor_name;
  
       // Set the taxonomy term for specialty
       if (!empty($line->specialty)) {
