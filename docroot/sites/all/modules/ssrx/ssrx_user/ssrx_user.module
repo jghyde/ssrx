@@ -63,8 +63,8 @@ function ssrx_user_form_alter(&$form, &$form_state, $form_id) {
  */
 function ssrx_user_menu_alter(&$callbacks) {
   $callbacks['user/register']['title'] = 'Join Us';
-  $callbacks['user/register']['weight'] = -1;
+  //$callbacks['user/register']['weight'] = -1;
   $callbacks['user/login']['title'] = 'Sign In';
-  $callbacks['user/login']['weight'] = 0;
-  $callbacks['user/password']['weight'] = 1;
+  //$callbacks['user/login']['weight'] = 0;
+  //$callbacks['user/password']['weight'] = 1;
 }

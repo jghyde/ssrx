@@ -569,11 +569,11 @@ function _ssrx_import_doctors($start, $batch_size, &$context) {
       $source = LOCATION_LATLON_UNDEFINED;
       $lat = '';
       if (isset($line->lat) && !empty($line->lat) && $line->lat != 0) {
-        $lat = $line->lat;
+        $lat = (float)$line->lat;
       }
       $lon = '';
       if (isset($line->lon) && !empty($line->lon) && $line->lon != 0) {
-        $lon = $line->lon;
+        $lon = (float)$line->lon;
       }
       if (!empty($lon) && !empty($lat)) {
         $source = LOCATION_LATLON_USER_SUBMITTED;
