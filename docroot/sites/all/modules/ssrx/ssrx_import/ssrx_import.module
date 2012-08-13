@@ -4,31 +4,31 @@ function ssrx_import_menu() {
     'title' => t('Import Pharmacies'),
     'page callback' => 'ssrx_import_pharmacies',
     'access callback' => 'user_access',
-    'access arguments' => 'administer content',
+    'access arguments' => array('administer content'),
   );
   $menu['ssrx/import/drugs'] = array(
     'title' => t('Import Drugs'),
     'page callback' => 'ssrx_import_drugs',
     'access callback' => 'user_access',
-    'access arguments' => 'administer content',
+    'access arguments' => array('administer content'),
   );
   $menu['ssrx/import/prices'] = array(
     'title' => t('Import Prices'),
     'page callback' => 'ssrx_import_prices',
     'access callback' => 'user_access',
-    'access arguments' => 'administer content',
+    'access arguments' => array('administer content'),
   );
   $menu['ssrx/import/urgent'] = array(
     'title' => t('Import Urgent Care Facilities'),
     'page callback' => 'ssrx_import_urgent',
     'access callback' => 'user_access',
-    'access arguments' => 'administer content',
+    'access arguments' => array('administer content'),
   );
   $menu['ssrx/import/doctors'] = array(
     'title' => t('Import Doctors'),
     'page callback' => 'ssrx_import_doctors',
     'access callback' => 'user_access',
-    'access arguments' => 'administer content',
+    'access arguments' => array('administer content'),
   );
 
   return $menu;
