@@ -850,6 +850,73 @@ function ssrx_pricereports_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-drug_price-field_price_unit'
+  $fields['node-drug_price-field_price_unit'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_price_unit',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'computed_field',
+      'settings' => array(
+        'code' => '$entity_field[0][\'value\'] = array_pop(array_pop(field_get_items($entity_type, $entity, \'field_price\'))) / (int)array_pop(array_pop(field_get_items($entity_type, $entity, \'field_quantity\')));',
+        'database' => array(
+          'data_default' => '',
+          'data_index' => 0,
+          'data_length' => '32',
+          'data_not_NULL' => 0,
+          'data_precision' => '10',
+          'data_scale' => '2',
+          'data_size' => 'normal',
+          'data_type' => 'numeric',
+        ),
+        'display_format' => '$display_output = $entity_field_item[\'value\'];',
+        'store' => 1,
+      ),
+      'translatable' => '0',
+      'type' => 'computed',
+    ),
+    'field_instance' => array(
+      'bundle' => 'drug_price',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'computed_field',
+          'settings' => array(),
+          'type' => 'computed_field_plain',
+          'weight' => 4,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_price_unit',
+      'label' => 'Price/Unit',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'computed_field',
+        'settings' => array(
+          'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+        ),
+        'type' => 'computed',
+        'weight' => '6',
+      ),
+    ),
+  );
+
   // Exported field: 'node-drug_price-field_quantity'
   $fields['node-drug_price-field_quantity'] = array(
     'field_config' => array(
@@ -930,6 +997,7 @@ function ssrx_pricereports_field_default_fields() {
   t('Is this a brand name or generic drug?');
   t('Location');
   t('Price');
+  t('Price/Unit');
   t('Quantity');
   t('Route');
   t('Strength');

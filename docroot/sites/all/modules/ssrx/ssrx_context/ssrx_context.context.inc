@@ -181,6 +181,10 @@ function ssrx_context_context_default_contexts() {
       'values' => array(
         'pharmacies' => 'pharmacies',
         'pharmacies/*' => 'pharmacies/*',
+        '~pharmacies/24' => '~pharmacies/24',
+        '~pharmacies/24*' => '~pharmacies/24*',
+        '~pharmacies/search/24' => '~pharmacies/search/24',
+        '~pharmacies/search/24*' => '~pharmacies/search/24*',
       ),
     ),
   );

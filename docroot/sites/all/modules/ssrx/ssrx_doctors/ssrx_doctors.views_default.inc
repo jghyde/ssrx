@@ -45,7 +45,7 @@ function ssrx_doctors_views_default_views() {
     'title' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
-      'align' => '',
+      'align' => 'views-align-left',
       'separator' => '',
       'empty_column' => 0,
     ),
@@ -59,19 +59,19 @@ function ssrx_doctors_views_default_views() {
     'field_doctor_specialty' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
-      'align' => 'views-align-center',
+      'align' => 'views-align-left',
       'separator' => '',
       'empty_column' => 0,
     ),
     'distance' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
-      'align' => '',
+      'align' => 'views-align-center',
       'separator' => '',
       'empty_column' => 0,
     ),
     'address' => array(
-      'align' => '',
+      'align' => 'views-align-left',
       'separator' => '',
       'empty_column' => 0,
     ),
@@ -173,7 +173,6 @@ function ssrx_doctors_views_default_views() {
   $handler->display->display_options['fields']['distance']['hide_empty'] = 0;
   $handler->display->display_options['fields']['distance']['empty_zero'] = 0;
   $handler->display->display_options['fields']['distance']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['distance']['origin'] = 'tied';
   $handler->display->display_options['fields']['distance']['units'] = 'mi';
   /* Field: Location: Address */
   $handler->display->display_options['fields']['address']['id'] = 'address';

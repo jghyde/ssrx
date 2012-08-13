@@ -42,8 +42,10 @@ function ssrx_pricereports_views_default_views() {
     'distance' => 'distance',
     'field_quantity' => 'field_quantity',
     'field_price' => 'field_price',
-    'nid' => 'nid',
+    'field_price_unit' => 'field_price_unit',
     'nid_1' => 'nid_1',
+    'field_location_1' => 'field_location_1',
+    'nid' => 'nid',
   );
   $handler->display->display_options['style_options']['default'] = 'field_price';
   $handler->display->display_options['style_options']['info'] = array(
@@ -55,28 +57,28 @@ function ssrx_pricereports_views_default_views() {
       'empty_column' => 0,
     ),
     'field_ingredients_collection' => array(
-      'align' => '',
+      'align' => 'views-align-center',
       'separator' => '',
       'empty_column' => 0,
     ),
     'field_drug_autocomplete' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
-      'align' => '',
+      'align' => 'views-align-center',
       'separator' => '',
       'empty_column' => 0,
     ),
     'field_location' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
-      'align' => '',
+      'align' => 'views-align-center',
       'separator' => '',
       'empty_column' => 0,
     ),
     'distance' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
-      'align' => '',
+      'align' => 'views-align-center',
       'separator' => '',
       'empty_column' => 0,
     ),
@@ -94,7 +96,7 @@ function ssrx_pricereports_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'nid' => array(
+    'field_price_unit' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => 'views-align-center',
@@ -102,6 +104,20 @@ function ssrx_pricereports_views_default_views() {
       'empty_column' => 0,
     ),
     'nid_1' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => 'views-align-center',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_location_1' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => 'views-align-center',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nid' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => 'views-align-center',
@@ -337,36 +353,37 @@ function ssrx_pricereports_views_default_views() {
     'prefix_suffix' => 1,
   );
   $handler->display->display_options['fields']['field_price']['field_api_classes'] = 0;
-  /* Field: Content: Nid */
-  $handler->display->display_options['fields']['nid']['id'] = 'nid';
-  $handler->display->display_options['fields']['nid']['table'] = 'node';
-  $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  $handler->display->display_options['fields']['nid']['relationship'] = 'field_drug_variety_nid';
-  $handler->display->display_options['fields']['nid']['label'] = 'Update Price';
-  $handler->display->display_options['fields']['nid']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['nid']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['nid']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['nid']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['nid']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['nid']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['nid']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['nid']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['nid']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['nid']['alter']['more_link'] = 0;
-  $handler->display->display_options['fields']['nid']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['nid']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['nid']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['nid']['element_label_colon'] = 1;
-  $handler->display->display_options['fields']['nid']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['nid']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['nid']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['nid']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['nid']['link_to_node'] = 0;
+  /* Field: Content: Price/Unit */
+  $handler->display->display_options['fields']['field_price_unit']['id'] = 'field_price_unit';
+  $handler->display->display_options['fields']['field_price_unit']['table'] = 'field_data_field_price_unit';
+  $handler->display->display_options['fields']['field_price_unit']['field'] = 'field_price_unit';
+  $handler->display->display_options['fields']['field_price_unit']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['field_price_unit']['alter']['text'] = '$[field_price_unit-value]';
+  $handler->display->display_options['fields']['field_price_unit']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_price_unit']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_price_unit']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_price_unit']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_price_unit']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_price_unit']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_price_unit']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_price_unit']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_price_unit']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_price_unit']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_price_unit']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_price_unit']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_price_unit']['element_label_colon'] = 0;
+  $handler->display->display_options['fields']['field_price_unit']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_price_unit']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_price_unit']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_price_unit']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_price_unit']['type'] = 'computed_field_computed_value';
+  $handler->display->display_options['fields']['field_price_unit']['field_api_classes'] = 0;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid_1']['id'] = 'nid_1';
   $handler->display->display_options['fields']['nid_1']['table'] = 'node';
   $handler->display->display_options['fields']['nid_1']['field'] = 'nid';
   $handler->display->display_options['fields']['nid_1']['label'] = 'Confirm Price';
+  $handler->display->display_options['fields']['nid_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid_1']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['nid_1']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['nid_1']['alter']['absolute'] = 0;
@@ -386,6 +403,62 @@ function ssrx_pricereports_views_default_views() {
   $handler->display->display_options['fields']['nid_1']['empty_zero'] = 0;
   $handler->display->display_options['fields']['nid_1']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['nid_1']['link_to_node'] = 0;
+  /* Field: Content: Location */
+  $handler->display->display_options['fields']['field_location_1']['id'] = 'field_location_1';
+  $handler->display->display_options['fields']['field_location_1']['table'] = 'field_data_field_location';
+  $handler->display->display_options['fields']['field_location_1']['field'] = 'field_location';
+  $handler->display->display_options['fields']['field_location_1']['label'] = 'Location NID';
+  $handler->display->display_options['fields']['field_location_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_location_1']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_location_1']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_location_1']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_location_1']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_location_1']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_location_1']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_location_1']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_location_1']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_location_1']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_location_1']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_location_1']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_location_1']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_location_1']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_location_1']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_location_1']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_location_1']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_location_1']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_location_1']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_location_1']['type'] = 'node_reference_nid';
+  $handler->display->display_options['fields']['field_location_1']['field_api_classes'] = 0;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['relationship'] = 'field_drug_variety_nid';
+  $handler->display->display_options['fields']['nid']['label'] = 'Report Price';
+  $handler->display->display_options['fields']['nid']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['nid']['alter']['text'] = '<ul>
+<li><a href="/report/drug/[nid]/pharmacy/[field_location_1]">Report Price</a></li>
+<li><a href="/confirm/pricereport/[nid]">Confirm Price</a></li>
+</ul>
+';
+  $handler->display->display_options['fields']['nid']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['nid']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['nid']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['nid']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['nid']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['nid']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['nid']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['nid']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['nid']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['nid']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['nid']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['nid']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['nid']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['nid']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['nid']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['nid']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['nid']['link_to_node'] = 0;
   /* Sort criterion: MIN(Content: Price (field_price)) */
   $handler->display->display_options['sorts']['field_price_value']['id'] = 'field_price_value';
   $handler->display->display_options['sorts']['field_price_value']['table'] = 'field_data_field_price';

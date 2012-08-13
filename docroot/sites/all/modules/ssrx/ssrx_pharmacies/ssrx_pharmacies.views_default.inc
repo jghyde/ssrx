@@ -442,7 +442,6 @@ function ssrx_pharmacies_views_default_views() {
   $handler->display->display_options['fields']['distance']['hide_empty'] = 0;
   $handler->display->display_options['fields']['distance']['empty_zero'] = 0;
   $handler->display->display_options['fields']['distance']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['distance']['origin'] = 'tied';
   $handler->display->display_options['fields']['distance']['units'] = 'mi';
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
@@ -474,7 +473,6 @@ function ssrx_pharmacies_views_default_views() {
   $handler->display->display_options['sorts']['distance']['id'] = 'distance';
   $handler->display->display_options['sorts']['distance']['table'] = 'location';
   $handler->display->display_options['sorts']['distance']['field'] = 'distance';
-  $handler->display->display_options['sorts']['distance']['origin'] = 'tied';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */

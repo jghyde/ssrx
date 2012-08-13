@@ -31,7 +31,7 @@ function ssrx_footer_menus_menu_default_menu_custom() {
   // Exported menu: menu-find-urgent-care
   $menus['menu-find-urgent-care'] = array(
     'menu_name' => 'menu-find-urgent-care',
-    'title' => 'Find Drugs',
+    'title' => 'Find',
     'description' => 'Find Drugs Footer Menu',
   );
   // Exported menu: menu-report-a-price
@@ -50,7 +50,7 @@ function ssrx_footer_menus_menu_default_menu_custom() {
   // Included for use with string extractors like potx.
   t('About Simply Smarter RX');
   t('About us');
-  t('Find Drugs');
+  t('Find');
   t('Find Drugs Footer Menu');
   t('Find Pharmacies');
   t('Find Pharmacies Footer Menu');
