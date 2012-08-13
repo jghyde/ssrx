@@ -497,5 +497,429 @@ function ssrx_admin_views_default_views() {
   $handler->display->display_options['menu']['context'] = 0;
   $export['7402_drugs'] = $view;
 
+  $view = new view;
+  $view->name = 'pharmacies_audit';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'Pharmacies Audit';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Pharmacies Audit';
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['query_comment'] = FALSE;
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '100';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
+    'street' => 'street',
+    'address' => 'address',
+    'city' => 'city',
+    'province' => 'province',
+    'postal_code' => 'postal_code',
+    'views_bulk_operations' => 'views_bulk_operations',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'street' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'address' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'city' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'province' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'postal_code' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'views_bulk_operations' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['override'] = 1;
+  $handler->display->display_options['style_options']['sticky'] = 0;
+  $handler->display->display_options['style_options']['empty_table'] = 0;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['title']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['title']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['title']['link_to_node'] = 1;
+  /* Field: Location: Street */
+  $handler->display->display_options['fields']['street']['id'] = 'street';
+  $handler->display->display_options['fields']['street']['table'] = 'location';
+  $handler->display->display_options['fields']['street']['field'] = 'street';
+  $handler->display->display_options['fields']['street']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['street']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['street']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['street']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['street']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['street']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['street']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['street']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['street']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['street']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['street']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['street']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['street']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['street']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['street']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['street']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['street']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['street']['hide_alter_empty'] = 1;
+  /* Field: Location: Address */
+  $handler->display->display_options['fields']['address']['id'] = 'address';
+  $handler->display->display_options['fields']['address']['table'] = 'location';
+  $handler->display->display_options['fields']['address']['field'] = 'address';
+  $handler->display->display_options['fields']['address']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['address']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['address']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['address']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['address']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['address']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['address']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['address']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['address']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['address']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['address']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['address']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['address']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['address']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['address']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['address']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['address']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['address']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['address']['hide'] = array(
+    'name' => 0,
+    'street' => 0,
+    'additional' => 0,
+    'city' => 0,
+    'province' => 0,
+    'postal_code' => 0,
+    'country' => 0,
+    'locpick' => 0,
+    'fax' => 0,
+    'phone' => 0,
+    'province_name' => 0,
+    'country_name' => 0,
+    'map_link' => 0,
+    'coords' => 0,
+  );
+  /* Field: Location: City */
+  $handler->display->display_options['fields']['city']['id'] = 'city';
+  $handler->display->display_options['fields']['city']['table'] = 'location';
+  $handler->display->display_options['fields']['city']['field'] = 'city';
+  $handler->display->display_options['fields']['city']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['city']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['city']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['city']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['city']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['city']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['city']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['city']['hide_alter_empty'] = 1;
+  /* Field: Location: Province */
+  $handler->display->display_options['fields']['province']['id'] = 'province';
+  $handler->display->display_options['fields']['province']['table'] = 'location';
+  $handler->display->display_options['fields']['province']['field'] = 'province';
+  $handler->display->display_options['fields']['province']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['province']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['province']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['province']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['province']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['province']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['province']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['province']['hide_alter_empty'] = 1;
+  /* Field: Location: Postal Code */
+  $handler->display->display_options['fields']['postal_code']['id'] = 'postal_code';
+  $handler->display->display_options['fields']['postal_code']['table'] = 'location';
+  $handler->display->display_options['fields']['postal_code']['field'] = 'postal_code';
+  $handler->display->display_options['fields']['postal_code']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['postal_code']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['postal_code']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['postal_code']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['postal_code']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['postal_code']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['postal_code']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['postal_code']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['postal_code']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['postal_code']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['postal_code']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['postal_code']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['postal_code']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['postal_code']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['postal_code']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['postal_code']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['postal_code']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['postal_code']['hide_alter_empty'] = 1;
+  /* Field: Bulk operations: Content */
+  $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
+  $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['label'] = 'Delete';
+  $handler->display->display_options['fields']['views_bulk_operations']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['entity_load_capacity'] = '10';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['operations'] = array(
+    'action::node_assign_owner_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::views_bulk_operations_delete_item' => array(
+      'selected' => 1,
+      'use_queue' => 0,
+      'skip_confirmation' => 1,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::system_message_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::views_bulk_operations_script_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_make_sticky_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_make_unsticky_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::views_bulk_operations_modify_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+      'settings' => array(
+        'show_all_tokens' => 1,
+        'display_values' => array(
+          '_all_' => '_all_',
+        ),
+      ),
+    ),
+    'action::views_bulk_operations_argument_selector_action' => array(
+      'selected' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+      'settings' => array(
+        'url' => '',
+      ),
+    ),
+    'action::node_promote_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_publish_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::system_goto_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_unpromote_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_save_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::system_send_email_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_unpublish_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_unpublish_by_keyword_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+  );
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['enable_select_all_pages'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_type'] = '0';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_result'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['merge_single_action'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['force_single'] = 0;
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  $handler->display->display_options['sorts']['title']['order'] = 'DESC';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'pharmacy' => 'pharmacy',
+  );
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'contains';
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Name of Pharmacy';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['required'] = 0;
+  $handler->display->display_options['filters']['title']['expose']['multiple'] = FALSE;
+  $handler->display->display_options['filters']['title']['expose']['autocomplete_filter'] = 1;
+  /* Filter criterion: Location: Postal Code */
+  $handler->display->display_options['filters']['postal_code']['id'] = 'postal_code';
+  $handler->display->display_options['filters']['postal_code']['table'] = 'location';
+  $handler->display->display_options['filters']['postal_code']['field'] = 'postal_code';
+  $handler->display->display_options['filters']['postal_code']['operator'] = 'starts';
+  $handler->display->display_options['filters']['postal_code']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['postal_code']['expose']['operator_id'] = 'postal_code_op';
+  $handler->display->display_options['filters']['postal_code']['expose']['label'] = 'Zip Code';
+  $handler->display->display_options['filters']['postal_code']['expose']['operator'] = 'postal_code_op';
+  $handler->display->display_options['filters']['postal_code']['expose']['identifier'] = 'postal_code';
+  $handler->display->display_options['filters']['postal_code']['expose']['required'] = 0;
+  $handler->display->display_options['filters']['postal_code']['expose']['multiple'] = FALSE;
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'admin/pharmacies';
+  $export['pharmacies_audit'] = $view;
+
   return $export;
 }
