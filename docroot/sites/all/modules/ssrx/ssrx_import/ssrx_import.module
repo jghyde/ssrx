@@ -356,10 +356,10 @@ function _ssrx_import_pharmacy($start, $batch_size, &$context) {
     $lat = 0;
     $lon = 0;
     if (!empty($line->lat)) {
-      $lat = $line->lat;
+      $lat = (float)$line->lat;
     }
     if (!empty($line->lon)) {
-      $lon = $line->lon;
+      $lon = (float)$line->lon;
     }
     $location = array(
       'street' => $line->PharmacyAddress,
@@ -536,12 +536,14 @@ function _ssrx_import_doctors($start, $batch_size, &$context) {
   if (!isset($context['doctor_vocabulary'])) {
     $context['doctor_vocabulary'] = taxonomy_vocabulary_machine_name_load('doctor_specialty');
   }
-
+  if (!isset($context['results']['dups'])) {
+    $context['results']['dups'] = 0;
+  }
   $result = db_query_range("SELECT * FROM {doctors} order by id ASC", $start, $batch_size);
   foreach ($result as $line) {
     $doctor_name = str_replace( array( '\'', '"', ',' , ';', '<', '>' ), '', $line->name);
-    $dup_check = db_query_range('select title from {node} where title=:title', 0, 1, array(':title' => $doctor_name))->fetchfield;
-    
+    $dup_check = NULL;
+    $dup_check = db_query('select count(*) from {node} where title=:title or title=:title2', array(':title' => $line->name, ':title2' => $doctor_name))->fetchfield();
     if (!$dup_check) {
     
       $node = new stdClass();
@@ -602,16 +604,15 @@ function _ssrx_import_doctors($start, $batch_size, &$context) {
       $node->locations = array();
       $node->locations[] = $node->location = $location;
       node_save($node);
+      $context['results'][] = $node->title;
       unset($location);
       unset($lat);
       unset($lon);
     }
     else {
-      $dup = $line->name . ' was a dup';
+      $context['results']['dups']++;
     }
     unset($line);
-
-    $context['results'][] = $node->title;
 
     // Update our progress information.
     $context['sandbox']['progress']++;
@@ -631,7 +632,7 @@ function ssrx_import_batch_finished($success, $results, $operations) {
     // Here we could do something meaningful with the results.
     // We just display the number of nodes we processed...
     drupal_set_message(t('@count rows of data imported.', array('@count' => count($results),)));
-    drupal_set_message(t('The final result was "%final"', array('%final' => end($results))));
+    drupal_set_message(t('The final result was "%final, and there were !dups duplicates ignored."', array('%final' => end($results), '!dups' => $result['dups'],)));
   }
   else {
     // An error occurred.
