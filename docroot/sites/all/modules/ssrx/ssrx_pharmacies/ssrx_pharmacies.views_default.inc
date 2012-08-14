@@ -563,7 +563,7 @@ function ssrx_pharmacies_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = 'Pharmacy Name';
+  $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
@@ -579,7 +579,7 @@ function ssrx_pharmacies_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['html'] = 0;
   $handler->display->display_options['fields']['title']['element_type'] = 'h4';
   $handler->display->display_options['fields']['title']['element_class'] = 'pharmacy-title';
-  $handler->display->display_options['fields']['title']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['element_default_classes'] = 0;
   $handler->display->display_options['fields']['title']['hide_empty'] = 0;
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
@@ -589,6 +589,7 @@ function ssrx_pharmacies_views_default_views() {
   $handler->display->display_options['fields']['address_1']['id'] = 'address_1';
   $handler->display->display_options['fields']['address_1']['table'] = 'location';
   $handler->display->display_options['fields']['address_1']['field'] = 'address';
+  $handler->display->display_options['fields']['address_1']['label'] = '';
   $handler->display->display_options['fields']['address_1']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['address_1']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['address_1']['alter']['absolute'] = 0;
@@ -602,14 +603,17 @@ function ssrx_pharmacies_views_default_views() {
   $handler->display->display_options['fields']['address_1']['alter']['strip_tags'] = 0;
   $handler->display->display_options['fields']['address_1']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['address_1']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['address_1']['element_label_colon'] = 0;
-  $handler->display->display_options['fields']['address_1']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['address_1']['element_type'] = 'div';
+  $handler->display->display_options['fields']['address_1']['element_class'] = 'pharmacy-address';
+  $handler->display->display_options['fields']['address_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['address_1']['element_default_classes'] = 0;
   $handler->display->display_options['fields']['address_1']['hide_empty'] = 0;
   $handler->display->display_options['fields']['address_1']['empty_zero'] = 0;
   $handler->display->display_options['fields']['address_1']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['address_1']['hide'] = array(
     'country' => 'country',
     'locpick' => 'locpick',
+    'fax' => 'fax',
     'country_name' => 'country_name',
     'map_link' => 'map_link',
     'coords' => 'coords',
@@ -619,47 +623,14 @@ function ssrx_pharmacies_views_default_views() {
     'city' => 0,
     'province' => 0,
     'postal_code' => 0,
-    'fax' => 0,
     'phone' => 0,
     'province_name' => 0,
   );
-  /* Field: Content: Rating */
-  $handler->display->display_options['fields']['field_pharmacy_rating']['id'] = 'field_pharmacy_rating';
-  $handler->display->display_options['fields']['field_pharmacy_rating']['table'] = 'field_data_field_pharmacy_rating';
-  $handler->display->display_options['fields']['field_pharmacy_rating']['field'] = 'field_pharmacy_rating';
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['more_link'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['element_label_colon'] = 1;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['click_sort_column'] = 'rating';
-  $handler->display->display_options['fields']['field_pharmacy_rating']['settings'] = array(
-    'widget' => array(
-      'fivestar_widget' => 'default',
-    ),
-    'expose' => 0,
-    'style' => 'average',
-    'text' => 'average',
-  );
-  $handler->display->display_options['fields']['field_pharmacy_rating']['field_api_classes'] = 0;
   /* Field: Content: 24 Hour Pharmacy */
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['id'] = 'field_24_hour_pharmacy';
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['table'] = 'field_data_field_24_hour_pharmacy';
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['field'] = 'field_24_hour_pharmacy';
-  $handler->display->display_options['fields']['field_24_hour_pharmacy']['label'] = '24 Hour';
+  $handler->display->display_options['fields']['field_24_hour_pharmacy']['label'] = '';
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['alter_text'] = 1;
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['text'] = '<div class="istf-[field_24_hour_pharmacy-value]">[field_24_hour_pharmacy-value]</div>';
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['make_link'] = 0;
@@ -674,7 +645,7 @@ function ssrx_pharmacies_views_default_views() {
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['strip_tags'] = 0;
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['field_24_hour_pharmacy']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_24_hour_pharmacy']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['element_default_classes'] = 0;
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['empty_zero'] = 0;
@@ -706,17 +677,12 @@ function ssrx_pharmacies_views_default_views() {
   $handler->display->display_options['fields']['view_node']['hide_empty'] = 0;
   $handler->display->display_options['fields']['view_node']['empty_zero'] = 0;
   $handler->display->display_options['fields']['view_node']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['view_node']['text'] = 'View';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Location: Postal Code */
   $handler->display->display_options['sorts']['postal_code']['id'] = 'postal_code';
   $handler->display->display_options['sorts']['postal_code']['table'] = 'location';
   $handler->display->display_options['sorts']['postal_code']['field'] = 'postal_code';
-  /* Sort criterion: Location: Distance / Proximity */
-  $handler->display->display_options['sorts']['distance']['id'] = 'distance';
-  $handler->display->display_options['sorts']['distance']['table'] = 'location';
-  $handler->display->display_options['sorts']['distance']['field'] = 'distance';
-  $handler->display->display_options['sorts']['distance']['origin'] = 'postal_default';
-  $handler->display->display_options['sorts']['distance']['postal_code'] = '77450';
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -1094,7 +1060,7 @@ function ssrx_pharmacies_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = 'Pharmacy Name';
+  $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
@@ -1110,7 +1076,7 @@ function ssrx_pharmacies_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['html'] = 0;
   $handler->display->display_options['fields']['title']['element_type'] = 'h4';
   $handler->display->display_options['fields']['title']['element_class'] = 'pharmacy-title';
-  $handler->display->display_options['fields']['title']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['element_default_classes'] = 0;
   $handler->display->display_options['fields']['title']['hide_empty'] = 0;
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
@@ -1120,6 +1086,7 @@ function ssrx_pharmacies_views_default_views() {
   $handler->display->display_options['fields']['address_1']['id'] = 'address_1';
   $handler->display->display_options['fields']['address_1']['table'] = 'location';
   $handler->display->display_options['fields']['address_1']['field'] = 'address';
+  $handler->display->display_options['fields']['address_1']['label'] = '';
   $handler->display->display_options['fields']['address_1']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['address_1']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['address_1']['alter']['absolute'] = 0;
@@ -1133,8 +1100,10 @@ function ssrx_pharmacies_views_default_views() {
   $handler->display->display_options['fields']['address_1']['alter']['strip_tags'] = 0;
   $handler->display->display_options['fields']['address_1']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['address_1']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['address_1']['element_label_colon'] = 0;
-  $handler->display->display_options['fields']['address_1']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['address_1']['element_type'] = 'div';
+  $handler->display->display_options['fields']['address_1']['element_class'] = 'pharmacy-address';
+  $handler->display->display_options['fields']['address_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['address_1']['element_default_classes'] = 0;
   $handler->display->display_options['fields']['address_1']['hide_empty'] = 0;
   $handler->display->display_options['fields']['address_1']['empty_zero'] = 0;
   $handler->display->display_options['fields']['address_1']['hide_alter_empty'] = 1;
@@ -1154,38 +1123,6 @@ function ssrx_pharmacies_views_default_views() {
     'phone' => 0,
     'province_name' => 0,
   );
-  /* Field: Content: Rating */
-  $handler->display->display_options['fields']['field_pharmacy_rating']['id'] = 'field_pharmacy_rating';
-  $handler->display->display_options['fields']['field_pharmacy_rating']['table'] = 'field_data_field_pharmacy_rating';
-  $handler->display->display_options['fields']['field_pharmacy_rating']['field'] = 'field_pharmacy_rating';
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['more_link'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['element_label_colon'] = 1;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['field_pharmacy_rating']['click_sort_column'] = 'rating';
-  $handler->display->display_options['fields']['field_pharmacy_rating']['settings'] = array(
-    'widget' => array(
-      'fivestar_widget' => 'default',
-    ),
-    'expose' => 0,
-    'style' => 'average',
-    'text' => 'average',
-  );
-  $handler->display->display_options['fields']['field_pharmacy_rating']['field_api_classes'] = 0;
   /* Field: Content: 24 Hour Pharmacy */
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['id'] = 'field_24_hour_pharmacy';
   $handler->display->display_options['fields']['field_24_hour_pharmacy']['table'] = 'field_data_field_24_hour_pharmacy';

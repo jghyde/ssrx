@@ -894,3 +894,11 @@ th.views-field-distance {
 .page-user-register ul.tabs.primary {
   /* display: none; */
 }
+.pharmacy-address {
+  font-size: 10px;
+  margin-bottom: 5px;
+}
+.gmap-popup .views-field.views-field-field-pharmacy-rating {
+  font-size: 10px;
+
+}
