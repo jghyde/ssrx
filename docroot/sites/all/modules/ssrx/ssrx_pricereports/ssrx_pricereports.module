@@ -77,17 +77,14 @@ function ssrx_pricereports_autocomplete($string = '') {
  * page callback for reporting prices
  */
 function ssrx_pricereports_report($drug_id, $pharmacy_id) {
+
   global $user;
-  $drug = node_load($drug_id);
-  $pharmacy = node_load($pharmacy_id);
-  //$test_node = node_load(898567);
-  
+
   // Build the node
   $node = new stdClass();
   $node->type = 'drug_price';
   $node->language = 'und';
   $node->field_drug_variety[LANGUAGE_NONE][0]['nid'] = $drug_id;
-  $node->field_drug_variety[LANGUAGE_NONE][0]['title_replace'] = 'title replacement for metformin';
   $node->field_location[LANGUAGE_NONE][0]['nid'] = $pharmacy_id;
   $node->uid = $user->uid;
   
