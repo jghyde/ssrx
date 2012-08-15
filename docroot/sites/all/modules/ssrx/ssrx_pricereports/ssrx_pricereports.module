@@ -97,7 +97,7 @@ function ssrx_pricereports_report($drug_id, $pharmacy_id) {
       }
     }
   }
-  if ($drug_id == 999999 || !is_numeric($drug_id)) {
+  if ($drug_id == 99999999 || !is_numeric($drug_id)) {
     $drug_id = '';
   }
 
@@ -128,12 +128,14 @@ function ssrx_pricereports_form_alter(&$form, &$form_state, $form_id) {
     $form['title']['#autocomplete_path'] = 'ssrx/pricereports/autocomplete';
   }
   if ($form_id == 'drug_price_node_form') {
+    $form['field_drug_variety']['#autocomplete_path'] = 'ssrx/pricereports/autocomplete';
     if (isset($form_state['node']->field_drug_variety[LANGUAGE_NONE][0]['nid']) && is_numeric($form_state['node']->field_drug_variety[LANGUAGE_NONE][0]['nid'])) {
       $drug_node = node_load($form_state['node']->field_drug_variety['und'][0]['nid']);
       $form['field_drug_variety']['#attributes']['class'][] = 'element-invisible';
       $form['field_drug_variety']['#suffix'] = '<label>You are entering a Price Report for:</label>';
       $form['field_drug_variety']['#suffix'] .= '<div class="field-drug-variety-text-only">' . $drug_node->field_drug_autocomplete['und'][0]['safe_value'] .
       ' <span class="not-correct">Not correct? ' . l('Click here to select another drug name, ingredient, strength or format.' , 'node/add/drug-price') . '</span></div>';
+      unset($form['field_drug_variety']['#autocomplete_path'] );
     }
     if (isset($form_state['node']->field_location[LANGUAGE_NONE][0]['nid'])) {
       $location_node = node_load($form_state['node']->field_location[LANGUAGE_NONE][0]['nid']);

@@ -434,7 +434,7 @@ function ssrx_pricereports_views_default_views() {
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['relationship'] = 'field_drug_variety_nid';
-  $handler->display->display_options['fields']['nid']['label'] = 'Report Price';
+  $handler->display->display_options['fields']['nid']['label'] = 'Report Prices';
   $handler->display->display_options['fields']['nid']['alter']['alter_text'] = 1;
   $handler->display->display_options['fields']['nid']['alter']['text'] = '<a href="/report/drug/[nid]/pharmacy/[field_location_1]">Report Prices</a>
 ';

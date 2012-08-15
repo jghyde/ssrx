@@ -1464,10 +1464,6 @@ print  $value;
   $handler->display->display_options['sorts']['distance']['field'] = 'distance';
   $handler->display->display_options['sorts']['distance']['origin'] = 'postal_default';
   $handler->display->display_options['sorts']['distance']['postal_code'] = '77450';
-  /* Sort criterion: Location: Postal Code */
-  $handler->display->display_options['sorts']['postal_code']['id'] = 'postal_code';
-  $handler->display->display_options['sorts']['postal_code']['table'] = 'location';
-  $handler->display->display_options['sorts']['postal_code']['field'] = 'postal_code';
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
