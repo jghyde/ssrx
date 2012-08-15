@@ -51,9 +51,9 @@ function ssrx_pricereports_menu() {
   $items['report/drug/%/pharmacy/%'] = array(
     'page callback' => 'ssrx_pricereports_report',
     'page arguments' => array(2, 4),
-    'access arguments' => array('drug price: create new content'),
+    'access arguments' => array('create', 'drug_price'),
     'type' => MENU_CALLBACK,
-    'access callback' => 'user_access',    
+    'access callback' => 'node_access',    
   );
   return $items;
 }
