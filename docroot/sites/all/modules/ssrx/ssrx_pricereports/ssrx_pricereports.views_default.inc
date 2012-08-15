@@ -47,7 +47,7 @@ function ssrx_pricereports_views_default_views() {
     'field_location_1' => 'field_location_1',
     'nid' => 'nid',
   );
-  $handler->display->display_options['style_options']['default'] = 'field_price';
+  $handler->display->display_options['style_options']['default'] = 'field_price_unit';
   $handler->display->display_options['style_options']['info'] = array(
     'title_1' => array(
       'sortable' => 1,
@@ -71,7 +71,7 @@ function ssrx_pricereports_views_default_views() {
     'field_location' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
-      'align' => 'views-align-center',
+      'align' => 'views-align-left',
       'separator' => '',
       'empty_column' => 0,
     ),
@@ -97,7 +97,7 @@ function ssrx_pricereports_views_default_views() {
       'empty_column' => 0,
     ),
     'field_price_unit' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => 'views-align-center',
       'separator' => '',
@@ -436,10 +436,7 @@ function ssrx_pricereports_views_default_views() {
   $handler->display->display_options['fields']['nid']['relationship'] = 'field_drug_variety_nid';
   $handler->display->display_options['fields']['nid']['label'] = 'Report Price';
   $handler->display->display_options['fields']['nid']['alter']['alter_text'] = 1;
-  $handler->display->display_options['fields']['nid']['alter']['text'] = '<ul>
-<li><a href="/report/drug/[nid]/pharmacy/[field_location_1]">Report Price</a></li>
-<li><a href="/confirm/pricereport/[nid]">Confirm Price</a></li>
-</ul>
+  $handler->display->display_options['fields']['nid']['alter']['text'] = '<a href="/report/drug/[nid]/pharmacy/[field_location_1]">Report Prices</a>
 ';
   $handler->display->display_options['fields']['nid']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['nid']['alter']['absolute'] = 0;
@@ -453,8 +450,12 @@ function ssrx_pricereports_views_default_views() {
   $handler->display->display_options['fields']['nid']['alter']['strip_tags'] = 0;
   $handler->display->display_options['fields']['nid']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['nid']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['nid']['element_type'] = 'div';
+  $handler->display->display_options['fields']['nid']['element_class'] = 'ssrxbutton';
+  $handler->display->display_options['fields']['nid']['element_label_type'] = 'div';
+  $handler->display->display_options['fields']['nid']['element_label_class'] = 'report-prices';
   $handler->display->display_options['fields']['nid']['element_label_colon'] = 1;
-  $handler->display->display_options['fields']['nid']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['nid']['element_default_classes'] = 0;
   $handler->display->display_options['fields']['nid']['hide_empty'] = 0;
   $handler->display->display_options['fields']['nid']['empty_zero'] = 0;
   $handler->display->display_options['fields']['nid']['hide_alter_empty'] = 1;

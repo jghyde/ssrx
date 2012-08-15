@@ -900,5 +900,18 @@ th.views-field-distance {
 }
 .gmap-popup .views-field.views-field-field-pharmacy-rating {
   font-size: 10px;
-
+}
+.not-correct {
+  display: block;
+  font-size: 10px;
+}
+.field-location-add-drug-with-pharmacy-known p,
+.field-location-add-drug-with-pharmacy-known h3 {
+  margin: 0 0 3px;
+}
+th.report-prices {
+  width: 130px;
+}
+th.report-prices a {
+  margin: 0 auto;
 }
