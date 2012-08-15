@@ -51,9 +51,9 @@ function ssrx_pricereports_menu() {
   $items['report/drug/%/pharmacy/%'] = array(
     'page callback' => 'ssrx_pricereports_report',
     'page arguments' => array(2, 4),
-    'access arguments' => array('view content'),
+    'access arguments' => array('drug price: create new content'),
     'type' => MENU_CALLBACK,
-    //'access callback' => 'user_access',    
+    'access callback' => 'user_access',    
   );
   return $items;
 }
@@ -80,12 +80,14 @@ function ssrx_pricereports_report($drug_id, $pharmacy_id) {
   global $user;
   $drug = node_load($drug_id);
   $pharmacy = node_load($pharmacy_id);
-  $test_node = node_load(898567);
+  //$test_node = node_load(898567);
   
   // Build the node
   $node = new stdClass();
   $node->type = 'drug_price';
+  $node->language = 'und';
   $node->field_drug_variety[LANGUAGE_NONE][0]['nid'] = $drug_id;
+  $node->field_drug_variety[LANGUAGE_NONE][0]['title_replace'] = 'title replacement for metformin';
   $node->field_location[LANGUAGE_NONE][0]['nid'] = $pharmacy_id;
   $node->uid = $user->uid;
   
@@ -102,6 +104,11 @@ function ssrx_pricereports_report($drug_id, $pharmacy_id) {
 function ssrx_pricereports_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-prescription-price-search-page') {
     $form['title']['#autocomplete_path'] = 'ssrx/pricereports/autocomplete';
+  }
+  if ($form_id = 'drug_price_node_form') {
+    $form['field_drug_variety']['#attributes']['class'][] = 'element-invisible';
+    $form['field_drug_variety']['#suffix'] = $form['#node']->field_drug_variety[LANGUAGE_NONE][0]['title_replace'];
+    //unset($form['#node']->field_drug_variety['und'][0]['title_replace']);
   }
 }
 
