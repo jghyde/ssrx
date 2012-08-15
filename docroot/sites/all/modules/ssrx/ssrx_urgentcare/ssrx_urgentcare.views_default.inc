@@ -194,7 +194,7 @@ function ssrx_urgentcare_views_default_views() {
   $handler->display->display_options['filters']['distance']['value'] = array(
     'latitude' => '',
     'longitude' => '',
-    'postal_code' => '78840',
+    'postal_code' => '',
     'country' => '',
     'php_code' => '',
     'nid_arg' => '',

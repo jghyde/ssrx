@@ -77,6 +77,29 @@ function ssrx_pricereports_autocomplete($string = '') {
  * page callback for reporting prices
  */
 function ssrx_pricereports_report($drug_id, $pharmacy_id) {
+  // Sometimes, the $drug_id will be a title of the search $_GET['q']
+  if (!is_numeric($drug_id) && !empty($drug_id)) {
+    // Do an entity field query on the Title given and see if it's unique:
+    $drug_id = urldecode($drug_id);
+    $query = new EntityFieldQuery();
+
+    $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'drug')
+      ->fieldCondition('field_drug_autocomplete', 'value', $drug_id, '=');
+    $result = $query->execute();
+    if (isset($result['node'])) {
+      foreach ($result['node'] as $k => $v) {
+        if (is_numeric($drug_id)) {
+          break;
+        }
+        // Here we transform the textual $drug_id into a real nid
+        $drug_id = $v->nid;
+      }
+    }
+  }
+  if ($drug_id == 999999 || !is_numeric($drug_id)) {
+    $drug_id = '';
+  }
 
   global $user;
 
@@ -84,7 +107,9 @@ function ssrx_pricereports_report($drug_id, $pharmacy_id) {
   $node = new stdClass();
   $node->type = 'drug_price';
   $node->language = 'und';
-  $node->field_drug_variety[LANGUAGE_NONE][0]['nid'] = $drug_id;
+  if (!empty($drug_id)) {
+    $node->field_drug_variety[LANGUAGE_NONE][0]['nid'] = $drug_id;
+  }
   $node->field_location[LANGUAGE_NONE][0]['nid'] = $pharmacy_id;
   $node->uid = $user->uid;
   
@@ -103,24 +128,24 @@ function ssrx_pricereports_form_alter(&$form, &$form_state, $form_id) {
     $form['title']['#autocomplete_path'] = 'ssrx/pricereports/autocomplete';
   }
   if ($form_id == 'drug_price_node_form') {
-    if (isset($form_state['node']->field_drug_variety[LANGUAGE_NONE][0]['nid'])) {
+    if (isset($form_state['node']->field_drug_variety[LANGUAGE_NONE][0]['nid']) && is_numeric($form_state['node']->field_drug_variety[LANGUAGE_NONE][0]['nid'])) {
       $drug_node = node_load($form_state['node']->field_drug_variety['und'][0]['nid']);
       $form['field_drug_variety']['#attributes']['class'][] = 'element-invisible';
       $form['field_drug_variety']['#suffix'] = '<label>You are entering a Price Report for:</label>';
       $form['field_drug_variety']['#suffix'] .= '<div class="field-drug-variety-text-only">' . $drug_node->field_drug_autocomplete['und'][0]['safe_value'] .
       ' <span class="not-correct">Not correct? ' . l('Click here to select another drug name, ingredient, strength or format.' , 'node/add/drug-price') . '</span></div>';
-      if (isset($form_state['node']->field_location[LANGUAGE_NONE][0]['nid'])) {
-        $location_node = node_load($form_state['node']->field_location[LANGUAGE_NONE][0]['nid']);
-        $address = '<div class="field-location-add-drug-with-pharmacy-known">';
-        $address .= '<h3>' . l($location_node->title, 'node/' . $location_node->nid) . '</h3>';
-        $address .= '<p>' . $location_node->location['street'] . '</p>';
-        if (!empty($location_node->location['additional'])) { $address .= '<p>' . $location_node->location['additional'] . '</p>'; }
-        $address .= '<p>' . $location_node->location['city'] . ', ' . $location_node->location['province'] . ' ' . $location_node->location['postal_code'] . '</p>';
-        $address .= '</div>';
-        $form['field_location']['#attributes']['class'][] = 'element-invisible';
-        $form['field_location']['#suffix'] = '<label>The Location Where this Price is Valid:</label>' . $address;
-      }
-    }    
+    }
+    if (isset($form_state['node']->field_location[LANGUAGE_NONE][0]['nid'])) {
+      $location_node = node_load($form_state['node']->field_location[LANGUAGE_NONE][0]['nid']);
+      $address = '<div class="field-location-add-drug-with-pharmacy-known">';
+      $address .= '<h3>' . l($location_node->title, 'node/' . $location_node->nid) . '</h3>';
+      $address .= '<p>' . $location_node->location['street'] . '</p>';
+      if (!empty($location_node->location['additional'])) { $address .= '<p>' . $location_node->location['additional'] . '</p>'; }
+      $address .= '<p>' . $location_node->location['city'] . ', ' . $location_node->location['province'] . ' ' . $location_node->location['postal_code'] . '</p>';
+      $address .= '</div>';
+      $form['field_location']['#attributes']['class'][] = 'element-invisible';
+      $form['field_location']['#suffix'] = '<label>The Location Where this Price is Valid:</label>' . $address;
+    }
   }
 }
 

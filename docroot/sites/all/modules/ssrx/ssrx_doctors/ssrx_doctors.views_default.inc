@@ -217,7 +217,7 @@ function ssrx_doctors_views_default_views() {
   $handler->display->display_options['sorts']['distance']['table'] = 'location';
   $handler->display->display_options['sorts']['distance']['field'] = 'distance';
   $handler->display->display_options['sorts']['distance']['expose']['label'] = 'Distance / Proximity';
-  $handler->display->display_options['sorts']['distance']['origin'] = 'postal_default';
+  $handler->display->display_options['sorts']['distance']['origin'] = 'tied';
   $handler->display->display_options['sorts']['distance']['postal_code'] = '76904';
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -305,7 +305,7 @@ function ssrx_doctors_views_default_views() {
   $handler = $view->new_display('attachment', 'Attachment Map', 'attachment_1');
   $handler->display->display_options['display_description'] = 'The map displaying the doctors';
   $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '1000';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '200';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'ssrxmap';
