@@ -102,7 +102,7 @@ function ssrx_pricereports_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'views_exposed_form' && $form['#id'] == 'views-exposed-form-prescription-price-search-page') {
     $form['title']['#autocomplete_path'] = 'ssrx/pricereports/autocomplete';
   }
-  if ($form_id = 'drug_price_node_form') {
+  if ($form_id == 'drug_price_node_form') {
     $form['field_drug_variety']['#attributes']['class'][] = 'element-invisible';
     $form['field_drug_variety']['#suffix'] = 'The Drug Name Strength Format';
     //unset($form['#node']->field_drug_variety['und'][0]['title_replace']);
