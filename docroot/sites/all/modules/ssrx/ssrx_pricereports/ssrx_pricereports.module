@@ -39,13 +39,21 @@ function ssrx_pricereports_menu() {
   $items['ssrx/drug-name-search-autocomplete-rebuild'] = array(
     'title' => t('Rebuild the autocomplete table for ssrx price report searches'),
     'page callback' => 'ssrx_pricereports_index_drug_autocomplete',
-    'access callback' => TRUE,    
+    'access arguments' => array('administer content'),
+    'access callback' => 'user_access',    
   );
   $items['ssrx/pricereports/autocomplete'] = array(
     'page callback' => 'ssrx_pricereports_autocomplete',
     'access arguments' => array('view content'),
     'type' => MENU_CALLBACK,
     'access callback' => TRUE,
+  );
+  $items['report/drug/%/pharmacy/%'] = array(
+    'page callback' => 'ssrx_pricereports_report',
+    'page arguments' => array(2, 4),
+    'access arguments' => array('view content'),
+    'type' => MENU_CALLBACK,
+    //'access callback' => 'user_access',    
   );
   return $items;
 }
@@ -63,6 +71,32 @@ function ssrx_pricereports_autocomplete($string = '') {
     $autocomplete[$row->string] = $row->string;
   }
   drupal_json_output($autocomplete);
+}
+
+/**
+ * page callback for reporting prices
+ */
+function ssrx_pricereports_report($drug_id, $pharmacy_id) {
+  global $user;
+  $drug = node_load($drug_id);
+  $pharmacy = node_load($pharmacy_id);
+  $test_node = node_load(898567);
+  
+  // Build the node
+  $node = new stdClass();
+  $node->type = 'drug_price';
+  $node->field_drug_variety[LANGUAGE_NONE][0]['nid'] = $drug_id;
+  $node->field_location[LANGUAGE_NONE][0]['nid'] = $pharmacy_id;
+  $node->uid = $user->uid;
+  
+  // Fill in the rest of the node values:
+  node_object_prepare( $node );
+  
+  // Include the node.pages just in case
+  module_load_include('inc', 'node', 'node.pages');
+  
+  // Return the form to the page:
+  return drupal_get_form( 'drug_price_node_form', $node );
 }
 
 function ssrx_pricereports_form_alter(&$form, &$form_state, $form_id) {
