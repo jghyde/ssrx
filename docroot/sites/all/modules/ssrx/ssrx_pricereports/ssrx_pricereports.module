@@ -104,7 +104,7 @@ function ssrx_pricereports_form_alter(&$form, &$form_state, $form_id) {
   }
   if ($form_id = 'drug_price_node_form') {
     $form['field_drug_variety']['#attributes']['class'][] = 'element-invisible';
-    $form['field_drug_variety']['#suffix'] = $form['#node']->field_drug_variety[LANGUAGE_NONE][0]['title_replace'];
+    $form['field_drug_variety']['#suffix'] = 'The Drug Name Strength Format';
     //unset($form['#node']->field_drug_variety['und'][0]['title_replace']);
   }
 }
