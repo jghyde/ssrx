@@ -539,4 +539,10 @@ $dir = dirname(__FILE__);
 if (file_exists($dir .'/local.settings.php')) {
   include_once($dir . '/local.settings.php');
 }
+else {
+  // if the local settings file doesn't exist, it's on the Acquia cloud so do the memcache thing:
+  $conf['cache_backends'][] = 'sites/all/modules/memcache/memcache.inc';
+  $conf['cache_default_class'] = 'MemCacheDrupal';
+  $conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
+}
 
