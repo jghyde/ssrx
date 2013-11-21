@@ -1,0 +1,65 @@
+<?php
+/**
+ * @file
+ * Code for the SSRX Ads feature.
+ *
+ * @todo none of the native ad handling stuff is being used. Should be removed
+ * since the site now uses an OpenX server.
+ */
+
+include_once 'ssrx_ads.features.inc';
+
+const SSRX_ADS_VIEWS_ROWS = 6;
+const SSRX_ADS_IPENX_VIEWS_AD_DELTA = 0;
+
+/**
+ * Implements hook_init().
+ */
+function ssrx_ads_init() {
+  drupal_add_css(drupal_get_path('module', 'ssrx_ads') . '/css/ssrx-ads.css');
+}
+
+/**
+ * Implements hook_preprocess_views_view_table().
+ */
+function ssrx_ads_preprocess_views_view_table(&$vars) {
+  $ad_views = array(
+    'doctors',
+    'drugs',
+    'pharmacies',
+    'prescription_price_search',
+    'prescriptions',
+    'urgent_care',
+  );
+
+  if (in_array($vars['view']->name, $ad_views) && !empty($vars['rows'])) {
+    $colspan = count($vars['rows'][0]);
+
+    $new_rows = $new_attributes = $new_classes = array();
+    $row_count = 0;
+
+    foreach ($vars['rows'] as $key => $row) {
+
+      // For every 5th result, add an ad.
+      if ((($row_count + 1) % SSRX_ADS_VIEWS_ROWS) == 0) {
+        $new_rows[$row_count] = array(
+          'title' => openx_invoke(variable_get('ssrx_ads_openx_views_ad_id', SSRX_ADS_IPENX_VIEWS_AD_DELTA)),
+        );
+        // The row should span the full table width.
+        $new_attributes['title'][$row_count] = array('colspan' => $colspan);
+        $new_classes['title'][$row_count] = 'ssrx-ad';
+        $row_count ++;
+      }
+
+      $new_rows[$row_count] = $row;
+      foreach (array_keys($vars['field_attributes']) as $field) {
+        $new_attributes[$field][$row_count] = $vars['field_attributes'][$field][$key];
+        $new_classes[$field][$row_count] = $vars['field_classes'][$field][$key];
+      }
+      $row_count ++;
+    }
+    $vars['rows'] = $new_rows;
+    $vars['field_attributes'] = $new_attributes;
+    $vars['field_classes'] = $new_classes;
+  }
+}

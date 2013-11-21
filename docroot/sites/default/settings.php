@@ -255,6 +255,10 @@ $drupal_hash_salt = '';
  * for you.
  */
 # $base_url = 'http://www.example.com';  // NO trailing slash!
+#$base_url = 'http://dev.ss-rx.com/';
+#$base_url = 'http://dev.ss-rx.com/';
+#$db_url = 'mysql://dev:D1872670942A022C@localhost/tom17_dev';
+
 
 /**
  * PHP settings:
@@ -531,18 +535,11 @@ $conf['fb_verbose'] = TRUE; // debug output
 $conf['fb_id'] = '322584547818383'; // Your connect app's ID goes here.
 
 // Enable URL rewriting (for canvas page apps).
-include "sites/all/modules/fb/fb_url_rewrite.inc";
-include "sites/all/modules/fb/fb_settings.inc";
+include "sites/all/modules/contrib/fb/fb_url_rewrite.inc";
+include "sites/all/modules/contrib/fb/fb_settings.inc";
 
 // Local settings, for local dev env.
 $dir = dirname(__FILE__);
-if (file_exists($dir .'/local.settings.php')) {
-  include_once($dir . '/local.settings.php');
+if (file_exists($dir .'/settings.local.php')) {
+  include_once $dir . '/settings.local.php';
 }
-else {
-  // if the local settings file doesn't exist, it's on the Acquia cloud so do the memcache thing:
-  $conf['cache_backends'][] = 'sites/all/modules/contrib/memcache/memcache.inc';
-  $conf['cache_default_class'] = 'MemCacheDrupal';
-  $conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
-}
-

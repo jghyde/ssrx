@@ -1,0 +1,12 @@
+name = "Cluetip"
+description = "A Drupal wrapper for the Cluetip jQuery plugin, which adds formatted tooltips to elements."
+dependencies[] = libraries
+package = User interface
+core = 7.x
+
+; Information added by drupal.org packaging script on 2011-06-24
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "cluetip"
+datestamp = "1308917089"
+

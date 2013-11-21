@@ -36,7 +36,7 @@ function interval_field_info() {
 /**
  * Defines the data structure used for interval field items.
  */
-function interval_entity_property_field_item_inerval_info() {
+function interval_entity_property_field_item_interval_info() {
   return array(
     'interval' => array(
       'type' => 'integer',
@@ -62,7 +62,7 @@ function interval_field_entity_property_info_alter(&$info, $entity_type, $field,
 
   $property['getter callback'] = 'entity_metadata_field_verbatim_get';
   $property['setter callback'] = 'entity_metadata_field_verbatim_set';
-  $property['property info'] = interval_entity_property_field_item_inerval_info();
+  $property['property info'] = interval_entity_property_field_item_interval_info();
   unset($property['query callback']);
 }
 

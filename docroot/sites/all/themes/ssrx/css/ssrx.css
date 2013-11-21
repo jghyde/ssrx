@@ -121,3 +121,13 @@ ul#superfish-1 {
 .sf-menu.sf-style-default li.sf-parent-children-10 ul.sf-megamenu {
   width: 120em;
 }
+.view.view-prescription-price-search.view-id-prescription_price_search.view-display-id-attachment_1
+{
+
+margin-bottom:1px !important;
+}
+#views-nivo-slider-home_slider-page
+{
+width:100% !important;
+height:auto !important;
+}

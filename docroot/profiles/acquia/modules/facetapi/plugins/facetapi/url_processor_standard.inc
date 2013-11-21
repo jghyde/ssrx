@@ -2,18 +2,21 @@
 
 /**
  * @file
- * The standard URL processor.
+ * The standard url processor class.
  */
 
 /**
- * Extension of FacetapiUrlProcessor.
+ * Url processor plugin that retrieves facet data from the query string.
+ *
+ * This plugin retrieves facet data from $_GET, and stored all information in
+ * the "f" query string variable by default.
  */
 class FacetapiUrlProcessorStandard extends FacetapiUrlProcessor {
 
   /**
    * Implements FacetapiUrlProcessor::fetchParams().
    *
-   * Pulls facet params from the $_GET variable.
+   * Use $_GET as the source for facet data.
    */
   public function fetchParams() {
     return $_GET;
@@ -63,14 +66,6 @@ class FacetapiUrlProcessorStandard extends FacetapiUrlProcessor {
     $active_items = $this->adapter->getAllActiveItems();
 
     $item = menu_get_item();
-    $last_load_func = is_array($item['load_functions']) ? end($item['load_functions']) : NULL;
-    if (!empty($item['title']) && ((!$keys && $active_items) || ($keys && $last_load_func != 'menu_tail_load'))) {
-      $last = end($breadcrumb);
-      $this_page = l($item['title'], $item['href'], $item['localized_options']);
-      if ($last != $this_page) {
-        $breadcrumb[] = $this_page;
-      }
-    }
 
     // Initializes base breadcrumb query.
     $query = $this->params;
@@ -100,7 +95,7 @@ class FacetapiUrlProcessorStandard extends FacetapiUrlProcessor {
       }
     }
 
-    // Sets the breadcrumb trail with h keys and filters.
+    // Sets the breadcrumb trail with the keys and filters.
     drupal_set_breadcrumb($breadcrumb);
   }
 }

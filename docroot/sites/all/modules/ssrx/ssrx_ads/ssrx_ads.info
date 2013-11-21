@@ -26,6 +26,7 @@ dependencies[] = commerce_product_ui
 dependencies[] = commerce_ui
 dependencies[] = features
 dependencies[] = interval
+dependencies[] = openx
 dependencies[] = rules
 dependencies[] = strongarm
 dependencies[] = views_bulk_operations

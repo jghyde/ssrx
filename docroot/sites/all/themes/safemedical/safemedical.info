@@ -1,0 +1,56 @@
+
+name = safemedical
+description = A flexible, recolorable theme with many regions.
+package = Core
+version = VERSION
+core = 7.x
+
+stylesheets[all][] = css/layout.css
+stylesheets[all][] = css/style.css
+stylesheets[all][] = css/colors.css
+stylesheets[print][] = css/print.css
+
+regions[header] = Header
+regions[headerleft] = Headerleft
+regions[headerright] = Headerright
+regions[fblogin] = Fblogin
+regions[Social_Media_Icons] = Social_Media_Icons
+
+regions[feedsmenu] = Feedsmenu
+regions[searchbox] = searchbox
+
+regions[movingbanner] = movingbanner
+
+regions[searchbar] = searchbar
+
+
+regions[sidebar_first] = Sidebar first
+
+
+regions[sidebar_first_block1] = sidebar_first_block1
+regions[sidebar_first_block2] = sidebar_first_block2
+regions[sidebar_first_block3] = sidebar_first_block3
+
+regions[sidebar_second] = Sidebar second
+
+
+
+regions[content] = Content
+regions[highlighted] = highlighted
+
+
+
+regions[footer_firstcolumn] = Footer first column
+regions[footer_secondcolumn] = Footer second column
+regions[footer_thirdcolumn] = Footer third column
+regions[footer_fourthcolumn] = Footer fourth column
+regions[footer] = Footer
+
+settings[shortcut_module_link] = 0
+
+
+; Information added by drupal.org packaging script on 2013-03-07
+version = "7.21"
+project = "drupal"
+datestamp = "1362616996"
+

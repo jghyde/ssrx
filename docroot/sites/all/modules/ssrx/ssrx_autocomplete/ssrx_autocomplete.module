@@ -84,10 +84,10 @@ function ssrx_autocomplete_menu() {
  */
 function ssrx_autocomplete_zip($string = '') {
   $result = db_query_range('
-    SELECT zip, autocomplete FROM {autocomplete}
+    SELECT autocomplete FROM {autocomplete}
     where autocomplete LIKE :ac', 0, 20, array(':ac' => $string . '%'));
   foreach ($result as $row) {
-    $autocomplete[$row->zip] = $row->autocomplete;
+    $autocomplete[$row->autocomplete] = $row->autocomplete;
   }
   drupal_json_output($autocomplete);
 }
@@ -208,6 +208,7 @@ function ssrx_autocomplete_get_postalcode_data_us($location = array()) {
   }
   else {
     return NULL;
+	//return array('lat' => '29.1700° N', 'lon' => '75.7200° E', 'city' => 'hisar', 'province' => 'haryana', 'country' => 'india');
   }
 }
 
@@ -247,5 +248,5 @@ function ssrx_autocomplete_doctors($string = '') {
   foreach ($result as $row) {
     $autocomplete[$row->title] = $row->title;
   }
-  drupal_json_output($autocomplete);
+  drupal_set_message(drupal_json_output($autocomplete));
 }

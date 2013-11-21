@@ -1,0 +1,24 @@
+<?php
+/**
+ * @file
+ * Update hooks for SSRX ads.
+ */
+
+/**
+ * Enable and configure the OpenX module.
+ */
+function ssrx_ads_update_7001() {
+  module_enable(array('openx'));
+
+  $variables['openx_delivery_url'] = 'ads.simplysmarterrx.com/delivery';
+  $variables['openx_delivery_url_https'] = 'ads.simplysmarterrx.com/delivery';
+  $variables['openx_zones'] = array(
+    0 => array(
+      'id' => '1',
+      'name' => 'text_inline',
+    ),
+  );
+  foreach ($variables as $name => $value) {
+    variable_set($name, $value);
+  }
+}

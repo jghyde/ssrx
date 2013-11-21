@@ -209,3 +209,66 @@ function ssrx_pricereports_views_pre_render(&$view) {
 function ssrx_pricereports_views_query_alter(&$view, &$query) {
   return;
 }
+
+/**
+ * Helper function to get a zip from a string.
+ */
+function ssrx_pricereports_get_zip($string) {
+  // Error check.
+  if (empty($string)) return FALSE;
+
+  static $old_string;
+  static $zip;
+
+  if (!empty($old_string) && !empty($zip) && $old_string == $string) {
+    return $zip;
+  }
+  $old_string = $string;
+
+  // 5 digit string, looks like a zip, so return it.
+  if (preg_match('/^\d{5}$/', $string)) {
+    $zip = $string;
+  }
+  // If someone entered an extended zip, truncate it and end.
+  elseif (preg_match('/^\d{5}/', $string)) {
+    $zip = substr($string, 0, 5);
+  }
+  // Assume we have a city, state and run an autocomplete lookup.
+  else {
+    // Clean up the string.
+    $string = trim(preg_replace('/\s*,\s*/', ', ', $string));
+    // search for the string.
+    $zip = db_query('SELECT zip FROM {autocomplete} WHERE autocomplete = :search', array(':search' => $string))->fetchAll();
+    if (count($zip)) {
+      $zip = $zip[0]->zip;
+    }
+  }
+
+  return (empty($zip))? FALSE : $zip;
+}
+
+/**
+ * Implements hook_views_pre_build().
+ * Run the autocomplete to convert the zip argument if it's a string location (not zip).
+ */
+function ssrx_pricereports_views_pre_build(&$view) {
+  if ($view->name == 'prescription_price_search') {
+    // If we have a postal code that doesnt match as a postal code, then fix it!
+    if (isset($view->exposed_raw_input['distance']['postal_code'])
+      && !empty($view->exposed_raw_input['distance']['postal_code'])) {
+
+      // Get the zip code.
+      if ($zip = ssrx_pricereports_get_zip($view->exposed_raw_input['distance']['postal_code'])) {
+        $view->exposed_raw_input['distance']['postal_code'] = $zip;
+      }
+      else {
+        // Oh no! There were no matches, set an error message.
+        static $set_once;
+        if (!$set_once) {
+          drupal_set_message(t('The location %location was not found, please enter a zip code or city and state to refine your search.', array('%location' => $view->exposed_raw_input['distance']['postal_code'])));
+        }
+        $set_once = TRUE;
+      }
+    }
+  }
+}

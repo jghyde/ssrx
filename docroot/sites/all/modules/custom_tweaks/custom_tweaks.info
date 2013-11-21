@@ -1,0 +1,5 @@
+name = Node Reference Autocomplete Limit
+description = Configure the number of items shown by the autocomplete widget of a Node Reference field
+
+package = CCK
+core = 7.x

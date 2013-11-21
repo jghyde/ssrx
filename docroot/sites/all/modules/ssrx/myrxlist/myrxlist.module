@@ -285,7 +285,9 @@ function myrxlist_form_alter(&$form, &$form_state, $form_id) {
         $form_state['input']['title'] = urldecode($form_state['input']['title']);
       }
     }
-    $form['#submit'][] = 'myrxlist_search_form_submit';
+    //$form['#submit'][] = 'myrxlist_search_form_submit';
+    // Run this form submission handler first.
+    array_unshift($form['#submit'], 'myrxlist_search_form_submit');
   }
 }
 
@@ -306,18 +308,26 @@ function myrxlist_search_form_submit($form, &$form_state) {
   // User
   global $user;
   
-  // Build query
-  $data = array(
-    'string' => $form_state['values']['title'],
-    'location' => $form_state['values']['distance']['postal_code'],
-    'uid' => $user->uid,
-  );
-  // Check for duplicates:
-  if (!$count = db_query('select count(*) from {myrxlist} where uid=:uid and string=:string and location=:location', array(':uid' => $data['uid'], ':string' => $data['string'], ':location' => $data['location']))->fetchField()) {
-    $r = drupal_write_record('myrxlist', $data);
-    if ($r == FALSE) {
-      watchdog('myrxlist', t('MyRxList Search failed to insert for %user', array('%user' => $user->name)), 'warning');
+  // Fix the postal code,
+  if ($zip = ssrx_pricereports_get_zip($form_state['values']['distance']['postal_code'])) {
+    // update the submitted value to the zip code.
+    $form_state['values']['distance']['postal_code'] = $zip;
+    $form_state['input']['distance']['postal_code'] = $zip;
+
+    // Build query
+    $data = array(
+      'string' => $form_state['values']['title'],
+      'location' => $form_state['values']['distance']['postal_code'],
+      'uid' => $user->uid,
+    );
+    // Check for duplicates:
+    if (!$count = db_query('select count(*) from {myrxlist} where uid=:uid and string=:string and location=:location', array(':uid' => $data['uid'], ':string' => $data['string'], ':location' => $data['location']))->fetchField()) {
+      $r = drupal_write_record('myrxlist', $data);
+      if ($r == FALSE) {
+        watchdog('myrxlist', t('MyRxList Search failed to insert for %user', array('%user' => $user->name)), 'warning');
+      }
     }
+
   }
 }
 /**

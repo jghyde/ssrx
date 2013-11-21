@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * A wrapper for the cluetip jquery plugin
+ */
+
+/**
+ *  Implements hook_library().
+ *
+ *  @TODO Including the hoverIntent and bgiframe plugins that come bundled with
+ *  cluetip like this could lead to conflicts if either get their own D7 module.
+ *  Assuming they implement hook_library, we could then instead add a dependency
+ *  element to this array that would include them if available.
+ */
+function cluetip_library() {
+  $libraries['cluetip'] = array(
+    'title' => 'Cluetips',
+    'website' => 'http://plugins.learningjquery.com/cluetip/',
+    'version' => '1.0.7',
+    'js' => array(
+      libraries_get_path('cluetip') . '/jquery.cluetip.js' => array('group' => JS_LIBRARY, 'weight' => 0),
+      libraries_get_path('cluetip') . '/lib/jquery.hoverIntent.js' => array('group' => JS_LIBRARY, 'weight' => 0),
+      libraries_get_path('cluetip') . '/lib/jquery.bgiframe.min.js' => array('group' => JS_LIBRARY, 'weight' => 0),
+    ),
+    'css' => array(
+      libraries_get_path('cluetip') . '/jquery.cluetip.css' => array('group' => CSS_DEFAULT),
+    ),
+  );
+
+  return $libraries;
+}

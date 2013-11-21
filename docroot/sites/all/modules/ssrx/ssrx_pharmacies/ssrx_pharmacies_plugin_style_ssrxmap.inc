@@ -59,7 +59,7 @@ class ssrx_pharmacies_plugin_style_ssrxmap extends views_plugin_style {
       $this->view->query->add_field($table, 'latitude', 'gmap_lat');
       $this->view->query->add_field($table, 'longitude', 'gmap_lon');
     }
-
+	
     if ($this->options['markers'] == 'nodetype') {
       $this->view->query->add_field('node', 'type', 'gmap_node_type');
     }
@@ -191,7 +191,8 @@ class ssrx_pharmacies_plugin_style_ssrxmap extends views_plugin_style {
       if (isset($centered) && is_array($centered)) {
         // Center on the search entered first, then fall back to the $centered[] discovered up there.
         if (!empty($_GET['distance']['postal_code'])) {
-          $result = db_query_range('SELECT longitude, latitude from {autocomplete} where zip = :zip', 0, 1, array(':zip' => $_GET['distance']['postal_code']));
+          $zip = ssrx_pricereports_get_zip($_GET['distance']['postal_code']);
+          $result = db_query_range('SELECT longitude, latitude from {autocomplete} where zip = :zip', 0, 1, array(':zip' => $zip));
           foreach ($result as $row) {
             $centered['lat'] = $row->latitude;
             $centered['long'] = $row->longitude;
@@ -365,6 +366,7 @@ class ssrx_pharmacies_plugin_style_ssrxmap extends views_plugin_style {
 
     unset($this->view->row_index);
     return $output;
+	
   }
 
   /**

@@ -24,7 +24,7 @@
  */
 function theme_current_search_text(array $variables) {
   // Initializes output, sanitizes text if necessary.
-  $sanitize = $variables['options']['html'];
+  $sanitize = empty($variables['options']['html']);
   $output = ($sanitize) ? check_plain($variables['text']) : $variables['text'];
 
   // Adds wrapper markup and CSS classes.
@@ -115,6 +115,18 @@ function theme_current_search_link_active($variables) {
   $variables['text'] .= ' ' . $accessible_markup;
   $variables['options']['html'] = TRUE;
   return theme_link($variables);
+}
+
+/**
+ * Returns HTML for a search keys facet item.
+ *
+ * @param $variables
+ *   An associative array containing the keys 'keys' and 'adapter'.
+ *
+ * @ingroup themeable
+ */
+function theme_current_search_keys($variables) {
+  return check_plain($variables['keys']);
 }
 
 /**
